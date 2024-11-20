@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "60c72b2f9b1d8b3a4c8b4567",
+    "name": "Headphone",
+    "description": "High-quality headphones for an immersive audio experience."
+  },
+  {
+    "_id": "60c72b2f9b1d8b3a4c8b4568",
+    "name": "Mouse",
+    "description": "Precision mice for gaming and productivity."
+  },
+  {
+    "_id": "60c72b2f9b1d8b3a4c8b4569",
+    "name": "Keyboard",
+    "description": "Mechanical and membrane keyboards for all your typing needs."
+  },
+  {
+    "_id": "60c72b2f9b1d8b3a4c8b456a",
+    "name": "Chair",
+    "description": "Gaming chairs for comfortable and healthy gaming."
+  },
+  {
+    "_id": "60c72b2f9b1d8b3a4c8b456b",
+    "name": "Table",
+    "description": "Sturdy and stylish tables for your gaming and working space."
+  }
+]

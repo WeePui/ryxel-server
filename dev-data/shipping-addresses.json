@@ -1,0 +1,74 @@
+[
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a01",
+    "fullname": "Nguyễn Văn A",
+    "phoneNumber": "0912345678",
+    "country": "Vietnam",
+    "state": "Hà Nội",
+    "city": "Quận Ba Đình",
+    "district": "Phường Kim Mã",
+    "address": "123 Kim Mã",
+    "addressInfo": "Tòa nhà Landmark, tầng 3",
+    "isDefault": true
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a02",
+    "fullname": "Lê Thị B",
+    "phoneNumber": "0987654321",
+    "country": "Vietnam",
+    "state": "TP Hồ Chí Minh",
+    "city": "Quận 1",
+    "district": "Phường Bến Nghé",
+    "address": "45 Lê Lợi",
+    "addressInfo": "Gần công viên 23/9",
+    "isDefault": false
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a03",
+    "fullname": "Trần Văn C",
+    "phoneNumber": "0971111222",
+    "country": "Vietnam",
+    "state": "Đà Nẵng",
+    "city": "Quận Hải Châu",
+    "district": "Phường Hòa Thuận Đông",
+    "address": "88 Nguyễn Văn Linh",
+    "addressInfo": "Tòa nhà ABC, tầng 2",
+    "isDefault": false
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a04",
+    "fullname": "Phạm Thị D",
+    "phoneNumber": "0933334444",
+    "country": "Vietnam",
+    "state": "Hải Phòng",
+    "city": "Quận Lê Chân",
+    "district": "Phường Đông Khê",
+    "address": "56 Trần Phú",
+    "addressInfo": "Đối diện siêu thị Co.opmart",
+    "isDefault": false
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a05",
+    "fullname": "Hoàng Văn E",
+    "phoneNumber": "0905556666",
+    "country": "Vietnam",
+    "state": "Cần Thơ",
+    "city": "Quận Ninh Kiều",
+    "district": "Phường An Lạc",
+    "address": "22 Trần Hưng Đạo",
+    "addressInfo": "Gần trường THPT Nguyễn Việt Hồng",
+    "isDefault": false
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a06",
+    "fullname": "Đặng Thị F",
+    "phoneNumber": "0922223333",
+    "country": "Vietnam",
+    "state": "Bình Dương",
+    "city": "Thành phố Thủ Dầu Một",
+    "district": "Phường Phú Cường",
+    "address": "10 Đại lộ Bình Dương",
+    "addressInfo": "Khu dân cư Chánh Nghĩa",
+    "isDefault": false
+  }
+]

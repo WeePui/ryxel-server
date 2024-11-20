@@ -1,0 +1,97 @@
+[
+  {
+    "_id": "637e2d7b1c5b5b002c1f1b01",
+    "name": "Tester 01",
+    "email": "tester1@example.com",
+    "emailVerified": true,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1b02",
+    "name": "Tester 02",
+    "email": "tester2@example.com",
+    "emailVerified": false,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1b03",
+    "name": "Tester 03",
+    "email": "tester3@example.com",
+    "emailVerified": false,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123",
+    "active": false
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1b04",
+    "name": "Admin",
+    "email": "admin@example.com",
+    "emailVerified": true,
+    "role": "admin",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a01",
+    "name": "Nguyễn Văn Hùng",
+    "email": "hung.nguyen@example.com",
+    "photo": "hung.jpg",
+    "shippingAddresses": [
+      "637d1e7a1c4b4a001c9f1a01",
+      "637d1e7a1c4b4a001c9f1a02"
+    ],
+    "emailVerified": true,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a02",
+    "name": "Trần Thị Mai",
+    "email": "mai.tran@example.com",
+    "photo": "mai.jpg",
+    "shippingAddresses": ["637d1e7a1c4b4a001c9f1a03"],
+    "emailVerified": false,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a03",
+    "name": "Lê Quang Dũng",
+    "email": "dung.le@example.com",
+    "photo": "dung.jpg",
+    "shippingAddresses": ["637d1e7a1c4b4a001c9f1a04"],
+    "emailVerified": true,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a04",
+    "name": "Phạm Minh An",
+    "email": "an.pham@example.com",
+    "photo": "an.jpg",
+    "shippingAddresses": ["637d1e7a1c4b4a001c9f1a05"],
+    "emailVerified": true,
+    "role": "admin",
+    "password": "adminpass123",
+    "passwordConfirm": "adminpass123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a05",
+    "name": "Hoàng Thị Linh",
+    "email": "linh.hoang@example.com",
+    "photo": "linh.jpg",
+    "shippingAddresses": ["637d1e7a1c4b4a001c9f1a06"],
+    "emailVerified": false,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  }
+]

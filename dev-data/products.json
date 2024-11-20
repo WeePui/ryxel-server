@@ -1,0 +1,470 @@
+[
+  {
+    "_id": "637c7e9b14b63b001c7e9d1b",
+    "name": "Chuột Gaming có dây HyperX Pulsefire Haste II",
+    "description": "Chuột Gaming HyperX Pulsefire Haste 2 trang bị mắt đọc cảm biến HyperX 26k với 26.000 DPI đem đến độ chính xác tới từng độ phân giải DPI.",
+    "brand": "HyperX",
+    "category": "60c72b2f9b1d8b3a4c8b4568",
+    "imageCover": "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7ea014b63b001c7e9d1c",
+        "name": "Black - Wired",
+        "sku": "GMX1000-BLK-WIRED",
+        "specifications": {
+          "dpi": "26000",
+          "connection": "USB",
+          "weight": "53g",
+          "rgb": "Yes"
+        },
+        "price": 49.99,
+        "stock": 50,
+        "sold": 20,
+        "images": [
+          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image1.jpg",
+          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image2.jpg",
+          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image3.jpg",
+          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image4.jpg"
+        ]
+      },
+      {
+        "_id": "637c7ea714b63b001c7e9d1d",
+        "name": "White - Wireless",
+        "sku": "GMX1000-WHT-WIRELESS",
+        "specifications": {
+          "dpi": "26000",
+          "connection": "Bluetooth",
+          "weight": "59g",
+          "rgb": "Yes"
+        },
+        "price": 69.99,
+        "stock": 30,
+        "sold": 15,
+        "images": [
+          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image1.jpg",
+          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image2.jpg",
+          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image3.jpg",
+          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7eb214b63b001c7e9d1e",
+    "name": "Bàn phím cơ TKL Dareu EK87L V2",
+    "description": "Bàn phím cơ TKL Dareu EK87L V2 sở hữu thiết kế Tenkeyless (TKL) tiết kiệm tối đa không gian bàn làm việc của bạn.",
+    "brand": "DareU",
+    "category": "60c72b2f9b1d8b3a4c8b4569",
+    "imageCover": "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7eb814b63b001c7e9d1f",
+        "name": "Black - Red Switch",
+        "sku": "KFK200-BLK-RED",
+        "specifications": {
+          "switchType": "Red",
+          "keycap": "PBT",
+          "rgb": "Yes",
+          "connection": "USB"
+        },
+        "price": 89.99,
+        "stock": 40,
+        "sold": 10,
+        "images": [
+          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image1.jpg",
+          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image2.jpg",
+          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image3.jpg",
+          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image4.jpg"
+        ]
+      },
+      {
+        "_id": "637c7ebe14b63b001c7e9d20",
+        "name": "White - Blue Switch",
+        "sku": "KFK200-WHT-BLUE",
+        "specifications": {
+          "switchType": "Blue",
+          "keycap": "ABS",
+          "rgb": "Yes",
+          "connection": "USB"
+        },
+        "price": 89.99,
+        "stock": 25,
+        "sold": 8,
+        "images": [
+          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image1.jpg",
+          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image2.jpg",
+          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image3.jpg",
+          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7ec414b63b001c7e9d21",
+    "name": "Tai Nghe Gaming HyperX Cloud III",
+    "description": "Tai Nghe Gaming HyperX Cloud III để bạn chìm đắm vào âm thanh 3D với âm thanh vòm được cung cấp nhờ DTS® Headphone: X Spatial Audio.",
+    "brand": "HyperX",
+    "category": "60c72b2f9b1d8b3a4c8b4567",
+    "imageCover": "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7ecb14b63b001c7e9d22",
+        "name": "Black",
+        "sku": "SWH500-BLK",
+        "specifications": {
+          "sound": "7.1 Surround",
+          "microphone": "Noise-canceling",
+          "connection": "USB",
+          "rgb": "No"
+        },
+        "price": 59.99,
+        "stock": 60,
+        "sold": 25,
+        "images": [
+          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image1.jpg",
+          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image2.jpg",
+          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image3.jpg",
+          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image4.jpg"
+        ]
+      },
+      {
+        "_id": "637c7ed114b63b001c7e9d23",
+        "name": "Red",
+        "sku": "SWH500-RED",
+        "specifications": {
+          "sound": "7.1 Surround",
+          "microphone": "Noise-canceling",
+          "connection": "USB",
+          "rgb": "No"
+        },
+        "price": 59.99,
+        "stock": 45,
+        "sold": 18,
+        "images": [
+          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image1.jpg",
+          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image2.jpg",
+          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image3.jpg",
+          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7f8a14b63b001c7e9d24",
+    "name": "Chuột Gaming không dây Logitech G Pro X Superlight 2",
+    "description": "Loại bỏ tất cả mọi chướng ngại vật trên chặng đường giành chiến thắng với con chuột PRO X SUPERLIGHT 2 cực nhẹ và nhanh nhất từ trước tới nay của Logitech.",
+    "brand": "Logitech",
+    "category": "60c72b2f9b1d8b3a4c8b4568",
+    "imageCover": "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7f9014b63b001c7e9d25",
+        "name": "Black",
+        "sku": "PGZ500-BLK",
+        "specifications": {
+          "dpi": "32000",
+          "connection": "Wireless",
+          "rgb": "No",
+          "weight": "60g"
+        },
+        "price": 99.99,
+        "stock": 45,
+        "sold": 10,
+        "images": [
+          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image1.jpg",
+          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image2.jpg",
+          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image3.jpg",
+          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image4.jpg"
+        ]
+      },
+      {
+        "_id": "637c7f9614b63b001c7e9d26",
+        "name": "White",
+        "sku": "PGZ500-WHT",
+        "specifications": {
+          "dpi": "32000",
+          "connection": "Wireless",
+          "rgb": "No",
+          "weight": "60g"
+        },
+        "price": 99.99,
+        "stock": 30,
+        "sold": 8,
+        "images": [
+          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image1.jpg",
+          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image2.jpg",
+          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image3.jpg",
+          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7fa314b63b001c7e9d27",
+    "name": "Chuột Gaming không dây Razer Viper V3 Pro",
+    "description": "Chuột Gaming Không Dây Razer Viper V3 Pro sở hữu thiết kế đối xứng hoàn hảo, phù hợp cho cả người thuận tay trái và tay phải.",
+    "brand": "Razer",
+    "category": "60c72b2f9b1d8b3a4c8b4568",
+    "imageCover": "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7faa14b63b001c7e9d28",
+        "name": "Black",
+        "sku": "LSU700-BLK",
+        "specifications": {
+          "dpi": "30000",
+          "connection": "Wireless",
+          "rgb": "Yes",
+          "weight": "54g"
+        },
+        "price": 129.99,
+        "stock": 50,
+        "sold": 15,
+        "images": [
+          "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image1.jpg",
+          "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image2.jpg",
+          "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image3.jpg",
+          "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7fb414b63b001c7e9d29",
+    "name": "Bàn phím cơ ASUS ROG Falchion Ace White",
+    "description": "Bàn phím cơ ASUS ROG Falchion Ace White (ROG NX Sw) là một tuyệt tác công nghệ dành cho game thủ và những người đam mê công nghệ.",
+    "brand": "ASUS",
+    "category": "60c72b2f9b1d8b3a4c8b4569",
+    "imageCover": "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7fb914b63b001c7e9d2a",
+        "name": "Red Switch",
+        "sku": "CKK90-RED",
+        "specifications": {
+          "switchType": "Red",
+          "rgb": "Yes",
+          "keycap": "PBT",
+          "connection": "USB"
+        },
+        "price": 69.99,
+        "stock": 40,
+        "sold": 12,
+        "images": [
+          "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image1.jpg",
+          "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image2.jpg",
+          "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image3.jpg",
+          "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7fc214b63b001c7e9d2b",
+    "name": "Tai Nghe Gaming không dây Corsair HS55 Wireless",
+    "description": "Nghe được mọi thứ với âm thanh Dolby Audio 7.1 Surround  sound từ những tiếng bước chân nhỏ nhẹ nhất đến tiếng nổ vang dội nhất.",
+    "brand": "Corsair",
+    "category": "60c72b2f9b1d8b3a4c8b4567",
+    "imageCover": "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7fc814b63b001c7e9d2c",
+        "name": "Black",
+        "sku": "SBH300-BLK",
+        "specifications": {
+          "sound": "7.1 Surround",
+          "microphone": "Noise-canceling",
+          "connection": "Wireless",
+          "rgb": "No"
+        },
+        "price": 79.99,
+        "stock": 55,
+        "sold": 22,
+        "images": [
+          "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image1.jpg",
+          "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image2.jpg",
+          "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image3.jpg",
+          "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7fd414b63b001c7e9d2d",
+    "name": "Bàn phím cơ HyperX Alloy Origins RGB HyperX",
+    "description": "Bàn phím cơ HyperX Alloy Origins có thiết kế nhỏ gọn và trang bị Switch HyperX mang đến hiệu suất cao nhất.",
+    "brand": "HyperX",
+    "category": "60c72b2f9b1d8b3a4c8b4569",
+    "imageCover": "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7fda14b63b001c7e9d2e",
+        "name": "Blue Switch",
+        "sku": "TTX-BLUE",
+        "specifications": {
+          "switchType": "Blue",
+          "rgb": "Yes",
+          "keycap": "ABS",
+          "connection": "USB"
+        },
+        "price": 99.99,
+        "stock": 35,
+        "sold": 18,
+        "images": [
+          "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image1.jpg",
+          "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image2.jpg",
+          "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image3.jpg",
+          "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7fe514b63b001c7e9d2f",
+    "name": "Ghế Gaming Corsair TC100 Fabric",
+    "description": "Ghế Gaming Corsair TC100 lấy cảm hứng thiết kế từ xe đua tạo cho người dùng sự thoải mái và phong cách độc đáo.",
+    "brand": "Corsair",
+    "category": "60c72b2f9b1d8b3a4c8b456a",
+    "imageCover": "/dev-products/ghe_gaming_corsair_tc100_fabric_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7fea14b63b001c7e9d30",
+        "name": "Black/Red",
+        "sku": "CMAX-C500-RD",
+        "specifications": {
+          "material": "Soft fabric",
+          "adjustability": "High",
+          "weightCapacity": "120kg"
+        },
+        "price": 149.99,
+        "stock": 25,
+        "sold": 10,
+        "images": [
+          "/dev-products/ghe_gaming_corsair_tc100_fabric_image1.jpg",
+          "/dev-products/ghe_gaming_corsair_tc100_fabric_image2.jpg",
+          "/dev-products/ghe_gaming_corsair_tc100_fabric_image3.jpg",
+          "/dev-products/ghe_gaming_corsair_tc100_fabric_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7ff014b63b001c7e9d31",
+    "name": "Bàn văn phòng HyperWork Core Desk",
+    "description": "Bàn Văn Phòng HyperWork Core Desk là giải pháp hoàn hảo cho những ai đang tìm kiếm một chiếc bàn làm việc vừa tiện dụng, vừa thẩm mỹ.",
+    "brand": "HyperWork",
+    "category": "60c72b2f9b1d8b3a4c8b456b",
+    "imageCover": "/dev-products/ban_van_phong_hyperwork_core_desk_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c7ff514b63b001c7e9d32",
+        "name": "Black",
+        "sku": "DPTX-BLK",
+        "specifications": {
+          "size": "140x60cm",
+          "rgb": "No",
+          "material": "Steel & MDF",
+          "maxLoad": "80kg"
+        },
+        "price": 199.99,
+        "stock": 20,
+        "sold": 5,
+        "images": [
+          "/dev-products/ban_van_phong_hyperwork_core_desk_image1.jpg",
+          "/dev-products/ban_van_phong_hyperwork_core_desk_image2.jpg",
+          "/dev-products/ban_van_phong_hyperwork_core_desk_image3.jpg",
+          "/dev-products/ban_van_phong_hyperwork_core_desk_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c7fff14b63b001c7e9d33",
+    "name": "Tai Nghe Gaming không dây Logitech Pro X 2 Lightspeed",
+    "description": "Tai nghe không dây PRO X 2 LIGHTSPEED với thiết kế chuyên nghiệp đã giành giải thưởng, mang lại âm thanh cấp độ chuyên nghiệp cùng sự thoải mái vượt trội.",
+    "brand": "Logitech",
+    "category": "60c72b2f9b1d8b3a4c8b4567",
+    "imageCover": "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c800514b63b001c7e9d34",
+        "name": "White",
+        "sku": "WTZ700-WHT",
+        "specifications": {
+          "sound": "Stereo",
+          "microphone": "noise-canceling",
+          "connection": "Wireless",
+          "rgb": "No"
+        },
+        "price": 119.99,
+        "stock": 60,
+        "sold": 25,
+        "images": [
+          "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image1.jpg",
+          "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image2.jpg",
+          "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image3.jpg",
+          "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c800e14b63b001c7e9d35",
+    "name": "Bàn phím cơ Razer Huntsman V3 Pro Tenkeyless",
+    "description": "Bàn phím cơ Razer Huntsman V3 Pro Tenkeyless Analog Optical thiết kế kiểu dáng gọn nhẹ, tối đa không gian để chuột nhưng đem đến độ chính xác cao cùng cảm giác chơi game tuyệt đỉnh cho game thủ.",
+    "brand": "Razer",
+    "category": "60c72b2f9b1d8b3a4c8b4569",
+    "imageCover": "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c801414b63b001c7e9d36",
+        "name": "Black Switch",
+        "sku": "PKRGB-BLACK",
+        "specifications": {
+          "switchType": "Black",
+          "rgb": "Yes",
+          "keycap": "Double-shot ABS",
+          "connection": "USB"
+        },
+        "price": 109.99,
+        "stock": 30,
+        "sold": 14,
+        "images": [
+          "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image1.jpg",
+          "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image2.jpg",
+          "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image3.jpg",
+          "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image4.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "637c801e14b63b001c7e9d37",
+    "name": "Ghế Gaming Corsair TC500 Luxe",
+    "description": "Ghế Gaming Corsair TC500 Luxe là một trong những sản phẩm ghế chơi game cao cấp nhất hiện nay, mang đến sự kết hợp hoàn hảo giữa thiết kế sang trọng, chất liệu cao cấp và công thái học vượt trội.",
+    "brand": "Corsair",
+    "category": "60c72b2f9b1d8b3a4c8b456a",
+    "imageCover": "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image1.jpg",
+    "variants": [
+      {
+        "_id": "637c802414b63b001c7e9d38",
+        "name": "White",
+        "sku": "CSXC300-WHT",
+        "specifications": {
+          "material": "Steel/Fabric",
+          "adjustability": "High",
+          "weightCapacity": "120kg"
+        },
+        "price": 279.99,
+        "stock": 15,
+        "sold": 7,
+        "images": [
+          "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image1.jpg",
+          "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image2.jpg",
+          "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image3.jpg",
+          "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image4.jpg"
+        ]
+      }
+    ]
+  }
+]
