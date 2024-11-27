@@ -119,7 +119,12 @@ productSchema.virtual('reviews', {
 });
 
 productSchema.pre(/^find/, function (next) {
-  this.populate({ path: 'category', select: 'name' });
+  if (!this._conditions.categoryName) {
+    this.populate({
+      path: 'category',
+      select: 'name',
+    });
+  }
   next();
 });
 

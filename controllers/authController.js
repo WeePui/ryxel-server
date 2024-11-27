@@ -1,4 +1,3 @@
-const { promisify } = require('util');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const User = require('../models/userModel');
@@ -6,6 +5,7 @@ const signToken = require('../utils/signToken');
 const sendEmail = require('../utils/email');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const verifyToken = require('../utils/verifyToken');
 
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
@@ -48,8 +48,19 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // 2. Verification token
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  const { valid, expired, decoded } = await verifyToken(token);
+  console.log(valid, expired, decoded);
 
+  if (!valid) {
+    return next(
+      new AppError(
+        expired
+          ? 'Your session has expired. Please log in again.'
+          : 'Invalid token. Please log in again.',
+        401
+      )
+    );
+  }
   // 3. Check if user still exists
   const user = await User.findById(decoded.id);
   if (!user)
@@ -83,6 +94,26 @@ exports.restrictTo = (...roles) => {
   };
 };
 
+exports.verifyToken = catchAsync(async (req, res, next) => {
+  const { token } = req.body;
+
+  if (!token) {
+    return next(new AppError('Token is required', 400));
+  }
+
+  const { valid, expired } = await verifyToken(token);
+
+  res.status(200).json({ valid, expired });
+});
+
+exports.logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
+};
+
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     name: req.body.name,
@@ -104,10 +135,11 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // 2. Check if user exists && password is correct
   const user = await User.findOne({ email }).select('+password');
-  const correct = user.correctPassword(password, user.password);
+  if (!user) return next(new AppError('Incorrect email or password', 401));
 
-  if (!user || !(await correct))
-    return next(new AppError('Incorrect email or password', 401));
+  const correct = await user.correctPassword(password, user.password);
+
+  if (!correct) return next(new AppError('Incorrect email or password', 401));
 
   createSendToken(user, 200, res);
 });

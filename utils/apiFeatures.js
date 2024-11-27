@@ -1,10 +1,12 @@
+const Category = require('../models/categoryModel');
+
 class APIFeatures {
   constructor(query, queryString) {
     this.query = query;
     this.queryString = queryString;
   }
 
-  filter() {
+  async filter() {
     const queryObj = { ...this.queryString };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach((el) => delete queryObj[el]);
@@ -13,6 +15,16 @@ class APIFeatures {
     if (queryObj.price) {
       queryObj.lowestPrice = { ...queryObj.price };
       delete queryObj.price;
+    }
+
+    if (queryObj.category) {
+      const categoryName = queryObj.category;
+      const category = await Category.findOne({ name: categoryName });
+      if (category) {
+        queryObj.category = category._id;
+      } else {
+        delete queryObj.category;
+      }
     }
 
     const queryStr = JSON.stringify(queryObj).replace(
@@ -47,12 +59,18 @@ class APIFeatures {
   pagination() {
     // Pagination
     const page = this.queryString.page * 1 || 1;
-    const limit = this.queryString.limit * 1 || 5;
+    const limit = this.queryString.limit * 1 || 10;
     const skip = page * limit - limit;
 
     this.query = this.query.skip(skip).limit(limit);
 
     return this;
+  }
+
+  async count() {
+    const countQuery = this.query.model.find(this.query.getFilter());
+    const count = await countQuery.countDocuments();
+    return count;
   }
 }
 

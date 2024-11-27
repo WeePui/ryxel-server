@@ -9,22 +9,14 @@ process.on('uncaughtException', (error) => {
   process.exit(1);
 });
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: './.env' });
+
+const { checkOverload } = require('./helpers/checkConnect');
+checkOverload();
+
+require('./database/initMongodb');
 
 const app = require('./app');
-
-const dbConnectionString = process.env.DB_CONNECTION
-  ? process.env.DB_CONNECTION.replace('<PASSWORD>', process.env.DB_PASSWORD)
-  : null;
-
-if (!dbConnectionString) {
-  console.error('Database connection string is not defined.');
-  process.exit(1);
-}
-
-mongoose.connect(dbConnectionString).then(() => {
-  console.log('Database connection successful!');
-});
 
 const server = app.listen(process.env.PORT, () => {
   console.log(
