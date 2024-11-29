@@ -8,7 +8,7 @@ const ShippingAddress = require('../models/shippingAddressModel');
 const Review = require('../models/reviewModel');
 const Category = require('../models/categoryModel');
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: './.env' });
 
 const products = JSON.parse(
   fs.readFileSync(`${__dirname}/products.json`, 'utf-8')

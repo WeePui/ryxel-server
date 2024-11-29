@@ -1,23 +1,24 @@
+const crypto = require('crypto');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const User = require('../models/userModel');
 const signToken = require('../utils/signToken');
 const sendEmail = require('../utils/email');
-const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
 const verifyToken = require('../utils/verifyToken');
 
 const createSendToken = (user, statusCode, res) => {
+  // Sign new token for the user
   const token = signToken(user._id);
   const cookieOptions = {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true,
+    ), // Expires in 90 days
+    httpOnly: true, // Cookie cannot be accessed or modified in any way by the browser
+    // Temporarily disabled:
+    // secure: process.env.NODE_ENV === 'production', // Cookie will only be sent on an encrypted connection
   };
 
-  res.cookie('jwt', token, cookieOptions);
+  res.cookie('jwt', token, cookieOptions); // Send the token in a cookie
 
   user.password = undefined;
 
@@ -49,7 +50,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 2. Verification token
   const { valid, expired, decoded } = await verifyToken(token);
-  console.log(valid, expired, decoded);
 
   if (!valid) {
     return next(
@@ -83,6 +83,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 exports.restrictTo = (...roles) => {
+  // roles is an array ['admin', 'user']
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return next(
@@ -92,6 +93,20 @@ exports.restrictTo = (...roles) => {
 
     next();
   };
+};
+
+exports.checkEmailExists = async (req, res, next) => {
+  const { email } = req.body;
+
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Email is already in use. Please try another.',
+    });
+  }
+
+  res.status(200).json({ status: 'success', message: 'Email is available.' });
 };
 
 exports.verifyToken = catchAsync(async (req, res, next) => {
@@ -107,6 +122,7 @@ exports.verifyToken = catchAsync(async (req, res, next) => {
 });
 
 exports.logout = (req, res) => {
+  // Send a new cookie with the same name and an expired date
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
@@ -120,9 +136,98 @@ exports.signup = catchAsync(async (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
+    gender: req.body.gender,
+    dob: req.body.dob,
   });
 
   createSendToken(newUser, 201, res);
+});
+
+exports.sendOTP = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    return next(new AppError('User not found', 404));
+  }
+
+  const now = Date.now();
+  if (user.otpLastRequest && now - user.otpLastRequest < 60 * 60 * 1000) {
+    // Only 3 OTPs can be sent in 1 hour
+    if (user.otpRequests >= 3) {
+      return next(
+        new AppError(
+          'You have reached the maximum number of OTP requests. Please try again later.',
+          429 // Too Many Requests
+        )
+      );
+    }
+  } else {
+    // If 1 hour has passed since the last request, reset the counter
+    user.otpRequests = 0;
+  }
+
+  const otp = user.createOTP();
+  user.otpRequests += 1;
+  user.otpLastRequest = now; // Update the last request time
+  await user.save({ validateBeforeSave: false });
+
+  const message = `Your OTP for email verification is: ${otp}. It is valid for 10 minutes.`;
+
+  try {
+    await sendEmail({
+      to: user.email,
+      subject: 'Email Verification OTP',
+      message,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'OTP sent to your email!',
+    });
+  } catch (err) {
+    // If there is an error sending the email, reset the OTP and the expiry time
+    user.otp = undefined;
+    user.otpExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    return next(
+      new AppError(
+        'There was an error sending the OTP. Please try again later.',
+        500
+      )
+    );
+  }
+});
+
+exports.verifyOTP = catchAsync(async (req, res, next) => {
+  // Hash the OTP sent by the user
+  const { otp } = req.body;
+  const hashedOTP = crypto.createHash('sha256').update(otp).digest('hex');
+
+  const user = await User.findById(req.user.id).select('+otp +otpExpires');
+
+  if (!user) return next(new AppError('User not found', 404));
+
+  // Check if the OTP is valid and has not expired
+  if (!user.otp || user.otpExpires < Date.now()) {
+    return next(new AppError('OTP is invalid or has expired.', 400));
+  }
+
+  if (user.otp !== hashedOTP) {
+    return next(new AppError('Incorrect OTP. Please try again.', 400));
+  }
+
+  // If the OTP is correct, set emailVerified to true and remove the OTP
+  user.emailVerified = true;
+  user.otp = undefined;
+  user.otpExpires = undefined;
+
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Email verified successfully!',
+  });
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -154,8 +259,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
+  const clientHost = process.env.CLIENT_HOST || 'http://localhost:3000';
 
-  const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
+  const resetURL = `${req.protocol}://${clientHost}/resetPassword/${resetToken}`;
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
 
@@ -168,9 +274,10 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      resetToken,
+      message: 'Reset token is sent to email!',
     });
   } catch (error) {
+    // If there is an error sending the email, reset the token and the expiry time
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
@@ -185,6 +292,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
+  // 1. Get user based on the token
   const hashedToken = crypto
     .createHash('sha256')
     .update(req.params.token)
@@ -199,6 +307,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     return next(new AppError('Token is invalid or has expired', 400));
   }
 
+  // 2. If token has not expired, and there is user, set the new password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;

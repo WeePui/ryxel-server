@@ -19,8 +19,13 @@ const userSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      default: 'default.jpg',
+      default: '/dev-users/default.png',
     },
+    gender: {
+      type: String,
+      enum: ['male', 'female', 'other'],
+    },
+    dob: Date,
     shippingAddresses: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -55,10 +60,22 @@ const userSchema = new mongoose.Schema(
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
+    otp: {
+      type: String,
+      select: false,
+    },
+    otpExpires: Date,
     active: {
       type: Boolean,
       default: true,
       select: false,
+    },
+    otpRequests: {
+      type: Number,
+      default: 0,
+    },
+    otpLastRequest: {
+      type: Date,
     },
   },
   { timestamps: true }
@@ -124,6 +141,16 @@ userSchema.methods.createPasswordResetToken = function () {
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
+};
+
+userSchema.methods.createOTP = function () {
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+  this.otp = crypto.createHash('sha256').update(otp).digest('hex');
+
+  this.otpExpires = Date.now() + 10 * 60 * 1000;
+
+  return otp;
 };
 
 const User = mongoose.model('User', userSchema);
