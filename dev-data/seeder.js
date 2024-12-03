@@ -7,6 +7,7 @@ const User = require('../models/userModel');
 const ShippingAddress = require('../models/shippingAddressModel');
 const Review = require('../models/reviewModel');
 const Category = require('../models/categoryModel');
+const Discount = require('../models/discountModel');
 
 dotenv.config({ path: './.env' });
 
@@ -22,6 +23,9 @@ const reviews = JSON.parse(
 );
 const categories = JSON.parse(
   fs.readFileSync(`${__dirname}/categories.json`, 'utf-8')
+);
+const discounts = JSON.parse(
+  fs.readFileSync(`${__dirname}/discounts.json`, 'utf-8')
 );
 
 const connectionString = process.env.DB_CONNECTION.replace(
@@ -44,6 +48,7 @@ async function importData() {
       ShippingAddress.create(shippingAddresses),
       Review.create(reviews),
       Category.create(categories),
+      Discount.create(discounts),
     ]);
 
     console.log('Data imported successfully');
@@ -62,6 +67,7 @@ async function deleteData() {
       ShippingAddress.deleteMany(),
       Review.deleteMany(),
       Category.deleteMany(),
+      Discount.deleteMany(),
     ]);
 
     console.log('Data deleted successfully');

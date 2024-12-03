@@ -15,10 +15,10 @@ class Database {
   }
 
   connect(type = 'mongodb') {
-    if (process.env.NODE_ENV === 'development') {
-      mongoose.set('debug', true);
-      mongoose.set('debug', { color: true });
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //   mongoose.set('debug', true);
+    //   mongoose.set('debug', { color: true });
+    // }
 
     mongoose
       .connect(dbConnectionString, { maxPoolSize: 100 })

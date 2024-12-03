@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
 
@@ -18,7 +20,9 @@ router.route('/sendOTP').post(authController.sendOTP);
 router.route('/verifyOTP').post(authController.verifyOTP);
 router.route('/updatePassword').patch(authController.updatePassword);
 router.route('/profile').get(userController.getProfile);
-router.route('/updateProfile').patch(userController.updateProfile);
+router
+  .route('/updateProfile')
+  .patch(upload.single('photo'), userController.updateProfile);
 router.route('/deleteProfile').delete(userController.deleteProfile);
 
 router.use(authController.restrictTo('admin'));

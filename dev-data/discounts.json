@@ -1,0 +1,67 @@
+[
+  {
+    "code": "SAVE10",
+    "name": "Save 10%",
+    "startDate": "2024-01-01T00:00:00.000Z",
+    "endDate": "2024-12-31T23:59:59.999Z",
+    "maxUse": 100,
+    "minOrderValue": 50,
+    "discountPercentage": 10,
+    "discountMaxValue": 20,
+    "maxUsePerUser": 5,
+    "usedUser": [],
+    "isActive": true
+  },
+  {
+    "code": "FREESHIP",
+    "name": "Free Shipping",
+    "startDate": "2024-02-01T00:00:00.000Z",
+    "endDate": "2024-11-30T23:59:59.999Z",
+    "maxUse": 200,
+    "minOrderValue": 30,
+    "discountPercentage": 100,
+    "discountMaxValue": 15,
+    "maxUsePerUser": 3,
+    "usedUser": [],
+    "isActive": true
+  },
+  {
+    "code": "WELCOME20",
+    "name": "Welcome 20%",
+    "startDate": "2024-03-01T00:00:00.000Z",
+    "endDate": "2024-10-31T23:59:59.999Z",
+    "maxUse": 150,
+    "minOrderValue": 40,
+    "discountPercentage": 20,
+    "discountMaxValue": 25,
+    "maxUsePerUser": 2,
+    "usedUser": [],
+    "isActive": true
+  },
+  {
+    "code": "SUMMER15",
+    "name": "Summer 15%",
+    "startDate": "2024-06-01T00:00:00.000Z",
+    "endDate": "2024-08-31T23:59:59.999Z",
+    "maxUse": 50,
+    "minOrderValue": 20,
+    "discountPercentage": 15,
+    "discountMaxValue": 10,
+    "maxUsePerUser": 1,
+    "usedUser": [],
+    "isActive": true
+  },
+  {
+    "code": "HOLIDAY25",
+    "name": "Holiday 25%",
+    "startDate": "2024-12-01T00:00:00.000Z",
+    "endDate": "2024-12-31T23:59:59.999Z",
+    "maxUse": 75,
+    "minOrderValue": 60,
+    "discountPercentage": 25,
+    "discountMaxValue": 30,
+    "maxUsePerUser": 4,
+    "usedUser": [],
+    "isActive": true
+  }
+]

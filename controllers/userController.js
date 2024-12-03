@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const { uploadImage, deleteImage } = require('../utils/cloudinaryService');
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -37,6 +38,7 @@ exports.getUserById = catchAsync(async (req, res, next) => {
   });
 });
 
+// For image upload. Request header must be 'Content-Type: multipart/form-data'
 exports.updateUser = catchAsync(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -76,7 +78,32 @@ exports.updateProfile = catchAsync(async (req, res, next) => {
     );
   }
 
-  const filteredBody = filterObj(req.body, 'name', 'email');
+  // Filtered out unwanted fields names that are not allowed to be updated
+  const filteredBody = filterObj(req.body, 'name', 'gender');
+
+  const user = await User.findById(req.user.id);
+
+  if (req.file) {
+    console.log('here');
+
+    const DEFAULT_PUBLIC_ID = 'avatars/test-public-id';
+    const [uploadResult, deleteResult] = await Promise.all([
+      uploadImage(req.file.path),
+      user.photo.publicId !== DEFAULT_PUBLIC_ID
+        ? deleteImage(user.photo.publicId)
+        : Promise.resolve('ok'),
+    ]);
+
+    if (!uploadResult) return next(new AppError('Error uploading image', 500));
+
+    if (deleteResult.result !== 'ok')
+      return next(new AppError('Error deleting image', 500));
+
+    filteredBody.photo = {
+      publicId: uploadResult.public_id,
+      url: uploadResult.secure_url,
+    };
+  }
 
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,

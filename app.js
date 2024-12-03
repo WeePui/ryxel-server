@@ -4,12 +4,14 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const xss = require('xss-clean');
 const hpp = require('hpp');
-const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
 const productRouter = require('./routes/productRoute');
 const userRouter = require('./routes/userRoute');
 const reviewRouter = require('./routes/reviewRoute');
 const categoryRouter = require('./routes/categoryRoute');
+const addressRouter = require('./routes/addressRoute');
+const discountRouter = require('./routes/discountRoute');
+const cartRouter = require('./routes/cartRoute');
 const errorController = require('./controllers/errorController');
 const compression = require('compression');
 
@@ -46,6 +48,9 @@ app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/categories', categoryRouter);
+app.use('/api/v1/addresses', addressRouter);
+app.use('/api/v1/discounts', discountRouter);
+app.use('/api/v1/carts', cartRouter);
 
 app.use(errorController);
 

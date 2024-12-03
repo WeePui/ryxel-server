@@ -18,20 +18,20 @@ const userSchema = new mongoose.Schema(
       validate: [validator.isEmail, 'Please provide a valid email!'],
     },
     photo: {
-      type: String,
-      default: '/dev-users/default.png',
+      publicId: {
+        type: String,
+        default: 'avatars/test-public-id',
+      },
+      url: {
+        type: String,
+        default: 'avatars/default.jpg',
+      },
     },
     gender: {
       type: String,
       enum: ['male', 'female', 'other'],
     },
     dob: Date,
-    shippingAddresses: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ShippingAddress',
-      },
-    ],
     emailVerified: {
       type: Boolean,
       default: false,
@@ -99,14 +99,6 @@ userSchema.pre('save', function (next) {
 
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
-  next();
-});
-
-userSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'shippingAddresses',
-    select: '-__v',
-  });
   next();
 });
 

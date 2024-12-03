@@ -2,6 +2,11 @@ const validator = require('validator');
 const mongoose = require('mongoose');
 
 const shippingAddressSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   fullname: {
     type: String,
     required: [true, 'Please provide your full name!'],
@@ -20,19 +25,19 @@ const shippingAddressSchema = new mongoose.Schema({
     default: 'Vietnam',
     trim: true,
   },
-  state: {
-    type: String,
-    required: [true, 'Please provide your state (or province)!'],
-    trim: true,
-  },
   city: {
     type: String,
-    required: [true, 'Please provide your city!'],
+    required: [true, 'Please provide your city (or province)!'],
     trim: true,
   },
   district: {
     type: String,
     required: [true, 'Please provide your district!'],
+    trim: true,
+  },
+  ward: {
+    type: String,
+    required: [true, 'Please provide your ward!'],
     trim: true,
   },
   address: {

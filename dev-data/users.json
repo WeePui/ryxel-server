@@ -3,7 +3,10 @@
     "_id": "637e2d7b1c5b5b002c1f1b01",
     "name": "Tester 01",
     "email": "tester1@example.com",
-    "photo": "/dev-users/default.png",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/default.png"
+    },
     "emailVerified": true,
     "role": "user",
     "password": "password123",
@@ -13,7 +16,10 @@
     "_id": "637e2d7b1c5b5b002c1f1b02",
     "name": "Tester 02",
     "email": "tester2@example.com",
-    "photo": "/dev-users/default.png",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/default.png"
+    },
     "emailVerified": false,
     "role": "user",
     "password": "password123",
@@ -23,7 +29,10 @@
     "_id": "637e2d7b1c5b5b002c1f1b03",
     "name": "Tester 03",
     "email": "tester3@example.com",
-    "photo": "/dev-users/default.png",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/default.png"
+    },
     "emailVerified": false,
     "role": "user",
     "password": "password123",
@@ -34,7 +43,10 @@
     "_id": "637e2d7b1c5b5b002c1f1b04",
     "name": "Admin",
     "email": "admin@example.com",
-    "photo": "/dev-users/admin.jpg",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/admin.jpg"
+    },
     "emailVerified": true,
     "role": "admin",
     "password": "password123",
@@ -44,11 +56,10 @@
     "_id": "637e2d7b1c5b5b002c1f1a01",
     "name": "Nguyễn Văn Hùng",
     "email": "hung.nguyen@example.com",
-    "photo": "/dev-users/hung.jpg",
-    "shippingAddresses": [
-      "637d1e7a1c4b4a001c9f1a01",
-      "637d1e7a1c4b4a001c9f1a02"
-    ],
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/hung.jpg"
+    },
     "emailVerified": true,
     "role": "user",
     "password": "password123",
@@ -58,8 +69,10 @@
     "_id": "637e2d7b1c5b5b002c1f1a02",
     "name": "Trần Thị Mai",
     "email": "mai.tran@example.com",
-    "photo": "/dev-users/mai.jpg",
-    "shippingAddresses": ["637d1e7a1c4b4a001c9f1a03"],
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/mai.jpg"
+    },
     "emailVerified": false,
     "role": "user",
     "password": "password123",
@@ -69,8 +82,10 @@
     "_id": "637e2d7b1c5b5b002c1f1a03",
     "name": "Lê Quang Dũng",
     "email": "dung.le@example.com",
-    "photo": "/dev-users/dung.jpg",
-    "shippingAddresses": ["637d1e7a1c4b4a001c9f1a04"],
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/dung.jpg"
+    },
     "emailVerified": true,
     "role": "user",
     "password": "password123",
@@ -80,8 +95,10 @@
     "_id": "637e2d7b1c5b5b002c1f1a04",
     "name": "Phạm Minh An",
     "email": "an.pham@example.com",
-    "photo": "/dev-users/an.jpg",
-    "shippingAddresses": ["637d1e7a1c4b4a001c9f1a05"],
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/an.jpg"
+    },
     "emailVerified": true,
     "role": "admin",
     "password": "adminpass123",
@@ -91,8 +108,10 @@
     "_id": "637e2d7b1c5b5b002c1f1a05",
     "name": "Hoàng Thị Linh",
     "email": "linh.hoang@example.com",
-    "photo": "/dev-users/linh.jpg",
-    "shippingAddresses": ["637d1e7a1c4b4a001c9f1a06"],
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/linh.jpg"
+    },
     "emailVerified": false,
     "role": "user",
     "password": "password123",
