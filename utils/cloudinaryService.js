@@ -5,7 +5,8 @@ exports.uploadImage = async (imageFile) => {
     const result = await cloudinary.v2.uploader.upload(imageFile, {
       folder: 'avatars',
       width: 150,
-      crop: 'scale',
+      height: 150,
+      crop: 'fill',
     });
     return result;
   } catch (error) {

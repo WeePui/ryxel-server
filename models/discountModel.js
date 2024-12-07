@@ -4,7 +4,7 @@ const discountSchema = new mongoose.Schema(
   {
     code: {
       type: String,
-      required: [true, 'Discount code is required'],
+      required: [true, 'Discount code is required'],//IS UPPERCASE
     },
     name: {
       type: String,

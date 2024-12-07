@@ -20,6 +20,7 @@ router.route('/sendOTP').post(authController.sendOTP);
 router.route('/verifyOTP').post(authController.verifyOTP);
 router.route('/updatePassword').patch(authController.updatePassword);
 router.route('/profile').get(userController.getProfile);
+router.route('/reauthenticate').post(authController.reauthenticate);
 router
   .route('/updateProfile')
   .patch(upload.single('photo'), userController.updateProfile);

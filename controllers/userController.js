@@ -84,9 +84,8 @@ exports.updateProfile = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
   if (req.file) {
-    console.log('here');
-
     const DEFAULT_PUBLIC_ID = 'avatars/test-public-id';
+    console.log(user.photo.publicId === DEFAULT_PUBLIC_ID);
     const [uploadResult, deleteResult] = await Promise.all([
       uploadImage(req.file.path),
       user.photo.publicId !== DEFAULT_PUBLIC_ID
@@ -96,7 +95,7 @@ exports.updateProfile = catchAsync(async (req, res, next) => {
 
     if (!uploadResult) return next(new AppError('Error uploading image', 500));
 
-    if (deleteResult.result !== 'ok')
+    if (deleteResult.result && deleteResult.result !== 'ok')
       return next(new AppError('Error deleting image', 500));
 
     filteredBody.photo = {

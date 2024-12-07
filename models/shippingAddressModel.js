@@ -26,19 +26,40 @@ const shippingAddressSchema = new mongoose.Schema({
     trim: true,
   },
   city: {
-    type: String,
-    required: [true, 'Please provide your city (or province)!'],
-    trim: true,
+    name: {
+      type: String,
+      required: [true, 'Please provide your city (or province)!'],
+      trim: true,
+    },
+    code: {
+      type: Number,
+      required: [true, 'Please provide your city code!'],
+      trim: true,
+    },
   },
   district: {
-    type: String,
-    required: [true, 'Please provide your district!'],
-    trim: true,
+    name: {
+      type: String,
+      required: [true, 'Please provide your city (or province)!'],
+      trim: true,
+    },
+    code: {
+      type: Number,
+      required: [true, 'Please provide your city code!'],
+      trim: true,
+    },
   },
   ward: {
-    type: String,
-    required: [true, 'Please provide your ward!'],
-    trim: true,
+    name: {
+      type: String,
+      required: [true, 'Please provide your city (or province)!'],
+      trim: true,
+    },
+    code: {
+      type: String,
+      required: [true, 'Please provide your city code!'],
+      trim: true,
+    },
   },
   address: {
     type: String,

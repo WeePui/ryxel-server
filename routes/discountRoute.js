@@ -1,30 +1,30 @@
 const express = require('express');
 const authController = require('../controllers/authController');
-const disountController = require('../controllers/discountController');
+const discountController = require('../controllers/discountController');
 
 const router = express.Router();
 
 router
   .route('/')
-  .get(disountController.getAllDiscounts)
+  .get(discountController.getAllDiscounts)
   .post(
     authController.protect,
     authController.restrictTo('admin'),
-    disountController.createDiscount
+    discountController.createDiscount
   );
-
 router
   .route('/:id')
-  .get(disountController.getDiscountById)
+  .get(authController.protect, discountController.getDiscountById)
+  .post(authController.protect, discountController.verifyDiscount)
   .patch(
     authController.protect,
     authController.restrictTo('admin'),
-    disountController.updateDiscount
+    discountController.updateDiscount
   )
   .delete(
     authController.protect,
     authController.restrictTo('admin'),
-    disountController.deleteDiscount
+    discountController.deleteDiscount
   );
 
 module.exports = router;

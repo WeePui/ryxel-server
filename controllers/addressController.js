@@ -163,6 +163,20 @@ exports.setDefaultShippingAddress = catchAsync(async (req, res, next) => {
   try {
     const { id } = req.params;
 
+    // Find the address and check if it belongs to the authenticated user
+    const address = await ShippingAddress.findById(id).session(session);
+
+    if (!address) {
+      throw new AppError('Shipping address not found', 404);
+    }
+
+    if (address.user.toString() !== req.user.id) {
+      throw new AppError(
+        'You do not have permission to perform this action',
+        403
+      );
+    }
+
     // Update existing default address to false
     await ShippingAddress.updateMany(
       { user: req.user.id, isDefault: true },
@@ -171,15 +185,8 @@ exports.setDefaultShippingAddress = catchAsync(async (req, res, next) => {
     );
 
     // Set the selected address as default
-    const updatedAddress = await ShippingAddress.findByIdAndUpdate(
-      id,
-      { isDefault: true },
-      { new: true, runValidators: true, session }
-    );
-
-    if (!updatedAddress) {
-      throw new AppError('Shipping address not found', 404);
-    }
+    address.isDefault = true;
+    await address.save({ session });
 
     await session.commitTransaction();
     session.endSession();
@@ -187,14 +194,12 @@ exports.setDefaultShippingAddress = catchAsync(async (req, res, next) => {
     res.status(200).json({
       status: 'success',
       data: {
-        address: updatedAddress,
+        address,
       },
     });
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    console.log(error);
-
-    return next(new AppError(error.messagge, 500));
+    return next(error);
   }
 });

@@ -40,6 +40,11 @@ const variantsSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    weight: {
+      type: Number,
+      required: [true, 'Variant weight is required'],
+      default: 0,
+    },
   },
   { timestamps: true }
 );
@@ -100,6 +105,7 @@ productSchema.index({ sold: -1 });
 productSchema.index({ category: 1 });
 productSchema.index({ brand: 1 });
 productSchema.index({ category: 1, lowestPrice: 1 });
+productSchema.index({ name: 'text', brand: 'text', description: 'text' });
 
 // Pre-save middleware to calculate the lowest price
 productSchema.pre('save', function (next) {

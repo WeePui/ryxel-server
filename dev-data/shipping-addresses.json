@@ -5,9 +5,18 @@
     "fullname": "Nguyễn Văn A",
     "phoneNumber": "0912345678",
     "country": "Vietnam",
-    "city": "Hà Nội",
-    "district": "Quận Ba Đình",
-    "ward": "Phường Kim Mã",
+    "city": {
+      "code": 201,
+      "name": "Hà Nội"
+    },
+    "district": {
+      "code": 1484,
+      "name": "Quận Ba Đình"
+    },
+    "ward": {
+      "code": "1A0105",
+      "name": "Phường Kim Mã"
+    },
     "address": "123 Kim Mã",
     "addressInfo": "Tòa nhà Landmark, tầng 3",
     "isDefault": true
@@ -18,9 +27,18 @@
     "fullname": "Lê Thị B",
     "phoneNumber": "0987654321",
     "country": "Vietnam",
-    "city": "TP Hồ Chí Minh",
-    "district": "Quận 1",
-    "ward": "Phường Bến Nghé",
+    "city": {
+      "code": 202,
+      "name": "Hồ Chí Minh"
+    },
+    "district": {
+      "code": 1442,
+      "name": "Quận 1"
+    },
+    "ward": {
+      "code": "20101",
+      "name": "Phường Bến Nghé"
+    },
     "address": "45 Lê Lợi",
     "addressInfo": "Gần công viên 23/9",
     "isDefault": false
@@ -31,9 +49,18 @@
     "fullname": "Trần Văn C",
     "phoneNumber": "0971111222",
     "country": "Vietnam",
-    "city": "Đà Nẵng",
-    "district": "Quận Hải Châu",
-    "ward": "Phường Hòa Thuận Đông",
+    "city": {
+      "code": 203,
+      "name": "Đà Nẵng"
+    },
+    "district": {
+      "code": 1526,
+      "name": "Quận Hải Châu"
+    },
+    "ward": {
+      "code": "40107",
+      "name": "Phường Hòa Thuận Đông"
+    },
     "address": "88 Nguyễn Văn Linh",
     "addressInfo": "Tòa nhà ABC, tầng 2",
     "isDefault": false
@@ -44,9 +71,18 @@
     "fullname": "Phạm Thị D",
     "phoneNumber": "0933334444",
     "country": "Vietnam",
-    "city": "Hải Phòng",
-    "district": "Quận Lê Chân",
-    "ward": "Phường Đông Khê",
+    "city": {
+      "code": 224,
+      "name": "Hải Phòng"
+    },
+    "district": {
+      "code": 1588,
+      "name": "Quận Lê Chân"
+    },
+    "ward": {
+      "code": "30304",
+      "name": "Phường Đông Khê"
+    },
     "address": "56 Trần Phú",
     "addressInfo": "Đối diện siêu thị Co.opmart",
     "isDefault": false
@@ -57,9 +93,18 @@
     "fullname": "Hoàng Văn E",
     "phoneNumber": "0905556666",
     "country": "Vietnam",
-    "city": "Cần Thơ",
-    "district": "Quận Ninh Kiều",
-    "ward": "Phường An Lạc",
+    "city": {
+      "code": 220,
+      "name": "Cần Thơ"
+    },
+    "district": {
+      "code": 1572,
+      "name": "Quận Ninh Kiều"
+    },
+    "ward": {
+      "code": "550106",
+      "name": "Phường An Lạc"
+    },
     "address": "22 Trần Hưng Đạo",
     "addressInfo": "Gần trường THPT Nguyễn Việt Hồng",
     "isDefault": false
@@ -70,9 +115,18 @@
     "fullname": "Đặng Thị F",
     "phoneNumber": "0922223333",
     "country": "Vietnam",
-    "city": "Bình Dương",
-    "district": "Thành phố Thủ Dầu Một",
-    "ward": "Phường Phú Cường",
+    "city": {
+      "code": 205,
+      "name": "Bình Dương"
+    },
+    "district": {
+      "code": 1538,
+      "name": "Thành phố Thủ Dầu Một"
+    },
+    "ward": {
+      "code": "440107",
+      "name": "Phường Phú Cường"
+    },
     "address": "10 Đại lộ Bình Dương",
     "addressInfo": "Khu dân cư Chánh Nghĩa",
     "isDefault": false

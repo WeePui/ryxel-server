@@ -336,3 +336,22 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   createSendToken(user, 200, res);
 });
+
+exports.reauthenticate = catchAsync(async (req, res, next) => {
+  const { password } = req.body;
+  const user = await User.findById(req.user.id).select('+password');
+
+  if (!user) {
+    return next(new AppError('User not found', 404));
+  }
+
+  const correct = await user.correctPassword(password, user.password);
+
+  if (!correct) {
+    return next(new AppError('Incorrect password. Please try again.', 401));
+  }
+
+  res.status(200).json({
+    status: 'success',
+  });
+});

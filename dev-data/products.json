@@ -17,7 +17,7 @@
           "weight": "53g",
           "rgb": "Yes"
         },
-        "price": 49.99,
+        "price": 1249000,
         "stock": 50,
         "sold": 20,
         "images": [
@@ -37,7 +37,7 @@
           "weight": "59g",
           "rgb": "Yes"
         },
-        "price": 69.99,
+        "price": 1269000,
         "stock": 30,
         "sold": 15,
         "images": [
@@ -45,7 +45,8 @@
           "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image2.jpg",
           "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image3.jpg",
           "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -67,7 +68,7 @@
           "rgb": "Yes",
           "connection": "USB"
         },
-        "price": 89.99,
+        "price": 1289000,
         "stock": 40,
         "sold": 10,
         "images": [
@@ -87,7 +88,7 @@
           "rgb": "Yes",
           "connection": "USB"
         },
-        "price": 89.99,
+        "price": 1289000,
         "stock": 25,
         "sold": 8,
         "images": [
@@ -95,7 +96,8 @@
           "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image2.jpg",
           "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image3.jpg",
           "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -117,7 +119,7 @@
           "connection": "USB",
           "rgb": "No"
         },
-        "price": 59.99,
+        "price": 1259000,
         "stock": 60,
         "sold": 25,
         "images": [
@@ -137,7 +139,7 @@
           "connection": "USB",
           "rgb": "No"
         },
-        "price": 59.99,
+        "price": 1259000,
         "stock": 45,
         "sold": 18,
         "images": [
@@ -145,7 +147,8 @@
           "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image2.jpg",
           "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image3.jpg",
           "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -167,7 +170,7 @@
           "rgb": "No",
           "weight": "60g"
         },
-        "price": 99.99,
+        "price": 1299000,
         "stock": 45,
         "sold": 10,
         "images": [
@@ -187,7 +190,7 @@
           "rgb": "No",
           "weight": "60g"
         },
-        "price": 99.99,
+        "price": 1299000,
         "stock": 30,
         "sold": 8,
         "images": [
@@ -195,7 +198,8 @@
           "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image2.jpg",
           "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image3.jpg",
           "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -217,7 +221,7 @@
           "rgb": "Yes",
           "weight": "54g"
         },
-        "price": 129.99,
+        "price": 2129000,
         "stock": 50,
         "sold": 15,
         "images": [
@@ -225,7 +229,8 @@
           "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image2.jpg",
           "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image3.jpg",
           "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -247,7 +252,7 @@
           "keycap": "PBT",
           "connection": "USB"
         },
-        "price": 69.99,
+        "price": 1269000,
         "stock": 40,
         "sold": 12,
         "images": [
@@ -255,7 +260,8 @@
           "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image2.jpg",
           "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image3.jpg",
           "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -277,7 +283,7 @@
           "connection": "Wireless",
           "rgb": "No"
         },
-        "price": 79.99,
+        "price": 17900000,
         "stock": 55,
         "sold": 22,
         "images": [
@@ -285,7 +291,8 @@
           "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image2.jpg",
           "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image3.jpg",
           "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -307,7 +314,7 @@
           "keycap": "ABS",
           "connection": "USB"
         },
-        "price": 99.99,
+        "price": 1990000,
         "stock": 35,
         "sold": 18,
         "images": [
@@ -315,7 +322,8 @@
           "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image2.jpg",
           "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image3.jpg",
           "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -336,7 +344,7 @@
           "adjustability": "High",
           "weightCapacity": "120kg"
         },
-        "price": 149.99,
+        "price": 1219000,
         "stock": 25,
         "sold": 10,
         "images": [
@@ -344,7 +352,8 @@
           "/dev-products/ghe_gaming_corsair_tc100_fabric_image2.jpg",
           "/dev-products/ghe_gaming_corsair_tc100_fabric_image3.jpg",
           "/dev-products/ghe_gaming_corsair_tc100_fabric_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -366,7 +375,7 @@
           "material": "Steel & MDF",
           "maxLoad": "80kg"
         },
-        "price": 199.99,
+        "price": 2199000,
         "stock": 20,
         "sold": 5,
         "images": [
@@ -374,7 +383,8 @@
           "/dev-products/ban_van_phong_hyperwork_core_desk_image2.jpg",
           "/dev-products/ban_van_phong_hyperwork_core_desk_image3.jpg",
           "/dev-products/ban_van_phong_hyperwork_core_desk_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -396,7 +406,7 @@
           "connection": "Wireless",
           "rgb": "No"
         },
-        "price": 119.99,
+        "price": 2119000,
         "stock": 60,
         "sold": 25,
         "images": [
@@ -404,7 +414,8 @@
           "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image2.jpg",
           "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image3.jpg",
           "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -426,7 +437,7 @@
           "keycap": "Double-shot ABS",
           "connection": "USB"
         },
-        "price": 109.99,
+        "price": 12109000,
         "stock": 30,
         "sold": 14,
         "images": [
@@ -434,7 +445,8 @@
           "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image2.jpg",
           "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image3.jpg",
           "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   },
@@ -455,7 +467,7 @@
           "adjustability": "High",
           "weightCapacity": "120kg"
         },
-        "price": 279.99,
+        "price": 1779000,
         "stock": 15,
         "sold": 7,
         "images": [
@@ -463,7 +475,8 @@
           "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image2.jpg",
           "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image3.jpg",
           "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image4.jpg"
-        ]
+        ],
+        "weight": 400
       }
     ]
   }
