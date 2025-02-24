@@ -1,0 +1,134 @@
+[
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a01",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "fullname": "Nguyễn Văn A",
+    "phoneNumber": "0912345678",
+    "country": "Vietnam",
+    "city": {
+      "code": 201,
+      "name": "Hà Nội"
+    },
+    "district": {
+      "code": 1484,
+      "name": "Quận Ba Đình"
+    },
+    "ward": {
+      "code": "1A0105",
+      "name": "Phường Kim Mã"
+    },
+    "address": "123 Kim Mã",
+    "addressInfo": "Tòa nhà Landmark, tầng 3",
+    "isDefault": true
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a02",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "fullname": "Lê Thị B",
+    "phoneNumber": "0987654321",
+    "country": "Vietnam",
+    "city": {
+      "code": 202,
+      "name": "Hồ Chí Minh"
+    },
+    "district": {
+      "code": 1442,
+      "name": "Quận 1"
+    },
+    "ward": {
+      "code": "20101",
+      "name": "Phường Bến Nghé"
+    },
+    "address": "45 Lê Lợi",
+    "addressInfo": "Gần công viên 23/9",
+    "isDefault": false
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a03",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "fullname": "Trần Văn C",
+    "phoneNumber": "0971111222",
+    "country": "Vietnam",
+    "city": {
+      "code": 203,
+      "name": "Đà Nẵng"
+    },
+    "district": {
+      "code": 1526,
+      "name": "Quận Hải Châu"
+    },
+    "ward": {
+      "code": "40107",
+      "name": "Phường Hòa Thuận Đông"
+    },
+    "address": "88 Nguyễn Văn Linh",
+    "addressInfo": "Tòa nhà ABC, tầng 2",
+    "isDefault": false
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a04",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "fullname": "Phạm Thị D",
+    "phoneNumber": "0933334444",
+    "country": "Vietnam",
+    "city": {
+      "code": 224,
+      "name": "Hải Phòng"
+    },
+    "district": {
+      "code": 1588,
+      "name": "Quận Lê Chân"
+    },
+    "ward": {
+      "code": "30304",
+      "name": "Phường Đông Khê"
+    },
+    "address": "56 Trần Phú",
+    "addressInfo": "Đối diện siêu thị Co.opmart",
+    "isDefault": false
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a05",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "fullname": "Hoàng Văn E",
+    "phoneNumber": "0905556666",
+    "country": "Vietnam",
+    "city": {
+      "code": 220,
+      "name": "Cần Thơ"
+    },
+    "district": {
+      "code": 1572,
+      "name": "Quận Ninh Kiều"
+    },
+    "ward": {
+      "code": "550106",
+      "name": "Phường An Lạc"
+    },
+    "address": "22 Trần Hưng Đạo",
+    "addressInfo": "Gần trường THPT Nguyễn Việt Hồng",
+    "isDefault": false
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a06",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "fullname": "Đặng Thị F",
+    "phoneNumber": "0922223333",
+    "country": "Vietnam",
+    "city": {
+      "code": 205,
+      "name": "Bình Dương"
+    },
+    "district": {
+      "code": 1538,
+      "name": "Thành phố Thủ Dầu Một"
+    },
+    "ward": {
+      "code": "440107",
+      "name": "Phường Phú Cường"
+    },
+    "address": "10 Đại lộ Bình Dương",
+    "addressInfo": "Khu dân cư Chánh Nghĩa",
+    "isDefault": false
+  }
+]
