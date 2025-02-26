@@ -109,10 +109,7 @@ export const checkEmailExists = catchAsync(
 
     const userExists = await User.findOne({ email });
     if (userExists) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'Email is already in use. Please try another.',
-      });
+      return next(new AppError('Email is already in use.', 400));
     }
 
     res.status(200).json({ status: 'success', message: 'Email is available.' });

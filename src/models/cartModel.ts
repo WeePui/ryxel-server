@@ -45,8 +45,8 @@ cartSchema.pre<ICart>('save', async function (next) {
     this.products.map(async (item) => {
       const product = await Product.findById(item.product).exec();
       if (product) {
-        const variant = product.variants.find((v) =>
-          (v._id as Types.ObjectId).equals(item.variant)
+        const variant = product.variants.find(
+          (v) => v._id.toString() === item.variant.toString()
         );
         if (variant) {
           return variant.price * item.quantity;

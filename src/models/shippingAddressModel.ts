@@ -2,6 +2,7 @@ import validator from 'validator';
 import mongoose, { Document, Schema } from 'mongoose';
 
 interface IShippingAddress extends Document {
+  _id: mongoose.Schema.Types.ObjectId;
   user: mongoose.Schema.Types.ObjectId;
   fullname: string;
   phoneNumber: string;
@@ -98,6 +99,9 @@ const shippingAddressSchema = new Schema<IShippingAddress>({
   },
 });
 
-const ShippingAddress = mongoose.model<IShippingAddress>('ShippingAddress', shippingAddressSchema);
+const ShippingAddress = mongoose.model<IShippingAddress>(
+  'ShippingAddress',
+  shippingAddressSchema
+);
 
 export default ShippingAddress;

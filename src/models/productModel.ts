@@ -2,6 +2,7 @@ import mongoose, { Document, Query, Schema } from 'mongoose';
 import './categoryModel';
 
 interface IVariant extends Document {
+  _id: mongoose.Schema.Types.ObjectId;
   name: string;
   sku: string;
   specifications: Map<string, string>;
