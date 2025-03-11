@@ -20,6 +20,8 @@ export const getUserShippingAddress = catchAsync(
 
 export const addShippingAddress = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body);
+
     const session = await mongoose.startSession();
     session.startTransaction();
 

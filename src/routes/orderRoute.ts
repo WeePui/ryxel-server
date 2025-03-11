@@ -7,6 +7,7 @@ import {
   updateOrder,
   deleteOrder,
   getAllOrders,
+  checkUnpaidOrder,
 } from '../controllers/orderController';
 import { protect, restrictTo } from '../controllers/authController';
 
@@ -18,6 +19,8 @@ router
   .get(protect, getUserOrders) // Get all orders for a user
   .post(protect, createOrder); // Create a new order
 
+router.route('/checkUnpaidOrder').get(protect, checkUnpaidOrder); // Check if user has unpaid order
+
 router
   .route('/:id')
   .get(protect, getOrderByID) // Get an order by ID
@@ -26,8 +29,9 @@ router
   .delete(protect, deleteOrder); // Delete an order by ID
 
 // Route for admin to view all users' orders. TO BE CHANGED WHEN ADMIN ROUTES ARE IMPLEMENTED
-router
-  .route('/admin/all')
-  .get(protect, restrictTo('admin'), getAllOrders); // Get all orders (Admin)
+router.route('/admin/all').get(protect, restrictTo('admin'), getAllOrders); // Get all orders (Admin)
+
+router.route('/checkout');
+//.post(protect, checkout); // Process checkout
 
 export default router;

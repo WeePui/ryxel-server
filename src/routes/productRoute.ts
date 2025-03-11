@@ -10,6 +10,7 @@ const router = express.Router();
 router
   .route('/top-5-bestsellers')
   .get(productController.aliasTopProducts, productController.getAllProducts);
+
 router
   .route('/')
   .get(productController.getAllProducts)
@@ -18,6 +19,7 @@ router
     authController.restrictTo('admin'),
     productController.createProduct
   );
+
 router
   .route('/:id')
   .get(productController.getProductById)

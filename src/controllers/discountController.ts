@@ -5,6 +5,7 @@ import Cart from '../models/cartModel';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 
+//TO VALIDATE IF THE DISCOUNT CODE IS USABLE AND RETURN THE DISCOUNT AMOUNT FOR FRONT END USAGE
 export const verifyDiscount = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const discountCode = req.params.id;
   const discount = await Discount.findOne({
@@ -128,8 +129,8 @@ export const updateDiscount = catchAsync(async (req: Request, res: Response, nex
   });
 });
 
-//TO BE UPDATE AND PUT IN THE CHECKOUT PROCESS
-/*export const updateDiscountUsage = catchAsync(async (discountId: String, userId: ) => {
+//UPDATE THE DISCOUNT USAGE, RUN AFTER ORDER IS PLACED
+const updateDiscountUsage = async (discountId: String, userId: string ) => {
   const discount = await Discount.findById(discountId);
   if (!discount) throw new AppError('No discount found with that ID', 404);
 
@@ -144,7 +145,7 @@ export const updateDiscount = catchAsync(async (req: Request, res: Response, nex
     discount.isActive = false;
   }
   await discount.save();
-});*/
+}
 
 export const deleteDiscount = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   await Discount.findByIdAndDelete(req.params.id);

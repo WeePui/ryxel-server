@@ -1,5 +1,6 @@
 import { Query } from 'mongoose';
 import Category from '../models/categoryModel';
+import Product from '../models/productModel';
 
 interface QueryString {
   search?: string;
@@ -19,21 +20,62 @@ class APIFeatures {
     this.queryString = queryString;
   }
 
-  search() {
+  async search() {
     if (this.queryString.search) {
-      this.query = this.query
-        .find(
-          {
-            $text: { $search: this.queryString.search },
+      const nameSearch = {
+        $search: {
+          index: 'autocomplete-index',
+          autocomplete: {
+            query: this.queryString.search,
+            path: 'name',
           },
-          {
-            score: { $meta: 'textScore' },
-          }
-        )
-        .sort({
-          score: { $meta: 'textScore' },
-        });
+        },
+      };
+
+      const descriptionSearch = {
+        $search: {
+          index: 'autocomplete-index',
+          autocomplete: {
+            query: this.queryString.search,
+            path: 'description',
+          },
+        },
+      };
+
+      const categorySearch = {
+        $search: {
+          index: 'autocomplete-index',
+          autocomplete: {
+            query: this.queryString.search,
+            path: 'category',
+          },
+        },
+      };
+
+      const nameResults = await Product.aggregate([
+        nameSearch,
+        { $addFields: { score: { $meta: 'searchScore' } } },
+      ]);
+      const descriptionResults = await Product.aggregate([
+        descriptionSearch,
+        { $addFields: { score: { $meta: 'searchScore' } } },
+      ]);
+      const categoryResults = await Product.aggregate([
+        categorySearch,
+        { $addFields: { score: { $meta: 'searchScore' } } },
+      ]);
+
+      const combinedResults = [
+        ...nameResults,
+        ...descriptionResults,
+        ...categoryResults,
+      ].sort((a, b) => b.score - a.score);
+
+      this.query = Product.find({
+        _id: { $in: combinedResults.map((result) => result._id) },
+      });
     }
+
     return this;
   }
 
@@ -70,9 +112,9 @@ class APIFeatures {
   sort() {
     // Sorting
     if (this.queryString.sort) {
-      const sortBy = this.queryString.sort.split(',').join(' ');
+      const sortBy = this.queryString.sort.split(',').join(' ') + ' _id';
       this.query = this.query.sort(sortBy);
-    } else this.query = this.query.sort('-createdAt');
+    } else this.query = this.query.sort('-createdAt _id');
 
     return this;
   }
@@ -89,16 +131,10 @@ class APIFeatures {
 
   pagination() {
     // Pagination
-    const page = this.queryString.page
-      ? parseInt(this.queryString.page, 10)
-      : 1;
-    const limit = this.queryString.limit
-      ? parseInt(this.queryString.limit, 10)
-      : 10;
+    const page = Number(this.queryString.page) || 1;
+    const limit = Number(this.queryString.limit) || 10;
     const skip = (page - 1) * limit;
-
     this.query = this.query.skip(skip).limit(limit);
-
     return this;
   }
 

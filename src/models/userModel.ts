@@ -1,8 +1,9 @@
-import mongoose, { Document, Schema, Query } from 'mongoose';
+import mongoose, { Document, Schema, Query, Types } from 'mongoose';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import './shippingAddressModel';
+import './wishlistModel';
 
 interface IUser extends Document {
   name: string;
@@ -25,6 +26,7 @@ interface IUser extends Document {
   active?: boolean;
   otpRequests?: number;
   otpLastRequest?: Date;
+  wishlistId?: Types.ObjectId;
   correctPassword(
     candidatePassword: string,
     userPassword: string
@@ -107,9 +109,22 @@ const userSchema = new Schema<IUser>(
     otpLastRequest: {
       type: Date,
     },
+    wishlistId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Wishlist',
+    },
   },
   { timestamps: true }
 );
+
+userSchema.pre<IUser>('find', function (next) {
+  this.populate({
+    path: 'wishlistId',
+    select: 'products shared shareCode',
+  });
+
+  next();
+});
 
 userSchema.pre<IUser>('save', async function (next) {
   if (!this.isModified('password')) return next();

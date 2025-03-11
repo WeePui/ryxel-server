@@ -4,10 +4,16 @@ import * as authController from '../controllers/authController';
 
 const router = express.Router();
 
+router.post('/zalopay/callback', paymentController.zalopayCallback);
+
 router.use(authController.protect);
 
 router
-  .route('/createCheckoutSession')
-  .post(paymentController.createCheckoutSession);
+  .route('/createStripeCheckoutSession')
+  .post(paymentController.createStripeCheckoutSession);
 
-  export default router;
+router
+  .route('/createZaloPayCheckoutSession')
+  .post(paymentController.createZaloPayCheckoutSession);
+
+export default router;

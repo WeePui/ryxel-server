@@ -21,7 +21,6 @@ export const getAllProducts = catchAsync(
 
     if (category) {
       const categoryDoc = await Category.findOne({ name: category });
-
       if (!categoryDoc) {
         return next(new AppError('No category found with that name', 404));
       }
@@ -30,11 +29,17 @@ export const getAllProducts = catchAsync(
     const apiFeatures = new APIFeatures(Product.find(), req.query);
     await apiFeatures.filter();
 
+    const searchResults = await apiFeatures.search();
+
+    if (searchResults.query) {
+      apiFeatures.query = searchResults.query;
+    }
+
     const totalResults = await apiFeatures.count();
 
-    apiFeatures.search().sort().limitFields().pagination();
+    apiFeatures.sort().limitFields().pagination();
 
-    const products = await apiFeatures.query.lean();
+    const products = await apiFeatures.query.lean().exec();
 
     res.status(200).json({
       status: 'success',

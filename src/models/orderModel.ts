@@ -1,48 +1,46 @@
 import mongoose, { Document, Schema, Types } from 'mongoose';
 
-interface ICheckout extends Document {
+/*interface ICheckout extends Document {
   total: number;
   shippingFee: number;
   discount: number;
-}
-
-interface IPayment extends Document {
-  method: string;
-  transactionId: string;
-}
+}*/
 
 interface IOrderProduct extends Document {
   product: Types.ObjectId;
   variant: Types.ObjectId;
   quantity: number;
+  unitPrice: number;
 }
 
 interface IOrder extends Document {
   user: Types.ObjectId;
-  checkout: ICheckout;
-  payment: IPayment;
+  //checkout: ICheckout;
+  paymentMethod: String;
   shippingAddress: Types.ObjectId;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  products: IOrderProduct[];
+  status:
+    | 'unpaid'
+    | 'pending'
+    | 'processing'
+    | 'shipped'
+    | 'delivered'
+    | 'cancelled';
+  lineItems: IOrderProduct[];
   createdAt: Date;
   updatedAt: Date;
 }
 
-const checkoutSchema = new Schema<ICheckout>({
+/*const checkoutSchema = new Schema<ICheckout>({
   total: { type: Number },
   shippingFee: { type: Number },
   discount: { type: Number },
-});
-
-const paymentSchema = new Schema<IPayment>({
-  method: { type: String },
-  transactionId: { type: String },
-});
+});*/
 
 const orderProductSchema = new Schema<IOrderProduct>({
   product: { type: Schema.Types.ObjectId, ref: 'Product' },
   variant: { type: Schema.Types.ObjectId, ref: 'Product.variants' },
   quantity: { type: Number },
+  unitPrice: { type: Number },
 });
 
 const orderSchema = new Schema<IOrder>(
@@ -52,13 +50,9 @@ const orderSchema = new Schema<IOrder>(
       ref: 'User',
       required: [true, 'Order must belong to a user!'],
     },
-    checkout: {
-      type: checkoutSchema,
-      required: [true, 'Order must have a checkout!'],
-    },
-    payment: {
-      // TO BE CHANGED WHEN PAYMENT IS ADDED
-      type: paymentSchema,
+    paymentMethod: {
+      type: String,
+      enum: ['zalopay', 'cod', 'stripe'],
       required: [true, 'Order must have a payment!'],
     },
     shippingAddress: {
@@ -68,10 +62,17 @@ const orderSchema = new Schema<IOrder>(
     },
     status: {
       type: String,
-      enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],
+      enum: [
+        'unpaid',
+        'pending',
+        'processing',
+        'shipped',
+        'delivered',
+        'cancelled',
+      ],
       default: 'pending',
     },
-    products: {
+    lineItems: {
       type: [orderProductSchema],
       required: [true, 'Order must have products!'],
     },

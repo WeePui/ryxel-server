@@ -20,7 +20,7 @@ router
   .patch(
     authController.protect,
     authController.restrictTo('admin'),
-    discountController.updateDiscount
+    //discountController.updateDiscount
   )
   .delete(
     authController.protect,

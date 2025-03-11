@@ -61,10 +61,11 @@ const variantsSchema = new Schema<IVariant>(
 );
 
 interface IProduct extends Document {
+  _id: mongoose.Types.ObjectId;
   name: string;
   description: string;
   brand: string;
-  category: mongoose.Schema.Types.ObjectId;
+  category: mongoose.Types.ObjectId;
   sold?: number;
   imageCover: string;
   variants: IVariant[];

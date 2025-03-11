@@ -16,7 +16,8 @@ import reviewRouter from './routes/reviewRoute';
 import cartRouter from './routes/cartRoute';
 import orderRouter from './routes/orderRoute';
 import paymentRouter from './routes/paymentRoute';
-// import paymentController from './controllers/paymentController';
+import wishlistRouter from './routes/wishlistRoute';
+import { fulfillCheckout } from './controllers/paymentController';
 import errorController from './controllers/errorController';
 import stripe from 'stripe';
 import dotenv from 'dotenv';
@@ -48,7 +49,7 @@ app.post(
   bodyParser.raw({ type: 'application/json' }),
   async (request: Request, response: Response): Promise<void> => {
     const payload = request.body;
-    const sig = request.headers['stripe-signature'] as string | undefined;
+    const sig = request.headers['stripe-signature'];
 
     if (!sig) {
       response.status(400).send('Webhook Error: Missing stripe-signature');
@@ -56,7 +57,6 @@ app.post(
     }
 
     let event;
-
     try {
       event = stripe.webhooks.constructEvent(
         payload,
@@ -64,16 +64,16 @@ app.post(
         process.env.STRIPE_WEBHOOK_SECRET!
       );
     } catch (err: any) {
-      console.log(err);
-
+      console.error('❌ Webhook Signature Error:', err.message);
       response.status(400).send(`Webhook Error: ${err.message}`);
       return;
     }
+
     if (
       event.type === 'checkout.session.completed' ||
       event.type === 'checkout.session.async_payment_succeeded'
     ) {
-      // paymentController.fulfillCheckout(event.data.object.id);
+      fulfillCheckout(event.data.object.id);
     }
 
     response.status(200).end();
@@ -99,6 +99,7 @@ app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/payments', paymentRouter);
+app.use('/api/v1/wishlist', wishlistRouter);
 
 app.use(errorController);
 

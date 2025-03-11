@@ -168,3 +168,11 @@ export const deleteCartItem = catchAsync(
     });
   }
 );
+
+export const clearCart = async (userId: string) => {
+  const cart = await Cart.findOne({ user: userId });
+  if (!cart) return;
+
+  cart.products = [];
+  await cart.save();
+};
