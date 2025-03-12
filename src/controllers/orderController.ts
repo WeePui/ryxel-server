@@ -181,6 +181,7 @@ export const getOrderByID = catchAsync(
       .populate('lineItems.product')
       .populate('lineItems.variant');
     if (!order) return next(new AppError('Order not found', 404));
+
     res.status(200).json({
       status: 'success',
       data: {
@@ -252,7 +253,7 @@ export const getAllOrders = catchAsync(
     const orders = await Order.find(query)
       .populate('User')
       .populate('shippingAddress')
-      .populate('products.product');
+      .populate('lineItems.product');
 
     res.status(200).json({
       status: 'success',
@@ -289,7 +290,7 @@ export const getUserOrders = catchAsync(
     const orders = await Order.find(query)
       .populate('user')
       .populate('shippingAddress')
-      .populate('products.product');
+      .populate('lineItems.product');
 
     res.status(200).json({
       status: 'success',
@@ -305,7 +306,7 @@ export const getAdminOrders = catchAsync(
     const orders = await Order.find()
       .populate('user')
       .populate('shippingAddress')
-      .populate('products.product');
+      .populate('lineItems.product');
     res.status(200).json({
       status: 'success',
       data: {

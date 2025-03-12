@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "67d045428ff4235b10369641",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "paymentMethod": "stripe",
+    "shippingAddress": {
+      "$oid": "67d03d6574ff8af7ef6d9309"
+    },
+    "status": "pending",
+    "products": [
+      {
+        "product": {
+          "$oid": "637c7f8a14b63b001c7e9d24"
+        },
+        "variant": {
+          "$oid": "637c7f9014b63b001c7e9d25"
+        },
+        "quantity": 1,
+        "_id": {
+          "$oid": "67d045428ff4235b10369642"
+        }
+      }
+    ],
+    "createdAt": {
+      "$date": "2025-03-11T14:14:26.481Z"
+    },
+    "updatedAt": {
+      "$date": "2025-03-11T14:14:37.190Z"
+    },
+    "__v": 0
+  }
+]
