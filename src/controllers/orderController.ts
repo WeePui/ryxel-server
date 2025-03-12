@@ -178,8 +178,7 @@ export const getOrderByID = catchAsync(
     const order = await Order.findById(req.params.id)
       .populate('user')
       .populate('shippingAddress')
-      .populate('lineItems.product')
-      .populate('lineItems.variant');
+      .populate('lineItems.product');
     if (!order) return next(new AppError('Order not found', 404));
 
     res.status(200).json({
