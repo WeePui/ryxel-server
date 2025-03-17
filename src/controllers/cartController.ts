@@ -36,7 +36,7 @@ export const createCart = catchAsync(
 export const getCart = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const cart = await Cart.findOne({ user: req.user.id }).populate(
-      'products.product'
+      'lineItems.product'
     );
     if (!cart) return next(new AppError('Cart does not exist', 404));
 
@@ -85,7 +85,7 @@ export const addOrUpdateCartItem = catchAsync(
       return next(new AppError('No variant found with that ID', 404));
     }
 
-    const cartItem = cart.products.find(
+    const cartItem = cart.lineItems.find(
       (p) =>
         p.product.toString() === productID.toString() &&
         p.variant.toString() === variantID.toString()
@@ -93,7 +93,7 @@ export const addOrUpdateCartItem = catchAsync(
 
     if (!cartItem) {
       if (quantity !== 0) {
-        cart.products.push({
+        cart.lineItems.push({
           product: new mongoose.Types.ObjectId(productID),
           variant: new mongoose.Types.ObjectId(variantID),
           quantity,
@@ -101,7 +101,7 @@ export const addOrUpdateCartItem = catchAsync(
       }
     } else {
       if (quantity === 0) {
-        cart.products = cart.products.filter(
+        cart.lineItems = cart.lineItems.filter(
           (p) =>
             p.product.toString() !== productID.toString() ||
             p.variant.toString() !== variantID.toString()
@@ -128,7 +128,7 @@ export const deleteAllCartItems = catchAsync(
     const cart = await Cart.findOne({ user });
     if (!cart) return next(new AppError('Cart does not exist', 404));
 
-    cart.products = [];
+    cart.lineItems = [];
     await cart.save();
 
     res.status(200).json({
@@ -148,13 +148,13 @@ export const deleteCartItem = catchAsync(
     const cart = await Cart.findOne({ user });
     if (!cart) return next(new AppError('Cart does not exist', 404));
 
-    const cartItem = cart.products.find(
+    const cartItem = cart.lineItems.find(
       (p) =>
         p.product.toString() === productID && p.variant.toString() === variantID
     );
     if (!cartItem) return next(new AppError('Cart item does not exist', 404));
 
-    cart.products = cart.products.filter(
+    cart.lineItems = cart.lineItems.filter(
       (p) =>
         p.product.toString() !== productID || p.variant.toString() !== variantID
     );
@@ -173,6 +173,6 @@ export const clearCart = async (userId: string) => {
   const cart = await Cart.findOne({ user: userId });
   if (!cart) return;
 
-  cart.products = [];
+  cart.lineItems = [];
   await cart.save();
 };

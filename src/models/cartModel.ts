@@ -9,7 +9,7 @@ interface ICartProduct {
 
 interface ICart extends Document {
   user: Types.ObjectId;
-  products: ICartProduct[];
+  lineItems: ICartProduct[];
   subtotal: number;
 }
 
@@ -19,7 +19,7 @@ const cartSchema = new Schema<ICart>({
     ref: 'User',
     required: [true, 'Cart must belong to a user!'],
   },
-  products: [
+  lineItems: [
     {
       product: {
         type: Schema.Types.ObjectId,
@@ -29,7 +29,10 @@ const cartSchema = new Schema<ICart>({
         type: Schema.Types.ObjectId,
         ref: 'Product.variants',
       },
-      quantity: Number,
+      quantity: {
+        type: Number,
+        required: [true, 'Quantity is required!'],
+      },
     },
   ],
   subtotal: {
@@ -39,10 +42,10 @@ const cartSchema = new Schema<ICart>({
 });
 
 cartSchema.pre<ICart>('save', async function (next) {
-  await this.populate('products.product'); // Populate the variant field
+  await this.populate('lineItems.product'); // Populate the variant field
 
   const subtotal = await Promise.all(
-    this.products.map(async (item) => {
+    this.lineItems.map(async (item) => {
       const product = await Product.findById(item.product).exec();
       if (product) {
         const variant = product.variants.find(
