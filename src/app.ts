@@ -21,6 +21,7 @@ import { fulfillCheckout } from './controllers/paymentController';
 import errorController from './controllers/errorController';
 import stripe from 'stripe';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -28,6 +29,14 @@ const app: Application = express();
 
 app.use(helmet());
 app.use(compression());
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+  })
+);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

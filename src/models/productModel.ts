@@ -1,5 +1,6 @@
 import mongoose, { Document, Query, Schema } from 'mongoose';
 import './categoryModel';
+import slugify from 'slugify';
 
 interface IVariant extends Document {
   _id: mongoose.Schema.Types.ObjectId;
@@ -72,6 +73,7 @@ interface IProduct extends Document {
   lowestPrice?: number;
   rating?: number;
   ratingsQuantity?: number;
+  slug: string;
 }
 
 const productSchema = new mongoose.Schema(
@@ -120,6 +122,10 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    slug: {
+      type: String,
+      unique: true,
+    },
   },
   { timestamps: true }
 );
@@ -131,6 +137,20 @@ productSchema.index({ category: 1 });
 productSchema.index({ brand: 1 });
 productSchema.index({ category: 1, lowestPrice: 1 });
 productSchema.index({ name: 'text', brand: 'text', description: 'text' });
+
+// Pre-save middleware to create a slug
+productSchema.pre<IProduct>('save', async function (next) {
+  let slug = slugify(this.name, { lower: true, strict: true });
+  let count = 1;
+
+  const originalSlug = slug;
+  while (await Product.findOne({ slug })) {
+    slug = `${originalSlug}-${count++}`;
+  }
+  this.slug = slug;
+
+  next();
+});
 
 // Pre-save middleware to calculate the lowest price
 productSchema.pre<IProduct>('save', function (next) {

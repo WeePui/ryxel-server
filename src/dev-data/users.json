@@ -1,5 +1,18 @@
 [
   {
+    "_id": "637e2d7b1c5b5b002c1f1a06",
+    "name": "Super Tester",
+    "email": "bhtcag@gmail.com",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/super-tester.jpg"
+    },
+    "emailVerified": true,
+    "role": "user",
+    "password": "14082002Tc",
+    "passwordConfirm": "14082002Tc"
+  },
+  {
     "_id": "637e2d7b1c5b5b002c1f1b01",
     "name": "Tester 01",
     "email": "tester1@example.com",

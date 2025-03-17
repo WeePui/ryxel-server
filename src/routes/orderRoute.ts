@@ -8,28 +8,35 @@ import {
   deleteOrder,
   getAllOrders,
   checkUnpaidOrder,
+  getShippingFee,
+  cancelOrder,
 } from '../controllers/orderController';
 import { protect, restrictTo } from '../controllers/authController';
 
 const router = express.Router();
 
+router.route('/shippingFee').get(getShippingFee); // Get shipping fee
+
+router.use(protect);
+
 // Routes for individual users to view their own orders
 router
   .route('/')
-  .get(protect, getUserOrders) // Get all orders for a user
-  .post(protect, createOrder); // Create a new order
+  .get(getUserOrders) // Get all orders for a user
+  .post(createOrder); // Create a new order
 
-router.route('/checkUnpaidOrder').get(protect, checkUnpaidOrder); // Check if user has unpaid order
+router.route('/checkUnpaidOrder').get(checkUnpaidOrder); // Check if user has unpaid order
 
 router
   .route('/:id')
-  .get(protect, getOrderByID) // Get an order by ID
-  .put(protect, updateOrderStatus) // Update the status of an order
-  .patch(protect, updateOrder) // Update an order by ID
-  .delete(protect, deleteOrder); // Delete an order by ID
+  .get(getOrderByID) // Get an order by ID
+  .patch(updateOrder) // Update an order by ID
+  .delete(deleteOrder); // Delete an order by ID
+
+router.route('/:id/cancel').patch(cancelOrder); // Cancel an order
 
 // Route for admin to view all users' orders. TO BE CHANGED WHEN ADMIN ROUTES ARE IMPLEMENTED
-router.route('/admin/all').get(protect, restrictTo('admin'), getAllOrders); // Get all orders (Admin)
+router.route('/admin/all').get(restrictTo('admin'), getAllOrders); // Get all orders (Admin)
 
 router.route('/checkout');
 //.post(protect, checkout); // Process checkout

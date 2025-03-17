@@ -54,7 +54,7 @@ export const createStripeCheckoutSession = catchAsync(
         },
         line_items: stripeLineItems,
         mode: 'payment',
-        success_url: `http://localhost:3000/?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `http://localhost:3000/account/orders/${orderId}`,
       });
 
       res.status(200).json({
@@ -88,7 +88,7 @@ export const createZaloPayCheckoutSession = catchAsync(
       });
 
       const embed_data = {
-        redirecturl: 'http://localhost:3000/cart',
+        redirecturl: `http://localhost:3000/account/orders/${orderId}`,
         orderId,
         userId: req.user.id,
       };

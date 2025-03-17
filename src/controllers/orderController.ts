@@ -4,8 +4,8 @@ import Order from '../models/orderModel';
 import Product from '../models/productModel';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
-import * as shippingController from '../utils/shippingFee';
-import ShippingAddress from '@models/shippingAddressModel';
+import ShippingAddress from '../models/shippingAddressModel';
+import { calculateShippingFee } from '../utils/shippingFee';
 
 const reduceStock = async (
   orderItems: any,
@@ -40,8 +40,10 @@ const increaseStock = async (
     ); // Use session if provided
     if (!product) throw new AppError('No product found with that ID', 404);
 
+    console.log(product.variants[0]._id.toString() === item.variant);
+
     const variant = product.variants.find(
-      (v) => v._id.toString() === item.variant
+      (v) => v._id.toString() === item.variant.toString()
     );
     if (!variant) throw new AppError('No variant found with that ID', 404);
 
@@ -65,33 +67,42 @@ export const changeOrderStatus = async (orderID: string, status: string) => {
         runValidators: true,
       }
     );
-    if (!order) {
-      console.log('Order not found');
-      return;
-    }
-    await order.save();
-    if (status === 'cancelled') increaseStock(order.lineItems);
 
-    console.log('Order status updated to', order.status);
+    if (!order) {
+      throw new AppError('No order found with that ID', 404);
+    }
+
+    await order.save();
+    if (status === 'cancelled') {
+      await increaseStock(order.lineItems);
+    }
   } catch (error) {
     console.error('Error updating order status:', error);
   }
 };
 
-const getShippingFee = async (
-  district: number,
-  ward: string,
-  weight: number
-) => {
-  const from_district = 3695;
-  const shippingFee = await shippingController.calculateShippingFee(
-    from_district,
-    district,
-    ward,
-    weight
-  );
-  return shippingFee;
-};
+export const getShippingFee = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { toDistrictCode, toWardCode, weight } = req.query;
+
+    if (!toDistrictCode || !toWardCode || !weight) {
+      return next(new AppError('Missing required parameters', 400));
+    }
+
+    const shippingFee = await calculateShippingFee(
+      Number(toDistrictCode),
+      toWardCode as string,
+      Number(weight)
+    );
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        shippingFee,
+      },
+    });
+  }
+);
 
 const calculateTotalPrice = (cart: any) => {
   let totalPrice = 0;
@@ -123,10 +134,22 @@ export const createOrder = catchAsync(
     session.startTransaction(); // Start a transaction
 
     try {
-      const shippingAddressID = req.body.address;
+      const shippingAddressId = req.body.address;
       const paymentMethod = req.body.paymentMethod;
       const userID = req.user.id;
       const orderItems = req.body.lineItems;
+
+      const shippingAddress = await ShippingAddress.findOne({
+        _id: shippingAddressId,
+      });
+      if (!shippingAddress)
+        throw new AppError('No shipping address found', 400);
+
+      const shippingFee = await calculateShippingFee(
+        Number(shippingAddress.district.code),
+        shippingAddress.ward.code,
+        1000 /*to be changed when implement the weight shittem, me tired*/
+      );
 
       let status = 'unpaid';
       if (paymentMethod === 'cod') {
@@ -145,7 +168,8 @@ export const createOrder = catchAsync(
           {
             user: userID,
             paymentMethod,
-            shippingAddress: shippingAddressID,
+            shippingAddress: shippingAddressId,
+            shippingFee,
             status,
             lineItems: orderProducts,
           },
@@ -167,7 +191,7 @@ export const createOrder = catchAsync(
     } catch (err) {
       await session.abortTransaction(); // Roll back transaction in case of error
       session.endSession();
-      next(err); // Pass the error to the next middleware
+      return next(new AppError('Cannot process the order', 400));
     }
   }
 );
@@ -322,22 +346,32 @@ export const cancelOrder = catchAsync(
     if (!order) {
       return next(new AppError('No order found with that ID', 404));
     }
-    // Check if the order was placed more than 30 minutes ago
-    const currentTime = new Date();
-    const orderTime = new Date(order.createdAt);
-    const timeDifference =
-      (currentTime.getTime() - orderTime.getTime()) / (1000 * 60); // Time difference in minutes
-    console.log('time', timeDifference);
 
-    if (timeDifference > 30) {
-      return next(
-        new AppError(
-          'Order cannot be cancelled after 30 minutes from the order time',
-          400
-        )
-      );
-    } else {
-      increaseStock(order.lineItems);
+    const session = await mongoose.startSession(); // Start a session
+    session.startTransaction(); // Start a transaction
+
+    try {
+      // Check if the order was placed more than 30 minutes ago
+      const currentTime = new Date();
+      const orderTime = new Date(order.createdAt);
+      const timeDifference =
+        (currentTime.getTime() - orderTime.getTime()) / (1000 * 60); // Time difference in minutes
+
+      if (timeDifference > 30) {
+        return next(
+          new AppError(
+            'Order cannot be cancelled after 30 minutes from the order time',
+            400
+          )
+        );
+      }
+
+      order.status = 'cancelled';
+
+      await increaseStock(order.lineItems, session);
+      await order.save({ session });
+
+      await session.commitTransaction();
 
       res.status(200).json({
         status: 'success',
@@ -345,6 +379,12 @@ export const cancelOrder = catchAsync(
           order,
         },
       });
+    } catch (err) {
+      console.log(err);
+
+      await session.abortTransaction(); // Roll back transaction in case of error
+      session.endSession();
+      return next(new AppError('Error', 400)); // Pass the error to the next middleware
     }
   }
 );
@@ -360,7 +400,7 @@ export const updateOrderStatus = catchAsync(
     // Update the order status
     order.status = req.body.status;
     await order.save();
-    if (order.status === 'cancelled') increaseStock(order.lineItems);
+    if (order.status === 'cancelled') await increaseStock(order.lineItems);
 
     res.status(200).json({
       status: 'success',

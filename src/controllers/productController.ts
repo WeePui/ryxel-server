@@ -52,6 +52,23 @@ export const getAllProducts = catchAsync(
   }
 );
 
+export const getProductBySlug = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const product = await Product.findOne({ slug: req.params.slug }).lean();
+
+    if (!product) {
+      return next(new AppError('No product found with that slug', 404));
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        product,
+      },
+    });
+  }
+);
+
 export const createProduct = catchAsync(async (req: Request, res: Response) => {
   const product = await Product.create(req.body);
 

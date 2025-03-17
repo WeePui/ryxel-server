@@ -67,28 +67,19 @@ async function importData(): Promise<void> {
 }
 
 async function deleteData(): Promise<void> {
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
   try {
     await Promise.all([
-      Product.deleteMany({}, { session }),
-      User.deleteMany({}, { session }),
-      ShippingAddress.deleteMany({}, { session }),
-      Review.deleteMany({}, { session }),
-      Category.deleteMany({}, { session }),
-      Discount.deleteMany({}, { session }),
+      Product.deleteMany({}),
+      User.deleteMany({}),
+      ShippingAddress.deleteMany({}),
+      Review.deleteMany({}),
+      Category.deleteMany({}),
+      Discount.deleteMany({}),
     ]);
-
-    await session.commitTransaction();
-    session.endSession();
 
     console.log('Data deleted successfully');
   } catch (error) {
     console.error(error);
-
-    await session.abortTransaction();
-    session.endSession();
   } finally {
     process.exit();
   }

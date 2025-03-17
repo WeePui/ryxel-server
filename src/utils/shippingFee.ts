@@ -1,46 +1,53 @@
 import axios from 'axios';
 
 export const calculateShippingFee = async (
-  fromDistrict: number,
-  toDistrict: number,
-  to_ward_code: string,
-  weight: number
+  toDistrictCode: number,
+  toWardCode: string,
+  weight: number,
+  fromDistrict = 3695
 ): Promise<number> => {
-  const shop_id = 5504852;
   try {
     const serviceResponse = await axios.post(
       'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services',
       {
         from_district: fromDistrict,
-        to_district: toDistrict,
-        shop_id: shop_id,
+        to_district: toDistrictCode,
+        shop_id: Number(process.env.GHN_SHOP_ID),
       },
       {
         headers: {
           'Content-Type': 'application/json',
-          token: process.env.GHN_API_KEY as string, // Replace YOUR_API_KEY with your actual API key
+          token: process.env.GHN_API_KEY as string,
         },
       }
     );
-    const serviceID = serviceResponse.data.data[0].service_id;
+
+    const { data: serviceData } = serviceResponse.data;
+    const { service_id: serviceId } = serviceData[0];
+
     const feeResponse = await axios.post(
       'https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee',
       {
-        service_id: serviceID,
-        to_district_id: toDistrict,
-        to_ward_code: to_ward_code,
+        service_id: serviceId,
+        to_district_id: toDistrictCode,
+        to_ward_code: toWardCode,
         weight: weight,
       },
       {
         headers: {
           'Content-Type': 'application/json',
-          token: '34fd4272-b38e-11ef-bfcf-9e83397c467a', // Replace YOUR_API_KEY with your actual API key
+          token: process.env.GHN_API_KEY,
         },
       }
     );
-    return feeResponse.data.data.service_fee;
+
+    const { data: feeData } = feeResponse.data;
+    const { service_fee: serviceFee } = feeData;
+
+    return serviceFee;
   } catch (error) {
     console.error('Error calculating shipping fee:', error);
-    throw error;
+
+    return -1;
   }
 };

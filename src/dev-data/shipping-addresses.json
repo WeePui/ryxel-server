@@ -130,5 +130,27 @@
     "address": "10 Đại lộ Bình Dương",
     "addressInfo": "Khu dân cư Chánh Nghĩa",
     "isDefault": false
+  },
+  {
+    "_id": "637d1e7a1c4b4a001c9f1a07",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "fullname": "Super Tester",
+    "phoneNumber": "0901234567",
+    "country": "Vietnam",
+    "city": {
+      "code": 202,
+      "name": "Hồ Chí Minh"
+    },
+    "district": {
+      "code": 3695,
+      "name": "Thành Phố Thủ Đức"
+    },
+    "ward": {
+      "code": "90737",
+      "name": "Phường Linh Trung"
+    },
+    "address": "1 Võ Văn Ngân",
+    "addressInfo": "Gần trường Đại học Sư phạm kĩ thuật",
+    "isDefault": true
   }
 ]

@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema, Types } from 'mongoose';
+import Product from './productModel';
 
 /*interface ICheckout extends Document {
   total: number;
@@ -26,6 +27,9 @@ interface IOrder extends Document {
     | 'delivered'
     | 'cancelled';
   lineItems: IOrderProduct[];
+  total: number;
+  shippingFee: number;
+  discount: String;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -76,9 +80,44 @@ const orderSchema = new Schema<IOrder>(
       type: [orderProductSchema],
       required: [true, 'Order must have products!'],
     },
+    total: {
+      type: Number,
+      required: [true, 'Order must have a subtotal!'],
+      default: 0,
+    },
+    shippingFee: {
+      type: Number,
+      required: [true, 'Order must have a shipping fee!'],
+      default: 0,
+    },
+    discount: {
+      type: String,
+      required: [false, 'Order dont need to have a discount!'],
+    },
   },
   { timestamps: true }
 );
+
+orderSchema.pre<IOrder>('save', async function (next) {
+  // Initialize the total and shippingFee
+  this.total = 0;
+
+  // Loop through the lineItems to calculate the subtotal for each variant
+  for (const item of this.lineItems) {
+    const product = await Product.findById(item.product);
+    if (product) {
+      // Compare the string representations of the ObjectIds
+      const variant = product.variants.find(
+        (v) => v._id.toString() === item.variant.toString()
+      );
+      if (variant) {
+        this.total += variant.price * item.quantity;
+      }
+    }
+  }
+
+  next();
+});
 
 const Order = mongoose.model<IOrder>('Order', orderSchema);
 

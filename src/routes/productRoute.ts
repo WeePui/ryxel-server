@@ -34,4 +34,6 @@ router
     productController.deleteProduct
   );
 
+router.route('/slug/:slug').get(productController.getProductBySlug);
+
 export default router;
