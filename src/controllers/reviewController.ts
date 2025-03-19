@@ -5,80 +5,121 @@ import Product from '../models/productModel';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 
-export const getAllReviews = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-  let filter: { product?: mongoose.Types.ObjectId } = {};
-  if (req.params.productId) filter = { product: new mongoose.Types.ObjectId(req.params.productId) };
+export const getAllReviews = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let filter: { product?: mongoose.Types.ObjectId } = {};
+    if (req.params.productId)
+      filter = { product: new mongoose.Types.ObjectId(req.params.productId) };
 
-  const reviews = await Review.find(filter);
+    const reviews = await Review.find(filter);
 
-  res.status(200).json({
-    status: 'success',
-    results: reviews.length,
-    data: {
-      reviews,
-    },
-  });
-});
+    res.status(200).json({
+      status: 'success',
+      results: reviews.length,
+      data: {
+        reviews,
+      },
+    });
+  }
+);
 
-export const createReview = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-  const { productId } = req.params;
+export const createReview = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { productId } = req.params;
 
-  const product = await Product.findById(new mongoose.Types.ObjectId(productId));
-  if (!product) return next(new AppError('No product found with that ID', 404));
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
-  const review = {
-    user: new mongoose.Types.ObjectId(req.user.id),
-    product: new mongoose.Types.ObjectId(productId),
-    rating: req.body.rating,
-    review: req.body.review,
-  };
+    const images = files?.['images']; // Array of image files
+    const video = files?.['video']; // Array with a single video file
 
-  await Review.create(review);
+    const product = await Product.findById(
+      new mongoose.Types.ObjectId(productId)
+    );
+    if (!product)
+      return next(new AppError('No product found with that ID', 404));
 
-  res.status(201).json({
-    status: 'success',
-    data: {
-      review,
-    },
-  });
-});
+    if (req.files === undefined) {
+      return next(new AppError('Files undefined', 400));
+    }
+    if (images && images.length > 0) {
+      const uploadedImages = await Promise.all(
+        images.map((file) => uploadProductReview(file.buffer))
+      );
+      review.images = uploadedImages.map(
+        (img) => (img as { secure_url: string }).secure_url
+      );
+    }
 
-export const getReviewById = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-  const review = await Review.findById(req.params.id);
+    if (video && video.length > 0) {
+      const uploadedVideo = await uploadVideo(video[0].buffer);
 
-  if (!review) return next(new AppError('No review found with that ID', 404));
+      if (!uploadedVideo || !uploadedVideo.secure_url) {
+        throw new Error('Failed to upload video.');
+      }
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      review,
-    },
-  });
-});
+      review.video = uploadedVideo.secure_url;
+    }
 
-export const updateReview = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-  const review = await Review.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+    const review = {
+      user: new mongoose.Types.ObjectId(req.user.id),
+      product: new mongoose.Types.ObjectId(productId),
+      rating: req.body.rating,
+      review: req.body.review,
+    };
 
-  if (!review) return next(new AppError('No review found with that ID', 404));
+    await Review.create(review);
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      review,
-    },
-  });
-});
+    res.status(201).json({
+      status: 'success',
+      data: {
+        review,
+      },
+    });
+  }
+);
 
-export const deleteReview = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-  const review = await Review.findByIdAndDelete(req.params.id);
+export const getReviewById = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const review = await Review.findById(req.params.id);
 
-  if (!review) return next(new AppError('No review found with that ID', 404));
+    if (!review) return next(new AppError('No review found with that ID', 404));
 
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
-});
+    res.status(200).json({
+      status: 'success',
+      data: {
+        review,
+      },
+    });
+  }
+);
+
+export const updateReview = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const review = await Review.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!review) return next(new AppError('No review found with that ID', 404));
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        review,
+      },
+    });
+  }
+);
+
+export const deleteReview = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const review = await Review.findByIdAndDelete(req.params.id);
+
+    if (!review) return next(new AppError('No review found with that ID', 404));
+
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  }
+);

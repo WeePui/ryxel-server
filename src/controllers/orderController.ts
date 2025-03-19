@@ -6,6 +6,9 @@ import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 import ShippingAddress from '../models/shippingAddressModel';
 import { calculateShippingFee } from '../utils/shippingFee';
+import { refundStripePayment, refundZaloPayPayment } from './paymentController';
+import Discount from '../models/discountModel';
+import { verifyDiscount } from './discountController';
 
 const reduceStock = async (
   orderItems: any,
@@ -136,20 +139,9 @@ export const createOrder = catchAsync(
     try {
       const shippingAddressId = req.body.address;
       const paymentMethod = req.body.paymentMethod;
-      const userID = req.user.id;
+      const userId = req.user.id;
       const orderItems = req.body.lineItems;
-
-      const shippingAddress = await ShippingAddress.findOne({
-        _id: shippingAddressId,
-      });
-      if (!shippingAddress)
-        throw new AppError('No shipping address found', 400);
-
-      const shippingFee = await calculateShippingFee(
-        Number(shippingAddress.district.code),
-        shippingAddress.ward.code,
-        1000 /*to be changed when implement the weight shittem, me tired*/
-      );
+      const discountCode = req.body.code;
 
       let status = 'unpaid';
       if (paymentMethod === 'cod') {
@@ -160,17 +152,40 @@ export const createOrder = catchAsync(
         product: item.product,
         variant: item.variant,
         quantity: item.quantity,
-        unitPrice: item.unitPrice, // Include unitPrice if provided by the frontend
       }));
+
+      const {
+        isValid: discountValid,
+        discountAmount,
+        discountId,
+      } = await verifyDiscount(discountCode, orderItems, userId);
+
+      const totalWeight = await getTotalWeight(orderProducts);
+
+      const shippingAddress = await ShippingAddress.findOne({
+        _id: shippingAddressId,
+      });
+      if (!shippingAddress)
+        throw new AppError('No shipping address found', 400);
+
+      const shippingFee = await calculateShippingFee(
+        shippingAddress.district.code,
+        shippingAddress.ward.code,
+        totalWeight
+      );
+      if (shippingFee === -1)
+        return next(new AppError('Address is invalid', 400));
 
       const newOrder = await Order.create(
         [
           {
-            user: userID,
+            user: userId,
             paymentMethod,
             shippingAddress: shippingAddressId,
             shippingFee,
             status,
+            ...(discountValid &&
+              discountAmount !== 0 && { discount: discountId, discountAmount }),
             lineItems: orderProducts,
           },
         ],
@@ -191,7 +206,9 @@ export const createOrder = catchAsync(
     } catch (err) {
       await session.abortTransaction(); // Roll back transaction in case of error
       session.endSession();
-      return next(new AppError('Cannot process the order', 400));
+      return next(
+        new AppError(`Cannot process the order: ${(err as Error).message}`, 400)
+      );
     }
   }
 );
@@ -203,7 +220,21 @@ export const getOrderByID = catchAsync(
       .populate('user')
       .populate('shippingAddress')
       .populate('lineItems.product');
+
     if (!order) return next(new AppError('Order not found', 404));
+
+    if (req.user.role === 'admin')
+      res.status(200).json({
+        status: 'success',
+        data: {
+          order,
+        },
+      });
+
+    if (order.user._id.toString() !== req.user.id)
+      return next(
+        new AppError('You are not authorized to access this order', 403)
+      );
 
     res.status(200).json({
       status: 'success',
@@ -366,6 +397,18 @@ export const cancelOrder = catchAsync(
         );
       }
 
+      if (order.paymentMethod === 'stripe' && order.status !== 'unpaid')
+        await refundStripePayment(
+          order.checkout!.paymentId,
+          order.checkout!.amount
+        );
+
+      if (order.paymentMethod === 'zalopay' && order.status !== 'unpaid')
+        await refundZaloPayPayment(
+          order.checkout!.paymentId,
+          order.checkout!.amount
+        );
+
       order.status = 'cancelled';
 
       await increaseStock(order.lineItems, session);
@@ -433,3 +476,41 @@ export const checkUnpaidOrder = catchAsync(
     });
   }
 );
+
+export const addPaymentId = async (
+  orderId: string,
+  checkout: { paymentId: string; checkoutId: string; amount: number }
+) => {
+  const order = await Order.findById(orderId);
+  if (!order) {
+    throw new AppError('No order found with that ID', 404);
+  }
+
+  order.checkout = {
+    paymentId: checkout.paymentId,
+    checkoutId: checkout.checkoutId,
+    amount: checkout.amount,
+  };
+  await order.save();
+};
+
+const getTotalWeight = async (orderItems: any) => {
+  let totalWeight = 0;
+
+  for (const item of orderItems) {
+    const product = await Product.findById(item.product);
+    if (!product) throw new AppError('No product found with that ID', 404);
+
+    const variant = product.variants.find(
+      (v) => v._id.toString() === item.variant
+    );
+    if (!variant) throw new AppError('No variant found with that ID', 404);
+
+    if (!variant.weight) throw new AppError('No weight found for variant', 404);
+    totalWeight += variant.weight * item.quantity;
+  }
+
+  if (totalWeight <= 1000) totalWeight = 1000;
+
+  return totalWeight;
+};

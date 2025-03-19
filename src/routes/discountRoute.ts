@@ -16,10 +16,10 @@ router
 router
   .route('/:id')
   .get(authController.protect, discountController.getDiscountById)
-  .post(authController.protect, discountController.verifyDiscount)
+  .post(authController.protect, discountController.checkDiscount)
   .patch(
     authController.protect,
-    authController.restrictTo('admin'),
+    authController.restrictTo('admin')
     //discountController.updateDiscount
   )
   .delete(

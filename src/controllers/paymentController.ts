@@ -6,8 +6,9 @@ import { getLineItemsInfo } from '../utils/getLineItemsInfo';
 import moment from 'moment';
 import CryptoJS from 'crypto-js';
 import axios from 'axios';
-import { changeOrderStatus } from './orderController';
+import { addPaymentId, changeOrderStatus } from './orderController';
 import { clearCart } from './cartController';
+import { checkout } from './checkoutController';
 
 const stripeClient = new stripe(process.env.STRIPE_SECRET_KEY as string, {
   typescript: true,
@@ -18,6 +19,7 @@ const zalopayConfig = {
   key1: 'PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL',
   key2: 'kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz',
   endpoint: 'https://sb-openapi.zalopay.vn/v2/create',
+  refund_url: 'https://sb-openapi.zalopay.vn/v2/refund',
 };
 
 export const createStripeCheckoutSession = catchAsync(
@@ -109,7 +111,7 @@ export const createZaloPayCheckoutSession = catchAsync(
         embed_data: JSON.stringify(embed_data),
         mac: '',
         callback_url:
-          'https://f85f-2402-800-63a8-d7c1-689e-9879-df9b-953b.ngrok-free.app/api/v1/payments/zalopay/callback',
+          'https://58be-2402-800-63a8-d7c1-3c85-706-a384-bd56.ngrok-free.app/api/v1/payments/zalopay/callback',
       };
 
       const data =
@@ -157,9 +159,13 @@ export const zalopayCallback = catchAsync(
       return next(new AppError('Invalid MAC', 400));
     } else {
       const data = JSON.parse(dataStr);
-      console.log(data);
       const { orderId, userId } = JSON.parse(data.embed_data);
-      console.log(orderId);
+
+      await addPaymentId(orderId, {
+        paymentId: data.zp_trans_id,
+        checkoutId: data.app_trans_id,
+        amount: data.amount,
+      });
       await changeOrderStatus(orderId, 'pending');
       await clearCart(userId);
     }
@@ -190,9 +196,64 @@ export const fulfillCheckout = async (sessionId: string) => {
   // to determine if fulfillment should be peformed
   if (checkoutSession.payment_status !== 'unpaid') {
     // TODO: Perform fulfillment of the line items
+
+    await addPaymentId(checkoutSession!.metadata!.order_id, {
+      paymentId: checkoutSession!.payment_intent as string,
+      checkoutId: checkoutSession.id,
+      amount: checkoutSession.amount_total!,
+    });
     await changeOrderStatus(checkoutSession!.metadata!.order_id, 'pending');
     await clearCart(checkoutSession.client_reference_id as string);
     // TODO: Record/save fulfillment status for this
     // Checkout Session
   }
+};
+
+export const refundStripePayment = async (
+  paymentId: string,
+  amount: number
+) => {
+  const paymentIntent = await stripeClient.paymentIntents.retrieve(paymentId);
+
+  if (paymentIntent.status === 'succeeded') {
+    await stripeClient.refunds.create({
+      payment_intent: paymentId,
+      amount: amount,
+    });
+  }
+};
+
+export const refundZaloPayPayment = async (
+  paymentId: string,
+  amount: number
+) => {
+  const timestamp = Date.now();
+  const uid = `${timestamp}${Math.floor(111 + Math.random() * 999)}`;
+
+  let params = {
+    app_id: zalopayConfig.app_id,
+    m_refund_id: `${moment().format('YYMMDD')}_${zalopayConfig.app_id}_${uid}`,
+    timestamp, // miliseconds
+    zp_trans_id: paymentId,
+    amount: amount,
+    description: 'ZaloPay Refund',
+    mac: '',
+  };
+
+  let data =
+    params.app_id +
+    '|' +
+    params.zp_trans_id +
+    '|' +
+    params.amount +
+    '|' +
+    params.description +
+    '|' +
+    params.timestamp;
+  params.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();
+
+  axios
+    .post(zalopayConfig.refund_url, null, { params })
+    .then((res) => console.log(res.data))
+    .catch((err) => console.log(err));
 };

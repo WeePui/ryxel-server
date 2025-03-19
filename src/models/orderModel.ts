@@ -12,12 +12,13 @@ interface IOrderProduct extends Document {
   variant: Types.ObjectId;
   quantity: number;
   unitPrice: number;
+  subtotal: number;
 }
 
 interface IOrder extends Document {
   user: Types.ObjectId;
   //checkout: ICheckout;
-  paymentMethod: String;
+  paymentMethod: string;
   shippingAddress: Types.ObjectId;
   status:
     | 'unpaid'
@@ -27,9 +28,16 @@ interface IOrder extends Document {
     | 'delivered'
     | 'cancelled';
   lineItems: IOrderProduct[];
+  subtotal: number;
   total: number;
   shippingFee: number;
-  discount: String;
+  discount: Types.ObjectId;
+  discountAmount: number;
+  checkout?: {
+    paymentId: string;
+    checkoutId: string;
+    amount: number;
+  };
   createdAt: Date;
   updatedAt: Date;
 }
@@ -91,8 +99,17 @@ const orderSchema = new Schema<IOrder>(
       default: 0,
     },
     discount: {
-      type: String,
-      required: [false, 'Order dont need to have a discount!'],
+      type: Schema.Types.ObjectId,
+      ref: 'Discount',
+    },
+    discountAmount: {
+      type: Number,
+      default: 0,
+    },
+    checkout: {
+      paymentId: { type: String },
+      checkoutId: { type: String },
+      amount: { type: Number },
     },
   },
   { timestamps: true }
@@ -100,7 +117,7 @@ const orderSchema = new Schema<IOrder>(
 
 orderSchema.pre<IOrder>('save', async function (next) {
   // Initialize the total and shippingFee
-  this.total = 0;
+  this.subtotal = 0;
 
   // Loop through the lineItems to calculate the subtotal for each variant
   for (const item of this.lineItems) {
@@ -111,11 +128,15 @@ orderSchema.pre<IOrder>('save', async function (next) {
         (v) => v._id.toString() === item.variant.toString()
       );
       if (variant) {
-        this.total += variant.price * item.quantity;
+        item.unitPrice = variant.price;
+        item.subtotal = item.unitPrice * item.quantity;
+        this.subtotal += item.subtotal;
+      } else {
+        throw new Error('Variant ' + item.variant.toString() + ' not found');
       }
     }
   }
-
+  this.total = this.subtotal + this.shippingFee - (this.discountAmount || 0);
   next();
 });
 

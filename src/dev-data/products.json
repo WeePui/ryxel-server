@@ -663,7 +663,8 @@
           "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image2.jpg",
           "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image3.jpg",
           "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image4.jpg"
-        ]
+        ],
+        "weight": 400
       },
       {
         "_id": "637c7ed114b63b001c7e9d23",
