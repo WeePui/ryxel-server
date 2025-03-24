@@ -1,32 +1,45 @@
 [
   {
-    "_id": "67d045428ff4235b10369641",
-    "user": "637e2d7b1c5b5b002c1f1a01",
-    "paymentMethod": "stripe",
-    "shippingAddress": {
-      "$oid": "67d03d6574ff8af7ef6d9309"
-    },
+    "_id": "67daf9420af0825ccb70366d",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "paymentMethod": "cod",
+    "shippingAddress": "637d1e7a1c4b4a001c9f1a07",
     "status": "pending",
-    "products": [
+    "lineItems": [
       {
-        "product": {
-          "$oid": "637c7f8a14b63b001c7e9d24"
-        },
-        "variant": {
-          "$oid": "637c7f9014b63b001c7e9d25"
-        },
-        "quantity": 1,
-        "_id": {
-          "$oid": "67d045428ff4235b10369642"
-        }
+        "product": "637c7ec414b63b001c7e9d21",
+        "variant": "637c7ecb14b63b001c7e9d22",
+        "quantity": 1
       }
     ],
-    "createdAt": {
-      "$date": "2025-03-11T14:14:26.481Z"
-    },
-    "updatedAt": {
-      "$date": "2025-03-11T14:14:37.190Z"
-    },
-    "__v": 0
+    "shippingFee": 21001,
+    "discount": "67d7edf7acd659b561c8425d",
+    "discountAmount": 125900,
+    "createdAt": "2025-03-19T17:05:06.508Z",
+    "updatedAt": "2025-03-19T17:05:06.508Z"
+  },
+  {
+    "_id": "67daf9420af0825ccb70366e",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "paymentMethod": "cod",
+    "shippingAddress": "637d1e7a1c4b4a001c9f1a07",
+    "status": "delivered",
+    "lineItems": [
+      {
+        "product": "637c7eb214b63b001c7e9d1e",
+        "variant": "637c7eb814b63b001c7e9d1f",
+        "quantity": 2
+      },
+      {
+        "product": "997d100054b63b001c7e9d05",
+        "variant": "997d100054b63b001c7e9d06",
+        "quantity": 3
+      }
+    ],
+    "shippingFee": 21001,
+    "discount": "67d7edf7acd659b561c8425d",
+    "discountAmount": 200000,
+    "createdAt": "2025-03-19T17:05:06.508Z",
+    "updatedAt": "2025-03-19T17:05:06.508Z"
   }
 ]

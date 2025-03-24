@@ -53,6 +53,7 @@ const orderProductSchema = new Schema<IOrderProduct>({
   variant: { type: Schema.Types.ObjectId, ref: 'Product.variants' },
   quantity: { type: Number },
   unitPrice: { type: Number },
+  subtotal: { type: Number },
 });
 
 const orderSchema = new Schema<IOrder>(
@@ -89,6 +90,11 @@ const orderSchema = new Schema<IOrder>(
       required: [true, 'Order must have products!'],
     },
     total: {
+      type: Number,
+      required: [true, 'Order must have a subtotal!'],
+      default: 0,
+    },
+    subtotal: {
       type: Number,
       required: [true, 'Order must have a subtotal!'],
       default: 0,

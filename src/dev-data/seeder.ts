@@ -9,6 +9,7 @@ import ShippingAddress from '../models/shippingAddressModel';
 import Review from '../models/reviewModel';
 import Category from '../models/categoryModel';
 import Discount from '../models/discountModel';
+import Order from '../models/orderModel';
 
 dotenv.config({ path: './.env' });
 
@@ -30,6 +31,9 @@ const categories: Document[] = JSON.parse(
 const discounts: Document[] = JSON.parse(
   fs.readFileSync(`${__dirname}/discounts.json`, 'utf-8')
 );
+const orders: Document[] = JSON.parse(
+  fs.readFileSync(`${__dirname}/orders.json`, 'utf-8')
+);
 
 const connectionString: string = process.env.DB_CONNECTION!.replace(
   '<PASSWORD>',
@@ -39,28 +43,21 @@ const connectionString: string = process.env.DB_CONNECTION!.replace(
 mongoose.connect(connectionString);
 
 async function importData(): Promise<void> {
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
   try {
+    await Product.create(products);
+
     await Promise.all([
-      Product.create(products, { session }),
-      User.create(users, { session }),
-      ShippingAddress.create(shippingAddresses, { session }),
-      Review.create(reviews, { session }),
-      Category.create(categories, { session }),
-      Discount.create(discounts, { session }),
+      User.create(users),
+      ShippingAddress.create(shippingAddresses),
+      Category.create(categories),
+      Discount.create(discounts),
     ]);
 
-    await session.commitTransaction();
-    session.endSession();
+    await Promise.all([Review.create(reviews), Order.create(orders)]);
 
     console.log('Data imported successfully');
   } catch (error) {
     console.error(error);
-
-    await session.abortTransaction();
-    session.endSession();
   } finally {
     process.exit();
   }
@@ -75,6 +72,7 @@ async function deleteData(): Promise<void> {
       Review.deleteMany({}),
       Category.deleteMany({}),
       Discount.deleteMany({}),
+      Order.deleteMany({}),
     ]);
 
     console.log('Data deleted successfully');

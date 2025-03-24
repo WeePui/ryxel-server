@@ -5,7 +5,7 @@
     "description": "Tai nghe không dây Razer Barracuda X 2022 nổi bật với thiết kế siêu nhẹ chỉ 250g, kết nối không dây 4 trong 1 và thời lượng pin lên đến 50 giờ. Sản phẩm này tương thích với nhiều thiết bị khác nhau",
     "brand": "Razer",
     "category": "60c72b2f9b1d8b3a4c8b4567",
-    "imageCover": "/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-5.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756953/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-5_qpeqpq.webp",
     "variants": [
       {
         "name": "Black",
@@ -20,10 +20,10 @@
         "stock": 50,
         "sold": 20,
         "images": [
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-4-0688d75a-974e-4b13-976d-5d377321708b.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-1.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-5.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756953/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-4-0688d75a-974e-4b13-976d-5d377321708b_zb4b1j.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756953/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-1_tkthmo.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756953/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1_zmakxv.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756953/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-5_qpeqpq.webp"
         ],
         "weight": 400
       },
@@ -40,10 +40,10 @@
         "stock": 30,
         "sold": 15,
         "images": [
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-1.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-3.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-4.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-50300a26-ccd7-45d9-ad65-bcce3eea2532.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-1_agmi9n.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-3_baorzq.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-4_e0osej.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-50300a26-ccd7-45d9-ad65-bcce3eea2532_g4chdp.webp"
         ],
         "weight": 400
       },
@@ -60,10 +60,10 @@
         "stock": 40,
         "sold": 10,
         "images": [
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-1.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-3.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-4.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-97cb972a-6ce5-4851-aca9-c7a020843c1a.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-1_gnrzqm.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-3_jbkqwi.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-4_wjjtwt.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-97cb972a-6ce5-4851-aca9-c7a020843c1a_xvwyyp.webp"
         ],
         "weight": 500
       }
@@ -75,7 +75,7 @@
     "description": "Tai nghe không dây Razer Barracuda X Chroma là bản nâng cấp mang đến trải nghiệm âm thanh sống động với công nghệ âm thanh vòm 7.1. đèn Led RGB và khả năng kết nối đa nền tảng.",
     "brand": "Razer",
     "category": "60c72b2f9b1d8b3a4c8b4567",
-    "imageCover": "/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-10.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-10_qvk98o.webp",
     "variants": [
       {
         "name": "Black",
@@ -90,10 +90,10 @@
         "stock": 50,
         "sold": 20,
         "images": [
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-03.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-05.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-07.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-08.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-03_uvx2rz.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-05_lhpty6.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-07_iqdh9r.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-08_egmpb7.webp"
         ],
         "weight": 600
       },
@@ -110,10 +110,10 @@
         "stock": 50,
         "sold": 20,
         "images": [
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-13.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-10.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-14.jpg",
-          "/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-15.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-13_gutccf.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-10_qvk98o.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756951/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-14_x6krfj.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-15_mrxvqp.webp"
         ],
         "weight": 600
       }
@@ -125,7 +125,7 @@
     "description": "Tai nghe EPOS Sennheiser có thiết kế chống ồn, âm thanh độ phân giải cao, micro rõ nét và headband điều chỉnh được, kết nổi thông qua jack 3.5mm phù hợp với nhiều thiết bị và nền tảng khác nhau.",
     "brand": "Sennheiser",
     "category": "60c72b2f9b1d8b3a4c8b4567",
-    "imageCover": "/dev-products/gearvn-epos-sennheiser-gsp301-4_a6f4fdf796d344d8aca3f2046f1a0d8b_grande.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-4_a6f4fdf796d344d8aca3f2046f1a0d8b_grande_ccvgax.webp",
     "variants": [
       {
         "name": "GSP 301 White",
@@ -140,10 +140,10 @@
         "stock": 50,
         "sold": 20,
         "images": [
-          "/dev-products/gearvn-epos-sennheiser-gsp301-4_a6f4fdf796d344d8aca3f2046f1a0d8b_grande.jpg",
-          "/dev-products/gearvn-epos-sennheiser-gsp301-3_2d24907e30144f558cc4cb9aa80f2186_grande.jpg",
-          "/dev-products/gearvn-epos-sennheiser-gsp301-2_71b801ebafee4a50bbfddc93459e3396_grande.jpg",
-          "/dev-products/gearvn-epos-sennheiser-gsp301-4_a6f4fdf796d344d8aca3f2046f1a0d8b_grande.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-4_a6f4fdf796d344d8aca3f2046f1a0d8b_grande_ccvgax.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-3_2d24907e30144f558cc4cb9aa80f2186_grande_v7tdik.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-2_71b801ebafee4a50bbfddc93459e3396_grande_ntifap.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-4_a6f4fdf796d344d8aca3f2046f1a0d8b_grande_ccvgax.webp"
         ],
         "weight": 700
       },
@@ -160,10 +160,10 @@
         "stock": 50,
         "sold": 2,
         "images": [
-          "/dev-products/unnamed_3bd33c509e264764a496c3c92bd1dd9d_large.jpg",
-          "/dev-products/unnamed3_858af896a7d94293b36efaa3f01a1294_large.jpg",
-          "/dev-products/unnamed_1_9748dd27d2a5487eb67748cba5514768_large.jpg",
-          "/dev-products/gearvn.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756976/products/dev-products/unnamed_3bd33c509e264764a496c3c92bd1dd9d_large_tofb7e.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756995/products/dev-products/unnamed3_858af896a7d94293b36efaa3f01a1294_large_f1vjhe.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756953/products/dev-products/unnamed_1_9748dd27d2a5487eb67748cba5514768_large_eisotv.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn_1_clqgse.webp"
         ],
         "weight": 700
       },
@@ -180,10 +180,10 @@
         "stock": 50,
         "sold": 3,
         "images": [
-          "/dev-products/screenshot_11_66f41a7a65944ae5a7ee24baede946bc.jpg",
-          "/dev-products/screenshot_10_a792348779af47d8bbfd62c500727dd5.jpg",
-          "/dev-products/screenshot_9_e8597ee675e3462b9e8080a9346ff667.jpg",
-          "/dev-products/screenshot_8_5e78922b673f4f5a847c3cf5bd580b22.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756836/products/dev-products/screenshot_11_66f41a7a65944ae5a7ee24baede946bc_bmqs0o.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/screenshot_10_a792348779af47d8bbfd62c500727dd5_zzs3fv.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756832/products/dev-products/screenshot_9_e8597ee675e3462b9e8080a9346ff667_krpogq.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756831/products/dev-products/screenshot_8_5e78922b673f4f5a847c3cf5bd580b22_k7jwes.webp"
         ],
         "weight": 700
       }
@@ -195,7 +195,7 @@
     "description": "Tai nghe Apple AirPods Max Green là một sản phẩm cao cấp của Apple, nổi bật với thiết kế sang trọng và chất lượng âm thanh tuyệt hảo. Với công nghệ khử tiếng ồn chủ động và âm thanh không gian, AirPods Max mang đến trải nghiệm nghe nhạc đỉnh cao. Tai nghe này cũng có thời lượng pin lên đến 20 giờ và khả năng kết nối Bluetooth 5.0, giúp bạn thoải mái sử dụng trong thời gian dài.",
     "brand": "Apple",
     "category": "60c72b2f9b1d8b3a4c8b4567",
-    "imageCover": "/dev-products/airpods-max-select-202409-starlight_FV1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg",
     "variants": [
       {
         "name": "StarLight",
@@ -210,10 +210,10 @@
         "stock": 50,
         "sold": 2,
         "images": [
-          "/dev-products/airpods-max-select-202409-starlight_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-starlight_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-starlight_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-starlight_FV1.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg"
         ],
         "weight": 1200
       },
@@ -230,10 +230,10 @@
         "stock": 50,
         "sold": 2,
         "images": [
-          "/dev-products/airpods-max-select-202409-midnight_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-midnight_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-midnight_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-midnight_FV1.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-midnight_FV1_f6s9li.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-midnight_FV1_f6s9li.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-midnight_FV1_f6s9li.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-midnight_FV1_f6s9li.jpg"
         ],
         "weight": 1200
       },
@@ -250,10 +250,10 @@
         "stock": 50,
         "sold": 2,
         "images": [
-          "/dev-products/airpods-max-select-202409-blue_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-blue_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-blue_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-blue_FV1.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-blue_FV1_xj2j2m.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-blue_FV1_xj2j2m.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-blue_FV1_xj2j2m.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-blue_FV1_xj2j2m.jpg"
         ],
         "weight": 1200
       },
@@ -270,10 +270,10 @@
         "stock": 50,
         "sold": 2,
         "images": [
-          "/dev-products/airpods-max-select-202409-purple_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-purple_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-purple_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-purple_FV1.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-purple_FV1_gzzftj.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-purple_FV1_gzzftj.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-purple_FV1_gzzftj.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-purple_FV1_gzzftj.jpg"
         ],
         "weight": 1200
       },
@@ -290,10 +290,10 @@
         "stock": 50,
         "sold": 2,
         "images": [
-          "/dev-products/airpods-max-select-202409-orange_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-orange_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-orange_FV1.jpg",
-          "/dev-products/airpods-max-select-202409-orange_FV1.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-orange_FV1_pt4qyq.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-orange_FV1_pt4qyq.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-orange_FV1_pt4qyq.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-orange_FV1_pt4qyq.jpg"
         ],
         "weight": 1200
       }
@@ -305,7 +305,7 @@
     "description": "Tai nghe Steelseries Arctis Nova Pro Wireless là lựa chọn hoàn hảo cho game thủ chuyên nghiệp. Với thiết kế cứng cáp nhưng nhẹ nhàng, tai nghe này mang lại cảm giác thoải mái khi đeo trong thời gian dài. Chất lượng âm thanh vượt trội với âm bass sống động và khả năng tái tạo âm thanh chuyên nghiệp nhờ hệ thống Nova Pro Acoustic System và Premium High Fidelity Drivers. Microphone ClearCast Gen 2 chống ồn hai chiều giúp giọng nói rõ ràng hơn. Pin dung lượng lớn lên đến 44 giờ sử dụng, đảm bảo không bị gián đoạn trong quá trình chơi game",
     "brand": "Steelseries",
     "category": "60c72b2f9b1d8b3a4c8b4567",
-    "imageCover": "/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-1_4825ff4f26a04258be72db4ff9a562d4.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-1_4825ff4f26a04258be72db4ff9a562d4_xorzgn.webp",
     "variants": [
       {
         "name": "Steelseries Arctis Nova Pro Wireless",
@@ -320,10 +320,10 @@
         "stock": 50,
         "sold": 12,
         "images": [
-          "/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-1_4825ff4f26a04258be72db4ff9a562d4.jpg",
-          "/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-2_f8a22546f15b4887a9229664cf02b2a8.jpg",
-          "/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-4_e8963e79525c463997ea9f027e61db66.jpg",
-          "/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-1_4825ff4f26a04258be72db4ff9a562d4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-1_4825ff4f26a04258be72db4ff9a562d4_xorzgn.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-2_f8a22546f15b4887a9229664cf02b2a8_bppzip.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756822/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-4_e8963e79525c463997ea9f027e61db66_wmvklr.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-1_4825ff4f26a04258be72db4ff9a562d4_xorzgn.webp"
         ],
         "weight": 1200
       }
@@ -335,7 +335,7 @@
     "description": "Ghế công thái học Razer Fujin RZ38-04950100-R3U1 được thiết kế để mang lại sự thoải mái và bảo vệ sức khỏe người dùng. Với khả năng điều chỉnh linh hoạt, chất liệu thoáng khí và thiết kế hiện đại, sản phẩm này giúp giảm áp lực lên cột sống và hỗ trợ tư thế ngồi đúng.",
     "brand": "Razer",
     "category": "60c72b2f9b1d8b3a4c8b456a",
-    "imageCover": "/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-04.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-04_gmkzqu.webp",
     "variants": [
       {
         "name": "Black",
@@ -349,10 +349,10 @@
         "stock": 50,
         "sold": 2,
         "images": [
-          "/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-04.jpg",
-          "/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-02.jpg",
-          "/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-01.jpg",
-          "/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-04.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-04_gmkzqu.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-02_imizc7.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-01_g1u5r1.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-04_gmkzqu.webp"
         ],
         "weight": 12200
       }
@@ -364,7 +364,7 @@
     "description": "Ghế công thái học Gami Focus V2 là lựa chọn tuyệt vời cho những ai cần một chiếc ghế hỗ trợ tư thế ngồi đúng và bảo vệ sức khỏe. Với thiết kế công thái học hiện đại, ghế giúp giảm căng thẳng cho cột sống, vai và cổ. Tựa lưng Twin-back FlexSupport và tựa đầu 2D Comfort mang lại sự thoải mái tối ưu. Tay vịn 3D và chân ghế hợp kim nhôm chắc chắn, cùng lớp lưới thoáng khí cao cấp, đảm bảo sự thoải mái và bền bỉ",
     "brand": "Gami",
     "category": "60c72b2f9b1d8b3a4c8b456a",
-    "imageCover": "/dev-products/ghe-cong-thai-hoc-gami-focus-v2-02.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756825/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-02_xdqers.webp",
     "variants": [
       {
         "name": "Gray",
@@ -378,10 +378,10 @@
         "stock": 50,
         "sold": 12,
         "images": [
-          "/dev-products/ghe-cong-thai-hoc-gami-focus-v2-02.jpg",
-          "/dev-products/ghe-cong-thai-hoc-gami-focus-v2-01.jpg",
-          "/dev-products/ghe-cong-thai-hoc-gami-focus-v2-03.jpg",
-          "/dev-products/ghe-cong-thai-hoc-gami-focus-v2-04.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756825/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-02_xdqers.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-01_zcb9br.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756829/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-03_p3b9qj.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756829/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-04_cuckgt.webp"
         ],
         "weight": 12200
       },
@@ -397,10 +397,10 @@
         "stock": 50,
         "sold": 12,
         "images": [
-          "/dev-products/ghe-cong-thai-hoc-gami-focus-v2-09.jpg",
-          "/dev-products/ghe-cong-thai-hoc-gami-focus-v2-06.jpg",
-          "/dev-products/ghe-cong-thai-hoc-gami-focus-v2-08.jpg",
-          "/dev-products/ghe-cong-thai-hoc-gami-focus-v2-10.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-09_c4hlle.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756829/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-06_zlwztn.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-08_hzmtlp.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-10_ttv7az.webp"
         ],
         "weight": 12200
       }
@@ -412,7 +412,7 @@
     "description": "Ghế công thái học Gami Crom All Black E902-001 nổi bật với thiết kế mạnh mẽ và sang trọng, chất liệu lưới Solidmesh USA thoáng mát, và khả năng điều chỉnh linh hoạt. Sản phẩm hỗ trợ nhiều tư thế ngồi với tựa lưng Butterfit 2D và tựa đầu HeadFlex 8D, giúp giảm căng thẳng cho cột sống và cổ. Chân ghế hợp kim nhôm chắc chắn, chịu lực tốt, và đệm ghế cao cấp mang lại sự thoải mái tối ưu.",
     "brand": "Gami",
     "category": "60c72b2f9b1d8b3a4c8b456a",
-    "imageCover": "/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-04.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-04_srqg4t.webp",
     "variants": [
       {
         "name": "Gami Crom All Black",
@@ -426,10 +426,10 @@
         "stock": 50,
         "sold": 12,
         "images": [
-          "/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-04.jpg",
-          "/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-03.jpg",
-          "/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-02.jpg",
-          "/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-04.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-04_srqg4t.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-03_cbebwo.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-02_hunopx.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-04_srqg4t.webp"
         ],
         "weight": 12200
       }
@@ -441,7 +441,7 @@
     "description": "Bộ bàn nâng hạ HyperWork Atlas có thiết kế hiện đại với động cơ dual motor, giúp điều chỉnh chiều cao từ 60.2cm đến 126cm một cách linh hoạt. Chân bàn bằng hợp kim chắc chắn, chịu tải trọng lên đến 120kg. Bộ điều khiển thông minh và công nghệ chống va chạm đảm bảo an toàn và tiện lợi khi sử dụng.",
     "brand": "HyperWork",
     "category": "60c72b2f9b1d8b3a4c8b456b",
-    "imageCover": "/dev-products/ban-nang-ha-hyperwork-atlas-trang-01.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-01_czokvz.webp",
     "variants": [
       {
         "name": "White",
@@ -456,10 +456,10 @@
         "stock": 50,
         "sold": 12,
         "images": [
-          "/dev-products/ban-nang-ha-hyperwork-atlas-trang-03.jpg",
-          "/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas.jpg",
-          "/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-01.jpg",
-          "/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-03.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-03_yqsrud.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas_dpqovs.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-01_q1blta.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-03_heuscm.webp"
         ],
         "weight": 22200
       },
@@ -476,10 +476,10 @@
         "stock": 50,
         "sold": 12,
         "images": [
-          "/dev-products/ban-nang-ha-hyperwork-atlas-trang-01.jpg",
-          "/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas.jpg",
-          "/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-01.jpg",
-          "/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-03.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-01_czokvz.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas_dpqovs.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-01_q1blta.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-03_heuscm.webp"
         ],
         "weight": 22200
       },
@@ -496,10 +496,10 @@
         "stock": 50,
         "sold": 12,
         "images": [
-          "/dev-products/ban-nang-ha-hyperwork-atlas-trang-02.jpg",
-          "/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas.jpg",
-          "/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-01.jpg",
-          "/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-03.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-02_h9z05x.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas_dpqovs.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-01_q1blta.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-03_heuscm.webp"
         ],
         "weight": 22200
       }
@@ -511,9 +511,10 @@
     "description": "Bàn Gaming E-DRA EGT1460A có thiết kế tối giản và chất lượng cao, với kích thước 140 x 60 x 75 cm. Chân bàn chữ A chắc chắn, có móc treo tai nghe và hộc đựng nước uống. Vật liệu nhựa và thép carbon cao cấp đảm bảo độ bền và ổn định, tạo không gian lý tưởng cho hệ thống máy tính của bạn.",
     "brand": "E-DRA",
     "category": "60c72b2f9b1d8b3a4c8b456b",
-    "imageCover": "/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024_mpz6k1.webp",
     "variants": [
       {
+        "_id": "997d100054b63b001c7e9d06",
         "name": "Black Switch",
         "sku": "EDRA-EGT146",
         "specifications": {
@@ -526,10 +527,10 @@
         "stock": 50,
         "sold": 12,
         "images": [
-          "/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024.jpg",
-          "/dev-products/gearvn-ban-gaming-e-dra-egt1460a-02_807eb022a44e40eabb8e2a30d89a2fc0_1024x1024.jpg",
-          "/dev-products/gearvn-ban-gaming-e-dra-egt1460a-03_f39d6f34f3c74f20b5492cbccfecf19a_1024x1024.jpg",
-          "/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024_mpz6k1.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-02_807eb022a44e40eabb8e2a30d89a2fc0_1024x1024_x7drza.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-03_f39d6f34f3c74f20b5492cbccfecf19a_1024x1024_gnizbr.webp",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024_mpz6k1.webp"
         ],
         "weight": 22200
       }
@@ -541,7 +542,7 @@
     "description": "Chuột Gaming HyperX Pulsefire Haste 2 trang bị mắt đọc cảm biến HyperX 26k với 26.000 DPI đem đến độ chính xác tới từng độ phân giải DPI.",
     "brand": "HyperX",
     "category": "60c72b2f9b1d8b3a4c8b4568",
-    "imageCover": "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image1_yy3wa7.jpg",
     "variants": [
       {
         "_id": "637c7ea014b63b001c7e9d1c",
@@ -557,10 +558,10 @@
         "stock": 50,
         "sold": 20,
         "images": [
-          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image1.jpg",
-          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image2.jpg",
-          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image3.jpg",
-          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image1_yy3wa7.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image2_ea9maa.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image3_bmeyzw.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image4_qiswi6.jpg"
         ]
       },
       {
@@ -577,10 +578,10 @@
         "stock": 30,
         "sold": 15,
         "images": [
-          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image1.jpg",
-          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image2.jpg",
-          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image3.jpg",
-          "/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image1_mydd2q.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image2_xr1st0.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image3_yjpanr.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image4_gffptl.jpg"
         ],
         "weight": 400
       }
@@ -592,7 +593,7 @@
     "description": "Bàn phím cơ TKL Dareu EK87L V2 sở hữu thiết kế Tenkeyless (TKL) tiết kiệm tối đa không gian bàn làm việc của bạn.",
     "brand": "DareU",
     "category": "60c72b2f9b1d8b3a4c8b4569",
-    "imageCover": "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image1_kljtht.jpg",
     "variants": [
       {
         "_id": "637c7eb814b63b001c7e9d1f",
@@ -608,10 +609,10 @@
         "stock": 40,
         "sold": 10,
         "images": [
-          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image1.jpg",
-          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image2.jpg",
-          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image3.jpg",
-          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image1_kljtht.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image2_t7qvbm.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image3_k7vlji.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image4_i4bqqw.jpg"
         ]
       },
       {
@@ -628,10 +629,10 @@
         "stock": 25,
         "sold": 8,
         "images": [
-          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image1.jpg",
-          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image2.jpg",
-          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image3.jpg",
-          "/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image1_uqz5rf.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image2_fqubin.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image3_pnk66r.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image4_phpgsn.jpg"
         ],
         "weight": 400
       }
@@ -643,7 +644,7 @@
     "description": "Tai Nghe Gaming HyperX Cloud III để bạn chìm đắm vào âm thanh 3D với âm thanh vòm được cung cấp nhờ DTS® Headphone: X Spatial Audio.",
     "brand": "HyperX",
     "category": "60c72b2f9b1d8b3a4c8b4567",
-    "imageCover": "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image1_qz6ioy.jpg",
     "variants": [
       {
         "_id": "637c7ecb14b63b001c7e9d22",
@@ -659,12 +660,11 @@
         "stock": 60,
         "sold": 25,
         "images": [
-          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image1.jpg",
-          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image2.jpg",
-          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image3.jpg",
-          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image4.jpg"
-        ],
-        "weight": 400
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image1_qz6ioy.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image2_zqbryl.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image3_khru0a.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image4_nhumz7.jpg"
+        ]
       },
       {
         "_id": "637c7ed114b63b001c7e9d23",
@@ -680,10 +680,10 @@
         "stock": 45,
         "sold": 18,
         "images": [
-          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image1.jpg",
-          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image2.jpg",
-          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image3.jpg",
-          "/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image1_tqufzz.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756836/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image2_wtzedr.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756836/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image3_xhhw2q.jpg",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756836/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image4_f3fpjc.jpg"
         ],
         "weight": 400
       }
@@ -695,7 +695,7 @@
     "description": "Loại bỏ tất cả mọi chướng ngại vật trên chặng đường giành chiến thắng với con chuột PRO X SUPERLIGHT 2 cực nhẹ và nhanh nhất từ trước tới nay của Logitech.",
     "brand": "Logitech",
     "category": "60c72b2f9b1d8b3a4c8b4568",
-    "imageCover": "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image1_w9msm8.png",
     "variants": [
       {
         "_id": "637c7f9014b63b001c7e9d25",
@@ -711,10 +711,10 @@
         "stock": 45,
         "sold": 10,
         "images": [
-          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image1.jpg",
-          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image2.jpg",
-          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image3.jpg",
-          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image1_w9msm8.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image2_bzvxq5.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image3_e1tq3d.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image4_ia5ovn.jpg"
         ]
       },
       {
@@ -731,10 +731,10 @@
         "stock": 30,
         "sold": 8,
         "images": [
-          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image1.jpg",
-          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image2.jpg",
-          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image3.jpg",
-          "/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image1_p5fk7p.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image2_jko6nf.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image3_lm5wnl.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image4_s0renw.png"
         ],
         "weight": 400
       }
@@ -746,7 +746,7 @@
     "description": "Chuột Gaming Không Dây Razer Viper V3 Pro sở hữu thiết kế đối xứng hoàn hảo, phù hợp cho cả người thuận tay trái và tay phải.",
     "brand": "Razer",
     "category": "60c72b2f9b1d8b3a4c8b4568",
-    "imageCover": "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image1_njzqg7.png",
     "variants": [
       {
         "_id": "637c7faa14b63b001c7e9d28",
@@ -762,10 +762,10 @@
         "stock": 50,
         "sold": 15,
         "images": [
-          "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image1.jpg",
-          "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image2.jpg",
-          "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image3.jpg",
-          "/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image1_njzqg7.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image2_cw5p2f.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image3_f1lxck.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image4_bxnppi.png"
         ],
         "weight": 400
       }
@@ -777,7 +777,7 @@
     "description": "Bàn phím cơ ASUS ROG Falchion Ace White (ROG NX Sw) là một tuyệt tác công nghệ dành cho game thủ và những người đam mê công nghệ.",
     "brand": "ASUS",
     "category": "60c72b2f9b1d8b3a4c8b4569",
-    "imageCover": "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756730/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image1_k8eqpa.png",
     "variants": [
       {
         "_id": "637c7fb914b63b001c7e9d2a",
@@ -793,10 +793,10 @@
         "stock": 40,
         "sold": 12,
         "images": [
-          "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image1.jpg",
-          "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image2.jpg",
-          "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image3.jpg",
-          "/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756730/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image1_k8eqpa.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756730/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image2_bqs1dt.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756731/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image3_o8dgca.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756732/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image4_exusvu.png"
         ],
         "weight": 400
       }
@@ -808,7 +808,7 @@
     "description": "Nghe được mọi thứ với âm thanh Dolby Audio 7.1 Surround  sound từ những tiếng bước chân nhỏ nhẹ nhất đến tiếng nổ vang dội nhất.",
     "brand": "Corsair",
     "category": "60c72b2f9b1d8b3a4c8b4567",
-    "imageCover": "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756838/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image1_reambf.png",
     "variants": [
       {
         "_id": "637c7fc814b63b001c7e9d2c",
@@ -824,10 +824,10 @@
         "stock": 55,
         "sold": 22,
         "images": [
-          "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image1.jpg",
-          "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image2.jpg",
-          "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image3.jpg",
-          "/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756838/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image1_reambf.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756857/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image2_kv0vhe.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756875/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image3_duhird.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756893/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image4_oy1wdd.png"
         ],
         "weight": 400
       }
@@ -839,7 +839,7 @@
     "description": "Bàn phím cơ HyperX Alloy Origins có thiết kế nhỏ gọn và trang bị Switch HyperX mang đến hiệu suất cao nhất.",
     "brand": "HyperX",
     "category": "60c72b2f9b1d8b3a4c8b4569",
-    "imageCover": "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image1_hrfrma.png",
     "variants": [
       {
         "_id": "637c7fda14b63b001c7e9d2e",
@@ -855,10 +855,10 @@
         "stock": 35,
         "sold": 18,
         "images": [
-          "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image1.jpg",
-          "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image2.jpg",
-          "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image3.jpg",
-          "/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image1_hrfrma.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756737/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image2_aczug8.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image3_xueslr.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image4_kzhtws.png"
         ],
         "weight": 400
       }
@@ -870,7 +870,7 @@
     "description": "Ghế Gaming Corsair TC100 lấy cảm hứng thiết kế từ xe đua tạo cho người dùng sự thoải mái và phong cách độc đáo.",
     "brand": "Corsair",
     "category": "60c72b2f9b1d8b3a4c8b456a",
-    "imageCover": "/dev-products/ghe_gaming_corsair_tc100_fabric_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe_gaming_corsair_tc100_fabric_image1_qpagry.png",
     "variants": [
       {
         "_id": "637c7fea14b63b001c7e9d30",
@@ -885,10 +885,10 @@
         "stock": 25,
         "sold": 10,
         "images": [
-          "/dev-products/ghe_gaming_corsair_tc100_fabric_image1.jpg",
-          "/dev-products/ghe_gaming_corsair_tc100_fabric_image2.jpg",
-          "/dev-products/ghe_gaming_corsair_tc100_fabric_image3.jpg",
-          "/dev-products/ghe_gaming_corsair_tc100_fabric_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe_gaming_corsair_tc100_fabric_image1_qpagry.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc100_fabric_image2_yxpsi0.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc100_fabric_image3_ozidyi.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc100_fabric_image4_mpyoln.png"
         ],
         "weight": 400
       }
@@ -900,7 +900,7 @@
     "description": "Bàn Văn Phòng HyperWork Core Desk là giải pháp hoàn hảo cho những ai đang tìm kiếm một chiếc bàn làm việc vừa tiện dụng, vừa thẩm mỹ.",
     "brand": "HyperWork",
     "category": "60c72b2f9b1d8b3a4c8b456b",
-    "imageCover": "/dev-products/ban_van_phong_hyperwork_core_desk_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image1_i4i86a.png",
     "variants": [
       {
         "_id": "637c7ff514b63b001c7e9d32",
@@ -916,10 +916,10 @@
         "stock": 20,
         "sold": 5,
         "images": [
-          "/dev-products/ban_van_phong_hyperwork_core_desk_image1.jpg",
-          "/dev-products/ban_van_phong_hyperwork_core_desk_image2.jpg",
-          "/dev-products/ban_van_phong_hyperwork_core_desk_image3.jpg",
-          "/dev-products/ban_van_phong_hyperwork_core_desk_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image1_i4i86a.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image2_jfjeke.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image3_lbttsi.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image4_hcgaxi.png"
         ],
         "weight": 400
       }
@@ -931,7 +931,7 @@
     "description": "Tai nghe không dây PRO X 2 LIGHTSPEED với thiết kế chuyên nghiệp đã giành giải thưởng, mang lại âm thanh cấp độ chuyên nghiệp cùng sự thoải mái vượt trội.",
     "brand": "Logitech",
     "category": "60c72b2f9b1d8b3a4c8b4567",
-    "imageCover": "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756943/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image1_yrldtz.png",
     "variants": [
       {
         "_id": "637c800514b63b001c7e9d34",
@@ -947,10 +947,10 @@
         "stock": 60,
         "sold": 25,
         "images": [
-          "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image1.jpg",
-          "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image2.jpg",
-          "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image3.jpg",
-          "/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756943/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image1_yrldtz.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756944/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image2_nemvy8.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756944/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image3_xmvrau.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756944/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image4_fn5mjf.png"
         ],
         "weight": 400
       }
@@ -962,7 +962,7 @@
     "description": "Bàn phím cơ Razer Huntsman V3 Pro Tenkeyless Analog Optical thiết kế kiểu dáng gọn nhẹ, tối đa không gian để chuột nhưng đem đến độ chính xác cao cùng cảm giác chơi game tuyệt đỉnh cho game thủ.",
     "brand": "Razer",
     "category": "60c72b2f9b1d8b3a4c8b4569",
-    "imageCover": "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image1_m7x4yi.png",
     "variants": [
       {
         "_id": "637c801414b63b001c7e9d36",
@@ -978,10 +978,10 @@
         "stock": 30,
         "sold": 14,
         "images": [
-          "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image1.jpg",
-          "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image2.jpg",
-          "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image3.jpg",
-          "/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image1_m7x4yi.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756737/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image2_vdii9b.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image3_fghbjv.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image4_fnmtzp.png"
         ],
         "weight": 400
       }
@@ -993,7 +993,7 @@
     "description": "Ghế Gaming Corsair TC500 Luxe là một trong những sản phẩm ghế chơi game cao cấp nhất hiện nay, mang đến sự kết hợp hoàn hảo giữa thiết kế sang trọng, chất liệu cao cấp và công thái học vượt trội.",
     "brand": "Corsair",
     "category": "60c72b2f9b1d8b3a4c8b456a",
-    "imageCover": "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image1_uojhb8.png",
     "variants": [
       {
         "_id": "637c802414b63b001c7e9d38",
@@ -1008,10 +1008,10 @@
         "stock": 15,
         "sold": 7,
         "images": [
-          "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image1.jpg",
-          "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image2.jpg",
-          "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image3.jpg",
-          "/dev-products/ghe_gaming_corsair_tc500_luxe_white_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image1_uojhb8.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image2_hjn8w2.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image3_h39lrr.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image4_jdskmv.png"
         ],
         "weight": 400
       }
@@ -1023,7 +1023,7 @@
     "description": "Bàn phím cơ không dây AKKO MonsGeek M1 V5-SP Contour Aluminum RGB Hotswap (AKKO Sw) nổi bật với thiết kế hiện đại và khung nhôm nguyên khối, mang lại vẻ ngoài chắc chắn và sang trọng.",
     "brand": "AKKO",
     "category": "60c72b2f9b1d8b3a4c8b4569",
-    "imageCover": "/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image1_g3c5qz.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d02",
@@ -1039,10 +1039,10 @@
         "stock": 53,
         "sold": 11,
         "images": [
-          "/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image1.jpg",
-          "/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image2.jpg",
-          "/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image3.jpg",
-          "/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image1_g3c5qz.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756731/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image2_ossqjk.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image3_snk3j7.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image4_yfhs8u.png"
         ]
       },
       {
@@ -1059,10 +1059,10 @@
         "stock": 30,
         "sold": 17,
         "images": [
-          "/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image1.jpg",
-          "/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image2.jpg",
-          "/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image3.jpg",
-          "/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image1_vnggw3.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image2_x3v0un.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image3_avr44v.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image4_akjmqc.png"
         ]
       }
     ]
@@ -1073,7 +1073,7 @@
     "description": "Bàn phím cơ Nuphy Air60 HE RGB Hotswap 8K Rapid Trigger (Magnetic Sw) được thiết kế với vẻ ngoài mỏng nhẹ, tinh tế và sang trọng.",
     "brand": "Nuphy",
     "category": "60c72b2f9b1d8b3a4c8b4569",
-    "imageCover": "/dev-products/ban_phim_co_nuphy_air60_he_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_nuphy_air60_he_image1_olhs6u.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d05",
@@ -1089,10 +1089,10 @@
         "stock": 21,
         "sold": 7,
         "images": [
-          "/dev-products/ban_phim_co_nuphy_air60_he_image1.jpg",
-          "/dev-products/ban_phim_co_nuphy_air60_he_image2.jpg",
-          "/dev-products/ban_phim_co_nuphy_air60_he_image3.jpg",
-          "/dev-products/ban_phim_co_nuphy_air60_he_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_nuphy_air60_he_image1_olhs6u.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756737/products/dev-products/ban_phim_co_nuphy_air60_he_image2_y0q2eh.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756737/products/dev-products/ban_phim_co_nuphy_air60_he_image3_wnxngw.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756737/products/dev-products/ban_phim_co_nuphy_air60_he_image4_wwprpn.png"
         ]
       }
     ]
@@ -1103,7 +1103,7 @@
     "description": "MX Mechanical Mini trang bị các switch cơ học Tactile với độ phản hồi vượt bật đem lại phản hồi chính xác và ít tiếng ồn hơn để việc gõ phím không làm phiền những người xung quanh bạn.",
     "brand": "Logitech",
     "category": "60c72b2f9b1d8b3a4c8b4569",
-    "imageCover": "/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image1_wwqq5m.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d07",
@@ -1119,10 +1119,10 @@
         "stock": 15,
         "sold": 3,
         "images": [
-          "/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image1.jpg",
-          "/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image2.jpg",
-          "/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image3.jpg",
-          "/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image1_wwqq5m.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image2_a3wodq.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756734/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image3_t6ronp.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756734/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image4_bczrze.png"
         ]
       }
     ]
@@ -1133,7 +1133,7 @@
     "description": "Bàn phím cơ không dây AKKO MU02 Autumn RGB Hotswap (AKKO Sw) gây ấn tượng với thiết kế màu sắc lấy cảm hứng từ mùa thu, mang lại sự tinh tế và độc đáo.",
     "brand": "AKKO",
     "category": "60c72b2f9b1d8b3a4c8b4569",
-    "imageCover": "/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756732/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image1_nksmoe.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d09",
@@ -1149,10 +1149,10 @@
         "stock": 30,
         "sold": 8,
         "images": [
-          "/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image1.jpg",
-          "/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image2.jpg",
-          "/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image3.jpg",
-          "/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756732/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image1_nksmoe.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756731/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image2_vwehve.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image3_ga4vak.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image4_anhl3l.png"
         ]
       }
     ]
@@ -1163,7 +1163,7 @@
     "description": "Bàn phím Razer Pro Type Ultra được tinh chỉnh thông qua các phản hồi của cộng đồng để phù hợp với các như cầu phổ biến của người dùng.",
     "brand": "Razer",
     "category": "60c72b2f9b1d8b3a4c8b4569",
-    "imageCover": "/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756734/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image1_un5zn3.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d0b",
@@ -1179,10 +1179,10 @@
         "stock": 30,
         "sold": 8,
         "images": [
-          "/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image1.jpg",
-          "/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image2.jpg",
-          "/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image3.jpg",
-          "/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756734/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image1_un5zn3.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image2_aaimhu.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image3_nxks5a.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image4_akkkou.png"
         ]
       }
     ]
@@ -1193,7 +1193,7 @@
     "description": "Nhanh nhạy. Chính xác. - Những màn flick chuột nhanh và chính xác hơn",
     "brand": "BenQ",
     "category": "60c72b2f9b1d8b3a4c8b4568",
-    "imageCover": "/dev-products/chuot_khong_day_benq_zowie_za13_dw_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756797/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image1_ixopoj.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d0d",
@@ -1209,10 +1209,10 @@
         "stock": 25,
         "sold": 5,
         "images": [
-          "/dev-products/chuot_khong_day_benq_zowie_za13_dw_image1.jpg",
-          "/dev-products/chuot_khong_day_benq_zowie_za13_dw_image2.jpg",
-          "/dev-products/chuot_khong_day_benq_zowie_za13_dw_image3.jpg",
-          "/dev-products/chuot_khong_day_benq_zowie_za13_dw_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756797/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image1_ixopoj.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756812/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image2_mncnjn.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756812/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image3_u5uvco.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756812/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image4_jy9ctv.png"
         ]
       }
     ]
@@ -1223,7 +1223,7 @@
     "description": "Hợp tác phát triển bởi Arbiter Studio và Vancer, Akitsu là mẫu chuột không dây mới nhất với vỏ làm từ sợi carbon composite.",
     "brand": "Arbiter",
     "category": "60c72b2f9b1d8b3a4c8b4568",
-    "imageCover": "/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image1_znm2cc.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d0f",
@@ -1239,10 +1239,10 @@
         "stock": 15,
         "sold": 3,
         "images": [
-          "/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image1.jpg",
-          "/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image2.jpg",
-          "/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image3.jpg",
-          "/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image1_znm2cc.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image2_zlhgz5.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image3_vqjosy.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image4_uxkfse.png"
         ]
       }
     ]
@@ -1253,7 +1253,7 @@
     "description": "Hợp tác chặc chẽ giữa Fnatic - Tổ chức esport hàng đầu thế giới đến từ Vương Quốc Anh và Lamzu - Thương hiệu gaming gear nổi bật với các sản phẩm được thiết kế chỉn chu từ hiệu năng đến trải nghiệm sử dụng.",
     "brand": "Fnatic",
     "category": "60c72b2f9b1d8b3a4c8b4568",
-    "imageCover": "/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d11",
@@ -1269,10 +1269,10 @@
         "stock": 35,
         "sold": 14,
         "images": [
-          "/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1.jpg",
-          "/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1.jpg",
-          "/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1.jpg",
-          "/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png"
         ]
       }
     ]
@@ -1283,7 +1283,7 @@
     "description": "Phiên bản giới hạn hợp tác giữa Pulsar và Demon Slayer",
     "brand": "Pulsar",
     "category": "60c72b2f9b1d8b3a4c8b4568",
-    "imageCover": "/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756814/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image1_wwbodv.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d13",
@@ -1299,10 +1299,10 @@
         "stock": 23,
         "sold": 1,
         "images": [
-          "/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image1.jpg",
-          "/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image2.jpg",
-          "/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image3.jpg",
-          "/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756814/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image1_wwbodv.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756814/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image2_ycqmrl.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756814/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image3_czugov.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756817/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image4_k8clgd.png"
         ]
       }
     ]
@@ -1313,7 +1313,7 @@
     "description": "Chuột gaming công thái học đến từ hãng gaming gear lâu đời cho giới chơi game fps.",
     "brand": "BenQ",
     "category": "60c72b2f9b1d8b3a4c8b4568",
-    "imageCover": "/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image1.jpg",
+    "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756751/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image1_cd7tjm.png",
     "variants": [
       {
         "_id": "637d100014b63b001c7e9d15",
@@ -1329,10 +1329,10 @@
         "stock": 18,
         "sold": 8,
         "images": [
-          "/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image1.jpg",
-          "/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image2.jpg",
-          "/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image3.jpg",
-          "/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image4.jpg"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756751/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image1_cd7tjm.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756752/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image2_kjml8o.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756761/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image3_fmng24.png",
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756779/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image4_ry2hzg.png"
         ]
       }
     ]

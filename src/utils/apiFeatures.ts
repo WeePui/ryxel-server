@@ -22,60 +22,65 @@ class APIFeatures {
 
   async search() {
     if (this.queryString.search) {
-      const nameSearch = {
-        $search: {
-          index: 'autocomplete-index',
-          autocomplete: {
-            query: this.queryString.search,
-            path: 'name',
+      const results = await Product.aggregate([
+        {
+          $search: {
+            index: 'products',
+            compound: {
+              should: [
+                {
+                  autocomplete: {
+                    query: this.queryString.search,
+                    path: 'name',
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: this.queryString.search,
+                    path: 'description',
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: this.queryString.search,
+                    path: 'brand',
+                  },
+                },
+                {
+                  embeddedDocument: {
+                    operator: {
+                      compound: {
+                        should: [
+                          {
+                            autocomplete: {
+                              query: this.queryString.search,
+                              path: 'variants.name',
+                            },
+                          },
+                          {
+                            autocomplete: {
+                              query: this.queryString.search,
+                              path: 'variants.specifications',
+                            },
+                          },
+                        ],
+                      },
+                    },
+                    path: 'variants',
+                  },
+                },
+              ],
+            },
           },
         },
-      };
-
-      const descriptionSearch = {
-        $search: {
-          index: 'autocomplete-index',
-          autocomplete: {
-            query: this.queryString.search,
-            path: 'description',
-          },
-        },
-      };
-
-      const categorySearch = {
-        $search: {
-          index: 'autocomplete-index',
-          autocomplete: {
-            query: this.queryString.search,
-            path: 'category',
-          },
-        },
-      };
-
-      const nameResults = await Product.aggregate([
-        nameSearch,
         { $addFields: { score: { $meta: 'searchScore' } } },
+        { $sort: { score: -1 } },
       ]);
-      const descriptionResults = await Product.aggregate([
-        descriptionSearch,
-        { $addFields: { score: { $meta: 'searchScore' } } },
-      ]);
-      const categoryResults = await Product.aggregate([
-        categorySearch,
-        { $addFields: { score: { $meta: 'searchScore' } } },
-      ]);
-
-      const combinedResults = [
-        ...nameResults,
-        ...descriptionResults,
-        ...categoryResults,
-      ].sort((a, b) => b.score - a.score);
 
       this.query = Product.find({
-        _id: { $in: combinedResults.map((result) => result._id) },
+        _id: { $in: results.map((result) => result._id) },
       });
     }
-
     return this;
   }
 

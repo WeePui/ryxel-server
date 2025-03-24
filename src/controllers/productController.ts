@@ -54,7 +54,9 @@ export const getAllProducts = catchAsync(
 
 export const getProductBySlug = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const product = await Product.findOne({ slug: req.params.slug }).lean();
+    const product = await Product.findOne({ slug: req.params.slug })
+      .populate('reviews')
+      .lean();
 
     if (!product) {
       return next(new AppError('No product found with that slug', 404));
