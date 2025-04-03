@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema, Types } from 'mongoose';
 import Product from './productModel';
+import Review from './reviewModel';
 
 /*interface ICheckout extends Document {
   total: number;
@@ -10,9 +11,11 @@ import Product from './productModel';
 interface IOrderProduct extends Document {
   product: Types.ObjectId;
   variant: Types.ObjectId;
+  _itemName: string;
   quantity: number;
   unitPrice: number;
   subtotal: number;
+  review?: Types.ObjectId;
 }
 
 interface IOrder extends Document {
@@ -38,6 +41,8 @@ interface IOrder extends Document {
     checkoutId: string;
     amount: number;
   };
+  orderCode: string;
+  reviewCount: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -49,11 +54,17 @@ interface IOrder extends Document {
 });*/
 
 const orderProductSchema = new Schema<IOrderProduct>({
-  product: { type: Schema.Types.ObjectId, ref: 'Product' },
-  variant: { type: Schema.Types.ObjectId, ref: 'Product.variants' },
-  quantity: { type: Number },
+  product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+  variant: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product.variants',
+    required: true,
+  },
+  quantity: { type: Number, required: true },
   unitPrice: { type: Number },
   subtotal: { type: Number },
+  _itemName: { type: String },
+  review: { type: Schema.Types.ObjectId, ref: 'Review' },
 });
 
 const orderSchema = new Schema<IOrder>(
@@ -117,9 +128,43 @@ const orderSchema = new Schema<IOrder>(
       checkoutId: { type: String },
       amount: { type: Number },
     },
+    orderCode: {
+      type: String,
+      unique: true,
+    },
+    reviewCount: {
+      type: Number,
+      default: 0,
+      max: 2,
+    },
   },
   { timestamps: true }
 );
+
+orderSchema.index({ user: 1 });
+orderSchema.index({ status: 1 });
+orderSchema.index({ createdAt: 1 });
+orderSchema.index({ updatedAt: 1 });
+orderSchema.index({ orderCode: 1 });
+
+orderSchema.pre<IOrder>('find', async function (next) {
+  this.populate({
+    path: 'lineItems.review',
+    select: 'rating review images video',
+  });
+
+  next();
+});
+
+orderSchema.pre<IOrder>('save', async function (next) {
+  // Generate an order code
+  const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
+  const userSuffix = this.user.toString().slice(-4).toUpperCase();
+  const randomNumber = Math.floor(10 + Math.random() * 90);
+
+  this.orderCode = `ORD-${today}-${userSuffix}-${randomNumber}`;
+  next();
+});
 
 orderSchema.pre<IOrder>('save', async function (next) {
   // Initialize the total and shippingFee
@@ -128,21 +173,28 @@ orderSchema.pre<IOrder>('save', async function (next) {
   // Loop through the lineItems to calculate the subtotal for each variant
   for (const item of this.lineItems) {
     const product = await Product.findById(item.product);
-    if (product) {
-      // Compare the string representations of the ObjectIds
-      const variant = product.variants.find(
-        (v) => v._id.toString() === item.variant.toString()
-      );
-      if (variant) {
-        item.unitPrice = variant.price;
-        item.subtotal = item.unitPrice * item.quantity;
-        this.subtotal += item.subtotal;
-      } else {
-        throw new Error('Variant ' + item.variant.toString() + ' not found');
-      }
+
+    if (!product) {
+      throw new Error('Product ' + item.product.toString() + ' not found');
+    }
+
+    item._itemName = product.name;
+
+    // Compare the string representations of the ObjectIds
+    const variant = product.variants.find(
+      (v) => v._id.toString() === item.variant.toString()
+    );
+    if (variant) {
+      item.unitPrice = variant.price;
+      item.subtotal = item.unitPrice * item.quantity;
+      this.subtotal += item.subtotal;
+    } else {
+      throw new Error('Variant ' + item.variant.toString() + ' not found');
     }
   }
+
   this.total = this.subtotal + this.shippingFee - (this.discountAmount || 0);
+
   next();
 });
 

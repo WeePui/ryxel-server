@@ -129,5 +129,57 @@
     "role": "user",
     "password": "password123",
     "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a07",
+    "name": "Nguyễn Thanh Tùng",
+    "email": "tung.nguyen@example.com",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/default.png"
+    },
+    "emailVerified": true,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a08",
+    "name": "Trần Minh Hải",
+    "email": "hai.tran@example.com",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/default.png"
+    },
+    "emailVerified": true,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a09",
+    "name": "Vũ Thị Hương",
+    "email": "huong.vu@example.com",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/default.png"
+    },
+    "emailVerified": false,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a11",
+    "name": "Phạm Thị Thu",
+    "email": "thu.pham@example.com",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/default.png"
+    },
+    "emailVerified": false,
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
   }
 ]

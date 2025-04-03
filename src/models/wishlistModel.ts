@@ -8,21 +8,31 @@ interface IWishlist {
   shareCode?: string;
 }
 
-const wishlistSchema = new mongoose.Schema<IWishlist>({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  products: [
-    {
+const wishlistSchema = new mongoose.Schema<IWishlist>(
+  {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product',
+      ref: 'User',
+      required: true,
     },
-  ],
-  shareCode: {
-    type: String,
+    products: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+      },
+    ],
+    shareCode: {
+      type: String,
+    },
   },
+  {
+    timestamps: true,
+  }
+);
+
+wishlistSchema.pre('find', async function (next) {
+  this.populate('products');
+  next();
 });
 
 // Calculate the shareCode after create wishlist

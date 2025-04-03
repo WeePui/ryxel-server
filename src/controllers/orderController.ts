@@ -5,9 +5,12 @@ import Product from '../models/productModel';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 import ShippingAddress from '../models/shippingAddressModel';
-import { calculateShippingFee } from '../utils/shippingFee';
+import {
+  calculateShippingFee,
+  getExpectedDeliveryDate,
+  getService,
+} from '../utils/shippingFeeService';
 import { refundStripePayment, refundZaloPayPayment } from './paymentController';
-import Discount from '../models/discountModel';
 import { verifyDiscount } from './discountController';
 
 const reduceStock = async (
@@ -42,8 +45,6 @@ const increaseStock = async (
       session ?? null
     ); // Use session if provided
     if (!product) throw new AppError('No product found with that ID', 404);
-
-    console.log(product.variants[0]._id.toString() === item.variant);
 
     const variant = product.variants.find(
       (v) => v._id.toString() === item.variant.toString()
@@ -86,35 +87,44 @@ export const changeOrderStatus = async (orderID: string, status: string) => {
 
 export const getShippingFee = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { toDistrictCode, toWardCode, weight } = req.query;
+    const { toDistrictCode, toWardCode } = req.query;
+    const { lineItems } = req.body;
 
-    if (!toDistrictCode || !toWardCode || !weight) {
+    const weight = await calculateTotalWeight(lineItems);
+
+    if (!toDistrictCode || !toWardCode) {
       return next(new AppError('Missing required parameters', 400));
     }
 
+    const service = await getService(Number(toDistrictCode));
+    if (!service) return next(new AppError('Cannot get service', 400));
+
     const shippingFee = await calculateShippingFee(
+      service.service_id,
       Number(toDistrictCode),
       toWardCode as string,
       Number(weight)
+    );
+
+    if (shippingFee === -1) {
+      return next(new AppError('Address is invalid', 400));
+    }
+
+    const expectedDeliveryDate = await getExpectedDeliveryDate(
+      service.service_id,
+      Number(toDistrictCode),
+      toWardCode as string
     );
 
     res.status(200).json({
       status: 'success',
       data: {
         shippingFee,
+        expectedDeliveryDate,
       },
     });
   }
 );
-
-const calculateTotalPrice = (cart: any) => {
-  let totalPrice = 0;
-  cart.forEach((item: any) => {
-    totalPrice += item.quantity * item.unitPrice;
-  });
-  console.log('Total', totalPrice);
-  return totalPrice;
-};
 
 // Create a new order
 export const createOrder = catchAsync(
@@ -160,7 +170,7 @@ export const createOrder = catchAsync(
         discountId,
       } = await verifyDiscount(discountCode, orderItems, userId);
 
-      const totalWeight = await getTotalWeight(orderProducts);
+      const totalWeight = await calculateTotalWeight(orderProducts);
 
       const shippingAddress = await ShippingAddress.findOne({
         _id: shippingAddressId,
@@ -168,7 +178,11 @@ export const createOrder = catchAsync(
       if (!shippingAddress)
         throw new AppError('No shipping address found', 400);
 
+      const service = await getService(shippingAddress.district.code);
+      if (!service) return next(new AppError('Cannot get service', 400));
+
       const shippingFee = await calculateShippingFee(
+        service.service_id,
         shippingAddress.district.code,
         shippingAddress.ward.code,
         totalWeight
@@ -423,8 +437,6 @@ export const cancelOrder = catchAsync(
         },
       });
     } catch (err) {
-      console.log(err);
-
       await session.abortTransaction(); // Roll back transaction in case of error
       session.endSession();
       return next(new AppError('Error', 400)); // Pass the error to the next middleware
@@ -477,6 +489,29 @@ export const checkUnpaidOrder = catchAsync(
   }
 );
 
+export const getOrderByOrderCode = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const orderCode = req.params.code;
+    const userId = req.user.id;
+
+    const order = await Order.findOne({ orderCode, user: userId })
+      .populate('user')
+      .populate('shippingAddress')
+      .populate('lineItems.product');
+
+    if (!order) {
+      return next(new AppError('No order found with that code', 404));
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        order,
+      },
+    });
+  }
+);
+
 export const addPaymentId = async (
   orderId: string,
   checkout: { paymentId: string; checkoutId: string; amount: number }
@@ -494,7 +529,7 @@ export const addPaymentId = async (
   await order.save();
 };
 
-const getTotalWeight = async (orderItems: any) => {
+const calculateTotalWeight = async (orderItems: any) => {
   let totalWeight = 0;
 
   for (const item of orderItems) {

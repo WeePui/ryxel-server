@@ -10,12 +10,13 @@ import {
   checkUnpaidOrder,
   getShippingFee,
   cancelOrder,
+  getOrderByOrderCode,
 } from '../controllers/orderController';
 import { protect, restrictTo } from '../controllers/authController';
 
 const router = express.Router();
 
-router.route('/shippingFee').get(getShippingFee); // Get shipping fee
+router.route('/shippingFee').post(getShippingFee); // Get shipping fee
 
 router.use(protect);
 
@@ -27,6 +28,7 @@ router
 
 router.route('/checkUnpaidOrder').get(checkUnpaidOrder); // Check if user has unpaid order
 
+router.route('/orderCode/:code').get(getOrderByOrderCode); // Get an order by order code
 router
   .route('/:id')
   .get(getOrderByID) // Get an order by ID

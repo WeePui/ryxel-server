@@ -26,6 +26,11 @@ export const uploadImage = async (imageFile: string): Promise<UploadResult> => {
   }
 };
 
+export const extractPublicId = (secureUrl: string) => {
+  const matches = secureUrl.match(/\/upload\/(?:v\d+\/)?([^/.]+)\./);
+  return matches ? matches[1] : null;
+};
+
 export const deleteImage = async (publicId: string): Promise<DeleteResult> => {
   try {
     const result = await cloudinary.uploader.destroy(publicId);
@@ -35,23 +40,23 @@ export const deleteImage = async (publicId: string): Promise<DeleteResult> => {
   }
 };
 
-export const uploadProductReview = async (buffer: Buffer) => {
+export const uploadProductReview = (
+  buffer: Buffer,
+  mimetype: string
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       {
-        resource_type: 'image',
         folder: 'product-reviews',
-        width: 640,
-        height: 360,
-        quality: 'auto',
+        resource_type: mimetype.startsWith('video') ? 'video' : 'image',
       },
       (error, result) => {
-        if (error) return reject(error);
-        resolve(result);
+        if (error) reject(error);
+        else resolve(result?.secure_url || '');
       }
     );
-    // Write the buffer to the stream
-    stream.end(buffer);
+
+    stream.end(buffer); // Truyền buffer vào stream
   });
 };
 

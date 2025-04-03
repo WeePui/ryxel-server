@@ -40,5 +40,273 @@
     "product": "637c7fa314b63b001c7e9d27",
     "rating": 4,
     "review": "Màu sắc đẹp, hiệu ứng đèn LED rất đẹp mắt!"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a07",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 5,
+    "review": "Bàn phím có độ hoàn thiện cực kỳ tốt, khung nhôm chắc chắn, không bị flex. Switch mặc định đã rất êm, gõ không gây ồn. Kết nối bluetooth ổn định, không bị lag khi chơi game. Pin dùng khoảng 1 tuần mới phải sạc lại. Đèn RGB rất đẹp, nhiều chế độ.",
+    "variant": "637d100014b63b001c7e9d02",
+    "images": [
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898455/product-reviews/34907eeb-75e4-4bc0-8d9f-626cebac003e.png",
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898537/product-reviews/c598fa25-d6a9-414e-8e06-462c8a7cc4eb.png"
+    ],
+    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742898723/product-reviews/noice-meme_wryzdf.mp4"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a08",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 4,
+    "review": "Sản phẩm tốt, đúng với giá tiền. Tôi đặc biệt thích khung nhôm và cảm giác gõ phím rất thích. Keycap PBT Double-shot chống bám vân tay tốt. Pin dùng được khoảng 3-4 ngày với đèn RGB bật. Điểm trừ duy nhất là phần mềm tùy chỉnh hơi khó sử dụng.",
+    "variant": "637d100014b63b001c7e9d03",
+    "images": [
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898892/product-reviews/d929576a-6d14-471d-8e22-a0a40b236b15.png",
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898935/product-reviews/ca5e0918-0e1d-4b60-897d-42242228ddae.png"
+    ],
+    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742898825/product-reviews/homelander-perfect_nf835t.mp4"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a09",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 3,
+    "review": "Bàn phím có thiết kế đẹp, nhưng pin không được như quảng cáo. Tôi phải sạc sau 2 ngày sử dụng liên tục. Đèn RGB tùy chỉnh khá phức tạp nếu không quen với phần mềm. Switch mặc định hơi cứng với người mới sử dụng bàn phím cơ.",
+    "variant": "637d100014b63b001c7e9d02",
+    "images": [
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898990/product-reviews/5e467b0e-405b-4a6f-b2ab-f9353532d41e.png"
+    ]
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a10",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 2,
+    "review": "Sản phẩm không như mong đợi. Sau 2 tháng sử dụng, một số phím đã bị chập chờn. Kết nối bluetooth thỉnh thoảng bị ngắt đột ngột. Phần mềm điều khiển RGB rất khó sử dụng và thường xuyên bị lỗi. Không đáng với mức giá này.",
+    "variant": "637d100014b63b001c7e9d03",
+    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742899139/product-reviews/not-approved_msxjmw.mp4"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a11",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 5,
+    "review": "Tôi là một người đam mê bàn phím và đây là một trong những mẫu tốt nhất tôi từng sở hữu. Tiếng gõ rất thỏa mãn, không quá ồn nhưng đủ tactile. Việc thay switch rất dễ dàng nhờ tính năng hotswap. Đồng bộ RGB với các thiết bị khác trong hệ sinh thái cũng khá tốt.",
+    "variant": "637d100014b63b001c7e9d02"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a12",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 4,
+    "review": "Bàn phím khá ấn tượng với thiết kế chắc chắn, đèn RGB sáng đẹp. Switch mặc định cho cảm giác gõ tốt. Điểm trừ nhỏ là dây cáp hơi cứng và phần phụ kiện không nhiều như các hãng khác.",
+    "variant": "637d100014b63b001c7e9d03"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a13",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 1,
+    "review": "Rất thất vọng! Sau 1 tuần sử dụng, phím Space bị kẹt và phải bấm mạnh mới nhận. Kết nối bluetooth liên tục bị ngắt khi sử dụng với laptop. Pin sụt nhanh hơn mô tả rất nhiều. Đã liên hệ bảo hành nhưng chưa được phản hồi.",
+    "variant": "637d100014b63b001c7e9d02"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a14",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 5,
+    "review": "Tôi đã dùng qua nhiều bàn phím AKKO và đây là mẫu tôi hài lòng nhất. Layout 75% rất hợp lý, vừa nhỏ gọn vừa đầy đủ phím chức năng. Keycap PBT chất lượng cao không bị bóng sau thời gian sử dụng. Pin trâu, dùng 1 tuần với đèn RGB bật mức trung bình.",
+    "variant": "637d100014b63b001c7e9d02"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a15",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 4,
+    "review": "Bàn phím đẹp, chắc chắn nhờ khung nhôm. Phím gõ êm, ít tiếng ồn. Kết nối Bluetooth với nhiều thiết bị cùng lúc rất tiện. Tuy nhiên, phần mềm tùy chỉnh hơi phức tạp và nút chỉnh âm lượng hơi cứng.",
+    "variant": "637d100014b63b001c7e9d03"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a16",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 3,
+    "review": "Bàn phím ở mức tạm được với tầm giá. Layout 75% tiện lợi, nhưng các phím chức năng bên phải hơi khó làm quen. Switch mặc định hơi nhẹ nên dễ bấm nhầm. Tuổi thọ pin khá ổn, sạc đầy dùng được 4-5 ngày.",
+    "variant": "637d100014b63b001c7e9d02"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a17",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 5,
+    "review": "Tuyệt vời! Bàn phím này là sự đầu tư xứng đáng cho công việc và giải trí. Cảm giác gõ phím rất đã, đèn RGB đẹp và có nhiều chế độ tùy chỉnh. Kết nối Bluetooth ổn định ngay cả khi dùng với nhiều thiết bị. Chất lượng build rất cao.",
+    "variant": "637d100014b63b001c7e9d03"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a18",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "637d100014b63b001c7e9d01",
+    "rating": 2,
+    "review": "Không như mong đợi. Một số phím bị rung lắc, khung nhôm không chắc như quảng cáo. Kết nối Bluetooth không ổn định và thường xuyên bị mất kết nối khi sử dụng. Đèn RGB đẹp nhưng điều khiển phức tạp. Không đáng với mức giá này.",
+    "variant": "637d100014b63b001c7e9d02"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a19",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "637c7fff14b63b001c7e9d33",
+    "rating": 4,
+    "review": "Tai nghe tốt, âm thanh rõ ràng, bass mạnh. Nhưng đeo lâu hơi mỏi",
+    "variant": "637c800514b63b001c7e9d34",
+    "images": [
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742900219/product-reviews/16167362-13d2-42e0-a6e8-654b16bcafa0.png"
+    ],
+    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742898723/product-reviews/noice-meme_wryzdf.mp4"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a20",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "637d100014b63b001c7e9d0a",
+    "rating": 2,
+    "review": "Đắt má hú",
+    "variant": "637d100014b63b001c7e9d0b",
+    "images": [
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742900390/product-reviews/02b67652-bf05-4ec0-ac02-4e75af203f6d.png"
+    ],
+    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742899139/product-reviews/not-approved_msxjmw.mp4"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a21",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "637d100014b63b001c7e9d0c",
+    "rating": 5,
+    "review": "Chuột xịn ấy",
+    "variant": "637d100014b63b001c7e9d0d",
+    "images": [
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898455/product-reviews/34907eeb-75e4-4bc0-8d9f-626cebac003e.png"
+    ]
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a22",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "637d100014b63b001c7e9d0c",
+    "rating": 2,
+    "review": "Nặng vãi",
+    "variant": "637d100014b63b001c7e9d0d",
+    "images": [
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742210710/product-reviews/pcrqpgy88q4emohdfnsh.png",
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742900390/product-reviews/02b67652-bf05-4ec0-ac02-4e75af203f6d.png"
+    ]
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a23",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "637d100014b63b001c7e9d0e",
+    "rating": 5,
+    "review": "Chuột xịn ấy",
+    "variant": "637d100014b63b001c7e9d0f",
+    "images": [
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898455/product-reviews/34907eeb-75e4-4bc0-8d9f-626cebac003e.png"
+    ]
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a24",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "637d100014b63b001c7e9d0e",
+    "rating": 2,
+    "review": "Nặng vãi",
+    "variant": "637d100014b63b001c7e9d0f",
+    "images": [
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742210710/product-reviews/pcrqpgy88q4emohdfnsh.png",
+      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742900390/product-reviews/02b67652-bf05-4ec0-ac02-4e75af203f6d.png"
+    ]
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a25",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "637d100014b63b001c7e9d14",
+    "rating": 3,
+    "review": "Chuột hơi thô",
+    "variant": "637d100014b63b001c7e9d15"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a26",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "637d100014b63b001c7e9d14",
+    "rating": 5,
+    "review": "Đúng đồ xịn có khác",
+    "variant": "637d100014b63b001c7e9d15"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a27",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "997d100054b63b001c7e9d05",
+    "rating": 1,
+    "review": "Đừng nên mua, lùa đấy",
+    "variant": "997d100054b63b001c7e9d06"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a28",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "997d100054b63b001c7e9d05",
+    "rating": 5,
+    "review": "Chất",
+    "variant": "997d100054b63b001c7e9d06"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a29",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "637c7eb214b63b001c7e9d1e",
+    "rating": 3,
+    "review": "Đồ tàu mua về xài đỡ thôi",
+    "variant": "637c7eb814b63b001c7e9d1f"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a30",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "637c7eb214b63b001c7e9d1e",
+    "rating": 5,
+    "review": "Đồ tàu chất vậy sao",
+    "variant": "637c7eb814b63b001c7e9d1f"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a31",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "637c7fc214b63b001c7e9d2b",
+    "rating": 5,
+    "review": "Tai nghe tốt",
+    "variant": "637c7fc814b63b001c7e9d2c"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a32",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "637c7fc214b63b001c7e9d2b",
+    "rating": 5,
+    "review": "Hàng tốt nghe thoải mái",
+    "variant": "637c7fc214b63b001c7e9d2c"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a33",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "637c7ff014b63b001c7e9d31",
+    "rating": 5,
+    "review": "Hàng tốt nghe thoải mái",
+    "variant": "637c7fc214b63b001c7e9d2c"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a34",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "637c800e14b63b001c7e9d35",
+    "rating": 1,
+    "review": "",
+    "variant": "637c801414b63b001c7e9d36"
+  },
+  {
+    "_id": "638a1d8f1a4b4b002d9f2a35",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "637d100014b63b001c7e9d10",
+    "rating": 5,
+    "review": "Hàng limited xịn xò",
+    "variant": "637d100014b63b001c7e9d11"
   }
 ]

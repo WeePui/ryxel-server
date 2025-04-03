@@ -1,6 +1,7 @@
 import mongoose, { Document, Query, Schema } from 'mongoose';
 import './categoryModel';
 import slugify from 'slugify';
+import Category from './categoryModel';
 
 interface IVariant extends Document {
   _id: mongoose.Schema.Types.ObjectId;
@@ -74,6 +75,7 @@ interface IProduct extends Document {
   rating?: number;
   ratingsQuantity?: number;
   slug: string;
+  _categoryName: string;
 }
 
 const productSchema = new mongoose.Schema(
@@ -126,6 +128,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
+    _categoryName: {
+      type: String,
+      trim: true,
+    },
   },
   { timestamps: true }
 );
@@ -137,6 +143,33 @@ productSchema.index({ category: 1 });
 productSchema.index({ brand: 1 });
 productSchema.index({ category: 1, lowestPrice: 1 });
 productSchema.index({ name: 'text', brand: 'text', description: 'text' });
+productSchema.index({ slug: 1 });
+
+productSchema.virtual('totalStock').get(function (this: IProduct) {
+  return this.variants.reduce((total, variant) => total + variant.stock, 0);
+});
+
+productSchema.statics.getPriceRange = async function (categoryId) {
+  return this.aggregate([
+    { $match: { category: categoryId } },
+    {
+      $group: {
+        _id: null,
+        minPrice: { $min: '$lowestPrice' },
+        maxPrice: { $max: '$lowestPrice' },
+      },
+    },
+  ]);
+};
+
+variantsSchema.pre('save', async function (next) {
+  const existing = await mongoose.models.Variant.findOne({ sku: this.sku });
+  if (existing) {
+    next(new Error('SKU must be unique'));
+  } else {
+    next();
+  }
+});
 
 // Pre-save middleware to create a slug
 productSchema.pre<IProduct>('save', async function (next) {
@@ -152,6 +185,47 @@ productSchema.pre<IProduct>('save', async function (next) {
   next();
 });
 
+// Hiện tại slug chỉ được tạo khi tạo mới, không update khi name thay đổi
+productSchema.pre<IProduct>('save', async function (next) {
+  // Nên kiểm tra nếu name thay đổi thì mới tạo slug mới
+  if (this.isModified('name')) {
+    let slug = slugify(this.name, { lower: true, strict: true });
+    let count = 1;
+
+    const originalSlug = slug;
+    while (await Product.findOne({ slug })) {
+      slug = `${originalSlug}-${count++}`;
+    }
+    this.slug = slug;
+  }
+
+  next();
+});
+
+// Pre-save middleware to update category name in all products
+// when the category is modified or a new product is created
+productSchema.pre<IProduct>('save', async function (next) {
+  if (this.isModified('category') || this.isNew) {
+    // Update tất cả Product liên quan khi Category thay đổi
+    try {
+      const category = await Category.findById(this.category);
+      if (!category) {
+        return next(new Error('Category not found ' + this.category));
+      }
+
+      this._categoryName = category.name;
+
+      await Product.updateMany(
+        { category: this.category },
+        { _categoryName: this._categoryName }
+      );
+    } catch (err) {
+      return next(err as mongoose.CallbackError);
+    }
+  }
+  next();
+});
+
 // Pre-save middleware to calculate the lowest price
 productSchema.pre<IProduct>('save', function (next) {
   if (this.variants && this.variants.length > 0) {
@@ -161,6 +235,22 @@ productSchema.pre<IProduct>('save', function (next) {
     this.sold = this.variants.reduce((acc, variant) => acc + variant.sold!, 0);
   }
 
+  next();
+});
+
+productSchema.pre<IProduct>('save', async function (next) {
+  if (this.isModified('category') || this.isNew) {
+    try {
+      const category = await Category.findById(this.category);
+      if (!category) {
+        return next(new Error('Category not found ' + this.category)); // Handle missing category gracefully
+      }
+
+      this._categoryName = category.name; // Assign category name
+    } catch (err) {
+      return next(err as mongoose.CallbackError);
+    }
+  }
   next();
 });
 

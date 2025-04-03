@@ -17,27 +17,13 @@ export const aliasTopProducts = (
 
 export const getAllProducts = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { category } = req.query;
-
-    if (category) {
-      const categoryDoc = await Category.findOne({ name: category });
-      if (!categoryDoc) {
-        return next(new AppError('No category found with that name', 404));
-      }
-    }
-
-    const apiFeatures = new APIFeatures(Product.find(), req.query);
-    await apiFeatures.filter();
-
-    const searchResults = await apiFeatures.search();
-
-    if (searchResults.query) {
-      apiFeatures.query = searchResults.query;
-    }
+    let apiFeatures = new APIFeatures(Product.find(), req.query);
+    apiFeatures = await apiFeatures.search();
 
     const totalResults = await apiFeatures.count();
 
-    apiFeatures.sort().limitFields().pagination();
+    const resultsPerPage = Number(req.query.limit) || 10;
+    apiFeatures.filter().sort().limitFields().paginate();
 
     const products = await apiFeatures.query.lean().exec();
 
@@ -45,9 +31,103 @@ export const getAllProducts = catchAsync(
       status: 'success',
       results: products.length,
       totalResults,
+      resultsPerPage,
       data: {
         products,
       },
+    });
+  }
+);
+
+export const getFilterData = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let apiFeatures = new APIFeatures(Product.find(), req.query);
+    apiFeatures = await apiFeatures.search();
+    apiFeatures.filter();
+
+    const allFilteredProducts = await apiFeatures.query
+      .select('brand lowestPrice variants.specifications')
+      .lean()
+      .exec();
+
+    if (allFilteredProducts.length === 0) {
+      return res.status(200).json({
+        status: 'success',
+        data: { brands: [], minPrice: 0, maxPrice: 0, specs: {} },
+      });
+    }
+
+    // Xử lý brand với count
+    const brandCounts = allFilteredProducts.reduce(
+      (acc, product) => {
+        if (!('brand' in product)) return acc;
+
+        acc[product.brand as string] = (acc[product.brand as string] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+
+    const brands = Object.entries(brandCounts).map(([value, count]) => ({
+      value,
+      count,
+    }));
+
+    // Xử lý giá
+    const prices = allFilteredProducts.map((p) => {
+      if ('lowestPrice' in p) return p.lowestPrice;
+      return 0;
+    }) as number[];
+    const minPrice = Math.min(...prices);
+    const maxPrice = Math.max(...prices);
+
+    // Xử lý specs với count (theo product)
+    const specsWithCounts = allFilteredProducts.reduce(
+      (acc, product) => {
+        const productSpecs = new Map<string, Set<string>>();
+        if (!('variants' in product)) return acc;
+        if (!product.variants) return acc;
+
+        // Gom nhóm specs unique theo product
+        (product.variants as Array<any>).forEach((variant) => {
+          const specs = variant.specifications || {};
+          for (const [key, value] of Object.entries(specs)) {
+            if (key === 'weight' || !value) continue;
+
+            if (!productSpecs.has(key)) {
+              productSpecs.set(key, new Set());
+            }
+            productSpecs.get(key)?.add(value as string);
+          }
+        });
+
+        // Thêm count cho từng spec
+        productSpecs.forEach((values, key) => {
+          if (!acc[key]) acc[key] = {};
+          values.forEach((value) => {
+            acc[key][value] = (acc[key][value] || 0) + 1;
+          });
+        });
+
+        return acc;
+      },
+      {} as Record<string, Record<string, number>>
+    );
+
+    // Định dạng đầu ra
+    const specs = Object.fromEntries(
+      Object.entries(specsWithCounts).map(([key, valueCounts]) => [
+        key,
+        Object.entries(valueCounts).map(([value, count]) => ({
+          value,
+          count,
+        })),
+      ])
+    );
+
+    res.status(200).json({
+      status: 'success',
+      data: { brands, minPrice, maxPrice, specs },
     });
   }
 );

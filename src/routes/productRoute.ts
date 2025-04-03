@@ -20,6 +20,8 @@ router
     productController.createProduct
   );
 
+router.route('/filters').get(productController.getFilterData);
+
 router
   .route('/:id')
   .get(productController.getProductById)

@@ -13,6 +13,6 @@ router.route('/').get(wishlistController.getWishlist);
 router
   .route('/:productId')
   .post(wishlistController.addToWishlist)
-  .delete(wishlistController.removeFromWishlist);
+  .patch(wishlistController.removeFromWishlist);
 
 export default router;

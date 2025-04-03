@@ -1,11 +1,16 @@
 import mongoose, { Document, Query, Schema } from 'mongoose';
 import Product from './productModel';
+import Order from './orderModel';
 
 interface IReview extends Document {
   review: string;
   rating: number;
   product: mongoose.Schema.Types.ObjectId;
   user: mongoose.Schema.Types.ObjectId;
+  variant: mongoose.Schema.Types.ObjectId;
+  order?: mongoose.Schema.Types.ObjectId;
+  images?: string[];
+  video?: string;
 }
 
 interface IReviewModel extends mongoose.Model<IReview> {
@@ -20,8 +25,8 @@ const reviewSchema = new Schema<IReview>(
   {
     review: {
       type: String,
-      required: [true, 'Review cannot be empty!'],
       trim: true,
+      default: '',
     },
     rating: {
       type: Number,
@@ -34,11 +39,21 @@ const reviewSchema = new Schema<IReview>(
       ref: 'Product',
       required: [true, 'Review must belong to a product!'],
     },
+    variant: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Product.variants',
+    },
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: [true, 'Review must belong to a user!'],
     },
+    order: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Order',
+    },
+    images: [String],
+    video: String,
   },
   {
     toJSON: { virtuals: true },
@@ -46,8 +61,6 @@ const reviewSchema = new Schema<IReview>(
     timestamps: true,
   }
 );
-
-reviewSchema.index({ product: 1, user: 1 }, { unique: true });
 
 reviewSchema.pre<Query<IReview, IReview>>(/^find/, function (next) {
   this.populate({
@@ -87,8 +100,25 @@ reviewSchema.statics.calcAverageRatings = async function (
   }
 };
 
-reviewSchema.post('save', function (doc) {
+reviewSchema.post('save', async function (doc) {
   (doc.constructor as IReviewModel).calcAverageRatings(this.product);
+
+  const order = await Order.findOne({
+    user: this.user,
+    _id: this.order,
+  });
+
+  if (order) {
+    order.reviewCount += 1;
+
+    order.lineItems.forEach((item) => {
+      if (item.product.toString() === this.product.toString()) {
+        item.review = doc._id as mongoose.Types.ObjectId;
+      }
+    });
+
+    await order.save();
+  }
 });
 
 reviewSchema.pre<IReviewQuery>(/^findOneAnd/, async function (next) {
@@ -100,6 +130,23 @@ reviewSchema.post(/^findOneAnd/, async function (doc) {
   if (!doc) return;
 
   await doc.constructor.calcAverageRatings(doc.product);
+
+  const order = await Order.findOne({
+    user: doc.user,
+    _id: doc.order,
+  });
+
+  if (order) {
+    order.reviewCount += 1;
+
+    order.lineItems.forEach((item) => {
+      if (item.product.toString() === doc.product.toString()) {
+        item.review = doc._id as mongoose.Types.ObjectId;
+      }
+    });
+
+    await order.save();
+  }
 });
 
 const Review = mongoose.model('Review', reviewSchema);

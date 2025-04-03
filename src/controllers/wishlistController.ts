@@ -7,7 +7,9 @@ import Product from '../models/productModel';
 
 export const getWishlist: RequestHandler = catchAsync(
   async (req, res, next) => {
-    let wishlist = await Wishlist.findOne({ user: req.user.id });
+    let wishlist = await Wishlist.findOne({ user: req.user.id }).populate(
+      'products'
+    );
 
     if (!wishlist) {
       wishlist = await Wishlist.create({ user: req.user.id, products: [] });
@@ -49,7 +51,7 @@ export const addToWishlist: RequestHandler = catchAsync(
     res.status(200).json({
       status: 'success',
       data: {
-        wishlist,
+        wishlist: await wishlist.populate('products'),
       },
     });
   }
@@ -80,7 +82,7 @@ export const removeFromWishlist: RequestHandler = catchAsync(
     res.status(200).json({
       status: 'success',
       data: {
-        wishlist,
+        wishlist: await wishlist.populate('products'),
       },
     });
   }

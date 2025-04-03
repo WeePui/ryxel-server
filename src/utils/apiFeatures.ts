@@ -47,6 +47,12 @@ class APIFeatures {
                   },
                 },
                 {
+                  autocomplete: {
+                    query: this.queryString.search,
+                    path: '_categoryName',
+                  },
+                },
+                {
                   embeddedDocument: {
                     operator: {
                       compound: {
@@ -84,9 +90,9 @@ class APIFeatures {
     return this;
   }
 
-  async filter() {
+  filter() {
     const queryObj = { ...this.queryString };
-    const excludedFields = ['page', 'sort', 'limit', 'fields'];
+    const excludedFields = ['page', 'sort', 'limit', 'fields', 'search'];
     excludedFields.forEach((el) => delete queryObj[el]);
 
     // Filtering
@@ -96,13 +102,25 @@ class APIFeatures {
     }
 
     if (queryObj.category) {
-      const categoryName = queryObj.category;
-      const category = await Category.findOne({ name: categoryName });
-      if (category) {
-        queryObj.category = category._id;
-      } else {
-        delete queryObj.category;
+      queryObj._categoryName = queryObj.category;
+      delete queryObj.category;
+    }
+
+    // Filtering by specifications
+    if (queryObj.specs) {
+      const specFilters = JSON.parse(queryObj.specs); // Chuyển từ string thành object
+      console.log(specFilters);
+      const specQuery = Object.entries(specFilters).map(([key, value]) => {
+        if (Array.isArray(value)) {
+          return { [`variants.specifications.${key}`]: { $in: value } }; // Nếu có nhiều giá trị, dùng $in
+        }
+        return { [`variants.specifications.${key}`]: value }; // Nếu chỉ có một giá trị, lọc như cũ
+      });
+
+      if (specQuery.length > 0) {
+        queryObj.$and = specQuery;
       }
+      delete queryObj.specs;
     }
 
     const queryStr = JSON.stringify(queryObj).replace(
@@ -111,6 +129,7 @@ class APIFeatures {
     );
 
     this.query = this.query.find(JSON.parse(queryStr));
+    console.log(queryStr);
     return this;
   }
 
@@ -134,10 +153,10 @@ class APIFeatures {
     return this;
   }
 
-  pagination() {
+  paginate(resPerPage = 10) {
     // Pagination
     const page = Number(this.queryString.page) || 1;
-    const limit = Number(this.queryString.limit) || 10;
+    const limit = resPerPage;
     const skip = (page - 1) * limit;
     this.query = this.query.skip(skip).limit(limit);
     return this;

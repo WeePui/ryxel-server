@@ -169,6 +169,72 @@ export const deleteCartItem = catchAsync(
   }
 );
 
+export const addMultipleItemsToCart = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user.id;
+    const { items } = req.body;
+
+    let cart = await Cart.findOne({ user });
+    if (!cart)
+      cart = await Cart.create({
+        user: user,
+      });
+
+    for (const item of items) {
+      const productId = item.productId;
+      const variantId = item.variantId;
+      const quantity = item.quantity;
+
+      const product = await Product.findById(productId);
+      if (!product) {
+        return next(new AppError('Product does not exist', 404));
+      }
+
+      const variant = product.variants.find(
+        (v) => v._id.toString() === variantId
+      );
+      if (!variant) {
+        return next(new AppError('No variant found with that ID', 404));
+      }
+
+      const cartItem = cart.lineItems.find(
+        (p) =>
+          p.product.toString() === productId.toString() &&
+          p.variant.toString() === variantId.toString()
+      );
+
+      if (!cartItem) {
+        if (quantity !== 0) {
+          cart.lineItems.push({
+            product: new mongoose.Types.ObjectId(productId),
+            variant: new mongoose.Types.ObjectId(variantId),
+            quantity,
+          });
+        }
+      } else {
+        if (quantity === 0) {
+          cart.lineItems = cart.lineItems.filter(
+            (p) =>
+              p.product.toString() !== productId.toString() ||
+              p.variant.toString() !== variantId.toString()
+          );
+        } else {
+          cartItem.quantity = quantity;
+        }
+      }
+    }
+
+    await cart.save();
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        cart,
+      },
+    });
+  }
+);
+
 export const clearCart = async (userId: string) => {
   const cart = await Cart.findOne({ user: userId });
   if (!cart) return;

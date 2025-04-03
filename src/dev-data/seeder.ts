@@ -44,12 +44,11 @@ mongoose.connect(connectionString);
 
 async function importData(): Promise<void> {
   try {
+    await Category.create(categories);
     await Product.create(products);
-
     await Promise.all([
       User.create(users),
       ShippingAddress.create(shippingAddresses),
-      Category.create(categories),
       Discount.create(discounts),
     ]);
 

@@ -38,8 +38,6 @@
     ],
     "shippingFee": 21001,
     "discount": "67d7edf7acd659b561c8425d",
-    "discountAmount": 200000,
-    "createdAt": "2025-03-19T17:05:06.508Z",
-    "updatedAt": "2025-03-19T17:05:06.508Z"
+    "discountAmount": 200000
   }
 ]

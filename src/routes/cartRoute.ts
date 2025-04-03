@@ -12,11 +12,14 @@ router
   .post(cartController.createCart) // Add items to the cart
   .delete(cartController.deleteCart); // Delete the entire cart
 
-router.route('/items').delete(cartController.deleteAllCartItems); // Remove all items from the cart
+router
+  .route('/items')
+  .post(cartController.addMultipleItemsToCart)
+  .delete(cartController.deleteAllCartItems); // Remove all items from the cart
 
 router
   .route('/items/:productID/:variantID')
   .patch(cartController.addOrUpdateCartItem) // Update a specific cart item
   .delete(cartController.deleteCartItem); // Remove a specific cart item
 
-export default router
+export default router;
