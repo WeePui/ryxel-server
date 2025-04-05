@@ -72,7 +72,8 @@ reviewSchema.pre<Query<IReview, IReview>>(/^find/, function (next) {
 });
 
 reviewSchema.statics.calcAverageRatings = async function (
-  productId: mongoose.Types.ObjectId
+  productId: mongoose.Types.ObjectId,
+  session?: mongoose.ClientSession
 ) {
   const stats = await this.aggregate([
     {
@@ -93,10 +94,14 @@ reviewSchema.statics.calcAverageRatings = async function (
       rating: stats[0].avgRating,
     });
   } else {
-    await Product.findByIdAndUpdate(productId, {
-      ratingsQuantity: 0,
-      rating: 0,
-    });
+    await Product.findByIdAndUpdate(
+      productId,
+      {
+        ratingsQuantity: 0,
+        rating: 0,
+      },
+      { session }
+    );
   }
 };
 
@@ -149,6 +154,6 @@ reviewSchema.post(/^findOneAnd/, async function (doc) {
   }
 });
 
-const Review = mongoose.model('Review', reviewSchema);
+const Review = mongoose.model<IReview, IReviewModel>('Review', reviewSchema);
 
 export default Review;
