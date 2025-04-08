@@ -162,15 +162,6 @@ productSchema.statics.getPriceRange = async function (categoryId) {
   ]);
 };
 
-variantsSchema.pre('save', async function (next) {
-  const existing = await mongoose.models.Variant.findOne({ sku: this.sku });
-  if (existing) {
-    next(new Error('SKU must be unique'));
-  } else {
-    next();
-  }
-});
-
 // Pre-save middleware to create a slug
 productSchema.pre<IProduct>('save', async function (next) {
   let slug = slugify(this.name, { lower: true, strict: true });

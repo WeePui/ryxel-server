@@ -220,6 +220,9 @@ export const createOrder = catchAsync(
     } catch (err) {
       await session.abortTransaction(); // Roll back transaction in case of error
       session.endSession();
+
+      console.log('Error creating order:', err);
+
       return next(
         new AppError(`Cannot process the order: ${(err as Error).message}`, 400)
       );

@@ -32,6 +32,18 @@ export const verifyDiscount = async (
   lineItems: any,
   userId: string
 ) => {
+  console.log('Discount code:', discountCode);
+
+  if (!discountCode) {
+    return {
+      isValid: false,
+      discountAmount: 0,
+      discountId: null,
+    };
+  }
+
+  console.log('hello');
+
   const discount = await Discount.findOne({
     code: discountCode.toUpperCase(),
   });
