@@ -1,6 +1,7 @@
-import { Query } from 'mongoose';
+import { Model, Query } from 'mongoose';
 import Category from '../models/categoryModel';
 import Product from '../models/productModel';
+import Order from '../models/orderModel';
 
 interface QueryString {
   search?: string;
@@ -22,70 +23,114 @@ class APIFeatures {
 
   async search() {
     if (this.queryString.search) {
-      const results = await Product.aggregate([
-        {
-          $search: {
-            index: 'products',
-            compound: {
-              should: [
-                {
-                  autocomplete: {
-                    query: this.queryString.search,
-                    path: 'name',
-                  },
-                },
-                {
-                  autocomplete: {
-                    query: this.queryString.search,
-                    path: 'description',
-                  },
-                },
-                {
-                  autocomplete: {
-                    query: this.queryString.search,
-                    path: 'brand',
-                  },
-                },
-                {
-                  autocomplete: {
-                    query: this.queryString.search,
-                    path: '_categoryName',
-                  },
-                },
-                {
-                  embeddedDocument: {
-                    operator: {
-                      compound: {
-                        should: [
-                          {
-                            autocomplete: {
-                              query: this.queryString.search,
-                              path: 'variants.name',
-                            },
-                          },
-                          {
-                            autocomplete: {
-                              query: this.queryString.search,
-                              path: 'variants.specifications',
-                            },
-                          },
-                        ],
+      if (this.query.model === Product || this.query.model === Order) {
+        let results = [];
+
+        if (this.query.model === Product) {
+          results = await this.query.model.aggregate([
+            {
+              $search: {
+                index: 'products',
+                compound: {
+                  should: [
+                    {
+                      autocomplete: {
+                        query: this.queryString.search,
+                        path: 'name',
                       },
                     },
-                    path: 'variants',
-                  },
+                    {
+                      autocomplete: {
+                        query: this.queryString.search,
+                        path: 'description',
+                      },
+                    },
+                    {
+                      autocomplete: {
+                        query: this.queryString.search,
+                        path: 'brand',
+                      },
+                    },
+                    {
+                      autocomplete: {
+                        query: this.queryString.search,
+                        path: '_categoryName',
+                      },
+                    },
+                    {
+                      embeddedDocument: {
+                        operator: {
+                          compound: {
+                            should: [
+                              {
+                                autocomplete: {
+                                  query: this.queryString.search,
+                                  path: 'variants.name',
+                                },
+                              },
+                              {
+                                autocomplete: {
+                                  query: this.queryString.search,
+                                  path: 'variants.specifications',
+                                },
+                              },
+                            ],
+                          },
+                        },
+                        path: 'variants',
+                      },
+                    },
+                  ],
                 },
-              ],
+              },
             },
-          },
-        },
-        { $addFields: { score: { $meta: 'searchScore' } } },
-        { $sort: { score: -1 } },
-      ]);
-
-      this.query = Product.find({
-        _id: { $in: results.map((result) => result._id) },
-      });
+            { $addFields: { score: { $meta: 'searchScore' } } },
+            { $sort: { score: -1 } },
+          ]);
+        } else if (this.query.model === Order) {
+          results = await this.query.model.aggregate([
+            {
+              $search: {
+                index: 'order',
+                compound: {
+                  should: [
+                    {
+                      text: {
+                        query: this.queryString.search,
+                        path: 'orderCode',
+                      },
+                    },
+                    {
+                      text: {
+                        query: this.queryString.search,
+                        path: 'status',
+                      },
+                    },
+                    {
+                      autocomplete: {
+                        query: this.queryString.search,
+                        path: 'lineItems._itemName',
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+            { $addFields: { score: { $meta: 'searchScore' } } },
+            { $sort: { score: -1 } },
+          ]);
+        }
+        this.query = this.query.find({
+          _id: { $in: results.map((result) => result._id) },
+        });
+      } else {
+        this.query = this.query.find({
+          $or: [
+            { name: { $regex: this.queryString.search, $options: 'i' } },
+            { description: { $regex: this.queryString.search, $options: 'i' } },
+          ],
+        });
+      }
     }
     return this;
   }
@@ -153,10 +198,10 @@ class APIFeatures {
     return this;
   }
 
-  paginate(resPerPage = 10) {
+  paginate() {
     // Pagination
     const page = Number(this.queryString.page) || 1;
-    const limit = resPerPage;
+    const limit = Number(this.queryString.limit) || 10;
     const skip = (page - 1) * limit;
     this.query = this.query.skip(skip).limit(limit);
     return this;

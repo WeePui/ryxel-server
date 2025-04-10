@@ -3,7 +3,6 @@ import Product from '../models/productModel';
 import APIFeatures from '../utils/apiFeatures';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
-import Category from '../models/categoryModel';
 
 export const aliasTopProducts = (
   req: Request,
@@ -20,19 +19,20 @@ export const getAllProducts = catchAsync(
     let apiFeatures = new APIFeatures(Product.find(), req.query);
     apiFeatures = await apiFeatures.search();
 
-    const totalResults = await apiFeatures.count();
+    const totalProducts = await apiFeatures.count();
 
     const resultsPerPage = Number(req.query.limit) || 10;
     apiFeatures.filter().sort().limitFields().paginate();
 
     const products = await apiFeatures.query.lean().exec();
+    const results = await apiFeatures.count();
 
     res.status(200).json({
       status: 'success',
-      results: products.length,
-      totalResults,
-      resultsPerPage,
       data: {
+        results,
+        totalProducts,
+        resultsPerPage,
         products,
       },
     });

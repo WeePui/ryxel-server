@@ -12,6 +12,7 @@ import {
 } from '../utils/shippingFeeService';
 import { refundStripePayment, refundZaloPayPayment } from './paymentController';
 import { verifyDiscount } from './discountController';
+import APIFeatures from '../utils/apiFeatures';
 
 const reduceStock = async (
   orderItems: any,
@@ -321,8 +322,11 @@ export const getAllOrders = catchAsync(
       }
     }
 
-    const orders = await Order.find(query)
-      .populate('User')
+    let apiFeatures = new APIFeatures(Order.find(), req.query);
+    apiFeatures = await apiFeatures.search();
+
+    const orders = await apiFeatures.query
+      .populate('user')
       .populate('shippingAddress')
       .populate('lineItems.product');
 
@@ -358,7 +362,10 @@ export const getUserOrders = catchAsync(
       }
     }
 
-    const orders = await Order.find(query)
+    let apiFeatures = new APIFeatures(Order.find({ user }), req.query);
+    apiFeatures = await apiFeatures.search();
+
+    const orders = await apiFeatures.query
       .populate('user')
       .populate('shippingAddress')
       .populate('lineItems.product');
@@ -374,13 +381,20 @@ export const getUserOrders = catchAsync(
 
 export const getAdminOrders = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const orders = await Order.find()
+    let apiFeatures = new APIFeatures(Order.find(), req.query);
+    apiFeatures = await apiFeatures.search();
+
+    const totalResults = await apiFeatures.count();
+
+    const orders = await apiFeatures.query
       .populate('user')
       .populate('shippingAddress')
       .populate('lineItems.product');
+
     res.status(200).json({
       status: 'success',
       data: {
+        totalResults,
         orders,
       },
     });
