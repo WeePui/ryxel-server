@@ -158,11 +158,13 @@ orderSchema.pre<IOrder>('find', async function (next) {
 
 orderSchema.pre<IOrder>('save', async function (next) {
   // Generate an order code
-  const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
-  const userSuffix = this.user.toString().slice(-4).toUpperCase();
-  const randomNumber = Math.floor(10 + Math.random() * 90);
+  if (!this.orderCode) {
+    const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
+    const userSuffix = this.user.toString().slice(-4).toUpperCase();
+    const randomNumber = Math.floor(10 + Math.random() * 90);
 
-  this.orderCode = `ORD-${today}-${userSuffix}-${randomNumber}`;
+    this.orderCode = `ORD-${today}-${userSuffix}-${randomNumber}`;
+  }
   next();
 });
 

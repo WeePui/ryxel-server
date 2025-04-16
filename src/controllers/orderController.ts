@@ -409,23 +409,29 @@ export const cancelOrder = catchAsync(
       return next(new AppError('No order found with that ID', 404));
     }
 
+    if (order.status !== 'unpaid' && order.status !== 'pending') {
+      return next(new AppError('Order cannot be cancelled', 400));
+    }
+
     const session = await mongoose.startSession(); // Start a session
     session.startTransaction(); // Start a transaction
 
     try {
-      // Check if the order was placed more than 30 minutes ago
-      const currentTime = new Date();
-      const orderTime = new Date(order.createdAt);
-      const timeDifference =
-        (currentTime.getTime() - orderTime.getTime()) / (1000 * 60); // Time difference in minutes
+      if (order.status !== 'unpaid') {
+        // Check if the order was placed more than 30 minutes ago
+        const currentTime = new Date();
+        const orderTime = new Date(order.createdAt);
+        const timeDifference =
+          (currentTime.getTime() - orderTime.getTime()) / (1000 * 60); // Time difference in minutes
 
-      if (timeDifference > 30) {
-        return next(
-          new AppError(
-            'Order cannot be cancelled after 30 minutes from the order time',
-            400
-          )
-        );
+        if (timeDifference > 30) {
+          return next(
+            new AppError(
+              'Order cannot be cancelled after 30 minutes from the order time',
+              400
+            )
+          );
+        }
       }
 
       if (order.paymentMethod === 'stripe' && order.status !== 'unpaid')

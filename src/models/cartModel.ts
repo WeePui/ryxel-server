@@ -11,6 +11,10 @@ interface ICart extends Document {
   user: Types.ObjectId;
   lineItems: ICartProduct[];
   subtotal: number;
+  removeCartItem: (
+    productId: Types.ObjectId,
+    variantId: Types.ObjectId
+  ) => Promise<void>;
 }
 
 const cartSchema = new Schema<ICart>({
@@ -40,6 +44,22 @@ const cartSchema = new Schema<ICart>({
     default: 0,
   },
 });
+
+cartSchema.methods.removeCartItem = async function (
+  productId: Types.ObjectId,
+  variantId: Types.ObjectId
+) {
+  const itemIndex = this.lineItems.findIndex(
+    (item: ICartProduct) =>
+      item.product.toString() === productId.toString() &&
+      item.variant.toString() === variantId.toString()
+  );
+
+  if (itemIndex > -1) {
+    this.lineItems.splice(itemIndex, 1);
+    await this.save();
+  }
+};
 
 cartSchema.pre<ICart>('save', async function (next) {
   await this.populate('lineItems.product'); // Populate the variant field

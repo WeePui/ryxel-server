@@ -7,8 +7,8 @@ import moment from 'moment';
 import CryptoJS from 'crypto-js';
 import axios from 'axios';
 import { addPaymentId, changeOrderStatus } from './orderController';
-import { clearCart } from './cartController';
-import { checkout } from './checkoutController';
+import Cart from '../models/cartModel';
+import Order from '../models/orderModel';
 
 const stripeClient = new stripe(process.env.STRIPE_SECRET_KEY as string, {
   typescript: true,
@@ -25,6 +25,10 @@ const zalopayConfig = {
 export const createStripeCheckoutSession = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { _id: orderId, lineItems } = req.body;
+    const order = await Order.findById(orderId);
+    if (!order) {
+      return next(new AppError('Order not found', 404));
+    }
 
     if (!lineItems) {
       return next(new AppError('No line items provided', 400));
@@ -39,9 +43,7 @@ export const createStripeCheckoutSession = catchAsync(
             currency: 'vnd',
             product_data: {
               name: item.variant.name,
-              images: [
-                'https://images.unsplash.com/photo-1721332153370-56d7cc352d63?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-              ],
+              images: [item.variant.images[0]],
             },
             unit_amount: item.variant.price,
           },
@@ -53,10 +55,19 @@ export const createStripeCheckoutSession = catchAsync(
         client_reference_id: req.user.id,
         metadata: {
           order_id: orderId,
+          lineItems: JSON.stringify(
+            lineItems.map((item: any) => {
+              return {
+                product: item.product,
+                variant: item.variant,
+                quantity: item.quantity,
+              };
+            })
+          ),
         },
         line_items: stripeLineItems,
         mode: 'payment',
-        success_url: `http://localhost:3000/account/orders/${orderId}`,
+        success_url: `http://localhost:3000/account/orders/${order.orderCode}`,
       });
 
       res.status(200).json({
@@ -72,6 +83,10 @@ export const createStripeCheckoutSession = catchAsync(
 export const createZaloPayCheckoutSession = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { _id: orderId, lineItems } = req.body;
+    const order = await Order.findById(orderId);
+    if (!order) {
+      return next(new AppError('Order not found', 404));
+    }
 
     if (!lineItems) {
       return next(new AppError('No line items provided', 400));
@@ -90,13 +105,14 @@ export const createZaloPayCheckoutSession = catchAsync(
       });
 
       const embed_data = {
-        redirecturl: `http://localhost:3000/account/orders/${orderId}`,
+        redirecturl: `http://localhost:3000/account/orders/${order.orderCode}`,
         orderId,
         userId: req.user.id,
       };
+
       const transId = Math.floor(Date.now() / 1000); // TODO: replace with your unique transaction ID
 
-      const order = {
+      const orderData = {
         app_id: zalopayConfig.app_id,
         app_trans_id: `${moment().format('YYMMDD')}_${transId}`,
         app_user: req.user.email,
@@ -111,27 +127,27 @@ export const createZaloPayCheckoutSession = catchAsync(
         embed_data: JSON.stringify(embed_data),
         mac: '',
         callback_url:
-          'https://58be-2402-800-63a8-d7c1-3c85-706-a384-bd56.ngrok-free.app/api/v1/payments/zalopay/callback',
+          'https://845f-2402-800-62a7-df66-c0b9-9fa3-cf23-6293.ngrok-free.app/api/v1/payments/zalopay/callback',
       };
 
       const data =
         zalopayConfig.app_id +
         '|' +
-        order.app_trans_id +
+        orderData.app_trans_id +
         '|' +
-        order.app_user +
+        orderData.app_user +
         '|' +
-        order.amount +
+        orderData.amount +
         '|' +
-        order.app_time +
+        orderData.app_time +
         '|' +
-        order.embed_data +
+        orderData.embed_data +
         '|' +
-        order.item;
-      order.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();
+        orderData.item;
+      orderData.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();
 
       axios
-        .post(zalopayConfig.endpoint, null, { params: order })
+        .post(zalopayConfig.endpoint, null, { params: orderData })
         .then((response) => {
           if (response.data.return_code !== 1) {
             return next(new AppError(response.data.return_message, 400));
@@ -167,13 +183,25 @@ export const zalopayCallback = catchAsync(
         amount: data.amount,
       });
       await changeOrderStatus(orderId, 'pending');
-      await clearCart(userId);
-    }
 
-    res.status(200).json({
-      status: 'success',
-      message: 'Payment successful',
-    });
+      const cart = await Cart.findOne({ user: userId });
+      const order = await Order.findById(orderId);
+
+      if (!order) {
+        return next(new AppError('Order not found', 404));
+      }
+
+      if (cart?.lineItems && cart.lineItems.length > 0) {
+        for (const item of order?.lineItems) {
+          await cart.removeCartItem(item.product, item.variant);
+        }
+      }
+
+      res.status(200).json({
+        status: 'success',
+        message: 'Payment successful',
+      });
+    }
   }
 );
 
@@ -203,7 +231,20 @@ export const fulfillCheckout = async (sessionId: string) => {
       amount: checkoutSession.amount_total!,
     });
     await changeOrderStatus(checkoutSession!.metadata!.order_id, 'pending');
-    await clearCart(checkoutSession.client_reference_id as string);
+    const cart = await Cart.findOne({
+      user: checkoutSession!.client_reference_id,
+    });
+    const order = await Order.findById(checkoutSession!.metadata!.order_id);
+
+    if (!order) {
+      throw new AppError('Order not found', 404);
+    }
+
+    if (cart?.lineItems && cart.lineItems.length > 0) {
+      for (const item of order?.lineItems) {
+        await cart.removeCartItem(item.product, item.variant);
+      }
+    }
     // TODO: Record/save fulfillment status for this
     // Checkout Session
   }
