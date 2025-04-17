@@ -14,7 +14,10 @@ interface IReview extends Document {
 }
 
 interface IReviewModel extends mongoose.Model<IReview> {
-  calcAverageRatings(productId: mongoose.Schema.Types.ObjectId): Promise<void>;
+  calcAverageRatings(
+    productId: mongoose.Schema.Types.ObjectId,
+    session?: mongoose.ClientSession
+  ): Promise<void>;
 }
 
 interface IReviewQuery extends Query<IReview, IReview> {
@@ -75,33 +78,67 @@ reviewSchema.statics.calcAverageRatings = async function (
   productId: mongoose.Types.ObjectId,
   session?: mongoose.ClientSession
 ) {
-  const stats = await this.aggregate([
-    {
-      $match: { product: productId },
-    },
-    {
-      $group: {
-        _id: '$product',
-        nRating: { $sum: 1 },
-        avgRating: { $avg: '$rating' },
-      },
-    },
-  ]);
-
-  if (stats.length > 0) {
-    await Product.findByIdAndUpdate(productId, {
-      ratingsQuantity: stats[0].nRating,
-      rating: stats[0].avgRating,
-    });
-  } else {
-    await Product.findByIdAndUpdate(
-      productId,
-      {
-        ratingsQuantity: 0,
-        rating: 0,
-      },
+  if (session) {
+    const stats = await this.aggregate(
+      [
+        {
+          $match: { product: productId },
+        },
+        {
+          $group: {
+            _id: '$product',
+            nRating: { $sum: 1 },
+            avgRating: { $avg: '$rating' },
+          },
+        },
+      ],
       { session }
     );
+
+    if (stats.length > 0) {
+      await Product.findByIdAndUpdate(
+        productId,
+        {
+          ratingsQuantity: stats[0].nRating,
+          rating: stats[0].avgRating,
+        },
+        { session }
+      );
+    } else {
+      await Product.findByIdAndUpdate(
+        productId,
+        {
+          ratingsQuantity: 0,
+          rating: 0,
+        },
+        { session }
+      );
+    }
+  } else {
+    const stats = await this.aggregate([
+      {
+        $match: { product: productId },
+      },
+      {
+        $group: {
+          _id: '$product',
+          nRating: { $sum: 1 },
+          avgRating: { $avg: '$rating' },
+        },
+      },
+    ]);
+
+    if (stats.length > 0) {
+      await Product.findByIdAndUpdate(productId, {
+        ratingsQuantity: stats[0].nRating,
+        rating: stats[0].avgRating,
+      });
+    } else {
+      await Product.findByIdAndUpdate(productId, {
+        ratingsQuantity: 0,
+        rating: 0,
+      });
+    }
   }
 };
 

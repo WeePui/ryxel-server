@@ -237,7 +237,8 @@ export const getOrderByID = catchAsync(
     const order = await Order.findById(req.params.id)
       .populate('user')
       .populate('shippingAddress')
-      .populate('lineItems.product');
+      .populate('lineItems.product')
+      .populate('lineItems.review');
 
     if (!order) return next(new AppError('Order not found', 404));
 
@@ -520,7 +521,8 @@ export const getOrderByOrderCode = catchAsync(
     const order = await Order.findOne({ orderCode, user: userId })
       .populate('user')
       .populate('shippingAddress')
-      .populate('lineItems.product');
+      .populate('lineItems.product')
+      .populate('lineItems.review');
 
     if (!order) {
       return next(new AppError('No order found with that code', 404));

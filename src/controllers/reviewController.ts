@@ -143,14 +143,14 @@ export const createReviewsByOrder = catchAsync(
         { session }
       );
 
-      await Promise.all(
-        createdReviews.map((review) =>
-          Review.calcAverageRatings(review.product, session)
-        )
-      );
-
       await session.commitTransaction();
       session.endSession();
+
+      await Promise.all(
+        createdReviews.map((review) =>
+          Review.calcAverageRatings(review.product)
+        )
+      );
 
       res.status(200).json({
         status: 'success',
