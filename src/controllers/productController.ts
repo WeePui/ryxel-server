@@ -3,6 +3,7 @@ import Product from '../models/productModel';
 import APIFeatures from '../utils/apiFeatures';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
+import { cartProductRecommend, similarProduct } from '../utils/python';
 
 export const aliasTopProducts = (
   req: Request,
@@ -24,7 +25,7 @@ export const getAllProducts = catchAsync(
     const resultsPerPage = Number(req.query.limit) || 10;
     apiFeatures.filter().sort().limitFields().paginate();
 
-    const products = await apiFeatures.query.lean().exec();
+    const products = await apiFeatures.query.exec();
     const results = await apiFeatures.count();
 
     res.status(200).json({
@@ -135,7 +136,7 @@ export const getFilterData = catchAsync(
 export const getProductBySlug = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const product = await Product.findOne({ slug: req.params.slug })
-      .populate('reviews')
+      .populate({ path: 'reviews', match: { status: 'approved' } })
       .lean();
 
     if (!product) {
@@ -213,6 +214,78 @@ export const deleteProduct = catchAsync(
     res.status(204).json({
       status: 'success',
       data: null,
+    });
+  }
+);
+
+export const getSimilarProduct = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { productId } = req.params;
+    if (!productId) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Missing productID in params.',
+      });
+    }
+    const recommendedProducts = await similarProduct(productId);
+    if (!recommendedProducts) {
+      return res.status(404).json({
+        status: 'Fatal error',
+        message:
+          'No recommended products found. If this is a new product, please retrain the model',
+      });
+    }
+
+    const productIDs = recommendedProducts.map((rec: any) => rec.productID);
+    const totalResults = productIDs.length;
+    const products = await Product.find({ _id: { $in: productIDs } })
+      .lean()
+      .exec();
+
+    res.status(200).json({
+      status: 'success',
+      results: products.length,
+      totalResults,
+      data: {
+        products,
+      },
+    });
+  }
+);
+
+export const getCartProductRecommend = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { productId } = req.params;
+
+    if (!productId) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Missing productID in params.',
+      });
+    }
+
+    const recommendedProducts = await cartProductRecommend(productId);
+    if (!recommendedProducts) {
+      return res.status(404).json({
+        status: 'Fatal error',
+        message:
+          'No recommended products found. If this is a new product, please retrain the model',
+      });
+    }
+
+    const productIDs = recommendedProducts.map((rec: any) => rec.productID);
+    const totalResults = productIDs.length;
+    const products = await Product.find({ _id: { $in: productIDs } })
+      .lean()
+      .exec();
+
+    res.status(200).json({
+      status: 'success',
+      results: products.length,
+      totalResults,
+      data: {
+        products,
+      },
     });
   }
 );

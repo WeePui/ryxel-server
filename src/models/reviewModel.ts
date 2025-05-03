@@ -11,6 +11,7 @@ interface IReview extends Document {
   order?: mongoose.Schema.Types.ObjectId;
   images?: string[];
   video?: string;
+  status: string;
 }
 
 interface IReviewModel extends mongoose.Model<IReview> {
@@ -57,6 +58,11 @@ const reviewSchema = new Schema<IReview>(
     },
     images: [String],
     video: String,
+    status: {
+      type: String,
+      enum: ['rejected', 'approved', 'processing'],
+      default: 'processing',
+    },
   },
   {
     toJSON: { virtuals: true },

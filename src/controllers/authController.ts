@@ -124,9 +124,14 @@ export const verifyUserToken = catchAsync(
       return next(new AppError('Token is required', 400));
     }
 
-    const { valid, expired } = await verifyToken(token);
+    const { valid, expired, decoded } = await verifyToken(token);
 
-    res.status(200).json({ valid, expired });
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return next(new AppError('User not found', 404));
+    }
+
+    res.status(200).json({ valid, expired, isAdmin: user.role === 'admin' });
   }
 );
 

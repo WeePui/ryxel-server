@@ -11,6 +11,7 @@ import {
   uploadVideo,
 } from '../utils/cloudinaryService';
 import Order from '../models/orderModel';
+import { nsfwDetection } from '../utils/python';
 
 export const getAllReviews = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -140,7 +141,7 @@ export const createReviewsByOrder = catchAsync(
           order: orderId,
           variant: review.variantId,
         })),
-        { session }
+        { session, ordered: true }
       );
 
       await session.commitTransaction();
@@ -151,6 +152,10 @@ export const createReviewsByOrder = catchAsync(
           Review.calcAverageRatings(review.product)
         )
       );
+
+      createdReviews.map((review) => {
+        nsfwDetection(review._id as string, review.images as string[]);
+      });
 
       res.status(200).json({
         status: 'success',
@@ -175,9 +180,6 @@ interface ReviewUpdateInput {
 
 export const updateReviewsByOrder = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log('Body: ', req.body);
-    console.log('Files: ', req.files);
-
     const { orderId } = req.params;
     const { reviews } = req.body;
 
@@ -292,7 +294,7 @@ export const updateReviewsByOrder = catchAsync(
           if (!updatedReview)
             throw new AppError('Failed to update review', 500);
 
-          await Review.calcAverageRatings(updatedReview.product, session);
+          await Review.calcAverageRatings(updatedReview.product);
 
           // ✅ Xóa ảnh/video cũ nếu bị FE xóa
           process.nextTick(async () => {
@@ -331,61 +333,6 @@ export const updateReviewsByOrder = catchAsync(
       console.error(error);
       return next(new AppError('Failed to update reviews', 500));
     }
-  }
-);
-
-export const createReview = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { productId } = req.params;
-
-    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
-
-    const images = files?.['images']; // Array of image files
-    const video = files?.['video']; // Array with a single video file
-
-    const product = await Product.findById(
-      new mongoose.Types.ObjectId(productId)
-    );
-    if (!product)
-      return next(new AppError('No product found with that ID', 404));
-
-    if (req.files === undefined) {
-      return next(new AppError('Files undefined', 400));
-    }
-    if (images && images.length > 0) {
-      const uploadedImages = await Promise.all(
-        images.map((file) => uploadProductReview(file.buffer))
-      );
-      review.images = uploadedImages.map(
-        (img) => (img as { secure_url: string }).secure_url
-      );
-    }
-
-    if (video && video.length > 0) {
-      const uploadedVideo = await uploadVideo(video[0].buffer);
-
-      if (!uploadedVideo || !uploadedVideo.secure_url) {
-        throw new Error('Failed to upload video.');
-      }
-
-      review.video = uploadedVideo.secure_url;
-    }
-
-    const review = {
-      user: new mongoose.Types.ObjectId(req.user.id),
-      product: new mongoose.Types.ObjectId(productId),
-      rating: req.body.rating,
-      review: req.body.review,
-    };
-
-    await Review.create(review);
-
-    res.status(201).json({
-      status: 'success',
-      data: {
-        review,
-      },
-    });
   }
 );
 
@@ -434,3 +381,96 @@ export const deleteReview = catchAsync(
     });
   }
 );
+
+export const processNSFWReview = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { reviewId, isValid, detected } = req.body;
+    console.log('hello mtf');
+
+    console.log(detected); //TO DO SOMETHING WITH THE PUSH NOTIFICATION LATER ON
+
+    const review = await Review.findById(reviewId);
+    if (!review) return next(new AppError('No review found with that ID', 404));
+
+    if (!isValid) {
+      let images = review.images;
+      let video = review.video;
+      try {
+        if (images && images.length > 0) {
+          await Promise.all(
+            images.map((img) => deleteImage(extractPublicId(img)!))
+          );
+        }
+        if (video) {
+          await deleteImage(extractPublicId(video)!);
+        }
+      } catch (err) {
+        console.error('Error deleting old files:', err);
+      }
+
+      await Review.findByIdAndDelete(reviewId);
+    } else {
+      review.status = 'approved';
+      await review.save();
+    }
+    res.status(204).json({
+      status: 'success',
+      isValid: isValid,
+    });
+  }
+);
+
+// export const createReview = catchAsync(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     const { productId } = req.params;
+
+//     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+//     const images = files?.['images']; // Array of image files
+//     const video = files?.['video']; // Array with a single video file
+
+//     const product = await Product.findById(
+//       new mongoose.Types.ObjectId(productId)
+//     );
+//     if (!product)
+//       return next(new AppError('No product found with that ID', 404));
+
+//     if (req.files === undefined) {
+//       return next(new AppError('Files undefined', 400));
+//     }
+//     if (images && images.length > 0) {
+//       const uploadedImages = await Promise.all(
+//         images.map((file) => uploadProductReview(file.buffer))
+//       );
+//       review.images = uploadedImages.map(
+//         (img) => (img as { secure_url: string }).secure_url
+//       );
+//     }
+
+//     if (video && video.length > 0) {
+//       const uploadedVideo = await uploadVideo(video[0].buffer);
+
+//       if (!uploadedVideo || !uploadedVideo.secure_url) {
+//         throw new Error('Failed to upload video.');
+//       }
+
+//       review.video = uploadedVideo.secure_url;
+//     }
+
+//     const review = {
+//       user: new mongoose.Types.ObjectId(req.user.id),
+//       product: new mongoose.Types.ObjectId(productId),
+//       rating: req.body.rating,
+//       review: req.body.review,
+//     };
+
+//     await Review.create(review);
+
+//     res.status(201).json({
+//       status: 'success',
+//       data: {
+//         review,
+//       },
+//     });
+//   }
+// );

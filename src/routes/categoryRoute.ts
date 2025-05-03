@@ -15,4 +15,6 @@ router
   .patch(categoryController.updateCategory)
   .delete(categoryController.deleteCategory);
 
+router.route('/slug/:slug').get(categoryController.getCategoryBySlug);
+
 export default router;

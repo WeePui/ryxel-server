@@ -76,6 +76,8 @@ interface IProduct extends Document {
   ratingsQuantity?: number;
   slug: string;
   _categoryName: string;
+  totalStock: number;
+  createdAt: Date;
 }
 
 const productSchema = new mongoose.Schema(
@@ -133,7 +135,7 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 productSchema.index({ lowestPrice: 1 });
@@ -249,6 +251,12 @@ productSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'product',
   localField: '_id',
+});
+productSchema.virtual('totalStock').get(function (this: IProduct) {
+  return this.variants.reduce(
+    (total, variant) => total + (variant.stock || 0),
+    0
+  );
 });
 
 productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {

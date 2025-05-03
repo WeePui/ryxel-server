@@ -1,0 +1,46 @@
+import express from 'express';
+import * as adminController from '../controllers/adminController';
+import * as authController from '../controllers/authController';
+// import reviewRouter from './reviewRoute';
+
+const router = express.Router();
+
+router.use(authController.protect, authController.restrictTo('admin'));
+
+router
+  .route('/dashboard')
+  .get(adminController.getDashboard);
+
+router
+  .route('/dashboard/recent-orders')
+  .get(adminController.getRecentOrders);
+
+router
+  .route('/categories')
+  .get(adminController.getCategoriesWithProductCount);
+
+router
+  .route('/dashboard/revenue')
+  .get(adminController.getRevenue);
+
+router
+  .route('/dashboard/top-customers')
+  .get(adminController.getTopCustomers);
+
+router
+  .route('/products/sold')
+  .get(adminController.getProductsSold);
+
+router
+  .route('/dashboard/category-sales')
+  .get(adminController.getCategorySales);
+
+router
+  .route('/products/stock')
+  .get(adminController.getStockSummary);
+
+router
+  .route('/products/summary')
+  .get(adminController.getProductsSummary);
+
+export default router;

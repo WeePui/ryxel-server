@@ -27,7 +27,7 @@ export const uploadImage = async (imageFile: string): Promise<UploadResult> => {
 };
 
 export const extractPublicId = (secureUrl: string) => {
-  const matches = secureUrl.match(/\/upload\/(?:v\d+\/)?([^/.]+)\./);
+  const matches = secureUrl.match(/\/upload\/(?:v\d+\/)?(.+?)(\.[a-z]+)?$/i);
   return matches ? matches[1] : null;
 };
 

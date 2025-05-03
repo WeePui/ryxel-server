@@ -9,6 +9,7 @@ import axios from 'axios';
 import { addPaymentId, changeOrderStatus } from './orderController';
 import Cart from '../models/cartModel';
 import Order from '../models/orderModel';
+import { Types } from 'mongoose';
 
 const stripeClient = new stripe(process.env.STRIPE_SECRET_KEY as string, {
   typescript: true,
@@ -24,8 +25,8 @@ const zalopayConfig = {
 
 export const createStripeCheckoutSession = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { _id: orderId, lineItems } = req.body;
-    const order = await Order.findById(orderId);
+    const { orderCode, lineItems } = req.body;
+    const order = await Order.findOne({ orderCode });
     if (!order) {
       return next(new AppError('Order not found', 404));
     }
@@ -51,20 +52,57 @@ export const createStripeCheckoutSession = catchAsync(
         };
       });
 
+      let coupon: stripe.Response<stripe.Coupon> | undefined = undefined;
+
+      if (order.discountAmount > 0) {
+        try {
+          // Kiểm tra xem coupon đã tồn tại chưa
+          const existingCoupon = await stripeClient.coupons.retrieve(
+            order.orderCode
+          );
+
+          coupon = existingCoupon;
+        } catch (error) {
+          // Tạo coupon với max_redemptions = 1
+          coupon = await stripeClient.coupons.create({
+            duration: 'forever',
+            amount_off: order.discountAmount,
+            currency: 'vnd',
+            id: order.orderCode, // Đảm bảo id duy nhất
+            max_redemptions: 1, // Chỉ có thể sử dụng một lần
+          });
+        }
+      }
+
+      if (order.shippingFee > 0) {
+        stripeLineItems.push({
+          price_data: {
+            currency: 'vnd',
+            product_data: { name: 'Phí vận chuyển', images: [] },
+            unit_amount: order.shippingFee,
+          },
+          quantity: 1,
+        });
+      }
+
       const session = await stripeClient.checkout.sessions.create({
         client_reference_id: req.user.id,
         metadata: {
-          order_id: orderId,
+          order_id: order.orderCode,
           lineItems: JSON.stringify(
             lineItems.map((item: any) => {
               return {
-                product: item.product,
+                product:
+                  typeof item.product === 'string'
+                    ? item.product
+                    : item.product._id,
                 variant: item.variant,
                 quantity: item.quantity,
               };
             })
           ),
         },
+        discounts: coupon ? [{ coupon: coupon.id }] : [],
         line_items: stripeLineItems,
         mode: 'payment',
         success_url: `http://localhost:3000/account/orders/${order.orderCode}`,
@@ -75,6 +113,7 @@ export const createStripeCheckoutSession = catchAsync(
         session,
       });
     } catch (error) {
+      console.error(error);
       return next(new AppError((error as Error).message, 400));
     }
   }
@@ -82,8 +121,8 @@ export const createStripeCheckoutSession = catchAsync(
 
 export const createZaloPayCheckoutSession = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { _id: orderId, lineItems } = req.body;
-    const order = await Order.findById(orderId);
+    const { orderCode, lineItems } = req.body;
+    const order = await Order.findOne({ orderCode });
     if (!order) {
       return next(new AppError('Order not found', 404));
     }
@@ -104,9 +143,31 @@ export const createZaloPayCheckoutSession = catchAsync(
         };
       });
 
+      if (order.discountAmount > 0) {
+        zaloItems.push({
+          itemid: 'discount',
+          itemname: `Giảm giá`,
+          itemprice: -order.discountAmount,
+          itemquantity: 1,
+        });
+      }
+      if (order.shippingFee > 0) {
+        zaloItems.push({
+          itemid: 'shipping',
+          itemname: 'Phí vận chuyển',
+          itemprice: order.shippingFee,
+          itemquantity: 1,
+        });
+      }
+
+      const totalAmount = zaloItems.reduce(
+        (total, item) => total + item.itemprice * item.itemquantity,
+        0
+      );
+
       const embed_data = {
         redirecturl: `http://localhost:3000/account/orders/${order.orderCode}`,
-        orderId,
+        orderCode,
         userId: req.user.id,
       };
 
@@ -118,16 +179,13 @@ export const createZaloPayCheckoutSession = catchAsync(
         app_user: req.user.email,
         app_time: Date.now(),
         item: JSON.stringify(zaloItems),
-        amount: zaloItems.reduce(
-          (total, item) => total + item.itemprice * item.itemquantity,
-          0
-        ), // TODO: replace with your total amount
+        amount: totalAmount,
         description: 'Thanh toán đơn hàng từ cửa hàng Ryxel Store.',
         bank_code: '',
         embed_data: JSON.stringify(embed_data),
         mac: '',
         callback_url:
-          'https://845f-2402-800-62a7-df66-c0b9-9fa3-cf23-6293.ngrok-free.app/api/v1/payments/zalopay/callback',
+          'https://22d9-14-191-63-11.ngrok-free.app/api/v1/payments/zalopay/callback',
       };
 
       const data =
@@ -156,6 +214,7 @@ export const createZaloPayCheckoutSession = catchAsync(
           res.status(200).json({
             status: 'success',
             data: response.data,
+            orderCode: req.body.orderCode,
           });
         })
         .catch((err) => next(new AppError((err as Error).message, 400)));
@@ -175,21 +234,25 @@ export const zalopayCallback = catchAsync(
       return next(new AppError('Invalid MAC', 400));
     } else {
       const data = JSON.parse(dataStr);
-      const { orderId, userId } = JSON.parse(data.embed_data);
+      const { orderCode, userId } = JSON.parse(data.embed_data);
 
-      await addPaymentId(orderId, {
+      const order = await Order.findOne({ orderCode });
+      if (!order) {
+        return next(new AppError('Order not found', 404));
+      }
+
+      await addPaymentId((order._id as Types.ObjectId).toString(), {
         paymentId: data.zp_trans_id,
         checkoutId: data.app_trans_id,
         amount: data.amount,
       });
-      await changeOrderStatus(orderId, 'pending');
+
+      await changeOrderStatus(
+        (order._id as Types.ObjectId).toString(),
+        'pending'
+      );
 
       const cart = await Cart.findOne({ user: userId });
-      const order = await Order.findById(orderId);
-
-      if (!order) {
-        return next(new AppError('Order not found', 404));
-      }
 
       if (cart?.lineItems && cart.lineItems.length > 0) {
         for (const item of order?.lineItems) {
@@ -224,21 +287,26 @@ export const fulfillCheckout = async (sessionId: string) => {
   // to determine if fulfillment should be peformed
   if (checkoutSession.payment_status !== 'unpaid') {
     // TODO: Perform fulfillment of the line items
-
-    await addPaymentId(checkoutSession!.metadata!.order_id, {
-      paymentId: checkoutSession!.payment_intent as string,
-      checkoutId: checkoutSession.id,
-      amount: checkoutSession.amount_total!,
+    const order = await Order.findOne({
+      orderCode: checkoutSession!.metadata!.order_id,
     });
-    await changeOrderStatus(checkoutSession!.metadata!.order_id, 'pending');
-    const cart = await Cart.findOne({
-      user: checkoutSession!.client_reference_id,
-    });
-    const order = await Order.findById(checkoutSession!.metadata!.order_id);
 
     if (!order) {
       throw new AppError('Order not found', 404);
     }
+
+    await addPaymentId((order._id as Types.ObjectId).toString(), {
+      paymentId: checkoutSession!.payment_intent as string,
+      checkoutId: checkoutSession.id,
+      amount: checkoutSession.amount_total!,
+    });
+    await changeOrderStatus(
+      (order._id as Types.ObjectId).toString(),
+      'pending'
+    );
+    const cart = await Cart.findOne({
+      user: checkoutSession!.client_reference_id,
+    });
 
     if (cart?.lineItems && cart.lineItems.length > 0) {
       for (const item of order?.lineItems) {

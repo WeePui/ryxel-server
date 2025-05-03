@@ -72,3 +72,23 @@ export const deleteCategory = async (
     data: null,
   });
 };
+
+export const getCategoryBySlug = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { slug } = req.params;
+
+  const category = await Category.findOne({ slug });
+
+  if (!category)
+    return next(new AppError('No category found with that slug', 404));
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      category,
+    },
+  });
+};

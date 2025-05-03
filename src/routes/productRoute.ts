@@ -38,4 +38,12 @@ router
 
 router.route('/slug/:slug').get(productController.getProductBySlug);
 
+router
+  .route('/cart-product-recommend/:productId')
+  .get(productController.getCartProductRecommend);
+
+router
+  .route('/similar-products/:productId')
+  .get(productController.getSimilarProduct);
+
 export default router;

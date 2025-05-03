@@ -2,26 +2,37 @@
   {
     "_id": "60c72b2f9b1d8b3a4c8b4567",
     "name": "headphone",
-    "description": "High-quality headphones for an immersive audio experience."
+    "description": "High-quality headphones for an immersive audio experience.",
+    "image": "/headset-category.jpg"
   },
   {
     "_id": "60c72b2f9b1d8b3a4c8b4568",
     "name": "mouse",
-    "description": "Precision mice for gaming and productivity."
+    "description": "Precision mice for gaming and productivity.",
+    "image": "/mouse-category.jpg"
   },
   {
     "_id": "60c72b2f9b1d8b3a4c8b4569",
     "name": "keyboard",
-    "description": "Mechanical and membrane keyboards for all your typing needs."
+    "description": "Mechanical and membrane keyboards for all your typing needs.",
+    "image": "/keyboard-category.jpg"
   },
   {
     "_id": "60c72b2f9b1d8b3a4c8b456a",
     "name": "chair",
-    "description": "Gaming chairs for comfortable and healthy gaming."
+    "description": "Gaming chairs for comfortable and healthy gaming.",
+    "image": "/chair-category.jpg"
   },
   {
     "_id": "60c72b2f9b1d8b3a4c8b456b",
     "name": "table",
-    "description": "Sturdy and stylish tables for your gaming and working space."
+    "description": "Sturdy and stylish tables for your gaming and working space.",
+    "image": "/table.jpg"
+  },
+  {
+    "_id": "60c72b2f9b1d8b3a4c8b456c",
+    "name": "accessory",
+    "description": "Essential accessories for your gaming setup.",
+    "image": "/accessory.jpg"
   }
 ]

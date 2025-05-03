@@ -47,6 +47,10 @@ interface IOrder extends Document {
   updatedAt: Date;
 }
 
+interface IOrderModel extends mongoose.Model<IOrder> {
+  calculateTotalSales(): Promise<number>;
+}
+
 /*const checkoutSchema = new Schema<ICheckout>({
   total: { type: Number },
   shippingFee: { type: Number },
@@ -161,9 +165,9 @@ orderSchema.pre<IOrder>('save', async function (next) {
   if (!this.orderCode) {
     const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
     const userSuffix = this.user.toString().slice(-4).toUpperCase();
-    const randomNumber = Math.floor(10 + Math.random() * 90);
+    const timestamp = Date.now().toString().slice(-5);
 
-    this.orderCode = `ORD-${today}-${userSuffix}-${randomNumber}`;
+    this.orderCode = `ORD-${today}-${userSuffix}-${timestamp}`;
   }
   next();
 });
@@ -200,6 +204,24 @@ orderSchema.pre<IOrder>('save', async function (next) {
   next();
 });
 
-const Order = mongoose.model<IOrder>('Order', orderSchema);
+orderSchema.statics.calculateTotalSales = async function () {
+  const result = await this.aggregate([
+    {
+      $match: {
+        status: { $nin: ['unpaid', 'cancelled'] }, // Lọc bỏ đơn hàng unpaid và cancelled
+      },
+    },
+    {
+      $group: {
+        _id: null, // Không nhóm theo trường nào
+        totalSales: { $sum: '$total' }, // Tính tổng trường `total`
+      },
+    },
+  ]);
+
+  return result.length > 0 ? result[0].totalSales : 0; // Nếu không có đơn hàng hợp lệ, trả về 0
+};
+
+const Order = mongoose.model<IOrder, IOrderModel>('Order', orderSchema);
 
 export default Order;
