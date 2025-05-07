@@ -149,7 +149,7 @@ export const createReviewsByOrder = catchAsync(
 
       await Promise.all(
         createdReviews.map((review) =>
-          Review.calcAverageRatings(review.product)
+          Review.calcAverageRatings(review.product, session)
         )
       );
 
@@ -294,7 +294,7 @@ export const updateReviewsByOrder = catchAsync(
           if (!updatedReview)
             throw new AppError('Failed to update review', 500);
 
-          await Review.calcAverageRatings(updatedReview.product);
+          await Review.calcAverageRatings(updatedReview.product, session);
 
           // ✅ Xóa ảnh/video cũ nếu bị FE xóa
           process.nextTick(async () => {
