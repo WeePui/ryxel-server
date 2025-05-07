@@ -157,7 +157,7 @@ reviewSchema.post('save', async function (doc) {
   });
 
   if (order) {
-    order.reviewCount += 1;
+    if (this.isModified('review')) order.reviewCount += 1;
 
     order.lineItems.forEach((item) => {
       if (item.product.toString() === this.product.toString()) {
@@ -185,8 +185,6 @@ reviewSchema.post(/^findOneAnd/, async function (doc) {
   });
 
   if (order) {
-    order.reviewCount += 1;
-
     order.lineItems.forEach((item) => {
       if (item.product.toString() === doc.product.toString()) {
         item.review = doc._id as mongoose.Types.ObjectId;
