@@ -129,40 +129,33 @@ export const createReviewsByOrder = catchAsync(
       review.video = fileMap[index]?.video || '';
     });
 
-    let createdReviews = [];
+    const createdReviews = await Review.create(
+      reviews.map((review: ReviewInput) => ({
+        user: req.user.id,
+        product: review.productId,
+        rating: review.rating,
+        images: review.images,
+        video: review.video,
+        review: review.review,
+        order: orderId,
+        variant: review.variantId,
+      }))
+    );
 
-    const session = await mongoose.startSession();
-    session.startTransaction();
-    try {
-      createdReviews = await Review.create(
-        reviews.map((review: ReviewInput) => ({
-          user: req.user.id,
-          product: review.productId,
-          rating: review.rating,
-          images: review.images,
-          video: review.video,
-          review: review.review,
-          order: orderId,
-          variant: review.variantId,
-        })),
-        { session, ordered: true }
-      );
+    await Order.updateOne({ _id: order._id }, { $inc: { reviewCount: 1 } });
 
-      await session.commitTransaction();
-      session.endSession();
-    } catch (error) {
-      await session.abortTransaction();
-      session.endSession();
-      console.log(error);
-      return next(new AppError('Failed to create review', 500));
-    }
+    const createdReviewsArray = Array.isArray(createdReviews)
+      ? createdReviews
+      : [createdReviews];
 
-    createdReviews.map((review) => {
+    createdReviewsArray.map((review) => {
       nsfwDetection(review._id as string, review.images as string[]);
     });
 
     await Promise.all(
-      createdReviews.map((review) => Review.calcAverageRatings(review.product))
+      createdReviewsArray.map((review) =>
+        Review.calcAverageRatings(review.product)
+      )
     );
 
     res.status(200).json({
