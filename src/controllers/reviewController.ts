@@ -46,6 +46,8 @@ export const createReviewsByOrder = catchAsync(
     const { orderId } = req.params;
     const { reviews } = req.body;
 
+    console.log('BODY:', req.body);
+
     const order = await Order.findById({ _id: orderId, user: req.user.id });
 
     if (!order)
@@ -149,12 +151,12 @@ export const createReviewsByOrder = catchAsync(
 
       await Promise.all(
         createdReviews.map((review) =>
-          Review.calcAverageRatings(review.product, session)
+          Review.calcAverageRatings(review.product)
         )
       );
 
       createdReviews.map((review) => {
-        nsfwDetection(review._id as string, review.images as string[]);
+        // nsfwDetection(review._id as string, review.images as string[]);
       });
 
       res.status(200).json({
