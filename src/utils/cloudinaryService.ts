@@ -12,18 +12,41 @@ interface DeleteResult {
   [key: string]: any;
 }
 
-export const uploadImage = async (imageFile: string): Promise<UploadResult> => {
-  try {
-    const result = await cloudinary.uploader.upload(imageFile, {
-      folder: 'avatars',
-      width: 150,
-      height: 150,
-      crop: 'fill',
+// utils/cloudinaryUtils.ts (sửa hàm uploadImage)
+
+export const uploadImage = (
+  folder: string,
+  imageFile: Buffer | string,
+  options: {
+    width?: number;
+    height?: number;
+    crop?: string;
+  } = {}
+): Promise<UploadResult> => {
+  // Nếu là Buffer → dùng upload_stream
+  if (Buffer.isBuffer(imageFile)) {
+    return new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        {
+          folder,
+          ...options,
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result as UploadResult);
+        }
+      );
+      stream.end(imageFile);
     });
-    return result;
-  } catch (error: any) {
-    throw new Error(error.message);
   }
+
+  // Nếu là string path → dùng upload()
+  return cloudinary.uploader
+    .upload(imageFile, {
+      folder,
+      ...options,
+    })
+    .then((result) => result as UploadResult);
 };
 
 export const extractPublicId = (secureUrl: string) => {
@@ -58,41 +81,4 @@ export const uploadProductReview = (
 
     stream.end(buffer); // Truyền buffer vào stream
   });
-};
-
-export const uploadVideo = async (
-  buffer: Buffer
-): Promise<{ secure_url: string }> => {
-  return new Promise((resolve, reject) => {
-    const stream = cloudinary.uploader.upload_stream(
-      {
-        resource_type: 'video',
-        folder: 'product-reviews',
-        width: 640,
-        height: 360,
-        crop: 'fill',
-        format: 'mp4',
-      },
-      (error, result) => {
-        if (error) return reject(error);
-        if (result && result.secure_url) {
-          resolve({ secure_url: result.secure_url });
-        } else {
-          reject(new Error('Invalid upload response'));
-        }
-      }
-    );
-    stream.end(buffer);
-  });
-};
-
-export const deleteVideo = async (publicId: string): Promise<DeleteResult> => {
-  try {
-    const result = await cloudinary.uploader.destroy(publicId, {
-      resource_type: 'video', // Specify the resource type as video
-    });
-    return result;
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
 };

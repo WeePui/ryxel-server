@@ -181,5 +181,18 @@
     "role": "user",
     "password": "password123",
     "passwordConfirm": "password123"
+  },
+  {
+    "_id": "637e2d7b1c5b5b002c1f1a12",
+    "name": "Kaikai",
+    "email": "kolvip48@gmail.com",
+    "photo": {
+      "publicId": "avatars/test-public-id",
+      "url": "/dev-users/default.png"
+    },
+    "emailVerified": true,
+    "role": "admin",
+    "password": "12345678",
+    "passwordConfirm": "12345678"
   }
 ]

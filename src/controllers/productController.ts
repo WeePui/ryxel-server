@@ -22,7 +22,7 @@ export const getAllProducts = catchAsync(
 
     const totalProducts = await apiFeatures.count();
 
-    const resultsPerPage = Number(req.query.limit) || 10;
+    const resultsPerPage = Number(req.query.limit) || 16;
     apiFeatures.filter().sort().limitFields().paginate();
 
     const products = await apiFeatures.query.exec();
@@ -136,12 +136,20 @@ export const getFilterData = catchAsync(
 export const getProductBySlug = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const product = await Product.findOne({ slug: req.params.slug })
-      .populate({ path: 'reviews', match: { status: 'approved' } })
+      .populate({
+        path: 'reviews',
+        match: { status: 'approved' },
+        options: { sort: { rating: -1, createdAt: -1 } },
+      })
       .lean();
 
     if (!product) {
       return next(new AppError('No product found with that slug', 404));
     }
+
+    (product as any).reviews = (product as any).reviews?.filter(
+      (review: any) => review.user.active
+    );
 
     res.status(200).json({
       status: 'success',

@@ -1,14 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import Review from '../models/reviewModel';
-import Product from '../models/productModel';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 import {
   deleteImage,
   extractPublicId,
   uploadProductReview,
-  uploadVideo,
 } from '../utils/cloudinaryService';
 import Order from '../models/orderModel';
 import { nsfwDetection } from '../utils/python';

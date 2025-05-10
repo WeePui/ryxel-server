@@ -117,7 +117,7 @@ const getTotalProductbyMonth = async (startDate: Date, endDate: Date) => {
   );
 };
 
-const getTime = (range: string, year: number, month?: number) => {
+export const getTime = (range: string, year: number, month?: number) => {
   let startDate: Date;
   let endDate: Date;
   let timeSlots: number[] = [];
@@ -297,17 +297,6 @@ export const getRecentOrders = catchAsync(
   }
 );
 
-export const getCategoriesWithProductCount = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const categories = await Category.getCategoriesWithProductCount();
-
-    res.status(200).json({
-      status: 'success',
-      data: categories,
-    });
-  }
-);
-
 export const getRevenue = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const range = req.query.range as string;
@@ -380,80 +369,6 @@ export const getRevenue = catchAsync(
       status: 'success',
       data: {
         revenue: responseData,
-      },
-    });
-  }
-);
-
-export const getCategorySales = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const range = req.query.range as string;
-    const year = parseInt(req.query.year as string);
-    const month = req.query.month
-      ? parseInt(req.query.month as string)
-      : undefined;
-
-    // Validate query parameters
-    if (
-      !['day', 'month', 'year'].includes(range) ||
-      (range !== 'day' && isNaN(year)) ||
-      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
-    ) {
-      return res.status(400).json({
-        status: 'fail',
-        message:
-          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
-      });
-    }
-
-    const { startDate, endDate } = getTime(range, year, month);
-    const sales = await Order.aggregate([
-      {
-        $match: {
-          status: { $nin: ['unpaid', 'canceled'] },
-          createdAt: { $gte: startDate, $lte: endDate },
-        },
-      },
-      { $unwind: '$lineItems' },
-      {
-        $lookup: {
-          from: 'products', // the collection name for products
-          localField: 'lineItems.product',
-          foreignField: '_id',
-          as: 'product',
-        },
-      },
-      { $unwind: '$product' },
-      {
-        $group: {
-          _id: '$product.category', // group by product's category
-          totalSales: { $sum: '$lineItems.subtotal' },
-        },
-      },
-      {
-        $lookup: {
-          from: 'categories', // the collection name for categories
-          localField: '_id',
-          foreignField: '_id',
-          as: 'category',
-        },
-      },
-      { $unwind: '$category' },
-      {
-        $project: {
-          _id: 0,
-          name: '$category.name', // category name
-          value: '$totalSales',
-        },
-      },
-      { $sort: { name: 1 } },
-    ]);
-
-    // Send the response with an array of { name, value } objects.
-    res.status(200).json({
-      status: 'success',
-      data: {
-        sales,
       },
     });
   }
@@ -662,6 +577,124 @@ export const getProductsSummary = catchAsync(
       totalOutStock: totalOutStock,
       totalInStock: totalInStock,
       prediction: prediction,
+    });
+  }
+);
+
+export const getCategorySaleData = async (
+  category: any,
+  startDate: Date,
+  endDate: Date,
+  groupBy: any
+) => {
+  const sales = await Order.aggregate([
+    {
+      $match: {
+        status: { $nin: ['unpaid', 'canceled'] },
+        createdAt: { $gte: startDate, $lt: endDate },
+      },
+    },
+    { $unwind: '$lineItems' },
+    {
+      $lookup: {
+        from: 'products',
+        localField: 'lineItems.product',
+        foreignField: '_id',
+        as: 'product',
+      },
+    },
+    { $unwind: '$product' },
+    {
+      $match: { 'product.category': category._id },
+    },
+    {
+      $group: {
+        _id: groupBy,
+        value: { $sum: '$lineItems.subtotal' },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        name: '$_id',
+        value: 1,
+      },
+    },
+    { $sort: { name: 1 } },
+  ]);
+  return sales;
+};
+
+export const getCategorySales = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const range = req.query.range as string;
+    const year = parseInt(req.query.year as string);
+    const month = req.query.month
+      ? parseInt(req.query.month as string)
+      : undefined;
+
+    // Validate query parameters
+    if (
+      !['day', 'month', 'year'].includes(range) ||
+      (range !== 'day' && isNaN(year)) ||
+      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
+    ) {
+      return res.status(400).json({
+        status: 'fail',
+        message:
+          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+      });
+    }
+
+    const { startDate, endDate } = getTime(range, year, month);
+    const sales = await Order.aggregate([
+      {
+        $match: {
+          status: { $nin: ['unpaid', 'canceled'] },
+          createdAt: { $gte: startDate, $lte: endDate },
+        },
+      },
+      { $unwind: '$lineItems' },
+      {
+        $lookup: {
+          from: 'products', // the collection name for products
+          localField: 'lineItems.product',
+          foreignField: '_id',
+          as: 'product',
+        },
+      },
+      { $unwind: '$product' },
+      {
+        $group: {
+          _id: '$product.category', // group by product's category
+          totalSales: { $sum: '$lineItems.subtotal' },
+        },
+      },
+      {
+        $lookup: {
+          from: 'categories', // the collection name for categories
+          localField: '_id',
+          foreignField: '_id',
+          as: 'category',
+        },
+      },
+      { $unwind: '$category' },
+      {
+        $project: {
+          _id: 0,
+          name: '$category.name', // category name
+          value: '$totalSales',
+        },
+      },
+      { $sort: { name: 1 } },
+    ]);
+
+    // Send the response with an array of { name, value } objects.
+    res.status(200).json({
+      status: 'success',
+      data: {
+        sales,
+      },
     });
   }
 );

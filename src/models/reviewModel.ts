@@ -74,7 +74,7 @@ const reviewSchema = new Schema<IReview>(
 reviewSchema.pre<Query<IReview, IReview>>(/^find/, function (next) {
   this.populate({
     path: 'user',
-    select: 'name photo',
+    select: 'name photo active',
   });
 
   next();

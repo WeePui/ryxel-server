@@ -1,312 +1,2578 @@
 [
   {
-    "_id": "638a1d8f1a4b4b002d9f2a01",
+    "_id": "681c9964fabf4248e69fc149",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb496",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc14a",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb481",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc14d",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb479",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc14f",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc150",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 4,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc151",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 3,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc152",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb49e",
+    "rating": 3,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc154",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc155",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb49e",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc156",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4d5",
+    "rating": 4,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc158",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb47e",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc159",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb49e",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc15b",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4de",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc15c",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 5,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc15d",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc15e",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc15f",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb499",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc161",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc162",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb4d2",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc164",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb496",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc168",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc16a",
     "user": "637e2d7b1c5b5b002c1f1a01",
-    "product": "637c7e9b14b63b001c7e9d1b",
+    "product": "681c8feaedc5df4cc9dfb4aa",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc16b",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb4d8",
+    "rating": 5,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc16c",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb493",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc16d",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb43b",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc16f",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb43b",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc170",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4d5",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc171",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4a7",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc172",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 5,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc177",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc178",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4a7",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc17a",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb4a4",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc17d",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc17f",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc180",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb434",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc182",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb434",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc184",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc185",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb43b",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc186",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb46a",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc189",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb43b",
     "rating": 5,
     "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a02",
+    "_id": "681c9964fabf4248e69fc18a",
     "user": "637e2d7b1c5b5b002c1f1a02",
-    "product": "637c7ec414b63b001c7e9d21",
+    "product": "681c8feaedc5df4cc9dfb46a",
     "rating": 4,
-    "review": "Bàn phím rất yên tĩnh, nhưng keycap hơi khó thay thế."
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a03",
-    "user": "637e2d7b1c5b5b002c1f1a03",
-    "product": "637c7ec414b63b001c7e9d21",
-    "rating": 3,
-    "review": "Âm thanh ổn, nhưng đeo lâu hơi khó chịu."
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a04",
-    "user": "637e2d7b1c5b5b002c1f1a04",
-    "product": "637c7fe514b63b001c7e9d2f",
-    "rating": 5,
-    "review": "Rất thoải mái, đặc biệt là phần lưng ghế có hỗ trợ rất tốt."
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a05",
-    "user": "637e2d7b1c5b5b002c1f1a05",
-    "product": "637c7fff14b63b001c7e9d33",
-    "rating": 4,
-    "review": "Di chuột rất mượt, nhưng kích thước hơi lớn so với bàn của mình."
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a06",
-    "user": "637e2d7b1c5b5b002c1f1a01",
-    "product": "637c7fa314b63b001c7e9d27",
-    "rating": 4,
-    "review": "Màu sắc đẹp, hiệu ứng đèn LED rất đẹp mắt!"
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a07",
-    "user": "637e2d7b1c5b5b002c1f1a01",
-    "product": "637d100014b63b001c7e9d01",
-    "rating": 5,
-    "review": "Bàn phím có độ hoàn thiện cực kỳ tốt, khung nhôm chắc chắn, không bị flex. Switch mặc định đã rất êm, gõ không gây ồn. Kết nối bluetooth ổn định, không bị lag khi chơi game. Pin dùng khoảng 1 tuần mới phải sạc lại. Đèn RGB rất đẹp, nhiều chế độ.",
-    "variant": "637d100014b63b001c7e9d02",
-    "images": [
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898455/product-reviews/34907eeb-75e4-4bc0-8d9f-626cebac003e.png",
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898537/product-reviews/c598fa25-d6a9-414e-8e06-462c8a7cc4eb.png"
-    ],
-    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742898723/product-reviews/noice-meme_wryzdf.mp4"
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a08",
+    "_id": "681c9964fabf4248e69fc18b",
     "user": "637e2d7b1c5b5b002c1f1a02",
-    "product": "637d100014b63b001c7e9d01",
-    "rating": 4,
-    "review": "Sản phẩm tốt, đúng với giá tiền. Tôi đặc biệt thích khung nhôm và cảm giác gõ phím rất thích. Keycap PBT Double-shot chống bám vân tay tốt. Pin dùng được khoảng 3-4 ngày với đèn RGB bật. Điểm trừ duy nhất là phần mềm tùy chỉnh hơi khó sử dụng.",
-    "variant": "637d100014b63b001c7e9d03",
-    "images": [
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898892/product-reviews/d929576a-6d14-471d-8e22-a0a40b236b15.png",
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898935/product-reviews/ca5e0918-0e1d-4b60-897d-42242228ddae.png"
-    ],
-    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742898825/product-reviews/homelander-perfect_nf835t.mp4"
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a09",
-    "user": "637e2d7b1c5b5b002c1f1a03",
-    "product": "637d100014b63b001c7e9d01",
+    "product": "681c8feaedc5df4cc9dfb4b6",
     "rating": 3,
-    "review": "Bàn phím có thiết kế đẹp, nhưng pin không được như quảng cáo. Tôi phải sạc sau 2 ngày sử dụng liên tục. Đèn RGB tùy chỉnh khá phức tạp nếu không quen với phần mềm. Switch mặc định hơi cứng với người mới sử dụng bàn phím cơ.",
-    "variant": "637d100014b63b001c7e9d02",
-    "images": [
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898990/product-reviews/5e467b0e-405b-4a6f-b2ab-f9353532d41e.png"
-    ]
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a10",
+    "_id": "681c9964fabf4248e69fc190",
     "user": "637e2d7b1c5b5b002c1f1a05",
-    "product": "637d100014b63b001c7e9d01",
-    "rating": 2,
-    "review": "Sản phẩm không như mong đợi. Sau 2 tháng sử dụng, một số phím đã bị chập chờn. Kết nối bluetooth thỉnh thoảng bị ngắt đột ngột. Phần mềm điều khiển RGB rất khó sử dụng và thường xuyên bị lỗi. Không đáng với mức giá này.",
-    "variant": "637d100014b63b001c7e9d03",
-    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742899139/product-reviews/not-approved_msxjmw.mp4"
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a11",
-    "user": "637e2d7b1c5b5b002c1f1a06",
-    "product": "637d100014b63b001c7e9d01",
+    "product": "681c8feaedc5df4cc9dfb440",
     "rating": 5,
-    "review": "Tôi là một người đam mê bàn phím và đây là một trong những mẫu tốt nhất tôi từng sở hữu. Tiếng gõ rất thỏa mãn, không quá ồn nhưng đủ tactile. Việc thay switch rất dễ dàng nhờ tính năng hotswap. Đồng bộ RGB với các thiết bị khác trong hệ sinh thái cũng khá tốt.",
-    "variant": "637d100014b63b001c7e9d02"
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a12",
-    "user": "637e2d7b1c5b5b002c1f1b01",
-    "product": "637d100014b63b001c7e9d01",
-    "rating": 4,
-    "review": "Bàn phím khá ấn tượng với thiết kế chắc chắn, đèn RGB sáng đẹp. Switch mặc định cho cảm giác gõ tốt. Điểm trừ nhỏ là dây cáp hơi cứng và phần phụ kiện không nhiều như các hãng khác.",
-    "variant": "637d100014b63b001c7e9d03"
+    "_id": "681c9964fabf4248e69fc191",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a13",
+    "_id": "681c9964fabf4248e69fc193",
     "user": "637e2d7b1c5b5b002c1f1b02",
-    "product": "637d100014b63b001c7e9d01",
-    "rating": 1,
-    "review": "Rất thất vọng! Sau 1 tuần sử dụng, phím Space bị kẹt và phải bấm mạnh mới nhận. Kết nối bluetooth liên tục bị ngắt khi sử dụng với laptop. Pin sụt nhanh hơn mô tả rất nhiều. Đã liên hệ bảo hành nhưng chưa được phản hồi.",
-    "variant": "637d100014b63b001c7e9d02"
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a14",
-    "user": "637e2d7b1c5b5b002c1f1a07",
-    "product": "637d100014b63b001c7e9d01",
-    "rating": 5,
-    "review": "Tôi đã dùng qua nhiều bàn phím AKKO và đây là mẫu tôi hài lòng nhất. Layout 75% rất hợp lý, vừa nhỏ gọn vừa đầy đủ phím chức năng. Keycap PBT chất lượng cao không bị bóng sau thời gian sử dụng. Pin trâu, dùng 1 tuần với đèn RGB bật mức trung bình.",
-    "variant": "637d100014b63b001c7e9d02"
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a15",
-    "user": "637e2d7b1c5b5b002c1f1a08",
-    "product": "637d100014b63b001c7e9d01",
+    "product": "681c8feaedc5df4cc9dfb4db",
     "rating": 4,
-    "review": "Bàn phím đẹp, chắc chắn nhờ khung nhôm. Phím gõ êm, ít tiếng ồn. Kết nối Bluetooth với nhiều thiết bị cùng lúc rất tiện. Tuy nhiên, phần mềm tùy chỉnh hơi phức tạp và nút chỉnh âm lượng hơi cứng.",
-    "variant": "637d100014b63b001c7e9d03"
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a16",
-    "user": "637e2d7b1c5b5b002c1f1a09",
-    "product": "637d100014b63b001c7e9d01",
+    "_id": "681c9964fabf4248e69fc194",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb440",
     "rating": 3,
-    "review": "Bàn phím ở mức tạm được với tầm giá. Layout 75% tiện lợi, nhưng các phím chức năng bên phải hơi khó làm quen. Switch mặc định hơi nhẹ nên dễ bấm nhầm. Tuổi thọ pin khá ổn, sạc đầy dùng được 4-5 ngày.",
-    "variant": "637d100014b63b001c7e9d02"
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a17",
-    "user": "637e2d7b1c5b5b002c1f1a11",
-    "product": "637d100014b63b001c7e9d01",
+    "_id": "681c9964fabf4248e69fc195",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4b9",
     "rating": 5,
-    "review": "Tuyệt vời! Bàn phím này là sự đầu tư xứng đáng cho công việc và giải trí. Cảm giác gõ phím rất đã, đèn RGB đẹp và có nhiều chế độ tùy chỉnh. Kết nối Bluetooth ổn định ngay cả khi dùng với nhiều thiết bị. Chất lượng build rất cao.",
-    "variant": "637d100014b63b001c7e9d03"
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a18",
-    "user": "637e2d7b1c5b5b002c1f1b03",
-    "product": "637d100014b63b001c7e9d01",
-    "rating": 2,
-    "review": "Không như mong đợi. Một số phím bị rung lắc, khung nhôm không chắc như quảng cáo. Kết nối Bluetooth không ổn định và thường xuyên bị mất kết nối khi sử dụng. Đèn RGB đẹp nhưng điều khiển phức tạp. Không đáng với mức giá này.",
-    "variant": "637d100014b63b001c7e9d02"
+    "_id": "681c9964fabf4248e69fc198",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 4,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a19",
+    "_id": "681c9964fabf4248e69fc199",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc19b",
     "user": "637e2d7b1c5b5b002c1f1a01",
-    "product": "637c7fff14b63b001c7e9d33",
+    "product": "681c8feaedc5df4cc9dfb452",
     "rating": 4,
-    "review": "Tai nghe tốt, âm thanh rõ ràng, bass mạnh. Nhưng đeo lâu hơi mỏi",
-    "variant": "637c800514b63b001c7e9d34",
-    "images": [
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742900219/product-reviews/16167362-13d2-42e0-a6e8-654b16bcafa0.png"
-    ],
-    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742898723/product-reviews/noice-meme_wryzdf.mp4"
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a20",
+    "_id": "681c9964fabf4248e69fc19c",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc19d",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 4,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc19f",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb490",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1a0",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1a1",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 5,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1a2",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1a5",
     "user": "637e2d7b1c5b5b002c1f1a11",
-    "product": "637d100014b63b001c7e9d0a",
-    "rating": 2,
-    "review": "Đắt má hú",
-    "variant": "637d100014b63b001c7e9d0b",
-    "images": [
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742900390/product-reviews/02b67652-bf05-4ec0-ac02-4e75af203f6d.png"
-    ],
-    "video": "https://res.cloudinary.com/dx77ngsh6/video/upload/v1742899139/product-reviews/not-approved_msxjmw.mp4"
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a21",
-    "user": "637e2d7b1c5b5b002c1f1a08",
-    "product": "637d100014b63b001c7e9d0c",
-    "rating": 5,
-    "review": "Chuột xịn ấy",
-    "variant": "637d100014b63b001c7e9d0d",
-    "images": [
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898455/product-reviews/34907eeb-75e4-4bc0-8d9f-626cebac003e.png"
-    ]
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a22",
-    "user": "637e2d7b1c5b5b002c1f1a03",
-    "product": "637d100014b63b001c7e9d0c",
-    "rating": 2,
-    "review": "Nặng vãi",
-    "variant": "637d100014b63b001c7e9d0d",
-    "images": [
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742210710/product-reviews/pcrqpgy88q4emohdfnsh.png",
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742900390/product-reviews/02b67652-bf05-4ec0-ac02-4e75af203f6d.png"
-    ]
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a23",
-    "user": "637e2d7b1c5b5b002c1f1a08",
-    "product": "637d100014b63b001c7e9d0e",
-    "rating": 5,
-    "review": "Chuột xịn ấy",
-    "variant": "637d100014b63b001c7e9d0f",
-    "images": [
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742898455/product-reviews/34907eeb-75e4-4bc0-8d9f-626cebac003e.png"
-    ]
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a24",
-    "user": "637e2d7b1c5b5b002c1f1a03",
-    "product": "637d100014b63b001c7e9d0e",
-    "rating": 2,
-    "review": "Nặng vãi",
-    "variant": "637d100014b63b001c7e9d0f",
-    "images": [
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742210710/product-reviews/pcrqpgy88q4emohdfnsh.png",
-      "https://res.cloudinary.com/dx77ngsh6/image/upload/v1742900390/product-reviews/02b67652-bf05-4ec0-ac02-4e75af203f6d.png"
-    ]
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a25",
-    "user": "637e2d7b1c5b5b002c1f1a08",
-    "product": "637d100014b63b001c7e9d14",
+    "product": "681c8feaedc5df4cc9dfb460",
     "rating": 3,
-    "review": "Chuột hơi thô",
-    "variant": "637d100014b63b001c7e9d15"
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a26",
-    "user": "637e2d7b1c5b5b002c1f1a09",
-    "product": "637d100014b63b001c7e9d14",
+    "_id": "681c9964fabf4248e69fc1ac",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1ad",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1ae",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4bc",
     "rating": 5,
-    "review": "Đúng đồ xịn có khác",
-    "variant": "637d100014b63b001c7e9d15"
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a27",
-    "user": "637e2d7b1c5b5b002c1f1a08",
-    "product": "997d100054b63b001c7e9d05",
-    "rating": 1,
-    "review": "Đừng nên mua, lùa đấy",
-    "variant": "997d100054b63b001c7e9d06"
-  },
-  {
-    "_id": "638a1d8f1a4b4b002d9f2a28",
-    "user": "637e2d7b1c5b5b002c1f1a09",
-    "product": "997d100054b63b001c7e9d05",
+    "_id": "681c9964fabf4248e69fc1af",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb487",
     "rating": 5,
-    "review": "Chất",
-    "variant": "997d100054b63b001c7e9d06"
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a29",
+    "_id": "681c9964fabf4248e69fc1b1",
     "user": "637e2d7b1c5b5b002c1f1a08",
-    "product": "637c7eb214b63b001c7e9d1e",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1b2",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb49e",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1b3",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb479",
+    "rating": 4,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1bd",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb46f",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1be",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4a1",
     "rating": 3,
-    "review": "Đồ tàu mua về xài đỡ thôi",
-    "variant": "637c7eb814b63b001c7e9d1f"
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a30",
-    "user": "637e2d7b1c5b5b002c1f1a09",
-    "product": "637c7eb214b63b001c7e9d1e",
+    "_id": "681c9964fabf4248e69fc1bf",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb45d",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1c1",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb479",
+    "rating": 3,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1c2",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 4,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1c4",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb440",
     "rating": 5,
-    "review": "Đồ tàu chất vậy sao",
-    "variant": "637c7eb814b63b001c7e9d1f"
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a31",
-    "user": "637e2d7b1c5b5b002c1f1a08",
-    "product": "637c7fc214b63b001c7e9d2b",
+    "_id": "681c9964fabf4248e69fc1c5",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb499",
     "rating": 5,
-    "review": "Tai nghe tốt",
-    "variant": "637c7fc814b63b001c7e9d2c"
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a32",
+    "_id": "681c9964fabf4248e69fc1ca",
     "user": "637e2d7b1c5b5b002c1f1a03",
-    "product": "637c7fc214b63b001c7e9d2b",
-    "rating": 5,
-    "review": "Hàng tốt nghe thoải mái",
-    "variant": "637c7fc214b63b001c7e9d2c"
+    "product": "681c8feaedc5df4cc9dfb434",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a33",
+    "_id": "681c9964fabf4248e69fc1cb",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4d2",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1cc",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1cf",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4de",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1d0",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb493",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1d1",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4b9",
+    "rating": 4,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1d2",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb479",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1d6",
     "user": "637e2d7b1c5b5b002c1f1b01",
-    "product": "637c7ff014b63b001c7e9d31",
+    "product": "681c8feaedc5df4cc9dfb479",
     "rating": 5,
-    "review": "Hàng tốt nghe thoải mái",
-    "variant": "637c7fc214b63b001c7e9d2c"
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a34",
-    "user": "637e2d7b1c5b5b002c1f1a01",
-    "product": "637c800e14b63b001c7e9d35",
-    "rating": 1,
-    "review": "",
-    "variant": "637c801414b63b001c7e9d36"
+    "_id": "681c9964fabf4248e69fc1d7",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb46a",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
   },
   {
-    "_id": "638a1d8f1a4b4b002d9f2a35",
+    "_id": "681c9964fabf4248e69fc1d8",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4d2",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1d9",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1dc",
     "user": "637e2d7b1c5b5b002c1f1a02",
-    "product": "637d100014b63b001c7e9d10",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1dd",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1de",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1e2",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1e4",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4aa",
+    "rating": 4,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1e6",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1ea",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb474",
     "rating": 5,
-    "review": "Hàng limited xịn xò",
-    "variant": "637d100014b63b001c7e9d11"
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1eb",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1ed",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb467",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1ee",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb479",
+    "rating": 4,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1ef",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4d8",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1f1",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 5,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1f4",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb481",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1f5",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1f6",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 5,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1fa",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4b3",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1fb",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb481",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc1ff",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc201",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb496",
+    "rating": 3,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc202",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4a4",
+    "rating": 4,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc203",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb452",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc204",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb46f",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc206",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc207",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4b3",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc208",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4a7",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc209",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4b9",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc20b",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc20c",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb49e",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc20d",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc20e",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb434",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc20f",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4a1",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc211",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb452",
+    "rating": 5,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc212",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb499",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc216",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc217",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb490",
+    "rating": 4,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc218",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc21a",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 4,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc21b",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4b0",
+    "rating": 5,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc21c",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc21f",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb4d5",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc220",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb452",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc223",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb481",
+    "rating": 4,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc224",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb4b6",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc225",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc228",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb490",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc229",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4d2",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc22a",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb46f",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc22d",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb487",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc230",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4a4",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc231",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb479",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc236",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb46a",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc239",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc23a",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc23b",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb493",
+    "rating": 5,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc23c",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4ad",
+    "rating": 3,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc23d",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 5,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc23f",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4ad",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc242",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb48d",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc244",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc247",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 5,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc248",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 4,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc249",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 5,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc24b",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb49e",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc24c",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb48d",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc24e",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb4de",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc24f",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb4b9",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc253",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc259",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4a4",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc25b",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb467",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc25e",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 4,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc260",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4a4",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc261",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc262",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb481",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc264",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb46a",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc267",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb48a",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc268",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4b0",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc269",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb455",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc26c",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb49e",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc26d",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc270",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb499",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc275",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc27a",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4b3",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc27d",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc27e",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 5,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc280",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 5,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc281",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb43b",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc282",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc285",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc287",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb48d",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc288",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc28c",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc28d",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 4,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc28f",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb47e",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc290",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc291",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb45d",
+    "rating": 3,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc294",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 5,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc295",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4b0",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc296",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb47e",
+    "rating": 5,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc29d",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 4,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc29e",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4d5",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2a2",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb46a",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2a3",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2a8",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4db",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2ae",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb47e",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2af",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb4d8",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2b1",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb487",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2b3",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb481",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2b4",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2b7",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 5,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2b8",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb490",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2b9",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4d8",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2bc",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 5,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2bd",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2c2",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 3,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2c3",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2c4",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2c5",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4d2",
+    "rating": 5,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2c6",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4a7",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2c9",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2ca",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb467",
+    "rating": 4,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2cb",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb4b6",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2cc",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2ce",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb452",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2cf",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4b9",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2d2",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4de",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2d3",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2e1",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2e3",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb46f",
+    "rating": 4,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2e5",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 5,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2e6",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2e7",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 4,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2e9",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4d8",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2ea",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2ec",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2ee",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2f0",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb43b",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2f2",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2f4",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 5,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2f5",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb490",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2f7",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb47e",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2f8",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4db",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2f9",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb43b",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc2fc",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb455",
+    "rating": 3,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc300",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb4b3",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc301",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb48a",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc302",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc30d",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4db",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc30e",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4aa",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc312",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb490",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc313",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb487",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc316",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb4b6",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc317",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc318",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb496",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc31a",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc31b",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc31c",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc31e",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4d2",
+    "rating": 4,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc31f",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc321",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb487",
+    "rating": 5,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc322",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb452",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc323",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4b9",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc324",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4d5",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc328",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb452",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc32a",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc32b",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4b9",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc32d",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb499",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc32e",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb455",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc32f",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4b0",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc331",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb46f",
+    "rating": 5,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc332",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb452",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc336",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb434",
+    "rating": 5,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc339",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc33b",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb481",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc33c",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb455",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc33e",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc340",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 4,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc341",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb46f",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc343",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb493",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc345",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4b3",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc346",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc348",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc34b",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc34e",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc34f",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb455",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc351",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc353",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb46a",
+    "rating": 4,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9964fabf4248e69fc354",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9964fabf4248e69fc355",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4de",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc359",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb45d",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc35a",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb46f",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc35f",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb45d",
+    "rating": 5,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc362",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb434",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc363",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 4,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc365",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb487",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc366",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4d5",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc367",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb455",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc36a",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc36c",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 4,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc36d",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 3,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc36e",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 3,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc370",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4db",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc374",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc375",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc376",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb434",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc378",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb490",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc37b",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb4db",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc37c",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb45d",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc37d",
+    "user": "637e2d7b1c5b5b002c1f1a01",
+    "product": "681c8feaedc5df4cc9dfb499",
+    "rating": 5,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc37f",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb46a",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc380",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb4d5",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc384",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb467",
+    "rating": 3,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc38a",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc38b",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc38e",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc396",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4b3",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc399",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc39a",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb47e",
+    "rating": 4,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc39d",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb474",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3a3",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 4,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3a5",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4b3",
+    "rating": 4,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3a9",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb467",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3ab",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb496",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3ac",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb479",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3ae",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4db",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3b0",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb47e",
+    "rating": 3,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3b1",
+    "user": "637e2d7b1c5b5b002c1f1a06",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3b4",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4d2",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3b6",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4b0",
+    "rating": 4,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3b7",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3be",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb45d",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3c1",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4e4",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3c3",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3c4",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb467",
+    "rating": 5,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3cd",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4b0",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3d7",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb46f",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3db",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb47e",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3dd",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb484",
+    "rating": 5,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3e2",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3e4",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb499",
+    "rating": 4,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3e5",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb458",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3e8",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3e9",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 5,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3ec",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4d2",
+    "rating": 4,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3ee",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4b0",
+    "rating": 3,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3f1",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4b9",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3f2",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb467",
+    "rating": 3,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3fb",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc3fd",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb460",
+    "rating": 3,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc406",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb43b",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc410",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4bc",
+    "rating": 4,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc419",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc41e",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4cb",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc42a",
+    "user": "637e2d7b1c5b5b002c1f1a05",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 5,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc431",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc432",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4b9",
+    "rating": 3,
+    "review": "Sản phẩm tuyệt vời! Cảm giác sử dụng rất mượt mà và nhạy."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc439",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb499",
+    "rating": 5,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc43c",
+    "user": "637e2d7b1c5b5b002c1f1a12",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 4,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc43e",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 5,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc441",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 5,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc442",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb447",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc450",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 3,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc455",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc458",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb440",
+    "rating": 5,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc459",
+    "user": "637e2d7b1c5b5b002c1f1a09",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc465",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 3,
+    "review": "Hài lòng với chất lượng, đóng gói cẩn thận."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc46d",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc46f",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 4,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc472",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb499",
+    "rating": 5,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc479",
+    "user": "637e2d7b1c5b5b002c1f1b01",
+    "product": "681c8feaedc5df4cc9dfb499",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc47c",
+    "user": "637e2d7b1c5b5b002c1f1a02",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc480",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 4,
+    "review": "Đúng mô tả, hàng xịn, giao nhanh."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc487",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb4e9",
+    "rating": 4,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc48b",
+    "user": "637e2d7b1c5b5b002c1f1a07",
+    "product": "681c8feaedc5df4cc9dfb47e",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc48e",
+    "user": "637e2d7b1c5b5b002c1f1a04",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 5,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc492",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4c6",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc493",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 5,
+    "review": "Sản phẩm chất lượng, thiết kế đẹp, đáng tiền."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc495",
+    "user": "637e2d7b1c5b5b002c1f1a11",
+    "product": "681c8feaedc5df4cc9dfb4b9",
+    "rating": 5,
+    "review": "Giá hợp lý, giao hàng nhanh chóng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc497",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc498",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 4,
+    "review": "Tốt hơn mong đợi, rất hài lòng!"
+  },
+  {
+    "_id": "681c9965fabf4248e69fc4a0",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 3,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc4a2",
+    "user": "637e2d7b1c5b5b002c1f1b03",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 3,
+    "review": "Mua lần 2 vì quá ưng, cảm ơn shop nhiều."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc4a4",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb434",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc4a8",
+    "user": "637e2d7b1c5b5b002c1f1b02",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 4,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc4ab",
+    "user": "637e2d7b1c5b5b002c1f1a08",
+    "product": "681c8feaedc5df4cc9dfb4c3",
+    "rating": 3,
+    "review": "Dùng ổn, phù hợp với mô tả. Sẽ ủng hộ tiếp."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc4ae",
+    "user": "637e2d7b1c5b5b002c1f1a03",
+    "product": "681c8feaedc5df4cc9dfb4e1",
+    "rating": 3,
+    "review": "Hoạt động ổn định, rất tiện lợi khi dùng."
+  },
+  {
+    "_id": "681c9965fabf4248e69fc4b8",
+    "user": "637e2d7b1c5b5b002c1f1b04",
+    "product": "681c8feaedc5df4cc9dfb4ec",
+    "rating": 3,
+    "review": "Không có gì để chê, quá tốt trong tầm giá."
   }
 ]

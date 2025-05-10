@@ -15,6 +15,7 @@
     "shippingFee": 21001,
     "discount": "67d7edf7acd659b561c8425d",
     "discountAmount": 125900,
+    "orderCode": "ORD-2025-03-19-0001",
     "createdAt": "2025-03-19T17:05:06.508Z",
     "updatedAt": "2025-03-19T17:05:06.508Z"
   },
@@ -38,6 +39,7 @@
     ],
     "shippingFee": 21001,
     "discount": "67d7edf7acd659b561c8425d",
-    "discountAmount": 200000
+    "discountAmount": 200000,
+    "orderCode": "ORD-2025-03-19-0002"
   }
 ]

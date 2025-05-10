@@ -99,7 +99,7 @@ export const updateProfile = catchAsync(
       const DEFAULT_PUBLIC_ID = 'avatars/test-public-id';
       console.log(user.photo.publicId === DEFAULT_PUBLIC_ID);
       const [uploadResult, deleteResult] = await Promise.all([
-        uploadImage(req.file.path),
+        uploadImage('avatars', req.file.path),
         user.photo.publicId !== DEFAULT_PUBLIC_ID
           ? deleteImage(user.photo.publicId!)
           : Promise.resolve({ result: 'ok' }),

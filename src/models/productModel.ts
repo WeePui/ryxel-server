@@ -45,9 +45,9 @@ const variantsSchema = new Schema<IVariant>(
       required: [true, 'Variant images is required'],
       validate: {
         validator: function (v) {
-          return v.length >= 4;
+          return v.length > 0;
         },
-        message: 'Each variant must have at least 4 images',
+        message: 'Each variant must have at least 1 image',
       },
     },
     sold: {
@@ -265,7 +265,7 @@ productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
   if (!filter.categoryName) {
     this.populate({
       path: 'category',
-      select: 'name',
+      select: 'name slug',
     });
   }
 

@@ -56,6 +56,8 @@ export default (
   res: Response,
   next: NextFunction
 ) => {
+  console.log('Error: ', error);
+
   error.statusCode = error.statusCode || 500;
   error.status = error.status || 'error';
 

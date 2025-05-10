@@ -183,7 +183,7 @@ class APIFeatures {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(',').join(' ') + ' _id';
       this.query = this.query.sort(sortBy);
-    } else this.query = this.query.sort('-createdAt _id');
+    } else this.query = this.query.sort('-createdAt _id totalStock');
 
     return this;
   }
@@ -201,7 +201,7 @@ class APIFeatures {
   paginate() {
     // Pagination
     const page = Number(this.queryString.page) || 1;
-    const limit = Number(this.queryString.limit) || 10;
+    const limit = Number(this.queryString.limit) || 16;
     const skip = (page - 1) * limit;
     this.query = this.query.skip(skip).limit(limit);
     return this;
