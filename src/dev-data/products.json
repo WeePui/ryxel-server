@@ -1,6 +1,6 @@
 [
   {
-    "_id": "681c8feaedc5df4cc9dfb434",
+    "_id": "681d33cc42a780efb6c4082a",
     "name": "Tai Nghe không dây Razer Barracuda X 2022",
     "description": "Tai nghe không dây Razer Barracuda X 2022 nổi bật với thiết kế siêu nhẹ chỉ 250g, kết nối không dây 4 trong 1 và thời lượng pin lên đến 50 giờ. Sản phẩm này tương thích với nhiều thiết bị khác nhau",
     "brand": "Razer",
@@ -17,8 +17,8 @@
           "rgb": "Không"
         },
         "price": 1890000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 912,
+        "sold": 138,
         "cost": 1140000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756953/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-4-0688d75a-974e-4b13-976d-5d377321708b_zb4b1j.webp",
@@ -27,7 +27,9 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756953/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-5_qpeqpq.webp"
         ],
         "weight": 400,
-        "_id": "681c8feaedc5df4cc9dfb436"
+        "_id": "681d33cc42a780efb6c4082c",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "Quarkz",
@@ -39,8 +41,8 @@
           "rgb": "Không"
         },
         "price": 1890000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 892,
+        "sold": 158,
         "cost": 1140000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-1_agmi9n.webp",
@@ -49,7 +51,9 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-50300a26-ccd7-45d9-ad65-bcce3eea2532_g4chdp.webp"
         ],
         "weight": 400,
-        "_id": "681c8feaedc5df4cc9dfb438"
+        "_id": "681d33cc42a780efb6c4082e",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "Mercury",
@@ -61,8 +65,8 @@
           "rgb": "Không"
         },
         "price": 1890000,
-        "stock": 0,
-        "sold": 40,
+        "stock": 910,
+        "sold": 130,
         "cost": 1140000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-1_gnrzqm.webp",
@@ -71,12 +75,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-97cb972a-6ce5-4851-aca9-c7a020843c1a_xvwyyp.webp"
         ],
         "weight": 500,
-        "_id": "681c8feaedc5df4cc9dfb43a"
+        "_id": "681d33cc42a780efb6c40830",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb43b",
+    "_id": "681d33cc42a780efb6c40831",
     "name": "Tai Nghe không dây Razer Barracuda X Chroma",
     "description": "Tai nghe không dây Razer Barracuda X Chroma là bản nâng cấp mang đến trải nghiệm âm thanh sống động với công nghệ âm thanh vòm 7.1. đèn Led RGB và khả năng kết nối đa nền tảng.",
     "brand": "Razer",
@@ -93,8 +101,8 @@
           "rgb": "Có"
         },
         "price": 3590000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 863,
+        "sold": 187,
         "cost": 210000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-03_uvx2rz.webp",
@@ -103,7 +111,9 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-08_egmpb7.webp"
         ],
         "weight": 365,
-        "_id": "681c8feaedc5df4cc9dfb43d"
+        "_id": "681d33cc42a780efb6c40833",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "White",
@@ -115,8 +125,8 @@
           "rgb": "Có"
         },
         "price": 3590000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 926,
+        "sold": 124,
         "cost": 210000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-13_gutccf.webp",
@@ -125,12 +135,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-15_mrxvqp.webp"
         ],
         "weight": 430,
-        "_id": "681c8feaedc5df4cc9dfb43f"
+        "_id": "681d33cc42a780efb6c40835",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb440",
+    "_id": "681d33cc42a780efb6c40836",
     "name": "Tai nghe EPOS Sennheiser",
     "description": "Tai nghe EPOS Sennheiser có thiết kế chống ồn, âm thanh độ phân giải cao, micro rõ nét và headband điều chỉnh được, kết nổi thông qua jack 3.5mm phù hợp với nhiều thiết bị và nền tảng khác nhau.",
     "brand": "Sennheiser",
@@ -147,17 +161,18 @@
           "rgb": "Không"
         },
         "price": 2990000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 862,
+        "sold": 188,
         "cost": 1310000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-4_a6f4fdf796d344d8aca3f2046f1a0d8b_grande_ccvgax.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-3_2d24907e30144f558cc4cb9aa80f2186_grande_v7tdik.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-2_71b801ebafee4a50bbfddc93459e3396_grande_ntifap.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-4_a6f4fdf796d344d8aca3f2046f1a0d8b_grande_ccvgax.webp"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-2_71b801ebafee4a50bbfddc93459e3396_grande_ntifap.webp"
         ],
         "weight": 398,
-        "_id": "681c8feaedc5df4cc9dfb442"
+        "_id": "681d33cc42a780efb6c40838",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "GSP 602 Blue",
@@ -169,8 +184,8 @@
           "rgb": "Không"
         },
         "price": 7130000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 902,
+        "sold": 148,
         "cost": 3130000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756976/products/dev-products/unnamed_3bd33c509e264764a496c3c92bd1dd9d_large_tofb7e.webp",
@@ -179,7 +194,9 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn_1_clqgse.webp"
         ],
         "weight": 373,
-        "_id": "681c8feaedc5df4cc9dfb444"
+        "_id": "681d33cc42a780efb6c4083a",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "GSP 600 Black",
@@ -191,8 +208,8 @@
           "rgb": "Không"
         },
         "price": 6990000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 887,
+        "sold": 163,
         "cost": 2990000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756836/products/dev-products/screenshot_11_66f41a7a65944ae5a7ee24baede946bc_bmqs0o.webp",
@@ -201,12 +218,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756831/products/dev-products/screenshot_8_5e78922b673f4f5a847c3cf5bd580b22_k7jwes.webp"
         ],
         "weight": 318,
-        "_id": "681c8feaedc5df4cc9dfb446"
+        "_id": "681d33cc42a780efb6c4083c",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb447",
+    "_id": "681d33cc42a780efb6c4083d",
     "name": "Tai nghe Apple AirPods Max",
     "description": "Tai nghe Apple AirPods Max Green là một sản phẩm cao cấp của Apple, nổi bật với thiết kế sang trọng và chất lượng âm thanh tuyệt hảo. Với công nghệ khử tiếng ồn chủ động và âm thanh không gian, AirPods Max mang đến trải nghiệm nghe nhạc đỉnh cao. Tai nghe này cũng có thời lượng pin lên đến 20 giờ và khả năng kết nối Bluetooth 5.0, giúp bạn thoải mái sử dụng trong thời gian dài.",
     "brand": "Apple",
@@ -223,17 +244,16 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 930,
+        "sold": 120,
         "cost": 8290000,
         "images": [
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg"
         ],
         "weight": 417,
-        "_id": "681c8feaedc5df4cc9dfb449"
+        "_id": "681d33cc42a780efb6c4083f",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "Midnight",
@@ -245,17 +265,16 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 936,
+        "sold": 114,
         "cost": 8290000,
         "images": [
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-midnight_FV1_f6s9li.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-midnight_FV1_f6s9li.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-midnight_FV1_f6s9li.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-midnight_FV1_f6s9li.jpg"
         ],
         "weight": 466,
-        "_id": "681c8feaedc5df4cc9dfb44b"
+        "_id": "681d33cc42a780efb6c40841",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "Blue",
@@ -267,17 +286,16 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 866,
+        "sold": 184,
         "cost": 8290000,
         "images": [
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-blue_FV1_xj2j2m.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-blue_FV1_xj2j2m.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-blue_FV1_xj2j2m.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-blue_FV1_xj2j2m.jpg"
         ],
         "weight": 439,
-        "_id": "681c8feaedc5df4cc9dfb44d"
+        "_id": "681d33cc42a780efb6c40843",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "Purple",
@@ -289,17 +307,16 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 905,
+        "sold": 145,
         "cost": 8290000,
         "images": [
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-purple_FV1_gzzftj.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-purple_FV1_gzzftj.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-purple_FV1_gzzftj.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-purple_FV1_gzzftj.jpg"
         ],
         "weight": 443,
-        "_id": "681c8feaedc5df4cc9dfb44f"
+        "_id": "681d33cc42a780efb6c40845",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "Orange",
@@ -311,22 +328,23 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 914,
+        "sold": 136,
         "cost": 8290000,
         "images": [
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-orange_FV1_pt4qyq.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-orange_FV1_pt4qyq.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-orange_FV1_pt4qyq.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-orange_FV1_pt4qyq.jpg"
         ],
         "weight": 420,
-        "_id": "681c8feaedc5df4cc9dfb451"
+        "_id": "681d33cc42a780efb6c40847",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb452",
+    "_id": "681d33cc42a780efb6c40848",
     "name": "Tai nghe Steelseries Arctis Nova Pro Wireless",
     "description": "Tai nghe Steelseries Arctis Nova Pro Wireless là lựa chọn hoàn hảo cho game thủ chuyên nghiệp. Với thiết kế cứng cáp nhưng nhẹ nhàng, tai nghe này mang lại cảm giác thoải mái khi đeo trong thời gian dài. Chất lượng âm thanh vượt trội với âm bass sống động và khả năng tái tạo âm thanh chuyên nghiệp nhờ hệ thống Nova Pro Acoustic System và Premium High Fidelity Drivers. Microphone ClearCast Gen 2 chống ồn hai chiều giúp giọng nói rõ ràng hơn. Pin dung lượng lớn lên đến 44 giờ sử dụng, đảm bảo không bị gián đoạn trong quá trình chơi game",
     "brand": "Steelseries",
@@ -343,22 +361,25 @@
           "rgb": "Không"
         },
         "price": 9490000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 910,
+        "sold": 140,
         "cost": 5490000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-1_4825ff4f26a04258be72db4ff9a562d4_xorzgn.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-2_f8a22546f15b4887a9229664cf02b2a8_bppzip.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756822/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-4_e8963e79525c463997ea9f027e61db66_wmvklr.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-1_4825ff4f26a04258be72db4ff9a562d4_xorzgn.webp"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756822/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-4_e8963e79525c463997ea9f027e61db66_wmvklr.webp"
         ],
         "weight": 406,
-        "_id": "681c8feaedc5df4cc9dfb454"
+        "_id": "681d33cc42a780efb6c4084a",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb455",
+    "_id": "681d33cc42a780efb6c4084b",
     "name": "Ghế công thái học Razer Fujin",
     "description": "Ghế công thái học Razer Fujin RZ38-04950100-R3U1 được thiết kế để mang lại sự thoải mái và bảo vệ sức khỏe người dùng. Với khả năng điều chỉnh linh hoạt, chất liệu thoáng khí và thiết kế hiện đại, sản phẩm này giúp giảm áp lực lên cột sống và hỗ trợ tư thế ngồi đúng.",
     "brand": "Razer",
@@ -374,22 +395,25 @@
           "weightCapacity": "136kg"
         },
         "price": 17990000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 921,
+        "sold": 129,
         "cost": 12290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-04_gmkzqu.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-02_imizc7.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-01_g1u5r1.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-04_gmkzqu.webp"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-01_g1u5r1.webp"
         ],
         "weight": 12200,
-        "_id": "681c8feaedc5df4cc9dfb457"
+        "_id": "681d33cc42a780efb6c4084d",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb458",
+    "_id": "681d33cc42a780efb6c4084e",
     "name": "Ghế công thái học Gami Focus V2",
     "description": "Ghế công thái học Gami Focus V2 là lựa chọn tuyệt vời cho những ai cần một chiếc ghế hỗ trợ tư thế ngồi đúng và bảo vệ sức khỏe. Với thiết kế công thái học hiện đại, ghế giúp giảm căng thẳng cho cột sống, vai và cổ. Tựa lưng Twin-back FlexSupport và tựa đầu 2D Comfort mang lại sự thoải mái tối ưu. Tay vịn 3D và chân ghế hợp kim nhôm chắc chắn, cùng lớp lưới thoáng khí cao cấp, đảm bảo sự thoải mái và bền bỉ",
     "brand": "Gami",
@@ -405,8 +429,8 @@
           "weightCapacity": "150kg"
         },
         "price": 3490000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 896,
+        "sold": 154,
         "cost": 1290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756825/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-02_xdqers.webp",
@@ -415,7 +439,9 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756829/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-04_cuckgt.webp"
         ],
         "weight": 12200,
-        "_id": "681c8feaedc5df4cc9dfb45a"
+        "_id": "681d33cc42a780efb6c40850",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "Black",
@@ -426,8 +452,8 @@
           "weightCapacity": "150kg"
         },
         "price": 3490000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 933,
+        "sold": 117,
         "cost": 1290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-09_c4hlle.webp",
@@ -436,12 +462,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-10_ttv7az.webp"
         ],
         "weight": 12200,
-        "_id": "681c8feaedc5df4cc9dfb45c"
+        "_id": "681d33cc42a780efb6c40852",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb45d",
+    "_id": "681d33cc42a780efb6c40853",
     "name": "Ghế công thái học Gami Crom All Black",
     "description": "Ghế công thái học Gami Crom All Black E902-001 nổi bật với thiết kế mạnh mẽ và sang trọng, chất liệu lưới Solidmesh USA thoáng mát, và khả năng điều chỉnh linh hoạt. Sản phẩm hỗ trợ nhiều tư thế ngồi với tựa lưng Butterfit 2D và tựa đầu HeadFlex 8D, giúp giảm căng thẳng cho cột sống và cổ. Chân ghế hợp kim nhôm chắc chắn, chịu lực tốt, và đệm ghế cao cấp mang lại sự thoải mái tối ưu.",
     "brand": "Gami",
@@ -457,22 +487,25 @@
           "weightCapacity": "150kg"
         },
         "price": 5850000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 909,
+        "sold": 141,
         "cost": 2350000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-04_srqg4t.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-03_cbebwo.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-02_hunopx.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-04_srqg4t.webp"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-02_hunopx.webp"
         ],
         "weight": 12200,
-        "_id": "681c8feaedc5df4cc9dfb45f"
+        "_id": "681d33cc42a780efb6c40855",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb460",
+    "_id": "681d33cc42a780efb6c40856",
     "name": "Bộ bàn nâng hạ HyperWork Atlas",
     "description": "Bộ bàn nâng hạ HyperWork Atlas có thiết kế hiện đại với động cơ dual motor, giúp điều chỉnh chiều cao từ 60.2cm đến 126cm một cách linh hoạt. Chân bàn bằng hợp kim chắc chắn, chịu tải trọng lên đến 120kg. Bộ điều khiển thông minh và công nghệ chống va chạm đảm bảo an toàn và tiện lợi khi sử dụng.",
     "brand": "HyperWork",
@@ -489,8 +522,8 @@
           "maxLoad": "120kg"
         },
         "price": 9590000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 864,
+        "sold": 186,
         "cost": 5290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-03_yqsrud.webp",
@@ -499,7 +532,9 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-03_heuscm.webp"
         ],
         "weight": 12639,
-        "_id": "681c8feaedc5df4cc9dfb462"
+        "_id": "681d33cc42a780efb6c40858",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "Black",
@@ -511,8 +546,8 @@
           "maxLoad": "120kg"
         },
         "price": 9590000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 876,
+        "sold": 174,
         "cost": 5290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-01_czokvz.webp",
@@ -521,7 +556,9 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-03_heuscm.webp"
         ],
         "weight": 14930,
-        "_id": "681c8feaedc5df4cc9dfb464"
+        "_id": "681d33cc42a780efb6c4085a",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
         "name": "Wood",
@@ -533,8 +570,8 @@
           "maxLoad": "120kg"
         },
         "price": 9590000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 918,
+        "sold": 132,
         "cost": 5290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-02_h9z05x.webp",
@@ -543,12 +580,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/bo-chan-chu-t-ban-nang-ha-hyperwork-atlas-03_heuscm.webp"
         ],
         "weight": 11550,
-        "_id": "681c8feaedc5df4cc9dfb466"
+        "_id": "681d33cc42a780efb6c4085c",
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb467",
+    "_id": "681d33cc42a780efb6c4085d",
     "name": "Bàn Gaming E-DRA EGT1460A",
     "description": "Bàn Gaming E-DRA EGT1460A có thiết kế tối giản và chất lượng cao, với kích thước 140 x 60 x 75 cm. Chân bàn chữ A chắc chắn, có móc treo tai nghe và hộc đựng nước uống. Vật liệu nhựa và thép carbon cao cấp đảm bảo độ bền và ổn định, tạo không gian lý tưởng cho hệ thống máy tính của bạn.",
     "brand": "E-DRA",
@@ -556,7 +597,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024_mpz6k1.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb469",
+        "_id": "681d33cc42a780efb6c4085f",
         "name": "Black Switch",
         "sku": "EDRA-EGT146",
         "specifications": {
@@ -566,21 +607,24 @@
           "maxLoad": "110kg"
         },
         "price": 2690000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 921,
+        "sold": 129,
         "cost": 1090000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024_mpz6k1.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-02_807eb022a44e40eabb8e2a30d89a2fc0_1024x1024_x7drza.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-03_f39d6f34f3c74f20b5492cbccfecf19a_1024x1024_gnizbr.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024_mpz6k1.webp"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-03_f39d6f34f3c74f20b5492cbccfecf19a_1024x1024_gnizbr.webp"
         ],
-        "weight": 12959
+        "weight": 12959,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb46a",
+    "_id": "681d33cc42a780efb6c40860",
     "name": "Chuột Gaming có dây HyperX Pulsefire Haste II",
     "description": "Chuột Gaming HyperX Pulsefire Haste 2 trang bị mắt đọc cảm biến HyperX 26k với 26.000 DPI đem đến độ chính xác tới từng độ phân giải DPI.",
     "brand": "HyperX",
@@ -588,7 +632,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image1_yy3wa7.jpg",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb46c",
+        "_id": "681d33cc42a780efb6c40862",
         "name": "Black - Wired",
         "sku": "GMX1000-BLK-WIRED",
         "specifications": {
@@ -598,8 +642,8 @@
           "rgb": "Yes"
         },
         "price": 1249000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 892,
+        "sold": 158,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image1_yy3wa7.jpg",
@@ -607,10 +651,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image3_bmeyzw.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image4_qiswi6.jpg"
         ],
-        "weight": 113
+        "weight": 113,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb46e",
+        "_id": "681d33cc42a780efb6c40864",
         "name": "White - Wireless",
         "sku": "GMX1000-WHT-WIRELESS",
         "specifications": {
@@ -620,8 +666,8 @@
           "rgb": "Yes"
         },
         "price": 1269000,
-        "stock": 0,
-        "sold": 30,
+        "stock": 887,
+        "sold": 143,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image1_mydd2q.jpg",
@@ -629,12 +675,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image3_yjpanr.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image4_gffptl.jpg"
         ],
-        "weight": 188
+        "weight": 188,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb46f",
+    "_id": "681d33cc42a780efb6c40865",
     "name": "Bàn phím cơ TKL Dareu EK87L V2",
     "description": "Bàn phím cơ TKL Dareu EK87L V2 sở hữu thiết kế Tenkeyless (TKL) tiết kiệm tối đa không gian bàn làm việc của bạn.",
     "brand": "DareU",
@@ -642,7 +692,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image1_kljtht.jpg",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb471",
+        "_id": "681d33cc42a780efb6c40867",
         "name": "Black - Red Switch",
         "sku": "KFK200-BLK-RED",
         "specifications": {
@@ -652,8 +702,8 @@
           "connection": "USB"
         },
         "price": 1289000,
-        "stock": 0,
-        "sold": 40,
+        "stock": 909,
+        "sold": 131,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image1_kljtht.jpg",
@@ -661,10 +711,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image3_k7vlji.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image4_i4bqqw.jpg"
         ],
-        "weight": 644
+        "weight": 644,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb473",
+        "_id": "681d33cc42a780efb6c40869",
         "name": "White - Blue Switch",
         "sku": "KFK200-WHT-BLUE",
         "specifications": {
@@ -674,8 +726,8 @@
           "connection": "USB"
         },
         "price": 1289000,
-        "stock": 0,
-        "sold": 25,
+        "stock": 923,
+        "sold": 102,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image1_uqz5rf.jpg",
@@ -683,12 +735,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image3_pnk66r.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image4_phpgsn.jpg"
         ],
-        "weight": 564
+        "weight": 564,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb474",
+    "_id": "681d33cc42a780efb6c4086a",
     "name": "Tai Nghe Gaming HyperX Cloud III",
     "description": "Tai Nghe Gaming HyperX Cloud III để bạn chìm đắm vào âm thanh 3D với âm thanh vòm được cung cấp nhờ DTS® Headphone: X Spatial Audio.",
     "brand": "HyperX",
@@ -696,7 +752,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image1_qz6ioy.jpg",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb476",
+        "_id": "681d33cc42a780efb6c4086c",
         "name": "Black",
         "sku": "SWH500-BLK",
         "specifications": {
@@ -706,8 +762,8 @@
           "rgb": "No"
         },
         "price": 1259000,
-        "stock": 0,
-        "sold": 60,
+        "stock": 877,
+        "sold": 183,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image1_qz6ioy.jpg",
@@ -715,10 +771,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image3_khru0a.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image4_nhumz7.jpg"
         ],
-        "weight": 431
+        "weight": 431,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb478",
+        "_id": "681d33cc42a780efb6c4086e",
         "name": "Red",
         "sku": "SWH500-RED",
         "specifications": {
@@ -728,8 +786,8 @@
           "rgb": "No"
         },
         "price": 1259000,
-        "stock": 0,
-        "sold": 45,
+        "stock": 882,
+        "sold": 163,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image1_tqufzz.jpg",
@@ -737,12 +795,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756836/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image3_xhhw2q.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756836/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image4_f3fpjc.jpg"
         ],
-        "weight": 400
+        "weight": 400,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb479",
+    "_id": "681d33cc42a780efb6c4086f",
     "name": "Chuột Gaming không dây Logitech G Pro X Superlight 2",
     "description": "Loại bỏ tất cả mọi chướng ngại vật trên chặng đường giành chiến thắng với con chuột PRO X SUPERLIGHT 2 cực nhẹ và nhanh nhất từ trước tới nay của Logitech.",
     "brand": "Logitech",
@@ -750,7 +812,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image1_w9msm8.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb47b",
+        "_id": "681d33cc42a780efb6c40871",
         "name": "Black",
         "sku": "PGZ500-BLK",
         "specifications": {
@@ -760,8 +822,8 @@
           "weight": 60
         },
         "price": 1299000,
-        "stock": 0,
-        "sold": 45,
+        "stock": 917,
+        "sold": 128,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image1_w9msm8.png",
@@ -769,10 +831,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image3_e1tq3d.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image4_ia5ovn.jpg"
         ],
-        "weight": 126
+        "weight": 126,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb47d",
+        "_id": "681d33cc42a780efb6c40873",
         "name": "White",
         "sku": "PGZ500-WHT",
         "specifications": {
@@ -782,8 +846,8 @@
           "weight": 60
         },
         "price": 1299000,
-        "stock": 0,
-        "sold": 30,
+        "stock": 912,
+        "sold": 118,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image1_p5fk7p.png",
@@ -791,12 +855,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image3_lm5wnl.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image4_s0renw.png"
         ],
-        "weight": 174
+        "weight": 174,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb47e",
+    "_id": "681d33cc42a780efb6c40874",
     "name": "Chuột Gaming không dây Razer Viper V3 Pro",
     "description": "Chuột Gaming Không Dây Razer Viper V3 Pro sở hữu thiết kế đối xứng hoàn hảo, phù hợp cho cả người thuận tay trái và tay phải.",
     "brand": "Razer",
@@ -804,7 +872,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image1_njzqg7.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb480",
+        "_id": "681d33cc42a780efb6c40876",
         "name": "Black",
         "sku": "LSU700-BLK",
         "specifications": {
@@ -814,8 +882,8 @@
           "weight": 54
         },
         "price": 2129000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 890,
+        "sold": 160,
         "cost": 890000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image1_njzqg7.png",
@@ -823,12 +891,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image3_f1lxck.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image4_bxnppi.png"
         ],
-        "weight": 174
+        "weight": 174,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb481",
+    "_id": "681d33cc42a780efb6c40877",
     "name": "Bàn phím cơ ASUS ROG Falchion Ace White",
     "description": "Bàn phím cơ ASUS ROG Falchion Ace White (ROG NX Sw) là một tuyệt tác công nghệ dành cho game thủ và những người đam mê công nghệ.",
     "brand": "ASUS",
@@ -836,7 +908,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756730/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image1_k8eqpa.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb483",
+        "_id": "681d33cc42a780efb6c40879",
         "name": "Red Switch",
         "sku": "CKK90-RED",
         "specifications": {
@@ -846,8 +918,8 @@
           "connection": "USB"
         },
         "price": 1269000,
-        "stock": 0,
-        "sold": 40,
+        "stock": 901,
+        "sold": 139,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756730/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image1_k8eqpa.png",
@@ -855,12 +927,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756731/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image3_o8dgca.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756732/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image4_exusvu.png"
         ],
-        "weight": 916
+        "weight": 916,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb484",
+    "_id": "681d33cc42a780efb6c4087a",
     "name": "Tai Nghe Gaming không dây Corsair HS55 Wireless",
     "description": "Nghe được mọi thứ với âm thanh Dolby Audio 7.1 Surround  sound từ những tiếng bước chân nhỏ nhẹ nhất đến tiếng nổ vang dội nhất.",
     "brand": "Corsair",
@@ -868,7 +944,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756838/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image1_reambf.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb486",
+        "_id": "681d33cc42a780efb6c4087c",
         "name": "Black",
         "sku": "SBH300-BLK",
         "specifications": {
@@ -878,8 +954,8 @@
           "rgb": "No"
         },
         "price": 17900000,
-        "stock": 0,
-        "sold": 55,
+        "stock": 898,
+        "sold": 157,
         "cost": 1340000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756838/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image1_reambf.png",
@@ -887,12 +963,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756875/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image3_duhird.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756893/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image4_oy1wdd.png"
         ],
-        "weight": 400
+        "weight": 400,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb487",
+    "_id": "681d33cc42a780efb6c4087d",
     "name": "Bàn phím cơ HyperX Alloy Origins RGB HyperX",
     "description": "Bàn phím cơ HyperX Alloy Origins có thiết kế nhỏ gọn và trang bị Switch HyperX mang đến hiệu suất cao nhất.",
     "brand": "HyperX",
@@ -900,7 +980,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image1_hrfrma.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb489",
+        "_id": "681d33cc42a780efb6c4087f",
         "name": "Blue Switch",
         "sku": "TTX-BLUE",
         "specifications": {
@@ -910,8 +990,8 @@
           "connection": "USB"
         },
         "price": 1990000,
-        "stock": 0,
-        "sold": 35,
+        "stock": 921,
+        "sold": 114,
         "cost": 840000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image1_hrfrma.png",
@@ -919,12 +999,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image3_xueslr.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image4_kzhtws.png"
         ],
-        "weight": 646
+        "weight": 646,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb48a",
+    "_id": "681d33cc42a780efb6c40880",
     "name": "Ghế Gaming Corsair TC100 Fabric",
     "description": "Ghế Gaming Corsair TC100 lấy cảm hứng thiết kế từ xe đua tạo cho người dùng sự thoải mái và phong cách độc đáo.",
     "brand": "Corsair",
@@ -932,7 +1016,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe_gaming_corsair_tc100_fabric_image1_qpagry.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb48c",
+        "_id": "681d33cc42a780efb6c40882",
         "name": "Black/Red",
         "sku": "CMAX-C500-RD",
         "specifications": {
@@ -941,8 +1025,8 @@
           "weightCapacity": "120kg"
         },
         "price": 1219000,
-        "stock": 0,
-        "sold": 25,
+        "stock": 902,
+        "sold": 123,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe_gaming_corsair_tc100_fabric_image1_qpagry.png",
@@ -950,12 +1034,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc100_fabric_image3_ozidyi.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc100_fabric_image4_mpyoln.png"
         ],
-        "weight": 9110
+        "weight": 9110,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb48d",
+    "_id": "681d33cc42a780efb6c40883",
     "name": "Bàn văn phòng HyperWork Core Desk",
     "description": "Bàn Văn Phòng HyperWork Core Desk là giải pháp hoàn hảo cho những ai đang tìm kiếm một chiếc bàn làm việc vừa tiện dụng, vừa thẩm mỹ.",
     "brand": "HyperWork",
@@ -963,7 +1051,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image1_i4i86a.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb48f",
+        "_id": "681d33cc42a780efb6c40885",
         "name": "Black",
         "sku": "DPTX-BLK",
         "specifications": {
@@ -973,8 +1061,8 @@
           "maxLoad": "80kg"
         },
         "price": 2199000,
-        "stock": 0,
-        "sold": 20,
+        "stock": 912,
+        "sold": 108,
         "cost": 840000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image1_i4i86a.png",
@@ -982,12 +1070,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image3_lbttsi.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image4_hcgaxi.png"
         ],
-        "weight": 12610
+        "weight": 12610,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb490",
+    "_id": "681d33cc42a780efb6c40886",
     "name": "Tai Nghe Gaming không dây Logitech Pro X 2 Lightspeed",
     "description": "Tai nghe không dây PRO X 2 LIGHTSPEED với thiết kế chuyên nghiệp đã giành giải thưởng, mang lại âm thanh cấp độ chuyên nghiệp cùng sự thoải mái vượt trội.",
     "brand": "Logitech",
@@ -995,7 +1087,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756943/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image1_yrldtz.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb492",
+        "_id": "681d33cc42a780efb6c40888",
         "name": "White",
         "sku": "WTZ700-WHT",
         "specifications": {
@@ -1005,8 +1097,8 @@
           "rgb": "No"
         },
         "price": 2119000,
-        "stock": 1,
-        "sold": 59,
+        "stock": 0,
+        "sold": 60,
         "cost": 980000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756943/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image1_yrldtz.png",
@@ -1014,12 +1106,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756944/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image3_xmvrau.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756944/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image4_fn5mjf.png"
         ],
-        "weight": 400
+        "weight": 400,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb493",
+    "_id": "681d33cc42a780efb6c40889",
     "name": "Bàn phím cơ Razer Huntsman V3 Pro Tenkeyless",
     "description": "Bàn phím cơ Razer Huntsman V3 Pro Tenkeyless Analog Optical thiết kế kiểu dáng gọn nhẹ, tối đa không gian để chuột nhưng đem đến độ chính xác cao cùng cảm giác chơi game tuyệt đỉnh cho game thủ.",
     "brand": "Razer",
@@ -1027,7 +1123,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image1_m7x4yi.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb495",
+        "_id": "681d33cc42a780efb6c4088b",
         "name": "Black Switch",
         "sku": "PKRGB-BLACK",
         "specifications": {
@@ -1037,8 +1133,8 @@
           "connection": "USB"
         },
         "price": 12109000,
-        "stock": 0,
-        "sold": 30,
+        "stock": 931,
+        "sold": 99,
         "cost": 8400000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image1_m7x4yi.png",
@@ -1046,12 +1142,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image3_fghbjv.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image4_fnmtzp.png"
         ],
-        "weight": 571
+        "weight": 571,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb496",
+    "_id": "681d33cc42a780efb6c4088c",
     "name": "Ghế Gaming Corsair TC500 Luxe",
     "description": "Ghế Gaming Corsair TC500 Luxe là một trong những sản phẩm ghế chơi game cao cấp nhất hiện nay, mang đến sự kết hợp hoàn hảo giữa thiết kế sang trọng, chất liệu cao cấp và công thái học vượt trội.",
     "brand": "Corsair",
@@ -1059,7 +1159,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image1_uojhb8.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb498",
+        "_id": "681d33cc42a780efb6c4088e",
         "name": "White",
         "sku": "CSXC300-WHT",
         "specifications": {
@@ -1068,8 +1168,8 @@
           "weightCapacity": "120kg"
         },
         "price": 1779000,
-        "stock": 0,
-        "sold": 15,
+        "stock": 895,
+        "sold": 120,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image1_uojhb8.png",
@@ -1077,12 +1177,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image3_h39lrr.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image4_jdskmv.png"
         ],
-        "weight": 7705
+        "weight": 7705,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb499",
+    "_id": "681d33cc42a780efb6c4088f",
     "name": "Bàn phím cơ không dây AKKO MonsGeek M1 V5-SP Contour Aluminum RGB Hotswap",
     "description": "Bàn phím cơ không dây AKKO MonsGeek M1 V5-SP Contour Aluminum RGB Hotswap (AKKO Sw) nổi bật với thiết kế hiện đại và khung nhôm nguyên khối, mang lại vẻ ngoài chắc chắn và sang trọng.",
     "brand": "AKKO",
@@ -1090,7 +1194,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image1_g3c5qz.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb49b",
+        "_id": "681d33cc42a780efb6c40891",
         "name": "Black",
         "sku": "MGM1-BLK",
         "specifications": {
@@ -1100,8 +1204,8 @@
           "connection": "USB-Wrieless"
         },
         "price": 2250000,
-        "stock": 0,
-        "sold": 53,
+        "stock": 886,
+        "sold": 167,
         "cost": 890000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image1_g3c5qz.png",
@@ -1109,10 +1213,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image3_snk3j7.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image4_yfhs8u.png"
         ],
-        "weight": 516
+        "weight": 516,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb49d",
+        "_id": "681d33cc42a780efb6c40893",
         "name": "White",
         "sku": "MGM1-WHT",
         "specifications": {
@@ -1122,8 +1228,8 @@
           "connection": "USB-Wireless"
         },
         "price": 2250000,
-        "stock": 0,
-        "sold": 30,
+        "stock": 869,
+        "sold": 161,
         "cost": 890000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image1_vnggw3.png",
@@ -1131,12 +1237,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image3_avr44v.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image4_akjmqc.png"
         ],
-        "weight": 709
+        "weight": 709,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb49e",
+    "_id": "681d33cc42a780efb6c40894",
     "name": "Bàn phím cơ Nuphy Air60 HE RGB Hotswap 8K Rapid Trigger",
     "description": "Bàn phím cơ Nuphy Air60 HE RGB Hotswap 8K Rapid Trigger (Magnetic Sw) được thiết kế với vẻ ngoài mỏng nhẹ, tinh tế và sang trọng.",
     "brand": "Nuphy",
@@ -1144,7 +1254,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_nuphy_air60_he_image1_olhs6u.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4a0",
+        "_id": "681d33cc42a780efb6c40896",
         "name": "Air60 HE",
         "sku": "AIR60-HE",
         "specifications": {
@@ -1154,8 +1264,8 @@
           "connection": "USB"
         },
         "price": 3090000,
-        "stock": 0,
-        "sold": 30,
+        "stock": 885,
+        "sold": 145,
         "cost": 1690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_nuphy_air60_he_image1_olhs6u.png",
@@ -1163,12 +1273,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756737/products/dev-products/ban_phim_co_nuphy_air60_he_image3_wnxngw.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756737/products/dev-products/ban_phim_co_nuphy_air60_he_image4_wwprpn.png"
         ],
-        "weight": 659
+        "weight": 659,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4a1",
+    "_id": "681d33cc42a780efb6c40897",
     "name": "Bàn phím cơ không dây Logitech MX Mechanical Mini Graphite",
     "description": "MX Mechanical Mini trang bị các switch cơ học Tactile với độ phản hồi vượt bật đem lại phản hồi chính xác và ít tiếng ồn hơn để việc gõ phím không làm phiền những người xung quanh bạn.",
     "brand": "Logitech",
@@ -1176,7 +1290,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image1_wwqq5m.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4a3",
+        "_id": "681d33cc42a780efb6c40899",
         "name": "Mini Graphite",
         "sku": "MX-MINI-GR",
         "specifications": {
@@ -1186,8 +1300,8 @@
           "connection": "USB-Wireless"
         },
         "price": 3390000,
-        "stock": 0,
-        "sold": 15,
+        "stock": 901,
+        "sold": 114,
         "cost": 1690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image1_wwqq5m.png",
@@ -1195,12 +1309,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756734/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image3_t6ronp.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756734/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image4_bczrze.png"
         ],
-        "weight": 559
+        "weight": 559,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4a4",
+    "_id": "681d33cc42a780efb6c4089a",
     "name": "Bàn phím cơ không dây AKKO MU02 Autumn RGB Hotswap",
     "description": "Bàn phím cơ không dây AKKO MU02 Autumn RGB Hotswap (AKKO Sw) gây ấn tượng với thiết kế màu sắc lấy cảm hứng từ mùa thu, mang lại sự tinh tế và độc đáo.",
     "brand": "AKKO",
@@ -1208,7 +1326,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756732/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image1_nksmoe.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4a6",
+        "_id": "681d33cc42a780efb6c4089c",
         "name": "Autumn",
         "sku": "MU02-AUT",
         "specifications": {
@@ -1218,8 +1336,8 @@
           "connection": "USB-Wireless-Bluetooth"
         },
         "price": 3190000,
-        "stock": 0,
-        "sold": 30,
+        "stock": 878,
+        "sold": 152,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756732/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image1_nksmoe.png",
@@ -1227,12 +1345,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image3_ga4vak.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image4_anhl3l.png"
         ],
-        "weight": 829
+        "weight": 829,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4a7",
+    "_id": "681d33cc42a780efb6c4089d",
     "name": "Bàn phím cơ không dây Razer Pro Type Ultra",
     "description": "Bàn phím Razer Pro Type Ultra được tinh chỉnh thông qua các phản hồi của cộng đồng để phù hợp với các như cầu phổ biến của người dùng.",
     "brand": "Razer",
@@ -1240,7 +1362,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756734/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image1_un5zn3.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4a9",
+        "_id": "681d33cc42a780efb6c4089f",
         "name": "White",
         "sku": "RZR-PTU-WHT",
         "specifications": {
@@ -1250,8 +1372,8 @@
           "connection": "USB-Wireless"
         },
         "price": 3590000,
-        "stock": 0,
-        "sold": 30,
+        "stock": 892,
+        "sold": 138,
         "cost": 1690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756734/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image1_un5zn3.png",
@@ -1259,12 +1381,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image3_nxks5a.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image4_akkkou.png"
         ],
-        "weight": 599
+        "weight": 599,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4aa",
+    "_id": "681d33cc42a780efb6c408a0",
     "name": "Chuột không dây BenQ Zowie ZA13-DW",
     "description": "Nhanh nhạy. Chính xác. - Những màn flick chuột nhanh và chính xác hơn",
     "brand": "BenQ",
@@ -1272,7 +1398,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756797/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image1_ixopoj.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4ac",
+        "_id": "681d33cc42a780efb6c408a2",
         "name": "Black",
         "sku": "ZA13-DW",
         "specifications": {
@@ -1282,8 +1408,8 @@
           "rgb": "No"
         },
         "price": 4350000,
-        "stock": 0,
-        "sold": 25,
+        "stock": 894,
+        "sold": 131,
         "cost": 2690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756797/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image1_ixopoj.png",
@@ -1291,12 +1417,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756812/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image3_u5uvco.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756812/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image4_jy9ctv.png"
         ],
-        "weight": 143
+        "weight": 143,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4ad",
+    "_id": "681d33cc42a780efb6c408a3",
     "name": "Chuột không dây siêu nhẹ Arbiter Akitsu",
     "description": "Hợp tác phát triển bởi Arbiter Studio và Vancer, Akitsu là mẫu chuột không dây mới nhất với vỏ làm từ sợi carbon composite.",
     "brand": "Arbiter",
@@ -1304,7 +1434,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image1_znm2cc.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4af",
+        "_id": "681d33cc42a780efb6c408a5",
         "name": "Black",
         "sku": "ABT-AKT",
         "specifications": {
@@ -1314,8 +1444,8 @@
           "rgb": "No"
         },
         "price": 4180000,
-        "stock": 0,
-        "sold": 15,
+        "stock": 893,
+        "sold": 122,
         "cost": 2690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image1_znm2cc.png",
@@ -1323,12 +1453,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image3_vqjosy.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image4_uxkfse.png"
         ],
-        "weight": 154
+        "weight": 154,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4b0",
+    "_id": "681d33cc42a780efb6c408a6",
     "name": "Chuột không dây siêu nhẹ Fnatic x Lamzu Maya",
     "description": "Hợp tác chặc chẽ giữa Fnatic - Tổ chức esport hàng đầu thế giới đến từ Vương Quốc Anh và Lamzu - Thương hiệu gaming gear nổi bật với các sản phẩm được thiết kế chỉn chu từ hiệu năng đến trải nghiệm sử dụng.",
     "brand": "Fnatic",
@@ -1336,7 +1470,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4b2",
+        "_id": "681d33cc42a780efb6c408a8",
         "name": "Orange",
         "sku": "FNC-LMZ-MAYA",
         "specifications": {
@@ -1346,21 +1480,22 @@
           "rgb": "No"
         },
         "price": 3300000,
-        "stock": 0,
-        "sold": 35,
+        "stock": 935,
+        "sold": 100,
         "cost": 1690000,
         "images": [
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png"
         ],
-        "weight": 187
+        "weight": 187,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4b3",
+    "_id": "681d33cc42a780efb6c408a9",
     "name": "Chuột không dây siêu nhẹ Pulsar X2 V2 Mini Nezuko",
     "description": "Phiên bản giới hạn hợp tác giữa Pulsar và Demon Slayer",
     "brand": "Pulsar",
@@ -1368,7 +1503,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756814/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image1_wwbodv.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4b5",
+        "_id": "681d33cc42a780efb6c408ab",
         "name": "Nezuko",
         "sku": "PUL-X2V2-NEZ",
         "specifications": {
@@ -1378,8 +1513,8 @@
           "rgb": "No"
         },
         "price": 2800000,
-        "stock": 0,
-        "sold": 25,
+        "stock": 880,
+        "sold": 145,
         "cost": 1290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756814/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image1_wwbodv.png",
@@ -1387,12 +1522,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756814/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image3_czugov.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756817/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image4_k8clgd.png"
         ],
-        "weight": 177
+        "weight": 177,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4b6",
+    "_id": "681d33cc42a780efb6c408ac",
     "name": "Chuột không dây BenQ Zowie EC2-CW",
     "description": "Chuột gaming công thái học đến từ hãng gaming gear lâu đời cho giới chơi game fps.",
     "brand": "BenQ",
@@ -1400,7 +1539,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756751/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image1_cd7tjm.png",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4b8",
+        "_id": "681d33cc42a780efb6c408ae",
         "name": "Black",
         "sku": "BENQ-EC2-CW",
         "specifications": {
@@ -1410,8 +1549,8 @@
           "rgb": "No"
         },
         "price": 2990000,
-        "stock": 0,
-        "sold": 25,
+        "stock": 919,
+        "sold": 106,
         "cost": 1690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756751/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image1_cd7tjm.png",
@@ -1419,12 +1558,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756761/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image3_fmng24.png",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756779/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image4_ry2hzg.png"
         ],
-        "weight": 193
+        "weight": 193,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4b9",
+    "_id": "681d33cc42a780efb6c408af",
     "name": "Chuột có dây Logitech B100",
     "description": "Plug and Play: Chỉ cần cắm chuột vào cổng USB và bạn đã sẵn sàng để sử dụng. Không cần phần mềm hoặc pin. Độ phân giải cao: Bạn sẽ được tận hưởng khả năng điều khiển con trỏ nhạy, mượt mà, chính xác với độ phân giải lên đến 1000 dpi. Độ tin cậy đến từ Logitech: Logitech B100 sở hữu chất lượng và thiết kế mà Logitech đã đưa vào hơn 1 tỷ con chuột, nhiều hơn bất kỳ nhà sản xuất nào khác. Với chất lượng và độ tin cậy cao đã đưa Logitech trở thành hãng dẫn đầu toàn cầu về chuột.",
     "brand": "Logitech",
@@ -1432,7 +1575,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452025/products/dev-products/oumufhfc99mfvp2d8yyh.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4bb",
+        "_id": "681d33cc42a780efb6c408b1",
         "name": "Black",
         "sku": "910-006605",
         "specifications": {
@@ -1442,8 +1585,8 @@
           "rgb": "No"
         },
         "price": 80000,
-        "stock": 10,
-        "sold": 90,
+        "stock": 0,
+        "sold": 100,
         "cost": 34000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452025/products/dev-products/oumufhfc99mfvp2d8yyh.webp",
@@ -1451,12 +1594,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452025/products/dev-products/p3cb4xvhg9p99oerkwrs.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452025/products/dev-products/tkbpww3xux48jgzg5iib.webp"
         ],
-        "weight": 192
+        "weight": 192,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4bc",
+    "_id": "681d33cc42a780efb6c408b2",
     "name": "Chuột không dây Logitech M331 Silent",
     "description": "Chuột không dây Logitech M331 Silent là lựa chọn lý tưởng cho môi trường làm việc yên tĩnh. Với công nghệ SilentTouch, chuột giảm tới 90% tiếng nhấp, giúp tập trung tốt hơn. Thiết kế công thái học phù hợp cho tay phải, viền cao su tạo cảm giác cầm chắc chắn. Chuột có độ phân giải 1000 DPI, cảm biến quang học cho khả năng điều khiển chính xác. Thời lượng pin lên đến 18 tháng nhờ chế độ tiết kiệm năng lượng. Kết nối không dây qua USB, tương thích với Windows, macOS, Chrome OS và Linux. Một sản phẩm tiện lợi, bền bỉ cho công việc hàng ngày.",
     "brand": "Logitech",
@@ -1464,7 +1611,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452491/products/dev-products/qboy2m7ulixtjpyifhyj.jpg",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4be",
+        "_id": "681d33cc42a780efb6c408b4",
         "name": "Black",
         "sku": "LOGI-M331-BLACK",
         "specifications": {
@@ -1475,8 +1622,8 @@
           "Pin": "1 AA"
         },
         "price": 315000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 890,
+        "sold": 160,
         "cost": 126000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452491/products/dev-products/qboy2m7ulixtjpyifhyj.jpg",
@@ -1484,10 +1631,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452491/products/dev-products/hrgnrubjb8fvcw81oosz.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452491/products/dev-products/c9kkfzt0q1pxzkvyjo0v.jpg"
         ],
-        "weight": 200
+        "weight": 200,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb4c0",
+        "_id": "681d33cc42a780efb6c408b6",
         "name": "Blue",
         "sku": "LOGI-M331-BLUE",
         "specifications": {
@@ -1498,8 +1647,8 @@
           "Pin": "1 AA"
         },
         "price": 315000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 930,
+        "sold": 120,
         "cost": 126000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452704/products/dev-products/snteulk7ddi7weeefvgn.jpg",
@@ -1507,10 +1656,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452704/products/dev-products/dxheqkqdnnr96jnofikx.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452704/products/dev-products/w0wpsfmitrvngayhzxtt.jpg"
         ],
-        "weight": 200
+        "weight": 200,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb4c2",
+        "_id": "681d33cc42a780efb6c408b8",
         "name": "Red",
         "sku": "LOGI-M331-RED",
         "specifications": {
@@ -1521,8 +1672,8 @@
           "Pin": "1 AA"
         },
         "price": 315000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 902,
+        "sold": 148,
         "cost": 126000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452827/products/dev-products/wzdjbeyxyqg5i0fvgp8x.webp",
@@ -1530,12 +1681,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452826/products/dev-products/ajoogpnq39fux1gitjdl.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452826/products/dev-products/tgpu0ubrc1bxf7rpi0qy.jpg"
         ],
-        "weight": 200
+        "weight": 200,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4c3",
+    "_id": "681d33cc42a780efb6c408b9",
     "name": "Chuột không dây Logitech MX Master 3S",
     "description": "Chuột không dây Logitech MX Master 3S Pale Gray là sản phẩm cao cấp với hiệu suất vượt trội. Trang bị cảm biến Darkfield có độ phân giải từ 200 - 8000 DPI, chuột hoạt động chính xác trên nhiều bề mặt, kể cả kính. Công nghệ Quiet Clicks giúp giảm 90% tiếng ồn khi sử dụng. Bánh lăn MagSpeed cho tốc độ cuộn ấn tượng, lên đến 1000 dòng trong một lần. Kết nối không dây qua USB 2.4GHz và Bluetooth, hỗ trợ chuyển đổi dễ dàng giữa nhiều thiết bị. Thời lượng pin lên đến 70 ngày, sạc nhanh qua USB-C. Tùy biến linh hoạt theo từng ứng dụng, tối ưu cho công việc và sáng tạo.",
     "brand": "Logitech",
@@ -1543,7 +1698,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453254/products/dev-products/q33bucdsa2elolujayv6.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4c5",
+        "_id": "681d33cc42a780efb6c408bb",
         "name": "Pale Gray",
         "sku": "LOGI-3S-PALEGRAY",
         "specifications": {
@@ -1554,8 +1709,8 @@
           "Pin": "500 mAh"
         },
         "price": 2250000,
-        "stock": 1,
-        "sold": 49,
+        "stock": 0,
+        "sold": 50,
         "cost": 1260000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453254/products/dev-products/q33bucdsa2elolujayv6.webp",
@@ -1563,12 +1718,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453254/products/dev-products/dlqsdlvsnqzlgubkzum6.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453321/products/dev-products/ye6egygpux8f9cogjssy.jpg"
         ],
-        "weight": 400
+        "weight": 400,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4c6",
+    "_id": "681d33cc42a780efb6c408bc",
     "name": "Tay cầm chơi game Razer Wolverine V3 Tournament Edition",
     "description": "Tay cầm chơi game Razer Wolverine V3 Tournament Edition là thiết bị lý tưởng cho game thủ chuyên nghiệp. Với nút bấm cơ học Mecha Tactile Action Buttons, sản phẩm mang lại phản hồi nhanh và chính xác. Tay cầm có 6 nút đa năng có thể lập trình giúp tối ưu hóa thao tác chơi game. Công nghệ Razer™ Pro HyperTriggers cho phép chuyển đổi giữa kích hoạt nhanh và điều khiển analog chính xác. Thiết kế công thái học giúp cầm nắm thoải mái trong thời gian dài. Kết nối có dây USB-A, tương thích với PC và Xbox Series X/S. Một lựa chọn tối ưu để nâng cao trải nghiệm chơi game!",
     "brand": "Razer",
@@ -1576,7 +1735,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453577/products/dev-products/wq26mhbqxg3oa371zsdb.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4c8",
+        "_id": "681d33cc42a780efb6c408be",
         "name": "Black",
         "sku": "RAZ-WOLV3-BLACK",
         "specifications": {
@@ -1586,8 +1745,8 @@
           "rgb": "No"
         },
         "price": 2690000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 915,
+        "sold": 135,
         "cost": 1260000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453577/products/dev-products/wq26mhbqxg3oa371zsdb.webp",
@@ -1595,10 +1754,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453578/products/dev-products/rndtpcuif1xl2gctlhut.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453578/products/dev-products/zactfcxvvlcolp06amrf.webp"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb4ca",
+        "_id": "681d33cc42a780efb6c408c0",
         "name": "White",
         "sku": "RAZ-WOLV3-WHITE",
         "specifications": {
@@ -1608,8 +1769,8 @@
           "rgb": "No"
         },
         "price": 2690000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 871,
+        "sold": 179,
         "cost": 1260000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453911/products/dev-products/zhl2rcnocydo6qx3lqsr.webp",
@@ -1617,12 +1778,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453907/products/dev-products/vxvfyh9dgvtiajudalps.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453907/products/dev-products/rpgdyoen3miwbpapgsuj.webp"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4cb",
+    "_id": "681d33cc42a780efb6c408c1",
     "name": "Tay cầm chơi game không dây Dareu H105 RGB",
     "description": "Tay cầm chơi game không dây Dareu H105 RGB sở hữu thiết kế công thái học giúp cầm nắm thoải mái, chống trơn trượt. Hỗ trợ kết nối Bluetooth 5.0, 2.4GHz và có dây, tương thích với Windows và Android. Pin 930mAh cho thời gian chơi lên đến 25 giờ, tích hợp đèn LED RGB tạo hiệu ứng bắt mắt. Một lựa chọn lý tưởng cho trải nghiệm gaming mượt mà!",
     "brand": "Dareu",
@@ -1630,7 +1795,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624449/products/dev-products/a4dvmwzpvra5cibnnuj3.jpg",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4cd",
+        "_id": "681d33cc42a780efb6c408c3",
         "name": "Black",
         "sku": "DAE-H105-BLK",
         "specifications": {
@@ -1640,19 +1805,20 @@
           "battery": "up to 25 hours"
         },
         "price": 600000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 917,
+        "sold": 133,
         "cost": 360000,
         "images": [
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624449/products/dev-products/a4dvmwzpvra5cibnnuj3.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624447/products/dev-products/jcnoblkbl5xmeauzddgw.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624448/products/dev-products/wsjqbed5rzphd0tipdgc.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624448/products/dev-products/pu7pgpbqopevhnz14ki9.jpg"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb4cf",
+        "_id": "681d33cc42a780efb6c408c5",
         "name": "White",
         "sku": "DAE-H105-WHT",
         "specifications": {
@@ -1662,19 +1828,20 @@
           "battery": "up to 25 hours"
         },
         "price": 600000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 904,
+        "sold": 146,
         "cost": 360000,
         "images": [
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624449/products/dev-products/a4dvmwzpvra5cibnnuj3.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624592/products/dev-products/lv3uiebd7yhcpir6nmfc.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624593/products/dev-products/bc47olmkuxs3lrq80s0e.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624681/products/dev-products/elqc0bmlzu7ywdflubi6.jpg"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb4d1",
+        "_id": "681d33cc42a780efb6c408c7",
         "name": "Pink",
         "sku": "DAE-H105-PNK",
         "specifications": {
@@ -1684,8 +1851,8 @@
           "battery": "up to 25 hours"
         },
         "price": 600000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 914,
+        "sold": 136,
         "cost": 360000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624449/products/dev-products/a4dvmwzpvra5cibnnuj3.jpg",
@@ -1693,12 +1860,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624593/products/dev-products/wsnpfsl8gxllnl4plnmv.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624592/products/dev-products/juwjsaj0ta23yztjhydu.webp"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4d2",
+    "_id": "681d33cc42a780efb6c408c8",
     "name": "Lót chuột Razer Firefly V2 Pro RGB",
     "description": "Lót chuột Razer Firefly V2 Pro RGB là tấm lót chuột chơi game cao cấp với hệ thống đèn LED RGB toàn bề mặt, mang đến hiệu ứng ánh sáng sống động. Bề mặt Micro-Textured tối ưu giúp chuột di chuyển mượt mà và chính xác, phù hợp với cả chuột quang lẫn chuột laser. Đế cao su chống trượt đảm bảo sự ổn định khi sử dụng, cùng với cổng USB-A tích hợp tăng cường tiện lợi. Một lựa chọn lý tưởng để nâng cao trải nghiệm gaming!",
     "brand": "Dareu",
@@ -1706,7 +1877,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625117/products/dev-products/czkvlyg7qiy7fmh6mfwr.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4d4",
+        "_id": "681d33cc42a780efb6c408ca",
         "name": "RGB",
         "sku": "RAZ-FV2-RGB",
         "specifications": {
@@ -1716,8 +1887,8 @@
           "rgb": "Yes"
         },
         "price": 2690000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 921,
+        "sold": 129,
         "cost": 1660000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625117/products/dev-products/czkvlyg7qiy7fmh6mfwr.webp",
@@ -1725,12 +1896,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625117/products/dev-products/nzzysfktft1ciznqte3c.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625117/products/dev-products/ehbiyc0lgpqoch0oyypc.jpg"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4d5",
+    "_id": "681d33cc42a780efb6c408cb",
     "name": "Lót chuột Akko Joy of Life Limited Edition",
     "description": "Lót chuột Akko Joy of Life Limited Edition MP-JOL có thiết kế nghệ thuật độc đáo với họa tiết 'Joy of Life' truyền cảm hứng. Bề mặt vải cao cấp siêu mịn giúp chuột di chuyển chính xác, đế cao su chống trượt đảm bảo sự ổn định. Kích thước lớn 900 x 400mm phù hợp cả gaming và làm việc. Một lựa chọn đầy phong cách!",
     "brand": "AKKO",
@@ -1738,7 +1913,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625494/products/dev-products/cy5oezyj5jybcw45qnnv.jpg",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4d7",
+        "_id": "681d33cc42a780efb6c408cd",
         "name": "Limited Edition",
         "sku": "AKK-JOL-WHT",
         "specifications": {
@@ -1748,21 +1923,23 @@
           "rgb": "No"
         },
         "price": 460000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 900,
+        "sold": 150,
         "cost": 260000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625494/products/dev-products/cy5oezyj5jybcw45qnnv.jpg",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625493/products/dev-products/hx7xv3iqf13ryryry2nt.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625494/products/dev-products/cy5oezyj5jybcw45qnnv.jpg",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625493/products/dev-products/hx7xv3iqf13ryryry2nt.webp"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4d8",
+    "_id": "681d33cc42a780efb6c408ce",
     "name": "Lót chuột Corsair MM100 Medium",
     "description": "Lót chuột Corsair MM100 Medium có bề mặt vải giúp tối ưu khả năng kiểm soát chuột, đảm bảo độ theo dõi chính xác với DPI cao. Kích thước 320mm x 270mm x 3mm mang lại sự thoải mái khi chơi lâu dài. Đế cao su chống trượt giữ cố định tốt ngay cả trong những trận đấu căng thẳng. Lựa chọn đáng tin cậy cho game thủ!",
     "brand": "Corsair",
@@ -1770,7 +1947,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625888/products/dev-products/g8tgfcvicmfwbi5ipyva.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4da",
+        "_id": "681d33cc42a780efb6c408d0",
         "name": "Black",
         "sku": "COR-MM100-BLK",
         "specifications": {
@@ -1780,21 +1957,23 @@
           "rgb": "No"
         },
         "price": 165000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 888,
+        "sold": 162,
         "cost": 860000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625888/products/dev-products/g8tgfcvicmfwbi5ipyva.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625888/products/dev-products/pujrq7duxvumkgldwupy.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625888/products/dev-products/g8tgfcvicmfwbi5ipyva.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625888/products/dev-products/pujrq7duxvumkgldwupy.webp"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4db",
+    "_id": "681d33cc42a780efb6c408d1",
     "name": "Kê tay bàn phím HyperWork Hybrid gỗ kết hợp nhôm CNC",
     "description": "Kê tay bàn phím HyperWork Hybrid HPW-WR01-ALW là sản phẩm kết hợp giữa gỗ óc chó cao cấp và nhôm CNC, mang đến vẻ đẹp tự nhiên và sự bền bỉ. Các cạnh được gia công tỉ mỉ bằng CNC, đảm bảo độ hoàn thiện cao. Ngoài lớp dầu bảo vệ giúp bề mặt luôn sáng bóng, kê tay còn có đệm cao su non êm ái, tạo cảm giác thoải mái khi sử dụng.",
     "brand": "HyperWork",
@@ -1802,7 +1981,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746694479/products/dev-products/wvwjdi03e9xjwvqoxi2n.jpg",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4dd",
+        "_id": "681d33cc42a780efb6c408d3",
         "name": "Wood",
         "sku": "HYP-HYB-WOOD",
         "specifications": {
@@ -1812,8 +1991,8 @@
           "rgb": "No"
         },
         "price": 560000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 917,
+        "sold": 133,
         "cost": 220000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746694479/products/dev-products/wvwjdi03e9xjwvqoxi2n.jpg",
@@ -1821,12 +2000,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746694479/products/dev-products/msaqnyuc8cichkka88bb.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746694479/products/dev-products/qodvbxxvud6y2vio54qn.jpg"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4de",
+    "_id": "681d33cc42a780efb6c408d4",
     "name": "Bộ kê tay Razer Ergonomic Wrist Rest Pro Fullsize",
     "description": "Kê tay bàn phím HyperWork Hybrid HPW-WR01-ALW là sản phẩm kết hợp giữa gỗ óc chó cao cấp và nhôm CNC, mang đến vẻ đẹp tự nhiên và sự bền bỉ. Các cạnh được gia công tỉ mỉ bằng CNC, đảm bảo độ hoàn thiện cao. Ngoài lớp dầu bảo vệ giúp bề mặt luôn sáng bóng, kê tay còn có đệm cao su non êm ái, tạo cảm giác thoải mái khi sử dụng.",
     "brand": "Razer",
@@ -1834,7 +2017,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696021/products/dev-products/b3my8k95zjfd5mz3n4ir.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4e0",
+        "_id": "681d33cc42a780efb6c408d6",
         "name": "Black",
         "sku": "RAZ-ERGO-BLK",
         "specifications": {
@@ -1843,21 +2026,24 @@
           "rgb": "No"
         },
         "price": 1290000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 884,
+        "sold": 166,
         "cost": 890000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696021/products/dev-products/b3my8k95zjfd5mz3n4ir.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696020/products/dev-products/bk6dgcm7mt6fhn5v36zk.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696021/products/dev-products/vokzokj08fsovn4o00ko.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696021/products/dev-products/b3my8k95zjfd5mz3n4ir.webp"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696021/products/dev-products/vokzokj08fsovn4o00ko.webp"
         ],
-        "weight": 600
+        "weight": 600,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4e1",
+    "_id": "681d33cc42a780efb6c408d7",
     "name": "Keycap AKKO Artisan Cat Paws",
     "description": "Keycap AKKO Artisan Cat Paws là bộ keycap độc đáo với thiết kế 3D hình chân mèo đáng yêu, giúp bàn phím của bạn trở nên sinh động hơn. Bộ sản phẩm gồm 4 keycap: 2 keycap hình móng mèo và 2 keycap hình mông mèo, phù hợp với các vị trí như phím ESC hoặc phím mũi tên. Chất liệu PC và Silicone cao cấp mang lại độ bền cao và cảm giác mềm mại khi gõ phím. Sản phẩm tương thích với hầu hết bàn phím cơ sử dụng switch MX và được đóng gói đẹp mắt, phù hợp làm quà tặng.",
     "brand": "AKKO",
@@ -1865,7 +2051,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696464/products/dev-products/zcqhrf7ex0tq9mmcneh3.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4e3",
+        "_id": "681d33cc42a780efb6c408d9",
         "name": "Paw",
         "sku": "AKKO-PAW-PINK",
         "specifications": {
@@ -1873,8 +2059,8 @@
           "keycap": "4"
         },
         "price": 190000,
-        "stock": 0,
-        "sold": 100,
+        "stock": 921,
+        "sold": 179,
         "cost": 85000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696464/products/dev-products/sujir1yvgajuufwshsh8.webp",
@@ -1882,12 +2068,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696464/products/dev-products/ntu8tm8ccnucrrkpcmlr.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696464/products/dev-products/rb83y1zv2n53huoyiw72.webp"
         ],
-        "weight": 100
+        "weight": 100,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4e4",
+    "_id": "681d33cc42a780efb6c408da",
     "name": "Keycap Keychron Artisan Metal Silicone Kitty Paw",
     "description": "Keycap Keychron Artisan Metal Silicone Kitty Paw là một phụ kiện độc đáo dành cho bàn phím cơ, mang thiết kế chân mèo 3D đáng yêu. Sản phẩm kết hợp giữa thân nhôm cao cấp với lớp silicone mềm mại, tạo cảm giác thoải mái khi sử dụng. Với công nghệ CNC và anodized, keycap có độ hoàn thiện cao, bền bỉ, chống mài mòn tốt. Tương thích với hầu hết các switch MX, đây là lựa chọn tuyệt vời để cá nhân hóa bàn phím của bạn hoặc làm quà tặng cho người yêu thích công nghệ.",
     "brand": "Keychron",
@@ -1895,7 +2085,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696597/products/dev-products/y9qmjegvaaigtmonq7bj.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4e6",
+        "_id": "681d33cc42a780efb6c408dc",
         "name": "Black",
         "sku": "KCH-PAW-BLK",
         "specifications": {
@@ -1903,8 +2093,8 @@
           "keycap": "1"
         },
         "price": 560000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 883,
+        "sold": 167,
         "cost": 360000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696597/products/dev-products/y9qmjegvaaigtmonq7bj.webp",
@@ -1912,10 +2102,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696597/products/dev-products/ndohly36zt9vwzl0muuh.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696597/products/dev-products/z2v1udhz7by8wy17eict.webp"
         ],
-        "weight": 100
+        "weight": 100,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       },
       {
-        "_id": "681c8feaedc5df4cc9dfb4e8",
+        "_id": "681d33cc42a780efb6c408de",
         "name": "Black",
         "sku": "KCH-PAW-BLK",
         "specifications": {
@@ -1923,8 +2115,8 @@
           "keycap": "1"
         },
         "price": 560000,
-        "stock": 0,
-        "sold": 50,
+        "stock": 894,
+        "sold": 156,
         "cost": 360000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696597/products/dev-products/y9qmjegvaaigtmonq7bj.webp",
@@ -1932,12 +2124,16 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696819/products/dev-products/wicsl1a2cidqfac3ss0q.webp",
           "hhttps://res.cloudinary.com/dx77ngsh6/image/upload/v1746696819/products/dev-products/avetzr3mymrjg3rozzhp.webp"
         ],
-        "weight": 100
+        "weight": 100,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4e9",
+    "_id": "681d33cc42a780efb6c408df",
     "name": "Dây dán HyperWork Velcro Tape",
     "description": "Dây dán HyperWork Velcro Tape VT01 là giải pháp tiện lợi để quản lý dây cáp và các vật dụng một cách gọn gàng. Được làm từ chất liệu nylon cao cấp với bề mặt gai móc chắc chắn, sản phẩm có độ bền cao và khả năng tái sử dụng nhiều lần. Với chiều dài 200cm, bạn có thể dễ dàng cắt và điều chỉnh để phù hợp với nhu cầu sử dụng. Đây là lựa chọn lý tưởng để tối ưu không gian làm việc và sinh hoạt.",
     "brand": "HyperWork",
@@ -1945,7 +2141,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697098/products/dev-products/qjdgrqh0ylskxjujo7zx.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4eb",
+        "_id": "681d33cc42a780efb6c408e1",
         "name": "200cm",
         "sku": "HPW-VT01-BLK",
         "specifications": {
@@ -1953,21 +2149,24 @@
           "color": "Black"
         },
         "price": 59000,
-        "stock": 16,
-        "sold": 84,
+        "stock": 0,
+        "sold": 100,
         "cost": 19000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697098/products/dev-products/qjdgrqh0ylskxjujo7zx.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697105/products/dev-products/km97uzn3dmo0rvzdvvf2.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697098/products/dev-products/f0bmcriozdotwavm47le.webp",
-          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697098/products/dev-products/qjdgrqh0ylskxjujo7zx.webp"
+          "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697098/products/dev-products/f0bmcriozdotwavm47le.webp"
         ],
-        "weight": 100
+        "weight": 100,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   },
   {
-    "_id": "681c8feaedc5df4cc9dfb4ec",
+    "_id": "681d33cc42a780efb6c408e2",
     "name": "Kệ màn hình Razer Monitor Stand Chroma",
     "description": "Kệ màn hình Razer Monitor Stand Chroma làm từ nhôm anodized, chịu tải 20kg, hỗ trợ LED RGB Chroma và 4 cổng kết nối (USB-C, USB-A, HDMI), giúp nâng màn hình và tối ưu không gian làm việc. Thiết kế sang trọng, phù hợp với màn hình 24-32 inch.",
     "brand": "Razer",
@@ -1975,7 +2174,7 @@
     "imageCover": "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697448/products/dev-products/pqk04flujheswbuetw3m.webp",
     "variants": [
       {
-        "_id": "681c8feaedc5df4cc9dfb4ee",
+        "_id": "681d33cc42a780efb6c408e4",
         "name": "200cm",
         "sku": "RAZ-STD-CHROMA",
         "specifications": {
@@ -1985,8 +2184,8 @@
           "maxLoad": "20kg"
         },
         "price": 59000,
-        "stock": 30,
-        "sold": 70,
+        "stock": 0,
+        "sold": 100,
         "cost": 19000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697448/products/dev-products/pqk04flujheswbuetw3m.webp",
@@ -1994,8 +2193,12 @@
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697448/products/dev-products/wpuftu7a71tdw6fxtvco.webp",
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697449/products/dev-products/am2tlmoebzxfdd1r2ati.webp"
         ],
-        "weight": 100
+        "weight": 100,
+        "createdAt": "2025-01-01T11:50:44.897Z",
+        "updatedAt": "2025-01-01T11:50:44.897Z"
       }
-    ]
+    ],
+    "createdAt": "2025-01-01T11:50:44.897Z",
+    "updatedAt": "2025-01-01T11:50:44.897Z"
   }
 ]
