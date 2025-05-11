@@ -22,7 +22,7 @@ export const getAllProducts = catchAsync(
 
     const totalProducts = await apiFeatures.count();
 
-    const resultsPerPage = Number(req.query.limit) || 16;
+    const resultsPerPage = Number(req.query.limit) || 12;
     apiFeatures.filter().sort().limitFields().paginate();
 
     const products = await apiFeatures.query.exec();
@@ -161,12 +161,12 @@ export const getProductBySlug = catchAsync(
 );
 
 export const createProduct = catchAsync(async (req: Request, res: Response) => {
-  const product = await Product.create(req.body);
+  console.log(req.body);
 
   res.status(201).json({
     status: 'success',
     data: {
-      product,
+      product: req.body,
     },
   });
 });

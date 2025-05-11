@@ -65,7 +65,7 @@ const getTotalSalebyMonth = async (startDate: Date, endDate: Date) => {
       await Order.aggregate([
         {
           $match: {
-            status: { $nin: ['unpaid', 'canceled'] },
+            status: { $nin: ['unpaid', 'cancelled'] },
             createdAt: {
               $gte: startDate,
               $lte: endDate,
@@ -86,7 +86,7 @@ const getTotalSalebyMonth = async (startDate: Date, endDate: Date) => {
 const getTotalOrderbyMonth = async (startDate: Date, endDate: Date) => {
   return (
     (await Order.find({
-      status: { $nin: ['unpaid', 'canceled'] },
+      status: { $nin: ['unpaid', 'cancelled'] },
       createdAt: {
         $gte: startDate,
         $lte: endDate,
@@ -218,10 +218,10 @@ export const getDashboard = catchAsync(
       totalUsersLastMonth
     );
 
-    // Total Orders (excluding unpaid/canceled)
+    // Total Orders (excluding unpaid/cancelled)
     const totalOrdersValue =
       (await Order.find({
-        status: { $nin: ['unpaid', 'canceled'] },
+        status: { $nin: ['unpaid', 'cancelled'] },
       }).countDocuments()) || 0;
 
     const totalOrdersThisMonth = await getTotalOrderbyMonth(
@@ -323,7 +323,7 @@ export const getRevenue = catchAsync(
 
     matchFilter = {
       createdAt: { $gte: startDate, $lte: endDate },
-      status: { $nin: ['unpaid', 'canceled'] },
+      status: { $nin: ['unpaid', 'cancelled'] },
     };
 
     const revenueData = await Order.aggregate([
@@ -351,14 +351,14 @@ export const getRevenue = catchAsync(
                       timezone: 'Asia/Ho_Chi_Minh',
                     },
                   }, // 1–12
-          totalRevenue: { $sum: '$total' },
+          totalRevenue: { $sum: '$subtotal' },
         },
       },
     ]);
 
     // Fill in missing dates or months with 0
     const responseData = timeSlots.map((slot, index) => {
-      const found = revenueData.find((item) => item._id === slot);
+      const found = revenueData.find((item) => item._id === index + 1);
       return {
         name: index, // Use 1-based index (1 for first day or month)
         value: found ? found.totalRevenue : 0,
@@ -402,14 +402,14 @@ export const getTopCustomers = catchAsync(
     const topCustomers = await Order.aggregate([
       {
         $match: {
-          status: { $nin: ['unpaid', 'canceled'] },
+          status: { $nin: ['unpaid', 'cancelled'] },
           createdAt: { $gte: startDate, $lte: endDate },
         },
       },
       {
         $group: {
           _id: '$user',
-          totalSpent: { $sum: '$total' },
+          totalSpent: { $sum: '$subtotal' },
           totalOrders: { $sum: 1 },
         },
       },
@@ -466,7 +466,7 @@ export const getProductsSold = catchAsync(
     const productsSold = await Order.aggregate([
       {
         $match: {
-          status: { $nin: ['unpaid', 'canceled'] },
+          status: { $nin: ['unpaid', 'cancelled'] },
           createdAt: { $gte: startDate, $lte: endDate },
         },
       },
@@ -590,7 +590,7 @@ export const getCategorySaleData = async (
   const sales = await Order.aggregate([
     {
       $match: {
-        status: { $nin: ['unpaid', 'canceled'] },
+        status: { $nin: ['unpaid', 'cancelled'] },
         createdAt: { $gte: startDate, $lt: endDate },
       },
     },
@@ -650,7 +650,7 @@ export const getCategorySales = catchAsync(
     const sales = await Order.aggregate([
       {
         $match: {
-          status: { $nin: ['unpaid', 'canceled'] },
+          status: { $nin: ['unpaid', 'cancelled'] },
           createdAt: { $gte: startDate, $lte: endDate },
         },
       },

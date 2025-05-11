@@ -17,6 +17,7 @@ import cartRouter from './routes/cartRoute';
 import orderRouter from './routes/orderRoute';
 import paymentRouter from './routes/paymentRoute';
 import wishlistRouter from './routes/wishlistRoute';
+import chatbotRouter from './routes/chatbotRoute';
 import { fulfillCheckout } from './controllers/paymentController';
 import errorController from './controllers/errorController';
 import adminRouter from './routes/adminRoute';
@@ -112,6 +113,7 @@ app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/payments', paymentRouter);
 app.use('/api/v1/wishlist', wishlistRouter);
 app.use('/api/v1/api-callback', apiCallback);
+app.use('/api/v1/chatbot', chatbotRouter);
 app.use('/api/v1/admin', adminRouter);
 
 app.use(errorController);

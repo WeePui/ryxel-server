@@ -3,16 +3,39 @@ import './categoryModel';
 import slugify from 'slugify';
 import Category from './categoryModel';
 
+interface ISaleOff extends Document {
+  percentage: number;
+  startDate: Date;
+  endDate: Date;
+}
+
+const saleOffSchema = new Schema<ISaleOff>({
+  percentage: {
+    type: Number,
+    default: 0,
+  },
+  startDate: {
+    type: Date,
+  },
+  endDate: {
+    type: Date,
+  },
+});
+
 interface IVariant extends Document {
   _id: mongoose.Schema.Types.ObjectId;
   name: string;
   sku: string;
   specifications: Map<string, string>;
+  saleOff: ISaleOff;
   price: number;
+  cost: number;
   stock: number;
   images: string[];
   sold?: number;
   weight?: number;
+  saleOffPrice: number;
+  finalPrice: number;
 }
 
 const variantsSchema = new Schema<IVariant>(
@@ -31,6 +54,14 @@ const variantsSchema = new Schema<IVariant>(
       type: Map,
       of: String,
       required: [true, 'Variant specifications is required'],
+    },
+    saleOff: {
+      type: saleOffSchema,
+      required: [false, 'Variant sale off is not required'],
+    },
+    cost: {
+      type: Number,
+      required: [true, 'Variant cost is required'],
     },
     price: {
       type: Number,
@@ -59,7 +90,11 @@ const variantsSchema = new Schema<IVariant>(
       default: 0,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
 );
 
 interface IProduct extends Document {
@@ -78,6 +113,7 @@ interface IProduct extends Document {
   _categoryName: string;
   totalStock: number;
   createdAt: Date;
+  updatedAt: Date;
 }
 
 const productSchema = new mongoose.Schema(
@@ -135,7 +171,11 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
   },
-  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
 );
 
 productSchema.index({ lowestPrice: 1 });
@@ -146,10 +186,6 @@ productSchema.index({ brand: 1 });
 productSchema.index({ category: 1, lowestPrice: 1 });
 productSchema.index({ name: 'text', brand: 'text', description: 'text' });
 productSchema.index({ slug: 1 });
-
-productSchema.virtual('totalStock').get(function (this: IProduct) {
-  return this.variants.reduce((total, variant) => total + variant.stock, 0);
-});
 
 productSchema.statics.getPriceRange = async function (categoryId) {
   return this.aggregate([
@@ -223,7 +259,7 @@ productSchema.pre<IProduct>('save', async function (next) {
 productSchema.pre<IProduct>('save', function (next) {
   if (this.variants && this.variants.length > 0) {
     this.lowestPrice = Math.min(
-      ...this.variants.map((variant) => variant.price)
+      ...this.variants.map((variant) => variant.finalPrice)
     );
     this.sold = this.variants.reduce((acc, variant) => acc + variant.sold!, 0);
   }
@@ -252,11 +288,32 @@ productSchema.virtual('reviews', {
   foreignField: 'product',
   localField: '_id',
 });
+
 productSchema.virtual('totalStock').get(function (this: IProduct) {
   return this.variants.reduce(
     (total, variant) => total + (variant.stock || 0),
     0
   );
+});
+
+variantsSchema.virtual('saleOffPrice').get(function (this: IVariant) {
+  const now = new Date();
+  const saleOff = this.saleOff as ISaleOff; // `saleOff` giả định chứa thông tin giảm giá
+  console.log(saleOff, now);
+  // Kiểm tra nếu đang trong khoảng thời gian sale off
+  if (saleOff && saleOff.startDate <= now && now <= saleOff.endDate) {
+    const price = (this.price * saleOff.percentage) / 100;
+    return Math.round(price / 100) * 100; // Giá sau giảm
+  }
+  return null; // Không có giảm giá
+});
+
+variantsSchema.virtual('finalPrice').get(function (this: IVariant) {
+  const saleOffPrice = this.saleOffPrice; // Lấy giá giảm từ virtual field
+  if (saleOffPrice) {
+    return this.price - saleOffPrice; // Nếu có giảm giá, dùng giá đã giảm
+  }
+  return this.price; // Nếu không, dùng giá gốc
 });
 
 productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {

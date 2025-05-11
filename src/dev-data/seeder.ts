@@ -10,6 +10,7 @@ import Review from '../models/reviewModel';
 import Category from '../models/categoryModel';
 import Discount from '../models/discountModel';
 import Order from '../models/orderModel';
+import Cart from '../models/cartModel';
 
 dotenv.config({ path: './.env' });
 
@@ -72,6 +73,7 @@ async function deleteData(): Promise<void> {
       Category.deleteMany({}),
       Discount.deleteMany({}),
       Order.deleteMany({}),
+      Cart.deleteMany({}),
     ]);
 
     console.log('Data deleted successfully');

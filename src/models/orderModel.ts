@@ -172,6 +172,24 @@ orderSchema.pre<IOrder>('save', async function (next) {
   next();
 });
 
+orderSchema.statics.calculateTotalSales = async function () {
+  const result = await this.aggregate([
+    {
+      $match: {
+        status: { $nin: ['unpaid', 'cancelled'] }, // Lọc bỏ đơn hàng unpaid và cancelled
+      },
+    },
+    {
+      $group: {
+        _id: null, // Không nhóm theo trường nào
+        totalSales: { $sum: '$subtotal' }, // Tính tổng trường `total`
+      },
+    },
+  ]);
+
+  return result.length > 0 ? result[0].totalSales : 0; // Nếu không có đơn hàng hợp lệ, trả về 0
+};
+
 orderSchema.pre<IOrder>('save', async function (next) {
   // Initialize the total and shippingFee
   this.subtotal = 0;
@@ -191,7 +209,7 @@ orderSchema.pre<IOrder>('save', async function (next) {
       (v) => v._id.toString() === item.variant.toString()
     );
     if (variant) {
-      item.unitPrice = variant.price;
+      item.unitPrice = variant.finalPrice;
       item.subtotal = item.unitPrice * item.quantity;
       this.subtotal += item.subtotal;
     } else {
@@ -203,24 +221,6 @@ orderSchema.pre<IOrder>('save', async function (next) {
 
   next();
 });
-
-orderSchema.statics.calculateTotalSales = async function () {
-  const result = await this.aggregate([
-    {
-      $match: {
-        status: { $nin: ['unpaid', 'cancelled'] }, // Lọc bỏ đơn hàng unpaid và cancelled
-      },
-    },
-    {
-      $group: {
-        _id: null, // Không nhóm theo trường nào
-        totalSales: { $sum: '$total' }, // Tính tổng trường `total`
-      },
-    },
-  ]);
-
-  return result.length > 0 ? result[0].totalSales : 0; // Nếu không có đơn hàng hợp lệ, trả về 0
-};
 
 const Order = mongoose.model<IOrder, IOrderModel>('Order', orderSchema);
 

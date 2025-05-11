@@ -1,9 +1,12 @@
 import express from 'express';
 import * as productController from '../controllers/productController';
 import * as authController from '../controllers/authController';
+import multer from 'multer';
 // import reviewRouter from './reviewRoute';
 
 const router = express.Router();
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 // router.use('/:productId/reviews', reviewRouter);
 
@@ -17,6 +20,7 @@ router
   .post(
     authController.protect,
     authController.restrictTo('admin'),
+    upload.any(),
     productController.createProduct
   );
 
