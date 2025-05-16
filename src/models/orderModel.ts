@@ -1,12 +1,7 @@
 import mongoose, { Document, Schema, Types } from 'mongoose';
 import Product from './productModel';
 import Review from './reviewModel';
-
-/*interface ICheckout extends Document {
-  total: number;
-  shippingFee: number;
-  discount: number;
-}*/
+import AppError from '../utils/AppError';
 
 interface IOrderProduct extends Document {
   product: Types.ObjectId;
@@ -16,6 +11,17 @@ interface IOrderProduct extends Document {
   unitPrice: number;
   subtotal: number;
   review?: Types.ObjectId;
+}
+
+interface IShippingTracking {
+  ghnOrderCode: string;
+  trackingStatus: string;
+  statusHistory: {
+    status: string;
+    description: string;
+    timestamp: Date;
+  }[];
+  expectedDeliveryDate?: Date;
 }
 
 interface IOrder extends Document {
@@ -29,7 +35,8 @@ interface IOrder extends Document {
     | 'processing'
     | 'shipped'
     | 'delivered'
-    | 'cancelled';
+    | 'cancelled'
+    | 'refunded';
   lineItems: IOrderProduct[];
   subtotal: number;
   total: number;
@@ -41,21 +48,26 @@ interface IOrder extends Document {
     checkoutId: string;
     amount: number;
   };
+  shippingTracking?: IShippingTracking;
   orderCode: string;
   reviewCount: number;
+  adminNotes: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
 interface IOrderModel extends mongoose.Model<IOrder> {
   calculateTotalSales(): Promise<number>;
+  getTopProvinces(
+    startDate: Date,
+    endDate: Date,
+    limit: number
+  ): Promise<{ name: string; value: number }[]>;
+  getOrderStatusCounts(
+    startDate: Date,
+    endDate: Date
+  ): Promise<{ name: string; value: number }[]>;
 }
-
-/*const checkoutSchema = new Schema<ICheckout>({
-  total: { type: Number },
-  shippingFee: { type: Number },
-  discount: { type: Number },
-});*/
 
 const orderProductSchema = new Schema<IOrderProduct>({
   product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
@@ -97,6 +109,7 @@ const orderSchema = new Schema<IOrder>(
         'shipped',
         'delivered',
         'cancelled',
+        'refunded',
       ],
       default: 'pending',
     },
@@ -141,6 +154,22 @@ const orderSchema = new Schema<IOrder>(
       default: 0,
       max: 2,
     },
+    shippingTracking: {
+      ghnOrderCode: { type: String },
+      trackingStatus: { type: String },
+      statusHistory: [
+        {
+          status: { type: String },
+          description: { type: String },
+          timestamp: { type: Date },
+        },
+      ],
+      expectedDeliveryDate: { type: Date },
+    },
+    adminNotes: {
+      type: String,
+      default: '',
+    },
   },
   { timestamps: true }
 );
@@ -169,6 +198,41 @@ orderSchema.pre<IOrder>('save', async function (next) {
 
     this.orderCode = `ORD-${today}-${userSuffix}-${timestamp}`;
   }
+  next();
+});
+
+orderSchema.pre<IOrder>('save', async function (next) {
+  // Nếu là đơn mới thì không cần ghi log
+  if (!this.isModified('status') || (this as any).skipLog) return next();
+
+  const statusMessages: Record<IOrder['status'], string> = {
+    unpaid: 'Chưa thanh toán',
+    pending: 'Đơn hàng đã được xác nhận',
+    processing: 'Đơn hàng đang được xử lý',
+    shipped: 'Đã giao cho đơn vị vận chuyển',
+    delivered: 'Giao hàng thành công',
+    cancelled: 'Đơn hàng đã bị hủy',
+    refunded: 'Đơn hàng đã hoàn tiền',
+  };
+
+  const logEntry = {
+    status: this.status,
+    description: statusMessages[this.status],
+    timestamp: new Date(),
+  };
+
+  if (!this.shippingTracking) {
+    this.shippingTracking = {
+      ghnOrderCode: '',
+      trackingStatus: this.status,
+      statusHistory: [logEntry],
+      expectedDeliveryDate: undefined,
+    };
+  } else {
+    this.shippingTracking.trackingStatus = this.status;
+    this.shippingTracking.statusHistory.push(logEntry);
+  }
+
   next();
 });
 
@@ -221,6 +285,79 @@ orderSchema.pre<IOrder>('save', async function (next) {
 
   next();
 });
+
+orderSchema.statics.getTopProvinces = async function (
+  startDate: Date,
+  endDate: Date,
+  limit: number = 5
+) {
+  return this.aggregate([
+    {
+      $match: {
+        status: { $nin: ['unpaid', 'cancelled'] },
+        createdAt: { $gte: startDate, $lte: endDate },
+      },
+    },
+    {
+      $lookup: {
+        from: 'shippingaddresses',
+        localField: 'shippingAddress',
+        foreignField: '_id',
+        as: 'address',
+      },
+    },
+    { $unwind: '$address' },
+    {
+      $match: {
+        'address.city.name': { $ne: null, $exists: true },
+      },
+    },
+    {
+      $group: {
+        _id: '$address.city.name',
+        value: { $sum: '$subtotal' },
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        name: { $ifNull: ['$_id', 'Không xác định'] },
+        value: 1,
+        count: 1,
+      },
+    },
+    { $sort: { value: -1 } },
+    { $limit: limit },
+  ]);
+};
+
+orderSchema.statics.getOrderStatusCounts = async function (
+  startDate: Date,
+  endDate: Date
+) {
+  return this.aggregate([
+    {
+      $match: {
+        createdAt: { $gte: startDate, $lte: endDate },
+      },
+    },
+    {
+      $group: {
+        _id: '$status',
+        value: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        name: '$_id',
+        value: 1,
+      },
+    },
+    { $sort: { value: -1 } },
+  ]);
+};
 
 const Order = mongoose.model<IOrder, IOrderModel>('Order', orderSchema);
 

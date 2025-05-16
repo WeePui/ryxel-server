@@ -7,8 +7,6 @@ interface EmailOptions {
 }
 
 const sendEmail = async (options: EmailOptions): Promise<void> => {
-  console.log(process.env.EMAIL_USERNAME, process.env.EMAIL_PASSWORD);
-
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: Number(process.env.EMAIL_PORT),

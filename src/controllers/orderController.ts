@@ -8,11 +8,13 @@ import ShippingAddress from '../models/shippingAddressModel';
 import {
   calculateShippingFee,
   getExpectedDeliveryDate,
-  getService,
-} from '../utils/shippingFeeService';
+  createShippingOrder as createShippingOrderGHN,
+} from '../utils/ghnService';
 import { refundStripePayment, refundZaloPayPayment } from './paymentController';
 import { verifyDiscount } from './discountController';
 import APIFeatures from '../utils/apiFeatures';
+import { getLineItemsInfo } from '../utils/getLineItemsInfo';
+import XLSX from 'xlsx';
 
 const reduceStock = async (
   orderItems: any,
@@ -91,20 +93,34 @@ export const getShippingFee = catchAsync(
     const { toDistrictCode, toWardCode } = req.query;
     const { lineItems } = req.body;
 
-    const weight = await calculateTotalWeight(lineItems);
+    const shippingItems = await getLineItemsInfo(lineItems);
+    const totalWeight = shippingItems.reduce(
+      (acc: number, item: any) => acc + item.variant.weight * item.quantity,
+      0
+    );
+    const ghnItems = shippingItems.map((item: any) => ({
+      name: item.variant.name,
+      quantity: item.quantity,
+      code: item.variant.sku,
+      price: item.variant.price,
+      weight: item.variant.weight,
+      length: item.variant.dimension.length,
+      width: item.variant.dimension.width,
+      height: item.variant.dimension.height,
+      category: {
+        level1: 'Hàng Công Nghệ',
+      },
+    }));
 
     if (!toDistrictCode || !toWardCode) {
       return next(new AppError('Missing required parameters', 400));
     }
 
-    const service = await getService(Number(toDistrictCode));
-    if (!service) return next(new AppError('Cannot get service', 400));
-
-    const shippingFee = await calculateShippingFee(
-      service.service_id,
+    const { shippingFee, serviceId } = await calculateShippingFee(
       Number(toDistrictCode),
       toWardCode as string,
-      Number(weight)
+      totalWeight,
+      ghnItems
     );
 
     if (shippingFee === -1) {
@@ -112,7 +128,7 @@ export const getShippingFee = catchAsync(
     }
 
     const expectedDeliveryDate = await getExpectedDeliveryDate(
-      service.service_id,
+      serviceId!,
       Number(toDistrictCode),
       toWardCode as string
     );
@@ -171,22 +187,36 @@ export const createOrder = catchAsync(
         discountId,
       } = await verifyDiscount(discountCode, orderItems, userId);
 
-      const totalWeight = await calculateTotalWeight(orderProducts);
-
       const shippingAddress = await ShippingAddress.findOne({
         _id: shippingAddressId,
       });
       if (!shippingAddress)
         throw new AppError('No shipping address found', 400);
 
-      const service = await getService(shippingAddress.district.code);
-      if (!service) return next(new AppError('Cannot get service', 400));
+      const shippingItems = await getLineItemsInfo(orderItems);
+      const totalWeight = shippingItems.reduce(
+        (acc: number, item: any) => acc + item.variant.weight * item.quantity,
+        0
+      );
+      const ghnItems = shippingItems.map((item: any) => ({
+        name: item.variant.name,
+        quantity: item.quantity,
+        code: item.variant.sku,
+        price: item.variant.price,
+        weight: item.variant.weight,
+        length: item.variant.dimension.length,
+        width: item.variant.dimension.width,
+        height: item.variant.dimension.height,
+        category: {
+          level1: 'Hàng Công Nghệ',
+        },
+      }));
 
-      const shippingFee = await calculateShippingFee(
-        service.service_id,
+      const { shippingFee, serviceId } = await calculateShippingFee(
         shippingAddress.district.code,
         shippingAddress.ward.code,
-        totalWeight
+        totalWeight,
+        ghnItems
       );
       if (shippingFee === -1)
         return next(new AppError('Address is invalid', 400));
@@ -304,15 +334,37 @@ export const deleteOrder = catchAsync(
 // Get all orders from user side
 export const getAllOrders = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { status, startDate, endDate } = req.query;
+    const { status, paymentMethod, total, startDate, endDate } = req.query;
 
     // Build the query object
     let query: any = {};
 
+    // Handle status array
     if (status) {
-      query.status = status;
+      const statusArray = (status as string).split(',');
+      query.status = { $in: statusArray };
     }
 
+    // Handle paymentMethod array
+    if (paymentMethod) {
+      const paymentMethodArray = (paymentMethod as string).split(',');
+      query.paymentMethod = { $in: paymentMethodArray };
+    }
+
+    // Handle total range
+    if (total) {
+      const totalRange = (total as string).split('-');
+      query.total = {};
+
+      if (totalRange[0]) {
+        query.total.$gte = Number(totalRange[0]);
+      }
+      if (totalRange[1]) {
+        query.total.$lte = Number(totalRange[1]);
+      }
+    }
+
+    // Handle date range
     if (startDate || endDate) {
       query.createdAt = {};
       if (startDate) {
@@ -323,8 +375,14 @@ export const getAllOrders = catchAsync(
       }
     }
 
-    let apiFeatures = new APIFeatures(Order.find(), req.query);
+    // Count total results before pagination
+    const totalResults = await Order.countDocuments(query);
+    // Get resultsPerPage from limit query or set default
+    const resultsPerPage = Number(req.query.limit) || 10;
+
+    let apiFeatures = new APIFeatures(Order.find(query), req.query);
     apiFeatures = await apiFeatures.search();
+    apiFeatures.paginate();
 
     const orders = await apiFeatures.query
       .populate('user')
@@ -335,6 +393,8 @@ export const getAllOrders = catchAsync(
       status: 'success',
       data: {
         orders,
+        resultsPerPage,
+        totalResults,
       },
     });
   }
@@ -435,18 +495,6 @@ export const cancelOrder = catchAsync(
         }
       }
 
-      if (order.paymentMethod === 'stripe' && order.status !== 'unpaid')
-        await refundStripePayment(
-          order.checkout!.paymentId,
-          order.checkout!.amount
-        );
-
-      if (order.paymentMethod === 'zalopay' && order.status !== 'unpaid')
-        await refundZaloPayPayment(
-          order.checkout!.paymentId,
-          order.checkout!.amount
-        );
-
       order.status = 'cancelled';
 
       await increaseStock(order.lineItems, session);
@@ -458,12 +506,15 @@ export const cancelOrder = catchAsync(
         status: 'success',
         data: {
           order,
+          message: 'Order cancelled successfully',
         },
       });
     } catch (err) {
       await session.abortTransaction(); // Roll back transaction in case of error
       session.endSession();
-      return next(new AppError('Error', 400)); // Pass the error to the next middleware
+      return next(
+        new AppError('Error occurred while cancelling the order', 400)
+      ); // Pass the error to the next middleware
     }
   }
 );
@@ -478,6 +529,7 @@ export const updateOrderStatus = catchAsync(
 
     // Update the order status
     order.status = req.body.status;
+    order.adminNotes = req.body.adminNotes;
     await order.save();
     if (order.status === 'cancelled') await increaseStock(order.lineItems);
 
@@ -516,9 +568,15 @@ export const checkUnpaidOrder = catchAsync(
 export const getOrderByOrderCode = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const orderCode = req.params.code;
-    const userId = req.user.id;
+    const currentUser = req.user;
+    let query = { orderCode };
 
-    const order = await Order.findOne({ orderCode, user: userId })
+    // Nếu không phải admin, chỉ tìm order thuộc về chính user
+    if (currentUser.role !== 'admin') {
+      Object.assign(query, { user: currentUser.id });
+    }
+
+    const order = await Order.findOne(query)
       .populate('user')
       .populate('shippingAddress')
       .populate('lineItems.product')
@@ -562,8 +620,9 @@ const calculateTotalWeight = async (orderItems: any) => {
     if (!product) throw new AppError('No product found with that ID', 404);
 
     const variant = product.variants.find(
-      (v) => v._id.toString() === item.variant
+      (v) => v._id.toString() === item.variant.toString()
     );
+
     if (!variant) throw new AppError('No variant found with that ID', 404);
 
     if (!variant.weight) throw new AppError('No weight found for variant', 404);
@@ -574,3 +633,194 @@ const calculateTotalWeight = async (orderItems: any) => {
 
   return totalWeight;
 };
+
+export const createShippingOrder = catchAsync(async (req, res, next) => {
+  const orderId = req.params.id;
+  const order = await Order.findById(orderId);
+
+  if (!order) {
+    return next(new AppError('No order found with that ID', 404));
+  }
+
+  if (order.status !== 'pending') {
+    return next(new AppError('Order is not in pending status', 400));
+  }
+
+  const shippingAddress = await ShippingAddress.findById(order.shippingAddress);
+  if (!shippingAddress) {
+    return next(new AppError('No shipping address found', 400));
+  }
+
+  const orderItems = order.lineItems.map((item: any) => ({
+    product: item.product,
+    variant: item.variant,
+    quantity: item.quantity,
+  }));
+
+  const lineItems = await getLineItemsInfo(orderItems);
+  const totalWeight = lineItems.reduce(
+    (acc: number, item: any) => acc + item.variant.weight * item.quantity,
+    0
+  );
+  const ghnItems = lineItems.map((item: any) => ({
+    name: item.variant.name,
+    quantity: item.quantity,
+    code: item.variant.sku,
+    price: item.variant.price,
+    weight: item.variant.weight,
+    length: item.variant.dimension.length,
+    width: item.variant.dimension.width,
+    height: item.variant.dimension.height,
+    category: {
+      level1: 'Hàng Công Nghệ',
+    },
+  }));
+
+  const shippingOrder = await createShippingOrderGHN({
+    toName: shippingAddress.fullname,
+    toPhone: shippingAddress.phoneNumber,
+    toAddress: shippingAddress.address,
+    toWardName: shippingAddress.ward.name,
+    toDistrictName: shippingAddress.district.name,
+    toDistrictCode: shippingAddress.district.code,
+    toProvinceName: shippingAddress.city.name,
+    clientOrderCode: order.orderCode,
+    weight: totalWeight,
+    lineItems: ghnItems,
+  });
+
+  const { data } = shippingOrder;
+
+  order.status = 'processing';
+
+  order.shippingTracking = {
+    ghnOrderCode: data.order_code,
+    expectedDeliveryDate: data.expected_delivery_time,
+    trackingStatus: 'ready_to_pick',
+    statusHistory: [
+      {
+        status: 'ready_to_pick',
+        description: 'Đơn vận đã được tạo và sẵn sàng để lấy',
+        timestamp: new Date(),
+      },
+    ],
+  };
+
+  await order.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      shippingOrder,
+    },
+  });
+});
+
+export const refundOrder = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const orderId = req.params.id;
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return next(new AppError('No order found with that ID', 404));
+    }
+
+    if (order.status === 'unpaid') {
+      return next(new AppError('Order is unpaid, cannot be refunded', 400));
+    }
+    if (order.status === 'refunded') {
+      return next(new AppError('Order is already refunded', 400));
+    }
+
+    if (order.paymentMethod === 'stripe') {
+      await refundStripePayment(
+        order.checkout!.paymentId,
+        order.checkout!.amount
+      );
+    } else if (order.paymentMethod === 'zalopay') {
+      await refundZaloPayPayment(
+        order.checkout!.paymentId,
+        order.checkout!.amount
+      );
+    }
+    order.status = 'refunded';
+
+    await order.save();
+    await increaseStock(order.lineItems);
+    res.status(200).json({
+      status: 'success',
+      message: 'Order refunded successfully',
+      data: {
+        order,
+      },
+    });
+  }
+);
+
+export const exportOrderExcel = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { code } = req.params;
+    console.log('Exporting order with code:', code);
+
+    const order = await Order.findOne({ orderCode: code })
+      .populate('user')
+      .populate('shippingAddress')
+      .populate('lineItems.product')
+      .populate('lineItems.review');
+
+    if (!order) {
+      console.log('Order not found');
+      return res.status(404).send('Order not found');
+    }
+
+    const shipping = order.shippingAddress as any;
+
+    const data = [
+      ['Mã đơn hàng:', order.orderCode],
+      ['Ngày đặt:', new Date(order.createdAt).toLocaleDateString('vi-VN')],
+      ['Khách hàng:', `${shipping.fullname} (${(order.user as any).name})`],
+      ['SĐT:', shipping.phoneNumber],
+      [
+        'Địa chỉ:',
+        `${shipping.address}, ${shipping.ward.name}, ${shipping.district.name}, ${shipping.city.name}`,
+      ],
+      [], // dòng trống
+      ['Sản phẩm', 'Số lượng', 'Đơn giá', 'Thành tiền'], // tiêu đề
+      ...order.lineItems.map((item) => [
+        (item.product as any).name,
+        item.quantity,
+        item.unitPrice,
+        item.subtotal,
+      ]),
+      [], // dòng trống
+      ['Tạm tính', '', '', order.subtotal],
+      ['Phí vận chuyển', '', '', order.shippingFee],
+      ...(order.discountAmount > 0
+        ? [['Giảm giá', '', '', -order.discountAmount]]
+        : []),
+      ['Tổng cộng', '', '', order.total],
+    ];
+
+    const ws = XLSX.utils.aoa_to_sheet(data);
+
+    // Set width cột
+    ws['!cols'] = [
+      { wch: 40 }, // Sản phẩm
+      { wch: 10 }, // Số lượng
+      { wch: 15 }, // Đơn giá
+      { wch: 20 }, // Thành tiền
+    ];
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Đơn hàng');
+
+    const buffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+
+    res.set({
+      'Content-Type':
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': `attachment; filename=order-${code}.xlsx`,
+    });
+    res.send(buffer);
+  }
+);

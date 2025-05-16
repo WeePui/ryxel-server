@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import e, { Request, Response, NextFunction } from 'express';
 import catchAsync from '../utils/catchAsync';
 import stripe from 'stripe';
 import AppError from '../utils/AppError';
@@ -329,6 +329,8 @@ export const refundStripePayment = async (
       payment_intent: paymentId,
       amount: amount,
     });
+  } else {
+    throw new AppError('Refund not successful', 400);
   }
 };
 
@@ -364,5 +366,8 @@ export const refundZaloPayPayment = async (
   axios
     .post(zalopayConfig.refund_url, null, { params })
     .then((res) => console.log(res.data))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      throw new AppError((err as Error).message, 400);
+    });
 };

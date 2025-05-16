@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import AppError from '../utils/AppError';
 
 const sendErrorDev = (error: AppError, req: Request, res: Response) => {
+  console.error('ERROR 💥', error);
   res.status(error.statusCode).json({
     status: error.status,
     error: error,

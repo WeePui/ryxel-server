@@ -23,4 +23,12 @@ router.route('/products/stock').get(adminController.getStockSummary);
 
 router.route('/products/summary').get(adminController.getProductsSummary);
 
+router.route('/orders/top-provinces').get(adminController.getTopProvinces);
+
+router
+  .route('/orders/order-by-status')
+  .get(adminController.getOrderStatusCounts);
+
+router.route('/orders/summary').get(adminController.getOrderStats);
+
 export default router;

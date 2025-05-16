@@ -4,7 +4,6 @@ import Order from '../models/orderModel';
 import User from '../models/userModel';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
-import Category from '../models/categoryModel';
 
 const predictOutOfStock = async (): Promise<{
   predictions: { product: any; predictedDaysToOutOfStock: number }[];
@@ -15,13 +14,14 @@ const predictOutOfStock = async (): Promise<{
 
     const predictions = products
       .map((product) => {
-        const totalStock = product.totalStock; // Lấy virtual field
+        const totalStock = product.totalStock || 0; // Lấy virtual field, default to 0
         const timeSinceCreation =
           (now.getTime() - product.createdAt.getTime()) / (1000 * 60 * 60 * 24); // Thời gian tính bằng ngày
         const sold = product.sold || 0; // Tổng sản phẩm đã bán được
 
+        // Chỉ tính toán cho sản phẩm có bán và còn hàng
         if (sold === 0 || totalStock === 0) {
-          return null; // Loại bỏ sản phẩm nếu không bán được hoặc không còn hàng
+          return null;
         }
 
         // Tính thời gian dự đoán hết hàng
@@ -34,7 +34,10 @@ const predictOutOfStock = async (): Promise<{
           predictedDaysToOutOfStock,
         };
       })
-      .filter((item) => item !== null) // Loại bỏ các sản phẩm không hợp lệ
+      .filter(
+        (item): item is { product: any; predictedDaysToOutOfStock: number } =>
+          item !== null
+      ) // Type guard để loại bỏ null
       .sort((a, b) => a.predictedDaysToOutOfStock - b.predictedDaysToOutOfStock) // Sắp xếp tăng dần theo thời gian dự đoán
       .slice(0, 10); // Lấy top 10 sản phẩm
 
@@ -534,9 +537,9 @@ export const getStockSummary = catchAsync(
     products.forEach((product) => {
       const totalStock = product.totalStock; // Dùng virtual field để lấy tổng stock
       if (totalStock > 0) {
-        inStock += totalStock;
+        inStock++;
       } else {
-        outStock += 1; // Nếu không còn hàng, tăng biến đếm outStock
+        outStock++; // Nếu không còn hàng, tăng biến đếm outStock
       }
     });
 
@@ -695,6 +698,191 @@ export const getCategorySales = catchAsync(
       data: {
         sales,
       },
+    });
+  }
+);
+
+export const getTopProvinces = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const range = req.query.range as string;
+    const year = parseInt(req.query.year as string);
+    const month = req.query.month
+      ? parseInt(req.query.month as string)
+      : undefined;
+
+    // Validate query parameters
+    if (
+      !['month', 'year'].includes(range) ||
+      isNaN(year) ||
+      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
+    ) {
+      return res.status(400).json({
+        status: 'fail',
+        message:
+          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+      });
+    }
+
+    const { startDate, endDate } = getTime(range, year, month);
+
+    const topProvinces = await Order.getTopProvinces(startDate, endDate, 5);
+
+    res.status(200).json({
+      status: 'success',
+      data: topProvinces,
+    });
+  }
+);
+
+export const getOrderStatusCounts = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const range = req.query.range as string;
+    const year = parseInt(req.query.year as string);
+    const month = req.query.month
+      ? parseInt(req.query.month as string)
+      : undefined;
+
+    // Validate query parameters
+    if (
+      !['month', 'year'].includes(range) ||
+      isNaN(year) ||
+      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
+    ) {
+      return res.status(400).json({
+        status: 'fail',
+        message:
+          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+      });
+    }
+
+    const { startDate, endDate } = getTime(range, year, month);
+
+    const statusCounts = await Order.getOrderStatusCounts(startDate, endDate);
+
+    res.status(200).json({
+      status: 'success',
+      data: statusCounts,
+    });
+  }
+);
+
+const getOrderStatsByStatus = async (startDate: Date, endDate: Date) => {
+  return Order.aggregate([
+    {
+      $match: {
+        createdAt: { $gte: startDate, $lte: endDate },
+      },
+    },
+    {
+      $group: {
+        _id: '$status',
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+};
+
+export const getOrderStats = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const now = new Date();
+    const currentMonth = now.getMonth() + 1;
+    const currentYear = now.getFullYear();
+
+    // Current month calculations
+    const thisMonthStartDate = new Date(
+      `${currentYear}-${String(currentMonth).padStart(2, '0')}-01`
+    );
+    const thisMonthEndDate = new Date(
+      `${currentYear}-${String(currentMonth).padStart(2, '0')}-${new Date(currentYear, currentMonth, 0).getDate()}`
+    );
+
+    // Previous month calculations
+    const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+    const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+
+    const previousMonthStartDate = new Date(
+      `${previousYear}-${String(previousMonth).padStart(2, '0')}-01`
+    );
+    const previousMonthEndDate = new Date(
+      `${previousYear}-${String(previousMonth).padStart(2, '0')}-${new Date(previousYear, previousMonth, 0).getDate()}`
+    );
+
+    // Get total orders for all time
+    const totalStats = await getOrderStatsByStatus(new Date(0), now);
+    const totalMap = new Map(totalStats.map((stat) => [stat._id, stat.count]));
+
+    // Get current month stats for changeRate
+    const currentMonthStats = await getOrderStatsByStatus(
+      thisMonthStartDate,
+      thisMonthEndDate
+    );
+    const currentMonthMap = new Map(
+      currentMonthStats.map((stat) => [stat._id, stat.count])
+    );
+
+    // Get previous month stats for changeRate
+    const previousMonthStats = await getOrderStatsByStatus(
+      previousMonthStartDate,
+      previousMonthEndDate
+    );
+    const previousMonthMap = new Map(
+      previousMonthStats.map((stat) => [stat._id, stat.count])
+    );
+
+    // Calculate total orders and change rate
+    const totalOrders = {
+      value: Array.from(totalMap.values()).reduce(
+        (sum, count) => sum + count,
+        0
+      ),
+      changeRate: calculateChangeRate(
+        Array.from(currentMonthMap.values()).reduce(
+          (sum, count) => sum + count,
+          0
+        ),
+        Array.from(previousMonthMap.values()).reduce(
+          (sum, count) => sum + count,
+          0
+        )
+      ),
+    };
+
+    // Calculate stats for each status
+    const stats = {
+      totalOrders,
+      totalPendingOrders: {
+        value: totalMap.get('pending') || 0,
+        changeRate: calculateChangeRate(
+          currentMonthMap.get('pending') || 0,
+          previousMonthMap.get('pending') || 0
+        ),
+      },
+      totalShippedOrders: {
+        value: totalMap.get('shipped') || 0,
+        changeRate: calculateChangeRate(
+          currentMonthMap.get('shipped') || 0,
+          previousMonthMap.get('shipped') || 0
+        ),
+      },
+      totalDeliveredOrders: {
+        value: totalMap.get('delivered') || 0,
+        changeRate: calculateChangeRate(
+          currentMonthMap.get('delivered') || 0,
+          previousMonthMap.get('delivered') || 0
+        ),
+      },
+      totalCancelOrders: {
+        value: totalMap.get('cancelled') || 0,
+        changeRate: calculateChangeRate(
+          currentMonthMap.get('cancelled') || 0,
+          previousMonthMap.get('cancelled') || 0
+        ),
+      },
+    };
+
+    res.status(200).json({
+      status: 'success',
+      data: stats,
     });
   }
 );

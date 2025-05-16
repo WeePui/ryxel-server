@@ -1,5 +1,4 @@
 import { Model, Query } from 'mongoose';
-import Category from '../models/categoryModel';
 import Product from '../models/productModel';
 import Order from '../models/orderModel';
 
@@ -154,7 +153,6 @@ class APIFeatures {
     // Filtering by specifications
     if (queryObj.specs) {
       const specFilters = JSON.parse(queryObj.specs); // Chuyển từ string thành object
-      console.log(specFilters);
       const specQuery = Object.entries(specFilters).map(([key, value]) => {
         if (Array.isArray(value)) {
           return { [`variants.specifications.${key}`]: { $in: value } }; // Nếu có nhiều giá trị, dùng $in
@@ -174,7 +172,6 @@ class APIFeatures {
     );
 
     this.query = this.query.find(JSON.parse(queryStr));
-    console.log(queryStr);
     return this;
   }
 
@@ -201,7 +198,9 @@ class APIFeatures {
   paginate() {
     // Pagination
     const page = Number(this.queryString.page) || 1;
-    const limit = Number(this.queryString.limit) || 16;
+    const limit =
+      Number(this.queryString.limit) ||
+      Number(process.env.DEFAULT_LIMIT_PER_PAGE);
     const skip = (page - 1) * limit;
     this.query = this.query.skip(skip).limit(limit);
     return this;

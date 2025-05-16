@@ -4,6 +4,11 @@ import APIFeatures from '../utils/apiFeatures';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 import { cartProductRecommend, similarProduct } from '../utils/python';
+import {
+  deleteImage,
+  extractPublicId,
+  uploadImage,
+} from '../utils/cloudinaryService';
 
 export const aliasTopProducts = (
   req: Request,
@@ -22,7 +27,8 @@ export const getAllProducts = catchAsync(
 
     const totalProducts = await apiFeatures.count();
 
-    const resultsPerPage = Number(req.query.limit) || 12;
+    const resultsPerPage =
+      Number(req.query.limit) || Number(process.env.DEFAULT_LIMIT_PER_PAGE);
     apiFeatures.filter().sort().limitFields().paginate();
 
     const products = await apiFeatures.query.exec();
@@ -160,16 +166,99 @@ export const getProductBySlug = catchAsync(
   }
 );
 
-export const createProduct = catchAsync(async (req: Request, res: Response) => {
-  console.log(req.body);
+export const createProduct = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { name, brand, category, description, variants } = req.body;
 
-  res.status(201).json({
-    status: 'success',
-    data: {
-      product: req.body,
-    },
-  });
-});
+    // Validate required fields
+    if (
+      !name ||
+      !brand ||
+      !category ||
+      !description ||
+      !variants ||
+      !req.files
+    ) {
+      return next(new AppError('Missing required fields', 400));
+    }
+
+    // Validate variants array
+    if (!Array.isArray(variants) || variants.length === 0) {
+      return next(new AppError('At least one variant is required', 400));
+    }
+
+    // Process image files
+    const files = req.files as Express.Multer.File[];
+    const imageCover = files.find((file) => file.fieldname === 'imageCover');
+    const variantImages = files.filter((file) =>
+      file.fieldname.startsWith('variants[')
+    );
+
+    if (!imageCover) {
+      return next(new AppError('Product cover image is required', 400));
+    }
+
+    // Upload cover image
+    const [coverImageResult] = await Promise.all([
+      uploadImage('products', imageCover.path),
+    ]);
+
+    if (!coverImageResult) {
+      return next(new AppError('Error uploading cover image', 500));
+    }
+
+    // Process variants and their images
+    const processedVariants = await Promise.all(
+      variants.map(async (variant, index) => {
+        const variantImages = files.filter((file) =>
+          file.fieldname.startsWith(`variants[${index}][images]`)
+        );
+
+        if (!variantImages || variantImages.length === 0) {
+          throw new AppError(
+            `Images are required for variant ${index + 1}`,
+            400
+          );
+        }
+
+        // Upload variant images
+        const uploadedImages = await Promise.all(
+          variantImages.map((image) =>
+            uploadImage('products/variants', image.path)
+          )
+        );
+
+        const imageUrls = uploadedImages.map((img) => img.secure_url);
+
+        return {
+          ...variant,
+          images: imageUrls,
+          sold: 0,
+          finalPrice: variant.saleOff
+            ? variant.price * (1 - variant.saleOff.percentage / 100)
+            : variant.price,
+        };
+      })
+    );
+
+    // Create product
+    const product = await Product.create({
+      name,
+      brand,
+      category,
+      description,
+      imageCover: coverImageResult.secure_url,
+      variants: processedVariants,
+    });
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        product,
+      },
+    });
+  }
+);
 
 export const getProductById = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -193,21 +282,134 @@ export const getProductById = catchAsync(
 export const updateProduct = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
+    const updateData = { ...req.body };
+    const files = req.files as Express.Multer.File[] | undefined;
 
-    const product = await Product.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!product)
+    // Find product first
+    const product = await Product.findById(id);
+    if (!product) {
       return next(new AppError('No product found with that ID', 404));
+    }
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        product,
-      },
-    });
+    try {
+      // Handle cover image update if provided
+      if (files?.length) {
+        const imageCover = files.find(
+          (file) => file.fieldname === 'imageCover'
+        );
+        if (imageCover) {
+          // Delete old cover image
+          if (product.imageCover) {
+            const oldPublicId = extractPublicId(product.imageCover);
+            if (oldPublicId) {
+              await deleteImage(oldPublicId);
+            }
+          }
+          // Upload new cover image
+          const coverImageResult = await uploadImage(
+            'products',
+            imageCover.path
+          );
+          if (!coverImageResult) {
+            throw new Error('Error uploading cover image');
+          }
+          updateData.imageCover = coverImageResult.secure_url;
+        }
+      }
+
+      // Handle variant updates
+      if (updateData.variants) {
+        const updatedVariants = await Promise.all(
+          updateData.variants.map(async (variant: any, index: number) => {
+            const existingVariant = product.variants[index];
+            if (!existingVariant) return variant;
+
+            // Handle variant images if provided
+            if (files?.length) {
+              const variantImages = files.filter((file) =>
+                file.fieldname.startsWith(`variants[${index}][images]`)
+              );
+
+              if (variantImages.length > 0) {
+                // Delete old variant images
+                for (const oldImageUrl of existingVariant.images) {
+                  const oldPublicId = extractPublicId(oldImageUrl);
+                  if (oldPublicId) {
+                    await deleteImage(oldPublicId);
+                  }
+                }
+
+                // Upload new variant images
+                const uploadedImages = await Promise.all(
+                  variantImages.map((image) =>
+                    uploadImage('products/variants', image.path)
+                  )
+                );
+                variant.images = uploadedImages.map((img) => img.secure_url);
+              }
+            }
+
+            // Handle sale off update if provided
+            if (variant.saleOff) {
+              // Validate sale off data
+              if (
+                !variant.saleOff.percentage ||
+                !variant.saleOff.startDate ||
+                !variant.saleOff.endDate
+              ) {
+                throw new Error('Missing required sale off fields');
+              }
+
+              // Validate percentage
+              if (
+                variant.saleOff.percentage < 0 ||
+                variant.saleOff.percentage > 100
+              ) {
+                throw new Error(
+                  'Sale off percentage must be between 0 and 100'
+                );
+              }
+
+              // Validate dates
+              const startDate = new Date(variant.saleOff.startDate);
+              const endDate = new Date(variant.saleOff.endDate);
+              const now = new Date();
+
+              if (startDate < now) {
+                throw new Error('Sale off start date must be in the future');
+              }
+
+              if (endDate <= startDate) {
+                throw new Error('Sale off end date must be after start date');
+              }
+            }
+
+            return {
+              ...existingVariant.toObject(),
+              ...variant,
+            };
+          })
+        );
+        updateData.variants = updatedVariants;
+      }
+
+      // Update product
+      const updatedProduct = await Product.findByIdAndUpdate(id, updateData, {
+        new: true,
+        runValidators: true,
+      });
+
+      res.status(200).json({
+        status: 'success',
+        data: {
+          product: updatedProduct,
+        },
+      });
+    } catch (error) {
+      return next(
+        new AppError(`Error updating product: ${(error as Error).message}`, 500)
+      );
+    }
   }
 );
 

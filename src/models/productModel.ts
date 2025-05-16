@@ -36,6 +36,11 @@ interface IVariant extends Document {
   weight?: number;
   saleOffPrice: number;
   finalPrice: number;
+  dimension: {
+    length: number;
+    width: number;
+    height: number;
+  };
 }
 
 const variantsSchema = new Schema<IVariant>(
@@ -57,7 +62,6 @@ const variantsSchema = new Schema<IVariant>(
     },
     saleOff: {
       type: saleOffSchema,
-      required: [false, 'Variant sale off is not required'],
     },
     cost: {
       type: Number,
@@ -89,6 +93,11 @@ const variantsSchema = new Schema<IVariant>(
       type: Number,
       default: 0,
     },
+    dimension: {
+      length: Number,
+      width: Number,
+      height: Number,
+    },
   },
   {
     timestamps: true,
@@ -112,6 +121,7 @@ interface IProduct extends Document {
   slug: string;
   _categoryName: string;
   totalStock: number;
+  percentageSaleOff: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -159,6 +169,10 @@ const productSchema = new mongoose.Schema(
       set: (value: number) => Math.round(value * 10) / 10,
     },
     ratingsQuantity: {
+      type: Number,
+      default: 0,
+    },
+    percentageSaleOff: {
       type: Number,
       default: 0,
     },
@@ -258,9 +272,22 @@ productSchema.pre<IProduct>('save', async function (next) {
 // Pre-save middleware to calculate the lowest price
 productSchema.pre<IProduct>('save', function (next) {
   if (this.variants && this.variants.length > 0) {
-    this.lowestPrice = Math.min(
-      ...this.variants.map((variant) => variant.finalPrice)
+    const { lowestPrice, percentageSaleOff } = this.variants.reduce(
+      (acc, variant) => {
+        const finalPrice = variant.finalPrice || 0;
+        if (finalPrice < acc.lowestPrice) {
+          return {
+            lowestPrice: finalPrice,
+            percentageSaleOff: variant.saleOff?.percentage || 0,
+          };
+        }
+        return acc;
+      },
+      { lowestPrice: Infinity, percentageSaleOff: 0 }
     );
+
+    this.lowestPrice = lowestPrice;
+    this.percentageSaleOff = percentageSaleOff;
     this.sold = this.variants.reduce((acc, variant) => acc + variant.sold!, 0);
   }
 
@@ -299,7 +326,7 @@ productSchema.virtual('totalStock').get(function (this: IProduct) {
 variantsSchema.virtual('saleOffPrice').get(function (this: IVariant) {
   const now = new Date();
   const saleOff = this.saleOff as ISaleOff; // `saleOff` giả định chứa thông tin giảm giá
-  console.log(saleOff, now);
+
   // Kiểm tra nếu đang trong khoảng thời gian sale off
   if (saleOff && saleOff.startDate <= now && now <= saleOff.endDate) {
     const price = (this.price * saleOff.percentage) / 100;
