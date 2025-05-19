@@ -6,6 +6,7 @@ import User from '../models/userModel';
 import signToken from '../utils/signToken';
 import sendEmail from '../utils/email';
 import verifyToken from '../utils/verifyToken';
+import { generateEmail, mainContent } from '../utils/generateEmailTemplate';
 
 const createSendToken = (user: any, statusCode: number, res: Response) => {
   // Sign new token for the user
@@ -155,6 +156,20 @@ export const signup = catchAsync(
       dob: req.body.dob,
     });
 
+    const subject = '[Ryxel Store no-reply] Chào mừng bạn đến với Ryxel Store';
+    const greetingName = newUser.name || 'Khách hàng';
+    const html = generateEmail({
+      subject,
+      greetingName,
+      mainContent: mainContent['welcome'](),
+    });
+
+    await sendEmail({
+      to: newUser.email,
+      subject,
+      html,
+    });
+
     createSendToken(newUser, 201, res);
   }
 );
@@ -192,13 +207,19 @@ export const sendOTP = catchAsync(
     user.otpLastRequest = new Date(now); // Update the last request time
     await user.save({ validateBeforeSave: false });
 
-    const message = `Your OTP for email verification is: ${otp}. It is valid for 10 minutes.`;
-
     try {
+      const subject = '[Ryxel Store no-reply] Mã OTP xác thực tài khoản';
+      const greetingName = user.name || 'Khách hàng';
+      const html = generateEmail({
+        subject,
+        greetingName,
+        mainContent: mainContent['sendingOtp'](otp),
+      });
+
       await sendEmail({
         to: user.email,
         subject: 'Email Verification OTP',
-        message,
+        html,
       });
 
       res.status(200).json({
@@ -294,13 +315,19 @@ export const forgotPassword = catchAsync(
 
     const resetURL = `${req.protocol}://${clientHost}/resetPassword/${resetToken}`;
 
-    const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
+    const subject = '[Ryxel Store no-reply] Đặt lại mật khẩu';
+    const greetingName = user.name || 'Khách hàng';
+    const html = generateEmail({
+      subject,
+      greetingName,
+      mainContent: mainContent['resetPassword'](resetURL),
+    });
 
     try {
       await sendEmail({
         to: user.email,
         subject: 'Your password reset token (valid for 10 min)',
-        message,
+        html,
       });
 
       res.status(200).json({

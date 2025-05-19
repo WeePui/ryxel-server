@@ -14,6 +14,7 @@ import {
   createShippingOrder,
   refundOrder,
   exportOrderExcel,
+  resendOrderEmail,
 } from '../controllers/orderController';
 import { protect, restrictTo } from '../controllers/authController';
 
@@ -53,6 +54,8 @@ router
 router.route('/:id/refund').patch(restrictTo('admin'), refundOrder); // Refund an order
 
 router.route('/:id/cancel').patch(cancelOrder); // Cancel an order
+
+router.route('/:id/send-email').patch(restrictTo('admin'), resendOrderEmail);
 
 router.route('/checkout');
 //.post(protect, checkout); // Process checkout

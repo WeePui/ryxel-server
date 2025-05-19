@@ -207,7 +207,7 @@ orderSchema.pre<IOrder>('save', async function (next) {
 
   const statusMessages: Record<IOrder['status'], string> = {
     unpaid: 'Chưa thanh toán',
-    pending: 'Đơn hàng đã được xác nhận',
+    pending: 'Đơn hàng đang chờ xác nhận',
     processing: 'Đơn hàng đang được xử lý',
     shipped: 'Đã giao cho đơn vị vận chuyển',
     delivered: 'Giao hàng thành công',

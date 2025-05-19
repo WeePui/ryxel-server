@@ -15,6 +15,8 @@ import { verifyDiscount } from './discountController';
 import APIFeatures from '../utils/apiFeatures';
 import { getLineItemsInfo } from '../utils/getLineItemsInfo';
 import XLSX from 'xlsx';
+import { generateEmail, mainContent } from '../utils/generateEmailTemplate';
+import sendEmail from '../utils/email';
 
 const reduceStock = async (
   orderItems: any,
@@ -241,6 +243,8 @@ export const createOrder = catchAsync(
 
       await session.commitTransaction(); // Commit the transaction
       session.endSession();
+
+      await sendOrderConfirmationEmail(newOrder[0]);
 
       res.status(201).json({
         status: 'success',
@@ -822,5 +826,80 @@ export const exportOrderExcel = catchAsync(
       'Content-Disposition': `attachment; filename=order-${code}.xlsx`,
     });
     res.send(buffer);
+  }
+);
+
+const sendOrderConfirmationEmail = async (order: any) => {
+  // Lấy thông tin đơn hàng với đầy đủ chi tiết sản phẩm và biến thể
+  const populatedOrder = await Order.findById(order._id)
+    .populate('user')
+    .populate('shippingAddress')
+    .populate({
+      path: 'lineItems.product',
+      select: 'name imageCover variants', // Thêm variants để lấy thông tin biến thể
+    });
+
+  if (!populatedOrder) {
+    throw new AppError('No order found with that ID', 404);
+  }
+
+  // Chuẩn bị dữ liệu cho template với thông tin variant đầy đủ
+  const orderItems = populatedOrder.lineItems.map((item) => {
+    // Tìm variant chính xác từ sản phẩm
+    const product = item.product as any;
+    const variant = product.variants.find(
+      (v: any) => v._id.toString() === item.variant.toString()
+    );
+
+    return {
+      product: {
+        name: product.name,
+        imageCover: product.imageCover,
+      },
+      variant: {
+        name: variant?.name || item._itemName || 'Phân loại mặc định',
+        images: variant?.images || [product.imageCover], // Sử dụng ảnh của variant hoặc dùng ảnh bìa nếu không có
+        sku: variant?.sku || '',
+      },
+      quantity: item.quantity,
+      unitPrice: item.unitPrice,
+      subtotal: item.subtotal,
+    };
+  });
+
+  // Tạo nội dung email
+  const html = generateEmail({
+    subject: `Thông tin đơn hàng #${order.orderCode}`,
+    greetingName: (populatedOrder.user as any).name,
+    mainContent: mainContent.orderConfirmation(
+      populatedOrder,
+      populatedOrder.shippingAddress,
+      orderItems
+    ),
+  });
+
+  // Gửi email
+  await sendEmail({
+    to: (populatedOrder.user as any).email,
+    subject: `Thông tin đơn hàng #${order.orderCode}`,
+    html,
+  });
+};
+
+export const resendOrderEmail = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const order = await Order.findById(id);
+
+    if (!order) {
+      return next(new AppError('No order found with that ID', 404));
+    }
+
+    await sendOrderConfirmationEmail(order);
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Order confirmation email sent successfully',
+    });
   }
 );

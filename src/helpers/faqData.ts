@@ -49,7 +49,7 @@ export const faqMap = [
 - Hotline: 0912 823 283 (8:00 - 17:00 hằng ngày)
 - Email: bhtcag@gmail.com
 - Facebook: https://www.facebook.com/weepui.bh/
-- Địa chỉ: 1 Võ Văn Ngân, p.Linh Trung, TP.Thủ Đức, TP.HCM`,
+- Địa chỉ: 1 Võ Văn Ngân, p.Linh Chiểu, TP.Thủ Đức, TP.HCM`,
   },
   {
     keys: ['bảo hành', 'đổi trả', 'đổi hàng', 'trả hàng', 'bảo trì'],
