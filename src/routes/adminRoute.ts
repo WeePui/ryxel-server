@@ -25,6 +25,10 @@ router.route('/products/summary').get(adminController.getProductsSummary);
 
 router.route('/orders/top-provinces').get(adminController.getTopProvinces);
 
+router.route('/users/users-summary').get(adminController.getUserStats);
+
+router.route('/users/top-provinces').get(adminController.getTopProvincesWithMostPurchasingUsers);
+
 router
   .route('/orders/order-by-status')
   .get(adminController.getOrderStatusCounts);
