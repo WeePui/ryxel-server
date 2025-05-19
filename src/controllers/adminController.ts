@@ -336,24 +336,24 @@ export const getRevenue = catchAsync(
           _id:
             range === 'day'
               ? {
-                  $dayOfWeek: {
+                $dayOfWeek: {
+                  date: '$createdAt',
+                  timezone: 'Asia/Ho_Chi_Minh',
+                },
+              } // 1 (Sunday) – 7 (Saturday)
+              : range === 'month'
+                ? {
+                  $dayOfMonth: {
                     date: '$createdAt',
                     timezone: 'Asia/Ho_Chi_Minh',
                   },
-                } // 1 (Sunday) – 7 (Saturday)
-              : range === 'month'
-                ? {
-                    $dayOfMonth: {
-                      date: '$createdAt',
-                      timezone: 'Asia/Ho_Chi_Minh',
-                    },
-                  } // 1–31
+                } // 1–31
                 : {
-                    $month: {
-                      date: '$createdAt',
-                      timezone: 'Asia/Ho_Chi_Minh',
-                    },
-                  }, // 1–12
+                  $month: {
+                    date: '$createdAt',
+                    timezone: 'Asia/Ho_Chi_Minh',
+                  },
+                }, // 1–12
           totalRevenue: { $sum: '$subtotal' },
         },
       },
@@ -479,24 +479,24 @@ export const getProductsSold = catchAsync(
           _id:
             range === 'day'
               ? {
-                  $dayOfWeek: {
+                $dayOfWeek: {
+                  date: '$createdAt',
+                  timezone: 'Asia/Ho_Chi_Minh',
+                },
+              } // 1 (Sunday) – 7 (Saturday)
+              : range === 'month'
+                ? {
+                  $dayOfMonth: {
                     date: '$createdAt',
                     timezone: 'Asia/Ho_Chi_Minh',
                   },
-                } // 1 (Sunday) – 7 (Saturday)
-              : range === 'month'
-                ? {
-                    $dayOfMonth: {
-                      date: '$createdAt',
-                      timezone: 'Asia/Ho_Chi_Minh',
-                    },
-                  } // 1–31
+                } // 1–31
                 : {
-                    $month: {
-                      date: '$createdAt',
-                      timezone: 'Asia/Ho_Chi_Minh',
-                    },
-                  }, // 1–12
+                  $month: {
+                    date: '$createdAt',
+                    timezone: 'Asia/Ho_Chi_Minh',
+                  },
+                }, // 1–12
           sold: { $sum: '$lineItems.quantity' },
         },
       },
@@ -886,3 +886,110 @@ export const getOrderStats = catchAsync(
     });
   }
 );
+
+export const getUserStats = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const now = new Date();
+    const currentMonth = now.getMonth() + 1;
+    const currentYear = now.getFullYear();
+
+    const thisMonthStartDate = new Date(`${currentYear}-${String(currentMonth).padStart(2, '0')}-01`);
+    const thisMonthEndDate = new Date(currentYear, currentMonth, 0); // cuối tháng hiện tại
+
+    const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+    const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+
+    const previousMonthStartDate = new Date(`${previousYear}-${String(previousMonth).padStart(2, '0')}-01`);
+    const previousMonthEndDate = new Date(previousYear, previousMonth, 0); // cuối tháng trước
+
+    const countUsers = async (filter = {}) =>
+      await User.countDocuments(filter);
+
+    const countUsersBetween = async (filter = {}, start: Date, end: Date) =>
+      await User.countDocuments({
+        ...filter,
+        createdAt: { $gte: start, $lte: end },
+      });
+
+    // Tổng số user từ trước tới nay
+    const totalUsers = await countUsers();
+    const totalActiveUsers = await countUsers({ isActive: true });
+    const totalVerifiedUsers = await countUsers({ isEmailVerified: true });
+    const totalAdminUsers = await countUsers({ role: 'admin' });
+
+    // Tháng hiện tại
+    const currentMonthUsers = await countUsersBetween({}, thisMonthStartDate, thisMonthEndDate);
+    const currentActiveUsers = await countUsersBetween({ isActive: true }, thisMonthStartDate, thisMonthEndDate);
+    const currentVerifiedUsers = await countUsersBetween({ isEmailVerified: true }, thisMonthStartDate, thisMonthEndDate);
+    const currentAdminUsers = await countUsersBetween({ role: 'admin' }, thisMonthStartDate, thisMonthEndDate);
+
+    // Tháng trước
+    const prevMonthUsers = await countUsersBetween({}, previousMonthStartDate, previousMonthEndDate);
+    const prevActiveUsers = await countUsersBetween({ isActive: true }, previousMonthStartDate, previousMonthEndDate);
+    const prevVerifiedUsers = await countUsersBetween({ isEmailVerified: true }, previousMonthStartDate, previousMonthEndDate);
+    const prevAdminUsers = await countUsersBetween({ role: 'admin' }, previousMonthStartDate, previousMonthEndDate);
+
+    const calculateChangeRate = (current: number, previous: number): number => {
+      if (previous === 0) return current > 0 ? 100 : 0;
+      return ((current - previous) / previous) * 100;
+    };
+
+    const stats = {
+      totalUsers: {
+        value: totalUsers,
+        changeRate: calculateChangeRate(currentMonthUsers, prevMonthUsers),
+      },
+      totalActiveUsers: {
+        value: totalActiveUsers,
+        changeRate: calculateChangeRate(currentActiveUsers, prevActiveUsers),
+      },
+      totalVerifiedUsers: {
+        value: totalVerifiedUsers,
+        changeRate: calculateChangeRate(currentVerifiedUsers, prevVerifiedUsers),
+      },
+      totalAdminUsers: {
+        value: totalAdminUsers,
+        changeRate: calculateChangeRate(currentAdminUsers, prevAdminUsers),
+      },
+    };
+
+    res.status(200).json({
+      status: 'success',
+      data: stats,
+    });
+  }
+);
+
+export const getTopProvincesWithMostPurchasingUsers = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const range = req.query.range as string;
+    const year = parseInt(req.query.year as string);
+    const month = req.query.month
+      ? parseInt(req.query.month as string)
+      : undefined;
+
+    // Validate query parameters
+    if (
+      !['month', 'year'].includes(range) ||
+      isNaN(year) ||
+      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
+    ) {
+      return res.status(400).json({
+        status: 'fail',
+        message:
+          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+      });
+    }
+
+    const { startDate, endDate } = getTime(range, year, month);
+
+    // Gộp đơn hàng delivered theo tỉnh
+    const topProvinces = await Order.getTopProvincesByPurchasingUsers(startDate, endDate, 6);
+
+    res.status(200).json({
+      status: 'success',
+      data: topProvinces,
+    });
+  }
+);
+
