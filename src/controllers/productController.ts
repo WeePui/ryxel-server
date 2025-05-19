@@ -288,11 +288,15 @@ export const updateProduct = catchAsync(async (req, res, next) => {
 
           const startDate = new Date(variant.saleOff.startDate);
           const endDate = new Date(variant.saleOff.endDate);
-          const now = new Date();
 
           if (endDate <= startDate) {
             return next(new AppError('Sale off end date must be after start date', 400));
           }
+
+          variant.finalPrice = variant.price * (1 - variant.saleOff.percentage / 100);
+        }
+        else {
+          variant.finalPrice = variant.price;
         }
 
         return {
@@ -303,6 +307,24 @@ export const updateProduct = catchAsync(async (req, res, next) => {
     );
 
     updateData.variants = updatedVariants;
+
+    // Tính toán giá thấp nhất và phần trăm giảm giá
+    const { lowestPrice, percentageSaleOff } = parsedVariants.reduce(
+      (acc, variant) => {
+        const finalPrice = variant.finalPrice || 1;
+        if (finalPrice < acc.lowestPrice) {
+          return {
+            lowestPrice: finalPrice,
+            percentageSaleOff: variant.saleOff?.percentage || 0,
+          };
+        }
+        return acc;
+      },
+      { lowestPrice: Infinity, percentageSaleOff: 0 }
+    );
+
+    updateData.lowestPrice = lowestPrice;
+    updateData.percentageSaleOff = percentageSaleOff;
   }
 
   const updatedProduct = await Product.findByIdAndUpdate(id, updateData, {
@@ -315,6 +337,7 @@ export const updateProduct = catchAsync(async (req, res, next) => {
     data: { product: updatedProduct },
   });
 });
+
 
 export const deleteProduct = catchAsync(async (req, res, next) => {
   const { id } = req.params;
