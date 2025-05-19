@@ -1,361 +1,426 @@
-import mongoose, { Document, Query, Schema } from 'mongoose';
-import './categoryModel';
-import slugify from 'slugify';
-import Category from './categoryModel';
+import mongoose, { Document, Schema, Types } from 'mongoose';
+import Product from './productModel';
+import Review from './reviewModel';
+import AppError from '../utils/AppError';
 
-interface ISaleOff extends Document {
-  percentage: number;
-  startDate: Date;
-  endDate: Date;
+interface IOrderProduct extends Document {
+  product: Types.ObjectId;
+  variant: Types.ObjectId;
+  _itemName: string;
+  quantity: number;
+  unitPrice: number;
+  subtotal: number;
+  review?: Types.ObjectId;
 }
 
-const saleOffSchema = new Schema<ISaleOff>({
-  percentage: {
-    type: Number,
-    default: 0,
-  },
-  startDate: {
-    type: Date,
-  },
-  endDate: {
-    type: Date,
-  },
-});
+interface IShippingTracking {
+  ghnOrderCode: string;
+  trackingStatus: string;
+  statusHistory: {
+    status: string;
+    description: string;
+    timestamp: Date;
+  }[];
+  expectedDeliveryDate?: Date;
+}
 
-interface IVariant extends Document {
-  _id: mongoose.Schema.Types.ObjectId;
-  name: string;
-  sku: string;
-  specifications: Map<string, string>;
-  saleOff: ISaleOff;
-  price: number;
-  cost: number;
-  stock: number;
-  images: string[];
-  sold?: number;
-  weight?: number;
-  saleOffPrice: number;
-  finalPrice: number;
-  dimension: {
-    length: number;
-    width: number;
-    height: number;
+interface IOrder extends Document {
+  user: Types.ObjectId;
+  //checkout: ICheckout;
+  paymentMethod: string;
+  shippingAddress: Types.ObjectId;
+  status:
+    | 'unpaid'
+    | 'pending'
+    | 'processing'
+    | 'shipped'
+    | 'delivered'
+    | 'cancelled'
+    | 'refunded';
+  lineItems: IOrderProduct[];
+  subtotal: number;
+  total: number;
+  shippingFee: number;
+  discount: Types.ObjectId;
+  discountAmount: number;
+  checkout?: {
+    paymentId: string;
+    checkoutId: string;
+    amount: number;
   };
-}
-
-const variantsSchema = new Schema<IVariant>(
-  {
-    name: {
-      type: String,
-      required: [true, 'Variant name is required'],
-      trim: true,
-    },
-    sku: {
-      type: String,
-      required: [true, 'Variant sku is required'],
-      unique: true,
-    },
-    specifications: {
-      type: Map,
-      of: String,
-      required: [true, 'Variant specifications is required'],
-    },
-    saleOff: {
-      type: saleOffSchema,
-    },
-    cost: {
-      type: Number,
-      required: [true, 'Variant cost is required'],
-    },
-    price: {
-      type: Number,
-      required: [true, 'Variant price is required'],
-    },
-    stock: {
-      type: Number,
-      required: [true, 'Variant stock is required'],
-    },
-    images: {
-      type: [String],
-      required: [true, 'Variant images is required'],
-      validate: {
-        validator: function (v) {
-          return v.length > 0;
-        },
-        message: 'Each variant must have at least 1 image',
-      },
-    },
-    sold: {
-      type: Number,
-      default: 0,
-    },
-    weight: {
-      type: Number,
-      default: 0,
-    },
-    dimension: {
-      length: Number,
-      width: Number,
-      height: Number,
-    },
-  },
-  {
-    timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-  }
-);
-
-interface IProduct extends Document {
-  _id: mongoose.Types.ObjectId;
-  name: string;
-  description: string;
-  brand: string;
-  category: mongoose.Types.ObjectId;
-  sold?: number;
-  imageCover: string;
-  variants: IVariant[];
-  lowestPrice?: number;
-  rating?: number;
-  ratingsQuantity?: number;
-  slug: string;
-  _categoryName: string;
-  totalStock: number;
-  percentageSaleOff: number;
+  shippingTracking?: IShippingTracking;
+  orderCode: string;
+  reviewCount: number;
+  adminNotes: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const productSchema = new mongoose.Schema(
+interface IOrderModel extends mongoose.Model<IOrder> {
+  calculateTotalSales(): Promise<number>;
+  getTopProvinces(
+    startDate: Date,
+    endDate: Date,
+    limit: number
+  ): Promise<{ name: string; value: number }[]>;
+  getOrderStatusCounts(
+    startDate: Date,
+    endDate: Date
+  ): Promise<{ name: string; value: number }[]>;
+
+  getTopProvincesByPurchasingUsers(
+    startDate: Date,
+    endDate: Date,
+    limit: number
+  ): Promise<{ name: string; value: number }[]>;
+}
+
+const orderProductSchema = new Schema<IOrderProduct>({
+  product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+  variant: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product.variants',
+    required: true,
+  },
+  quantity: { type: Number, required: true },
+  unitPrice: { type: Number },
+  subtotal: { type: Number },
+  _itemName: { type: String },
+  review: { type: Schema.Types.ObjectId, ref: 'Review' },
+});
+
+const orderSchema = new Schema<IOrder>(
   {
-    name: {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'Order must belong to a user!'],
+    },
+    paymentMethod: {
       type: String,
-      required: [true, 'Product name is required'],
-      trim: true,
+      enum: ['zalopay', 'cod', 'stripe'],
+      required: [true, 'Order must have a payment!'],
     },
-    description: {
+    shippingAddress: {
+      type: Schema.Types.ObjectId,
+      ref: 'ShippingAddress',
+      required: [true, 'Order must have a shipping address!'],
+    },
+    status: {
       type: String,
-      required: [true, 'Product description is required'],
-      trim: true,
+      enum: [
+        'unpaid',
+        'pending',
+        'processing',
+        'shipped',
+        'delivered',
+        'cancelled',
+        'refunded',
+      ],
+      default: 'pending',
     },
-    brand: {
-      type: String,
-      required: [true, 'Product brand is required'],
-      trim: true,
+    lineItems: {
+      type: [orderProductSchema],
+      required: [true, 'Order must have products!'],
     },
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category',
-      required: [true, 'Product category is required'],
+    total: {
+      type: Number,
+      required: [true, 'Order must have a subtotal!'],
+      default: 0,
     },
-    sold: {
+    subtotal: {
+      type: Number,
+      required: [true, 'Order must have a subtotal!'],
+      default: 0,
+    },
+    shippingFee: {
+      type: Number,
+      required: [true, 'Order must have a shipping fee!'],
+      default: 0,
+    },
+    discount: {
+      type: Schema.Types.ObjectId,
+      ref: 'Discount',
+    },
+    discountAmount: {
       type: Number,
       default: 0,
     },
-    imageCover: {
-      type: String,
-      required: [true, 'Product imageCover is required'],
+    checkout: {
+      paymentId: { type: String },
+      checkoutId: { type: String },
+      amount: { type: Number },
     },
-    variants: [variantsSchema],
-    lowestPrice: {
-      type: Number,
-      default: 0,
-    },
-    rating: {
-      type: Number,
-      default: 0,
-      min: [0, 'Rating must be above 0'],
-      max: [5, 'Rating must be below 5'],
-      set: (value: number) => Math.round(value * 10) / 10,
-    },
-    ratingsQuantity: {
-      type: Number,
-      default: 0,
-    },
-    percentageSaleOff: {
-      type: Number,
-      default: 0,
-    },
-    slug: {
+    orderCode: {
       type: String,
       unique: true,
     },
-    _categoryName: {
+    reviewCount: {
+      type: Number,
+      default: 0,
+      max: 2,
+    },
+    shippingTracking: {
+      ghnOrderCode: { type: String },
+      trackingStatus: { type: String },
+      statusHistory: [
+        {
+          status: { type: String },
+          description: { type: String },
+          timestamp: { type: Date },
+        },
+      ],
+      expectedDeliveryDate: { type: Date },
+    },
+    adminNotes: {
       type: String,
-      trim: true,
+      default: '',
     },
   },
-  {
-    timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-  }
+  { timestamps: true }
 );
 
-productSchema.index({ lowestPrice: 1 });
-productSchema.index({ lowestPrice: 1, rating: -1 });
-productSchema.index({ sold: -1 });
-productSchema.index({ category: 1 });
-productSchema.index({ brand: 1 });
-productSchema.index({ category: 1, lowestPrice: 1 });
-productSchema.index({ name: 'text', brand: 'text', description: 'text' });
-productSchema.index({ slug: 1 });
+orderSchema.index({ user: 1 });
+orderSchema.index({ status: 1 });
+orderSchema.index({ createdAt: 1 });
+orderSchema.index({ updatedAt: 1 });
+orderSchema.index({ orderCode: 1 });
 
-productSchema.statics.getPriceRange = async function (categoryId) {
-  return this.aggregate([
-    { $match: { category: categoryId } },
+orderSchema.pre<IOrder>('find', async function (next) {
+  this.populate({
+    path: 'lineItems.review',
+    select: 'rating review images video',
+  });
+
+  next();
+});
+
+orderSchema.pre<IOrder>('save', async function (next) {
+  // Generate an order code
+  if (!this.orderCode) {
+    const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
+    const userSuffix = this.user.toString().slice(-4).toUpperCase();
+    const timestamp = Date.now().toString().slice(-5);
+
+    this.orderCode = `ORD-${today}-${userSuffix}-${timestamp}`;
+  }
+  next();
+});
+
+orderSchema.pre<IOrder>('save', async function (next) {
+  // Nếu là đơn mới thì không cần ghi log
+  if (!this.isModified('status') || (this as any).skipLog) return next();
+
+  const statusMessages: Record<IOrder['status'], string> = {
+    unpaid: 'Chưa thanh toán',
+    pending: 'Đơn hàng đã được xác nhận',
+    processing: 'Đơn hàng đang được xử lý',
+    shipped: 'Đã giao cho đơn vị vận chuyển',
+    delivered: 'Giao hàng thành công',
+    cancelled: 'Đơn hàng đã bị hủy',
+    refunded: 'Đơn hàng đã hoàn tiền',
+  };
+
+  const logEntry = {
+    status: this.status,
+    description: statusMessages[this.status],
+    timestamp: new Date(),
+  };
+
+  if (!this.shippingTracking) {
+    this.shippingTracking = {
+      ghnOrderCode: '',
+      trackingStatus: this.status,
+      statusHistory: [logEntry],
+      expectedDeliveryDate: undefined,
+    };
+  } else {
+    this.shippingTracking.trackingStatus = this.status;
+    this.shippingTracking.statusHistory.push(logEntry);
+  }
+
+  next();
+});
+
+orderSchema.statics.calculateTotalSales = async function () {
+  const result = await this.aggregate([
+    {
+      $match: {
+        status: { $nin: ['unpaid', 'cancelled'] }, // Lọc bỏ đơn hàng unpaid và cancelled
+      },
+    },
     {
       $group: {
-        _id: null,
-        minPrice: { $min: '$lowestPrice' },
-        maxPrice: { $max: '$lowestPrice' },
+        _id: null, // Không nhóm theo trường nào
+        totalSales: { $sum: '$subtotal' }, // Tính tổng trường `total`
       },
+    },
+  ]);
+
+  return result.length > 0 ? result[0].totalSales : 0; // Nếu không có đơn hàng hợp lệ, trả về 0
+};
+
+orderSchema.pre<IOrder>('save', async function (next) {
+  // Initialize the total and shippingFee
+  this.subtotal = 0;
+
+  // Loop through the lineItems to calculate the subtotal for each variant
+  for (const item of this.lineItems) {
+    const product = await Product.findById(item.product);
+
+    if (!product) {
+      throw new Error('Product ' + item.product.toString() + ' not found');
+    }
+
+    item._itemName = product.name;
+
+    // Compare the string representations of the ObjectIds
+    const variant = product.variants.find(
+      (v) => v._id.toString() === item.variant.toString()
+    );
+    if (variant) {
+      item.unitPrice = variant.finalPrice;
+      item.subtotal = item.unitPrice * item.quantity;
+      this.subtotal += item.subtotal;
+    } else {
+      throw new Error('Variant ' + item.variant.toString() + ' not found');
+    }
+  }
+
+  this.total = this.subtotal + this.shippingFee - (this.discountAmount || 0);
+
+  next();
+});
+
+orderSchema.statics.getTopProvinces = async function (
+  startDate: Date,
+  endDate: Date,
+  limit: number = 5
+) {
+  return this.aggregate([
+    {
+      $match: {
+        status: { $nin: ['unpaid', 'cancelled'] },
+        createdAt: { $gte: startDate, $lte: endDate },
+      },
+    },
+    {
+      $lookup: {
+        from: 'shippingaddresses',
+        localField: 'shippingAddress',
+        foreignField: '_id',
+        as: 'address',
+      },
+    },
+    { $unwind: '$address' },
+    {
+      $match: {
+        'address.city.name': { $ne: null, $exists: true },
+      },
+    },
+    {
+      $group: {
+        _id: '$address.city.name',
+        value: { $sum: '$subtotal' },
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        name: { $ifNull: ['$_id', 'Không xác định'] },
+        value: 1,
+        count: 1,
+      },
+    },
+    { $sort: { value: -1 } },
+    { $limit: limit },
+  ]);
+};
+
+orderSchema.statics.getTopProvincesByPurchasingUsers = async function (
+  startDate: Date,
+  endDate: Date,
+  limit: number = 6
+): Promise<{ name: string; value: number }[]> {
+  return this.aggregate([
+    {
+      $match: {
+        status: 'delivered',
+        createdAt: { $gte: startDate, $lte: endDate },
+      },
+    },
+    {
+      $lookup: {
+        from: 'shippingaddresses',
+        localField: 'shippingAddress',
+        foreignField: '_id',
+        as: 'address',
+      },
+    },
+    { $unwind: '$address' },
+    {
+      $match: {
+        'address.city.name': { $ne: null, $exists: true },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          province: '$address.city.name',
+          userId: '$user',
+        },
+      },
+    },
+    {
+      $group: {
+        _id: '$_id.province',
+        value: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        name: '$_id',
+        value: 1,
+      },
+    },
+    {
+      $sort: { value: -1 },
+    },
+    {
+      $limit: limit,
     },
   ]);
 };
 
-// Pre-save middleware to create a slug
-productSchema.pre<IProduct>('save', async function (next) {
-  let slug = slugify(this.name, { lower: true, strict: true });
-  let count = 1;
-
-  const originalSlug = slug;
-  while (await Product.findOne({ slug })) {
-    slug = `${originalSlug}-${count++}`;
-  }
-  this.slug = slug;
-
-  next();
-});
-
-// Hiện tại slug chỉ được tạo khi tạo mới, không update khi name thay đổi
-productSchema.pre<IProduct>('save', async function (next) {
-  // Nên kiểm tra nếu name thay đổi thì mới tạo slug mới
-  if (this.isModified('name')) {
-    let slug = slugify(this.name, { lower: true, strict: true });
-    let count = 1;
-
-    const originalSlug = slug;
-    while (await Product.findOne({ slug })) {
-      slug = `${originalSlug}-${count++}`;
-    }
-    this.slug = slug;
-  }
-
-  next();
-});
-
-// Pre-save middleware to update category name in all products
-// when the category is modified or a new product is created
-productSchema.pre<IProduct>('save', async function (next) {
-  if (this.isModified('category') || this.isNew) {
-    // Update tất cả Product liên quan khi Category thay đổi
-    try {
-      const category = await Category.findById(this.category);
-      if (!category) {
-        return next(new Error('Category not found ' + this.category));
-      }
-
-      this._categoryName = category.name;
-
-      await Product.updateMany(
-        { category: this.category },
-        { _categoryName: this._categoryName }
-      );
-    } catch (err) {
-      return next(err as mongoose.CallbackError);
-    }
-  }
-  next();
-});
-
-// Pre-save middleware to calculate the lowest price
-productSchema.pre<IProduct>('save', function (next) {
-  if (this.variants && this.variants.length > 0) {
-    const { lowestPrice, percentageSaleOff } = this.variants.reduce(
-      (acc, variant) => {
-        const finalPrice = variant.finalPrice || 0;
-        if (finalPrice < acc.lowestPrice) {
-          return {
-            lowestPrice: finalPrice,
-            percentageSaleOff: variant.saleOff?.percentage || 0,
-          };
-        }
-        return acc;
+orderSchema.statics.getOrderStatusCounts = async function (
+  startDate: Date,
+  endDate: Date
+) {
+  return this.aggregate([
+    {
+      $match: {
+        createdAt: { $gte: startDate, $lte: endDate },
       },
-      { lowestPrice: Infinity, percentageSaleOff: 0 }
-    );
+    },
+    {
+      $group: {
+        _id: '$status',
+        value: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        name: '$_id',
+        value: 1,
+      },
+    },
+    { $sort: { value: -1 } },
+  ]);
+};
 
-    this.lowestPrice = lowestPrice;
-    this.percentageSaleOff = percentageSaleOff;
-    this.sold = this.variants.reduce((acc, variant) => acc + variant.sold!, 0);
-  }
+const Order = mongoose.model<IOrder, IOrderModel>('Order', orderSchema);
 
-  next();
-});
-
-productSchema.pre<IProduct>('save', async function (next) {
-  if (this.isModified('category') || this.isNew) {
-    try {
-      const category = await Category.findById(this.category);
-      if (!category) {
-        return next(new Error('Category not found ' + this.category)); // Handle missing category gracefully
-      }
-
-      this._categoryName = category.name; // Assign category name
-    } catch (err) {
-      return next(err as mongoose.CallbackError);
-    }
-  }
-  next();
-});
-
-productSchema.virtual('reviews', {
-  ref: 'Review',
-  foreignField: 'product',
-  localField: '_id',
-});
-
-productSchema.virtual('totalStock').get(function (this: IProduct) {
-  return this.variants.reduce(
-    (total, variant) => total + (variant.stock || 0),
-    0
-  );
-});
-
-variantsSchema.virtual('saleOffPrice').get(function (this: IVariant) {
-  const now = new Date();
-  const saleOff = this.saleOff as ISaleOff; // `saleOff` giả định chứa thông tin giảm giá
-
-  // Kiểm tra nếu đang trong khoảng thời gian sale off
-  if (saleOff && saleOff.startDate <= now && now <= saleOff.endDate) {
-    const price = (this.price * saleOff.percentage) / 100;
-    return Math.round(price / 100) * 100; // Giá sau giảm
-  }
-  return null; // Không có giảm giá
-});
-
-variantsSchema.virtual('finalPrice').get(function (this: IVariant) {
-  const saleOffPrice = this.saleOffPrice; // Lấy giá giảm từ virtual field
-  if (saleOffPrice) {
-    return this.price - saleOffPrice; // Nếu có giảm giá, dùng giá đã giảm
-  }
-  return this.price; // Nếu không, dùng giá gốc
-});
-
-productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
-  const filter = this.getFilter();
-
-  if (!filter.categoryName) {
-    this.populate({
-      path: 'category',
-      select: 'name slug',
-    });
-  }
-
-  next();
-});
-
-const Product = mongoose.model<IProduct>('Product', productSchema);
-
-export default Product;
+export default Order;
