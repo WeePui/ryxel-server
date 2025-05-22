@@ -1,6 +1,6 @@
-import mongoose, { Document, Query, Schema } from 'mongoose';
-import Product from './productModel';
-import Order from './orderModel';
+import mongoose, { Document, Query, Schema } from "mongoose";
+import Product from "./productModel";
+import Order from "./orderModel";
 
 interface IReview extends Document {
   review: string;
@@ -30,51 +30,55 @@ const reviewSchema = new Schema<IReview>(
     review: {
       type: String,
       trim: true,
-      default: '',
+      default: "",
     },
     rating: {
       type: Number,
       min: 1,
       max: 5,
-      required: [true, 'Rating is required!'],
+      required: [true, "Rating is required!"],
     },
     product: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Product',
-      required: [true, 'Review must belong to a product!'],
+      ref: "Product",
+      required: [true, "Review must belong to a product!"],
     },
     variant: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Product.variants',
+      ref: "Product.variants",
     },
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User',
-      required: [true, 'Review must belong to a user!'],
+      ref: "User",
+      required: [true, "Review must belong to a user!"],
     },
     order: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Order',
+      ref: "Order",
     },
     images: [String],
     video: String,
     status: {
       type: String,
-      enum: ['rejected', 'approved', 'processing'],
-      default: 'processing',
+      enum: ["rejected", "approved", "processing"],
+      default: "processing",
     },
-  },
-  {
+  },  {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
     timestamps: true,
   }
 );
 
+// Add a compound index on product, variant, and user to prevent duplicate reviews
+// When order is included in the index, it will allow multiple reviews for the same product-variant
+// but from different orders
+reviewSchema.index({ product: 1, variant: 1, user: 1, order: 1 }, { unique: true });
+
 reviewSchema.pre<Query<IReview, IReview>>(/^find/, function (next) {
   this.populate({
-    path: 'user',
-    select: 'name photo active',
+    path: "user",
+    select: "name photo active",
   });
 
   next();
@@ -92,9 +96,9 @@ reviewSchema.statics.calcAverageRatings = async function (
         },
         {
           $group: {
-            _id: '$product',
+            _id: "$product",
             nRating: { $sum: 1 },
-            avgRating: { $avg: '$rating' },
+            avgRating: { $avg: "$rating" },
           },
         },
       ],
@@ -127,9 +131,9 @@ reviewSchema.statics.calcAverageRatings = async function (
       },
       {
         $group: {
-          _id: '$product',
+          _id: "$product",
           nRating: { $sum: 1 },
-          avgRating: { $avg: '$rating' },
+          avgRating: { $avg: "$rating" },
         },
       },
     ]);
@@ -148,7 +152,7 @@ reviewSchema.statics.calcAverageRatings = async function (
   }
 };
 
-reviewSchema.post('save', async function (doc) {
+reviewSchema.post("save", async function (doc) {
   (doc.constructor as IReviewModel).calcAverageRatings(this.product);
 
   const order = await Order.findOne({
@@ -157,7 +161,7 @@ reviewSchema.post('save', async function (doc) {
   });
 
   if (order) {
-    if (this.isModified('review')) order.reviewCount += 1;
+    if (this.isModified("review")) order.reviewCount += 1;
 
     order.lineItems.forEach((item) => {
       if (item.product.toString() === this.product.toString()) {
@@ -195,6 +199,6 @@ reviewSchema.post(/^findOneAnd/, async function (doc) {
   }
 });
 
-const Review = mongoose.model<IReview, IReviewModel>('Review', reviewSchema);
+const Review = mongoose.model<IReview, IReviewModel>("Review", reviewSchema);
 
 export default Review;
