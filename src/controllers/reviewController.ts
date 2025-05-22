@@ -1,15 +1,15 @@
-import { Request, Response, NextFunction } from 'express';
-import mongoose from 'mongoose';
-import Review from '../models/reviewModel';
-import catchAsync from '../utils/catchAsync';
-import AppError from '../utils/AppError';
+import { Request, Response, NextFunction } from "express";
+import mongoose from "mongoose";
+import Review from "../models/reviewModel";
+import catchAsync from "../utils/catchAsync";
+import AppError from "../utils/AppError";
 import {
   deleteImage,
   extractPublicId,
   uploadProductReview,
-} from '../utils/cloudinaryService';
-import Order from '../models/orderModel';
-import { nsfwDetection } from '../utils/python';
+} from "../utils/cloudinaryService";
+import Order from "../models/orderModel";
+import { nsfwDetection } from "../utils/python";
 
 export const getAllReviews = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -20,7 +20,7 @@ export const getAllReviews = catchAsync(
     const reviews = await Review.find(filter);
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       results: reviews.length,
       data: {
         reviews,
@@ -44,25 +44,25 @@ export const createReviewsByOrder = catchAsync(
     const { orderId } = req.params;
     const { reviews } = req.body;
 
-    console.log('BODY:', req.body);
+    console.log("BODY:", req.body);
 
     const order = await Order.findById({ _id: orderId, user: req.user.id });
 
     if (!order)
       return next(
         new AppError(
-          'No order found with that ID or does not belong to you',
+          "No order found with that ID or does not belong to you",
           404
         )
       );
     if (order.reviewCount >= 2)
       return next(
-        new AppError('Order has reached the maximum review count', 400)
+        new AppError("Order has reached the maximum review count", 400)
       );
-    if (order.status !== 'delivered')
-      return next(new AppError('Order is not delivered yet', 400));
+    if (order.status !== "delivered")
+      return next(new AppError("Order is not delivered yet", 400));
     if (order.createdAt.getTime() < Date.now() - 7 * 24 * 60 * 60 * 1000)
-      return next(new AppError('Order is too old to review', 400));
+      return next(new AppError("Order is too old to review", 400));
 
     const lineItemIds = order.lineItems.map((item) => item.product.toString());
     const reviewProductIds = reviews.map(
@@ -73,16 +73,16 @@ export const createReviewsByOrder = catchAsync(
       (id: string) => !lineItemIds.includes(id)
     );
     if (hasInvalidReviews) {
-      return next(new AppError('Some reviews do not match line items', 400));
+      return next(new AppError("Some reviews do not match line items", 400));
     }
 
     if (req.files && (req.files.length as number) > 0) {
       const allowedMimeTypes = [
-        'image/jpeg',
-        'image/png',
-        'image/webp',
-        'video/mp4',
-        'video/webm',
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "video/mp4",
+        "video/webm",
       ];
       const invalidFiles = (req.files as Express.Multer.File[]).filter(
         (file: Express.Multer.File) => !allowedMimeTypes.includes(file.mimetype)
@@ -91,11 +91,24 @@ export const createReviewsByOrder = catchAsync(
       if (invalidFiles.length > 0) {
         return next(
           new AppError(
-            'Only JPEG, PNG, WEBP images, and MP4/WEBM videos are allowed',
+            "Only JPEG, PNG, WEBP images, and MP4/WEBM videos are allowed",
             400
           )
         );
       }
+    } // Log received files for debugging
+    console.log(
+      `Received ${req.files ? (req.files as Express.Multer.File[]).length : 0} files`
+    );
+    if (req.files) {
+      console.log(
+        "File field names:",
+        (req.files as Express.Multer.File[]).map((f) => f.fieldname)
+      );
+      console.log(
+        "File original names:",
+        (req.files as Express.Multer.File[]).map((f) => f.originalname)
+      );
     }
 
     const files = req.files as Express.Multer.File[];
@@ -103,62 +116,194 @@ export const createReviewsByOrder = catchAsync(
 
     await Promise.all(
       files.map(async (file) => {
-        const match = file.fieldname.match(/\[([0-9]+)\]\[(images|video)\]/);
-        if (match) {
-          const reviewIndex = parseInt(match[1], 10);
-          const type = match[2];
-
-          if (!fileMap[reviewIndex]) fileMap[reviewIndex] = {};
-
-          const url = await uploadProductReview(file.buffer, file.mimetype);
-
-          if (type === 'images') {
-            if (!fileMap[reviewIndex].images) fileMap[reviewIndex].images = [];
-            fileMap[reviewIndex].images!.push(url);
-          } else if (type === 'video') {
-            fileMap[reviewIndex].video = url;
-          }
+        // Improved regex that captures the review index more reliably
+        const match = file.fieldname.match(
+          /reviews\[([0-9]+)\]\[(images|video)\]/
+        );
+        if (!match) {
+          console.warn(`Could not parse fieldname pattern: ${file.fieldname}`);
+          return;
         }
+
+        const reviewIndex = parseInt(match[1], 10);
+        const type = match[2];
+
+        console.log(
+          `Processing file for review ${reviewIndex}, type: ${type}, originalname: ${file.originalname}`
+        );
+
+        if (!fileMap[reviewIndex]) fileMap[reviewIndex] = {};
+
+        const url = await uploadProductReview(file.buffer, file.mimetype);
+        console.log(`Uploaded file for review ${reviewIndex}, URL: ${url}`);
+
+        if (type === "images") {
+          if (!fileMap[reviewIndex].images) fileMap[reviewIndex].images = [];
+          fileMap[reviewIndex].images!.push(url);
+        } else if (type === "video") {
+          fileMap[reviewIndex].video = url;
+        }
+
+        console.log(
+          `Updated fileMap for review ${reviewIndex}:`,
+          fileMap[reviewIndex]
+        );
       })
+    );
+    // ADD THIS LOG:
+    console.log(
+      "Final fileMap after all uploads:",
+      JSON.stringify(fileMap, null, 2)
     );
 
     reviews.forEach((review: ReviewInput, index: number) => {
       review.images = fileMap[index]?.images || [];
-      review.video = fileMap[index]?.video || '';
+      review.video = fileMap[index]?.video || "";
     });
-
-    const createdReviews = await Review.create(
-      reviews.map((review: ReviewInput) => ({
-        user: req.user.id,
-        product: review.productId,
-        rating: review.rating,
-        images: review.images,
-        video: review.video,
-        review: review.review,
-        order: orderId,
-        variant: review.variantId,
-      }))
+    // ADD THIS LOG:
+    console.log(
+      "req.body.reviews after image assignment:",
+      JSON.stringify(reviews, null, 2)
     );
 
-    await Order.updateOne({ _id: order._id }, { $inc: { reviewCount: 1 } });
+    const reviewObjects = reviews.map((review: ReviewInput) => ({
+      user: req.user.id,
+      product: review.productId,
+      rating: review.rating,
+      images: review.images || [],
+      video: review.video || "",
+      review: review.review || "",
+      order: orderId,
+      variant: review.variantId,
+    }));
+    // ADD THIS LOG:
+    console.log(
+      "Final reviewObjects before create:",
+      JSON.stringify(reviewObjects, null, 2)
+    );
 
+    // Try to create all reviews at once
+    let createdReviews;
+    try {
+      createdReviews = await Review.create(reviewObjects);
+    } catch (err: any) {
+      console.error("Error creating reviews:", err);
+
+      // If bulk creation fails, try individual creation to identify which ones failed
+      const individualResults = await Promise.allSettled(
+        reviewObjects.map(async (reviewObj: any) => {
+          try {
+            return await Review.create(reviewObj);
+          } catch (individualError: any) {
+            return {
+              error: true,
+              productId: reviewObj.product,
+              variantId: reviewObj.variant,
+              message: individualError.message,
+            };
+          }
+        })
+      );
+
+      // Filter successful and failed creations
+      const successful = individualResults
+        .filter(
+          (result) => result.status === "fulfilled" && !result.value?.error
+        )
+        .map((result) => (result.status === "fulfilled" ? result.value : null))
+        .filter(Boolean);
+
+      const failed = individualResults
+        .filter(
+          (result) =>
+            result.status === "rejected" ||
+            (result.status === "fulfilled" && result.value?.error)
+        )
+        .map((result) => {
+          if (result.status === "rejected") {
+            return { reason: result.reason?.message || "Unknown error" };
+          }
+          return result.status === "fulfilled" ? result.value : null;
+        })
+        .filter(Boolean);
+
+      // If some succeeded but some failed
+      if (successful.length > 0) {
+        // Process the successful ones
+        for (const review of successful) {
+          // Run NSFW detection for images
+          if (review.images && review.images.length > 0) {
+            // nsfwDetection(review._id as string, review.images as string[]);
+          }
+
+          // Update product ratings
+          await Review.calcAverageRatings(review.product);
+        }
+
+        // Increment review count since at least one review was created
+        await Order.updateOne({ _id: order._id }, { $inc: { reviewCount: 1 } });
+
+        // Return success with information about failed reviews
+        return res.status(207).json({
+          status: "partial_success",
+          message: "Some reviews were created successfully, but others failed",
+          data: {
+            successful: successful.length,
+            failed: failed.length,
+            details: { successful, failed },
+          },
+        });
+      }
+
+      // If all failed
+      return next(
+        new AppError(
+          "Could not create any reviews. This may be because you have already reviewed these variants or there was a server error.",
+          400
+        )
+      );
+    }
+
+    // If all reviews were created successfully
     const createdReviewsArray = Array.isArray(createdReviews)
       ? createdReviews
       : [createdReviews];
 
-    createdReviewsArray.map((review) => {
-      nsfwDetection(review._id as string, review.images as string[]);
-    });
+    // Process NSFW detection and update product ratings
+    for (const review of createdReviewsArray) {
+      if (review.images && review.images.length > 0) {
+        nsfwDetection(review._id as string, review.images as string[]);
+      }
+      await Review.calcAverageRatings(review.product);
 
-    await Promise.all(
-      createdReviewsArray.map((review) =>
-        Review.calcAverageRatings(review.product)
-      )
-    );
+      // Update the order's lineItem with the correct review reference
+      await Order.updateOne(
+        {
+          _id: orderId,
+          "lineItems.product": review.product,
+          "lineItems.variant": review.variant,
+        },
+        {
+          $set: { "lineItems.$.review": review._id },
+        }
+      );
+    }
 
+    // Increment review count
+    await Order.updateOne({ _id: order._id }, { $inc: { reviewCount: 1 } });
     res.status(200).json({
-      status: 'success',
-      message: 'Review added successfully',
+      status: "success",
+      message: "All reviews were processed successfully",
+      data: {
+        successful: createdReviewsArray.length,
+        details: {
+          createdReviews: createdReviewsArray.map((review) => ({
+            id: review._id,
+            productId: review.product,
+            variantId: review.variant,
+          })),
+        },
+      },
     });
   }
 );
@@ -169,12 +314,16 @@ interface ReviewUpdateInput {
   review: string;
   images?: string[];
   video?: string;
+  product?: string;
+  variant?: string;
 }
 
 export const updateReviewsByOrder = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { orderId } = req.params;
     const { reviews } = req.body;
+
+    console.log("UPDATE BODY:", req.body);
 
     const order = await Order.findOne({
       _id: orderId,
@@ -184,7 +333,7 @@ export const updateReviewsByOrder = catchAsync(
     if (!order) {
       return next(
         new AppError(
-          'No order found with that ID or does not belong to you',
+          "No order found with that ID or does not belong to you",
           404
         )
       );
@@ -192,26 +341,26 @@ export const updateReviewsByOrder = catchAsync(
 
     if (order.reviewCount >= 2) {
       return next(
-        new AppError('Order has reached the maximum review count', 400)
+        new AppError("Order has reached the maximum review count", 400)
       );
     }
 
-    if (order.status !== 'delivered') {
-      return next(new AppError('Order is not delivered yet', 400));
+    if (order.status !== "delivered") {
+      return next(new AppError("Order is not delivered yet", 400));
     }
 
     if (order.createdAt.getTime() < Date.now() - 7 * 24 * 60 * 60 * 1000) {
-      return next(new AppError('Order is too old to review', 400));
+      return next(new AppError("Order is too old to review", 400));
     }
 
-    // ✅ Kiểm tra định dạng file
+    // Kiểm tra định dạng file
     if (req.files && (req.files.length as number) > 0) {
       const allowedMimeTypes = [
-        'image/jpeg',
-        'image/png',
-        'image/webp',
-        'video/mp4',
-        'video/webm',
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "video/mp4",
+        "video/webm",
       ];
       const invalidFiles = (req.files as Express.Multer.File[]).filter(
         (file: Express.Multer.File) => !allowedMimeTypes.includes(file.mimetype)
@@ -219,72 +368,119 @@ export const updateReviewsByOrder = catchAsync(
       if (invalidFiles.length > 0) {
         return next(
           new AppError(
-            'Only JPEG, PNG, WEBP images, and MP4/WEBM videos are allowed',
+            "Only JPEG, PNG, WEBP images, and MP4/WEBM videos are allowed",
             400
           )
         );
       }
     }
 
-    const files = req.files as Express.Multer.File[];
-    const fileMap: Record<string, { images?: string[]; video?: string }> = {};
+    // Log received files for debugging
+    console.log(
+      `Received ${req.files ? (req.files as Express.Multer.File[]).length : 0} update files`
+    );
+    if (req.files) {
+      console.log(
+        "Update file field names:",
+        (req.files as Express.Multer.File[]).map((f) => f.fieldname)
+      );
+      console.log(
+        "Update file original names:",
+        (req.files as Express.Multer.File[]).map((f) => f.originalname)
+      );
+    }
 
-    // ✅ Upload file mới lên Cloud
+    const files = req.files as Express.Multer.File[];
+    const fileMap: Record<number, { images?: string[]; video?: string }> = {};
+
+    // Upload file mới lên Cloud
     await Promise.all(
       files.map(async (file) => {
-        const match = file.fieldname.match(/reviews\[(.+)\]\[(images|video)\]/);
-        if (match) {
-          const reviewId = match[1];
-          const type = match[2];
-
-          if (!fileMap[reviewId]) fileMap[reviewId] = {};
-          const url = await uploadProductReview(file.buffer, file.mimetype);
-
-          if (type === 'images') {
-            if (!fileMap[reviewId].images) fileMap[reviewId].images = [];
-            fileMap[reviewId].images.push(url);
-          } else if (type === 'video') {
-            fileMap[reviewId].video = url;
-          }
+        // Improved regex that captures the review index more reliably
+        const match = file.fieldname.match(
+          /reviews\[([0-9]+)\]\[(images|video)\]/
+        );
+        if (!match) {
+          console.warn(`Could not parse fieldname pattern: ${file.fieldname}`);
+          return;
         }
+
+        const reviewIndex = parseInt(match[1], 10);
+        const type = match[2];
+
+        console.log(
+          `Processing update file for review ${reviewIndex}, type: ${type}, originalname: ${file.originalname}`
+        );
+
+        if (!fileMap[reviewIndex]) fileMap[reviewIndex] = {};
+
+        const url = await uploadProductReview(file.buffer, file.mimetype);
+        console.log(
+          `Uploaded update file for review ${reviewIndex}, URL: ${url}`
+        );
+
+        if (type === "images") {
+          if (!fileMap[reviewIndex].images) fileMap[reviewIndex].images = [];
+          fileMap[reviewIndex].images!.push(url);
+        } else if (type === "video") {
+          fileMap[reviewIndex].video = url;
+        }
+
+        console.log(
+          `Updated fileMap for review ${reviewIndex}:`,
+          fileMap[reviewIndex]
+        );
       })
     );
 
-    // ✅ Cập nhật tất cả reviews
-    await Promise.all(
-      Object.keys(reviews).map(async (reviewId) => {
-        const reviewData = reviews[reviewId];
+    console.log(
+      "Final update fileMap after all uploads:",
+      JSON.stringify(fileMap, null, 2)
+    );
 
+    // Array to collect responses from each review update
+    const updateResults = [];
+    const updatedReviews = [];
+
+    // Process each review update
+    for (let index = 0; index < reviews.length; index++) {
+      const reviewData = reviews[index] as ReviewUpdateInput;
+
+      try {
+        // Find the original review
         const oldReview = await Review.findOne({
-          _id: reviewId,
+          _id: reviewData._id,
           order: orderId,
         });
 
         if (!oldReview) {
-          throw new AppError(`Review ${reviewId} not found`, 404);
+          updateResults.push({
+            error: true,
+            reviewId: reviewData._id,
+            message: `Review not found or does not belong to this order`,
+          });
+          continue;
         }
 
         const oldImages = oldReview.images || [];
-        const oldVideo = oldReview.video || '';
+        const oldVideo = oldReview.video || "";
 
-        // ✅ Xác định ảnh giữ lại + ảnh mới
+        // Process images: keep existing strings from input + add new uploads
         const newImages = (reviewData.images || []).filter(
-          (img: any) => typeof img === 'string'
+          (img: any) => typeof img === "string"
         );
-        const uploadedImages = fileMap[reviewId]?.images || [];
-        const finalImages = [...newImages, ...uploadedImages];
-
-        // ✅ Video mới hoặc xóa video
+        const uploadedImages = fileMap[index]?.images || [];
+        const finalImages = [...newImages, ...uploadedImages]; // Process video
         let finalVideo = oldVideo;
-        if (reviewData.video === '') {
-          finalVideo = '';
-        } else if (fileMap[reviewId]?.video) {
-          finalVideo = fileMap[reviewId].video;
+        if (reviewData.video === "") {
+          finalVideo = "";
+        } else if (fileMap[index]?.video) {
+          finalVideo = fileMap[index].video || "";
         }
 
-        // ✅ Cập nhật review
+        // Update the review
         const updatedReview = await Review.findByIdAndUpdate(
-          reviewId,
+          reviewData._id,
           {
             rating: reviewData.rating,
             review: reviewData.review,
@@ -295,36 +491,77 @@ export const updateReviewsByOrder = catchAsync(
         );
 
         if (updatedReview) {
+          updatedReviews.push(updatedReview);
+
+          // Update product ratings
           await Review.calcAverageRatings(updatedReview.product);
 
-          // ✅ Xóa file cũ nếu cần (không block response)
+          // Update the order's lineItem with the correct review reference
+          await Order.updateOne(
+            {
+              _id: orderId,
+              "lineItems.product": updatedReview.product,
+              "lineItems.variant": updatedReview.variant,
+            },
+            {
+              $set: { "lineItems.$.review": updatedReview._id },
+            }
+          );
+
+          updateResults.push({
+            success: true,
+            reviewId: updatedReview._id,
+            product: updatedReview.product,
+            variant: updatedReview.variant,
+          });
+
+          // Clean up old files in the background
           process.nextTick(async () => {
             try {
               const removedImages = oldImages.filter(
                 (img) => !finalImages.includes(img)
               );
-              const removedVideo = oldVideo && finalVideo === '';
+              const removedVideo = oldVideo && finalVideo === "";
 
-              await Promise.all([
-                ...removedImages.map((img) =>
-                  deleteImage(extractPublicId(img)!)
-                ),
-                removedVideo ? deleteImage(extractPublicId(oldVideo)!) : null,
-              ]);
+              await Promise.all(
+                [
+                  ...removedImages.map((img) =>
+                    deleteImage(extractPublicId(img)!)
+                  ),
+                  removedVideo ? deleteImage(extractPublicId(oldVideo)!) : null,
+                ].filter(Boolean)
+              );
             } catch (err) {
-              console.error('Error deleting old files:', err);
+              console.error("Error deleting old files:", err);
             }
           });
         }
-      })
-    );
+      } catch (err: any) {
+        console.error(`Error updating review at index ${index}:`, err);
+        updateResults.push({
+          error: true,
+          reviewId: reviewData._id,
+          message: err.message || "Unknown error during update",
+        });
+      }
+    } // Check for NSFW content in uploaded images
+    for (const review of updatedReviews) {
+      if (review.images && review.images.length > 0) {
+        nsfwDetection(review._id as string, review.images as string[]);
+      }
+    }
 
-    // ✅ Tăng reviewCount (nếu bạn muốn giữ logic này)
+    // Increment review count
     await Order.updateOne({ _id: orderId }, { $inc: { reviewCount: 1 } });
 
     res.status(200).json({
-      status: 'success',
-      message: 'Reviews updated successfully',
+      status: "success",
+      message: "Reviews updated successfully",
+      data: {
+        successful: updatedReviews.length,
+        total: reviews.length,
+        details: updateResults,
+      },
     });
   }
 );
@@ -333,10 +570,10 @@ export const getReviewById = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const review = await Review.findById(req.params.id);
 
-    if (!review) return next(new AppError('No review found with that ID', 404));
+    if (!review) return next(new AppError("No review found with that ID", 404));
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         review,
       },
@@ -351,10 +588,10 @@ export const updateReview = catchAsync(
       runValidators: true,
     });
 
-    if (!review) return next(new AppError('No review found with that ID', 404));
+    if (!review) return next(new AppError("No review found with that ID", 404));
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         review,
       },
@@ -366,10 +603,10 @@ export const deleteReview = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const review = await Review.findByIdAndDelete(req.params.id);
 
-    if (!review) return next(new AppError('No review found with that ID', 404));
+    if (!review) return next(new AppError("No review found with that ID", 404));
 
     res.status(204).json({
-      status: 'success',
+      status: "success",
       data: null,
     });
   }
@@ -378,12 +615,16 @@ export const deleteReview = catchAsync(
 export const processNSFWReview = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { reviewId, isValid, detected } = req.body;
-    console.log('hello mtf');
-
-    console.log(detected); //TO DO SOMETHING WITH THE PUSH NOTIFICATION LATER ON
+    console.log("==== NSFW Detection Callback Received ====");
+    console.log("ReviewID:", reviewId);
+    console.log("IsValid:", isValid);
+    console.log("Detected:", detected);
 
     const review = await Review.findById(reviewId);
-    if (!review) return next(new AppError('No review found with that ID', 404));
+    if (!review) return next(new AppError("No review found with that ID", 404));
+
+    console.log("Found review:", review._id);
+    console.log("Review images before update:", review.images);
 
     if (!isValid) {
       let images = review.images;
@@ -398,16 +639,19 @@ export const processNSFWReview = catchAsync(
           await deleteImage(extractPublicId(video)!);
         }
       } catch (err) {
-        console.error('Error deleting old files:', err);
+        console.error("Error deleting old files:", err);
       }
 
       await Review.findByIdAndDelete(reviewId);
+      console.log("Review deleted due to NSFW content");
     } else {
-      review.status = 'approved';
+      review.status = "approved";
       await review.save();
+      console.log("Review approved:", review._id);
+      console.log("Review images after approval:", review.images);
     }
     res.status(204).json({
-      status: 'success',
+      status: "success",
       isValid: isValid,
     });
   }

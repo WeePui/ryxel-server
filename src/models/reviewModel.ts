@@ -63,17 +63,18 @@ const reviewSchema = new Schema<IReview>(
       enum: ["rejected", "approved", "processing"],
       default: "processing",
     },
-  },  {
+  },
+  {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
     timestamps: true,
   }
 );
 
-// Add a compound index on product, variant, and user to prevent duplicate reviews
-// When order is included in the index, it will allow multiple reviews for the same product-variant
-// but from different orders
-reviewSchema.index({ product: 1, variant: 1, user: 1, order: 1 }, { unique: true });
+reviewSchema.index(
+  { product: 1, variant: 1, user: 1, order: 1 },
+  { unique: true }
+);
 
 reviewSchema.pre<Query<IReview, IReview>>(/^find/, function (next) {
   this.populate({
