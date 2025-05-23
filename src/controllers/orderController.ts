@@ -1,20 +1,22 @@
-import { Request, Response, NextFunction } from 'express';
-import mongoose from 'mongoose';
-import Order from '../models/orderModel';
-import Product from '../models/productModel';
-import catchAsync from '../utils/catchAsync';
-import AppError from '../utils/AppError';
-import ShippingAddress from '../models/shippingAddressModel';
+import { Request, Response, NextFunction } from "express";
+import mongoose from "mongoose";
+import Order from "../models/orderModel";
+import Product from "../models/productModel";
+import catchAsync from "../utils/catchAsync";
+import AppError from "../utils/AppError";
+import ShippingAddress from "../models/shippingAddressModel";
 import {
   calculateShippingFee,
   getExpectedDeliveryDate,
   createShippingOrder as createShippingOrderGHN,
-} from '../utils/ghnService';
-import { refundStripePayment, refundZaloPayPayment } from './paymentController';
-import { verifyDiscount } from './discountController';
-import APIFeatures from '../utils/apiFeatures';
-import { getLineItemsInfo } from '../utils/getLineItemsInfo';
-import XLSX from 'xlsx';
+} from "../utils/ghnService";
+import { refundStripePayment, refundZaloPayPayment } from "./paymentController";
+import { verifyDiscount } from "./discountController";
+import APIFeatures from "../utils/apiFeatures";
+import { getLineItemsInfo } from "../utils/getLineItemsInfo";
+import XLSX from "xlsx";
+import { generateEmail, mainContent } from "../utils/generateEmailTemplate";
+import sendEmail from "../utils/email";
 
 const reduceStock = async (
   orderItems: any,
@@ -24,12 +26,12 @@ const reduceStock = async (
     const product = await Product.findById(item.product).session(
       session ?? null
     ); // Use session if provided
-    if (!product) throw new AppError('No product found with that ID', 404);
+    if (!product) throw new AppError("No product found with that ID", 404);
 
     const variant = product.variants.find(
       (v) => v._id.toString() === item.variant
     );
-    if (!variant) throw new AppError('No variant found with that ID', 404);
+    if (!variant) throw new AppError("No variant found with that ID", 404);
 
     variant.stock -= item.quantity;
     variant.sold += item.quantity;
@@ -47,12 +49,12 @@ const increaseStock = async (
     const product = await Product.findById(item.product).session(
       session ?? null
     ); // Use session if provided
-    if (!product) throw new AppError('No product found with that ID', 404);
+    if (!product) throw new AppError("No product found with that ID", 404);
 
     const variant = product.variants.find(
       (v) => v._id.toString() === item.variant.toString()
     );
-    if (!variant) throw new AppError('No variant found with that ID', 404);
+    if (!variant) throw new AppError("No variant found with that ID", 404);
 
     variant.stock += item.quantity;
     if (variant.sold && variant.sold >= item.quantity)
@@ -76,15 +78,15 @@ export const changeOrderStatus = async (orderID: string, status: string) => {
     );
 
     if (!order) {
-      throw new AppError('No order found with that ID', 404);
+      throw new AppError("No order found with that ID", 404);
     }
 
     await order.save();
-    if (status === 'cancelled') {
+    if (status === "cancelled") {
       await increaseStock(order.lineItems);
     }
   } catch (error) {
-    console.error('Error updating order status:', error);
+    console.error("Error updating order status:", error);
   }
 };
 
@@ -108,12 +110,12 @@ export const getShippingFee = catchAsync(
       width: item.variant.dimension.width,
       height: item.variant.dimension.height,
       category: {
-        level1: 'Hàng Công Nghệ',
+        level1: "Hàng Công Nghệ",
       },
     }));
 
     if (!toDistrictCode || !toWardCode) {
-      return next(new AppError('Missing required parameters', 400));
+      return next(new AppError("Missing required parameters", 400));
     }
 
     const { shippingFee, serviceId } = await calculateShippingFee(
@@ -124,7 +126,7 @@ export const getShippingFee = catchAsync(
     );
 
     if (shippingFee === -1) {
-      return next(new AppError('Address is invalid', 400));
+      return next(new AppError("Address is invalid", 400));
     }
 
     const expectedDeliveryDate = await getExpectedDeliveryDate(
@@ -134,7 +136,7 @@ export const getShippingFee = catchAsync(
     );
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         shippingFee,
         expectedDeliveryDate,
@@ -148,13 +150,13 @@ export const createOrder = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const unpaidOrder = await Order.findOne({
       user: req.user.id,
-      status: 'unpaid',
+      status: "unpaid",
     });
 
     if (unpaidOrder) {
       return next(
         new AppError(
-          'You have an unpaid order. Please complete the payment',
+          "You have an unpaid order. Please complete the payment",
           400
         )
       );
@@ -170,9 +172,9 @@ export const createOrder = catchAsync(
       const orderItems = req.body.lineItems;
       const discountCode = req.body.code;
 
-      let status = 'unpaid';
-      if (paymentMethod === 'cod') {
-        status = 'pending';
+      let status = "unpaid";
+      if (paymentMethod === "cod") {
+        status = "pending";
       }
 
       const orderProducts = orderItems.map((item: any) => ({
@@ -191,7 +193,7 @@ export const createOrder = catchAsync(
         _id: shippingAddressId,
       });
       if (!shippingAddress)
-        throw new AppError('No shipping address found', 400);
+        throw new AppError("No shipping address found", 400);
 
       const shippingItems = await getLineItemsInfo(orderItems);
       const totalWeight = shippingItems.reduce(
@@ -208,7 +210,7 @@ export const createOrder = catchAsync(
         width: item.variant.dimension.width,
         height: item.variant.dimension.height,
         category: {
-          level1: 'Hàng Công Nghệ',
+          level1: "Hàng Công Nghệ",
         },
       }));
 
@@ -219,7 +221,7 @@ export const createOrder = catchAsync(
         ghnItems
       );
       if (shippingFee === -1)
-        return next(new AppError('Address is invalid', 400));
+        return next(new AppError("Address is invalid", 400));
 
       const newOrder = await Order.create(
         [
@@ -242,8 +244,10 @@ export const createOrder = catchAsync(
       await session.commitTransaction(); // Commit the transaction
       session.endSession();
 
+      await sendOrderConfirmationEmail(newOrder[0]);
+
       res.status(201).json({
-        status: 'success',
+        status: "success",
         data: {
           order: newOrder[0],
         },
@@ -252,7 +256,7 @@ export const createOrder = catchAsync(
       await session.abortTransaction(); // Roll back transaction in case of error
       session.endSession();
 
-      console.log('Error creating order:', err);
+      console.log("Error creating order:", err);
 
       return next(
         new AppError(`Cannot process the order: ${(err as Error).message}`, 400)
@@ -265,16 +269,16 @@ export const createOrder = catchAsync(
 export const getOrderByID = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const order = await Order.findById(req.params.id)
-      .populate('user')
-      .populate('shippingAddress')
-      .populate('lineItems.product')
-      .populate('lineItems.review');
+      .populate("user")
+      .populate("shippingAddress")
+      .populate("lineItems.product")
+      .populate("lineItems.review");
 
-    if (!order) return next(new AppError('Order not found', 404));
+    if (!order) return next(new AppError("Order not found", 404));
 
-    if (req.user.role === 'admin')
+    if (req.user.role === "admin")
       res.status(200).json({
-        status: 'success',
+        status: "success",
         data: {
           order,
         },
@@ -282,11 +286,11 @@ export const getOrderByID = catchAsync(
 
     if (order.user._id.toString() !== req.user.id)
       return next(
-        new AppError('You are not authorized to access this order', 403)
+        new AppError("You are not authorized to access this order", 403)
       );
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         order,
       },
@@ -303,11 +307,11 @@ export const updateOrder = catchAsync(
     });
 
     if (!order) {
-      return next(new AppError('No order found with that ID', 404));
+      return next(new AppError("No order found with that ID", 404));
     }
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         order,
       },
@@ -321,11 +325,11 @@ export const deleteOrder = catchAsync(
     const order = await Order.findByIdAndDelete(req.params.id);
 
     if (!order) {
-      return next(new AppError('No order found with that ID', 404));
+      return next(new AppError("No order found with that ID", 404));
     }
 
     res.status(204).json({
-      status: 'success',
+      status: "success",
       data: null,
     });
   }
@@ -341,19 +345,19 @@ export const getAllOrders = catchAsync(
 
     // Handle status array
     if (status) {
-      const statusArray = (status as string).split(',');
+      const statusArray = (status as string).split(",");
       query.status = { $in: statusArray };
     }
 
     // Handle paymentMethod array
     if (paymentMethod) {
-      const paymentMethodArray = (paymentMethod as string).split(',');
+      const paymentMethodArray = (paymentMethod as string).split(",");
       query.paymentMethod = { $in: paymentMethodArray };
     }
 
     // Handle total range
     if (total) {
-      const totalRange = (total as string).split('-');
+      const totalRange = (total as string).split("-");
       query.total = {};
 
       if (totalRange[0]) {
@@ -378,19 +382,19 @@ export const getAllOrders = catchAsync(
     // Count total results before pagination
     const totalResults = await Order.countDocuments(query);
     // Get resultsPerPage from limit query or set default
-    const resultsPerPage = Number(req.query.limit) || 10;
+    const resultsPerPage = Number(req.query.limit) || 12;
 
     let apiFeatures = new APIFeatures(Order.find(query), req.query);
     apiFeatures = await apiFeatures.search();
     apiFeatures.paginate();
 
     const orders = await apiFeatures.query
-      .populate('user')
-      .populate('shippingAddress')
-      .populate('lineItems.product');
+      .populate("user")
+      .populate("shippingAddress")
+      .populate("lineItems.product");
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         orders,
         resultsPerPage,
@@ -427,12 +431,12 @@ export const getUserOrders = catchAsync(
     apiFeatures = await apiFeatures.search();
 
     const orders = await apiFeatures.query
-      .populate('user')
-      .populate('shippingAddress')
-      .populate('lineItems.product');
+      .populate("user")
+      .populate("shippingAddress")
+      .populate("lineItems.product");
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         orders,
       },
@@ -448,12 +452,12 @@ export const getAdminOrders = catchAsync(
     const totalResults = await apiFeatures.count();
 
     const orders = await apiFeatures.query
-      .populate('user')
-      .populate('shippingAddress')
-      .populate('lineItems.product');
+      .populate("user")
+      .populate("shippingAddress")
+      .populate("lineItems.product");
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         totalResults,
         orders,
@@ -467,18 +471,18 @@ export const cancelOrder = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return next(new AppError('No order found with that ID', 404));
+      return next(new AppError("No order found with that ID", 404));
     }
 
-    if (order.status !== 'unpaid' && order.status !== 'pending') {
-      return next(new AppError('Order cannot be cancelled', 400));
+    if (order.status !== "unpaid" && order.status !== "pending") {
+      return next(new AppError("Order cannot be cancelled", 400));
     }
 
     const session = await mongoose.startSession(); // Start a session
     session.startTransaction(); // Start a transaction
 
     try {
-      if (order.status !== 'unpaid') {
+      if (order.status !== "unpaid") {
         // Check if the order was placed more than 30 minutes ago
         const currentTime = new Date();
         const orderTime = new Date(order.createdAt);
@@ -488,14 +492,14 @@ export const cancelOrder = catchAsync(
         if (timeDifference > 30) {
           return next(
             new AppError(
-              'Order cannot be cancelled after 30 minutes from the order time',
+              "Order cannot be cancelled after 30 minutes from the order time",
               400
             )
           );
         }
       }
 
-      order.status = 'cancelled';
+      order.status = "cancelled";
 
       await increaseStock(order.lineItems, session);
       await order.save({ session });
@@ -503,17 +507,17 @@ export const cancelOrder = catchAsync(
       await session.commitTransaction();
 
       res.status(200).json({
-        status: 'success',
+        status: "success",
         data: {
           order,
-          message: 'Order cancelled successfully',
+          message: "Order cancelled successfully",
         },
       });
     } catch (err) {
       await session.abortTransaction(); // Roll back transaction in case of error
       session.endSession();
       return next(
-        new AppError('Error occurred while cancelling the order', 400)
+        new AppError("Error occurred while cancelling the order", 400)
       ); // Pass the error to the next middleware
     }
   }
@@ -524,17 +528,17 @@ export const updateOrderStatus = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const order = await Order.findById(req.params.id);
     if (!order) {
-      return next(new AppError('No order found with that ID', 404));
+      return next(new AppError("No order found with that ID", 404));
     }
 
     // Update the order status
     order.status = req.body.status;
     order.adminNotes = req.body.adminNotes;
     await order.save();
-    if (order.status === 'cancelled') await increaseStock(order.lineItems);
+    if (order.status === "cancelled") await increaseStock(order.lineItems);
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         order,
       },
@@ -546,18 +550,18 @@ export const checkUnpaidOrder = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const unpaidOrder = await Order.findOne({
       user: new mongoose.Types.ObjectId(req.user.id), // Cast to ObjectId
-      status: 'unpaid',
+      status: "unpaid",
     });
 
     if (!unpaidOrder) {
       return res.status(404).json({
-        status: 'fail',
-        message: 'No unpaid order found for this user',
+        status: "fail",
+        message: "No unpaid order found for this user",
       });
     }
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         unpaidOrder,
       },
@@ -572,22 +576,22 @@ export const getOrderByOrderCode = catchAsync(
     let query = { orderCode };
 
     // Nếu không phải admin, chỉ tìm order thuộc về chính user
-    if (currentUser.role !== 'admin') {
+    if (currentUser.role !== "admin") {
       Object.assign(query, { user: currentUser.id });
     }
 
     const order = await Order.findOne(query)
-      .populate('user')
-      .populate('shippingAddress')
-      .populate('lineItems.product')
-      .populate('lineItems.review');
+      .populate("user")
+      .populate("shippingAddress")
+      .populate("lineItems.product")
+      .populate("lineItems.review");
 
     if (!order) {
-      return next(new AppError('No order found with that code', 404));
+      return next(new AppError("No order found with that code", 404));
     }
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         order,
       },
@@ -601,7 +605,7 @@ export const addPaymentId = async (
 ) => {
   const order = await Order.findById(orderId);
   if (!order) {
-    throw new AppError('No order found with that ID', 404);
+    throw new AppError("No order found with that ID", 404);
   }
 
   order.checkout = {
@@ -617,15 +621,15 @@ const calculateTotalWeight = async (orderItems: any) => {
 
   for (const item of orderItems) {
     const product = await Product.findById(item.product);
-    if (!product) throw new AppError('No product found with that ID', 404);
+    if (!product) throw new AppError("No product found with that ID", 404);
 
     const variant = product.variants.find(
       (v) => v._id.toString() === item.variant.toString()
     );
 
-    if (!variant) throw new AppError('No variant found with that ID', 404);
+    if (!variant) throw new AppError("No variant found with that ID", 404);
 
-    if (!variant.weight) throw new AppError('No weight found for variant', 404);
+    if (!variant.weight) throw new AppError("No weight found for variant", 404);
     totalWeight += variant.weight * item.quantity;
   }
 
@@ -639,16 +643,16 @@ export const createShippingOrder = catchAsync(async (req, res, next) => {
   const order = await Order.findById(orderId);
 
   if (!order) {
-    return next(new AppError('No order found with that ID', 404));
+    return next(new AppError("No order found with that ID", 404));
   }
 
-  if (order.status !== 'pending') {
-    return next(new AppError('Order is not in pending status', 400));
+  if (order.status !== "pending") {
+    return next(new AppError("Order is not in pending status", 400));
   }
 
   const shippingAddress = await ShippingAddress.findById(order.shippingAddress);
   if (!shippingAddress) {
-    return next(new AppError('No shipping address found', 400));
+    return next(new AppError("No shipping address found", 400));
   }
 
   const orderItems = order.lineItems.map((item: any) => ({
@@ -672,7 +676,7 @@ export const createShippingOrder = catchAsync(async (req, res, next) => {
     width: item.variant.dimension.width,
     height: item.variant.dimension.height,
     category: {
-      level1: 'Hàng Công Nghệ',
+      level1: "Hàng Công Nghệ",
     },
   }));
 
@@ -691,16 +695,16 @@ export const createShippingOrder = catchAsync(async (req, res, next) => {
 
   const { data } = shippingOrder;
 
-  order.status = 'processing';
+  order.status = "processing";
 
   order.shippingTracking = {
     ghnOrderCode: data.order_code,
     expectedDeliveryDate: data.expected_delivery_time,
-    trackingStatus: 'ready_to_pick',
+    trackingStatus: "ready_to_pick",
     statusHistory: [
       {
-        status: 'ready_to_pick',
-        description: 'Đơn vận đã được tạo và sẵn sàng để lấy',
+        status: "ready_to_pick",
+        description: "Đơn vận đã được tạo và sẵn sàng để lấy",
         timestamp: new Date(),
       },
     ],
@@ -709,7 +713,7 @@ export const createShippingOrder = catchAsync(async (req, res, next) => {
   await order.save();
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       shippingOrder,
     },
@@ -722,34 +726,34 @@ export const refundOrder = catchAsync(
     const order = await Order.findById(orderId);
 
     if (!order) {
-      return next(new AppError('No order found with that ID', 404));
+      return next(new AppError("No order found with that ID", 404));
     }
 
-    if (order.status === 'unpaid') {
-      return next(new AppError('Order is unpaid, cannot be refunded', 400));
+    if (order.status === "unpaid") {
+      return next(new AppError("Order is unpaid, cannot be refunded", 400));
     }
-    if (order.status === 'refunded') {
-      return next(new AppError('Order is already refunded', 400));
+    if (order.status === "refunded") {
+      return next(new AppError("Order is already refunded", 400));
     }
 
-    if (order.paymentMethod === 'stripe') {
+    if (order.paymentMethod === "stripe") {
       await refundStripePayment(
         order.checkout!.paymentId,
         order.checkout!.amount
       );
-    } else if (order.paymentMethod === 'zalopay') {
+    } else if (order.paymentMethod === "zalopay") {
       await refundZaloPayPayment(
         order.checkout!.paymentId,
         order.checkout!.amount
       );
     }
-    order.status = 'refunded';
+    order.status = "refunded";
 
     await order.save();
     await increaseStock(order.lineItems);
     res.status(200).json({
-      status: 'success',
-      message: 'Order refunded successfully',
+      status: "success",
+      message: "Order refunded successfully",
       data: {
         order,
       },
@@ -760,32 +764,32 @@ export const refundOrder = catchAsync(
 export const exportOrderExcel = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { code } = req.params;
-    console.log('Exporting order with code:', code);
+    console.log("Exporting order with code:", code);
 
     const order = await Order.findOne({ orderCode: code })
-      .populate('user')
-      .populate('shippingAddress')
-      .populate('lineItems.product')
-      .populate('lineItems.review');
+      .populate("user")
+      .populate("shippingAddress")
+      .populate("lineItems.product")
+      .populate("lineItems.review");
 
     if (!order) {
-      console.log('Order not found');
-      return res.status(404).send('Order not found');
+      console.log("Order not found");
+      return res.status(404).send("Order not found");
     }
 
     const shipping = order.shippingAddress as any;
 
     const data = [
-      ['Mã đơn hàng:', order.orderCode],
-      ['Ngày đặt:', new Date(order.createdAt).toLocaleDateString('vi-VN')],
-      ['Khách hàng:', `${shipping.fullname} (${(order.user as any).name})`],
-      ['SĐT:', shipping.phoneNumber],
+      ["Mã đơn hàng:", order.orderCode],
+      ["Ngày đặt:", new Date(order.createdAt).toLocaleDateString("vi-VN")],
+      ["Khách hàng:", `${shipping.fullname} (${(order.user as any).name})`],
+      ["SĐT:", shipping.phoneNumber],
       [
-        'Địa chỉ:',
+        "Địa chỉ:",
         `${shipping.address}, ${shipping.ward.name}, ${shipping.district.name}, ${shipping.city.name}`,
       ],
       [], // dòng trống
-      ['Sản phẩm', 'Số lượng', 'Đơn giá', 'Thành tiền'], // tiêu đề
+      ["Sản phẩm", "Số lượng", "Đơn giá", "Thành tiền"], // tiêu đề
       ...order.lineItems.map((item) => [
         (item.product as any).name,
         item.quantity,
@@ -793,18 +797,18 @@ export const exportOrderExcel = catchAsync(
         item.subtotal,
       ]),
       [], // dòng trống
-      ['Tạm tính', '', '', order.subtotal],
-      ['Phí vận chuyển', '', '', order.shippingFee],
+      ["Tạm tính", "", "", order.subtotal],
+      ["Phí vận chuyển", "", "", order.shippingFee],
       ...(order.discountAmount > 0
-        ? [['Giảm giá', '', '', -order.discountAmount]]
+        ? [["Giảm giá", "", "", -order.discountAmount]]
         : []),
-      ['Tổng cộng', '', '', order.total],
+      ["Tổng cộng", "", "", order.total],
     ];
 
     const ws = XLSX.utils.aoa_to_sheet(data);
 
     // Set width cột
-    ws['!cols'] = [
+    ws["!cols"] = [
       { wch: 40 }, // Sản phẩm
       { wch: 10 }, // Số lượng
       { wch: 15 }, // Đơn giá
@@ -812,15 +816,90 @@ export const exportOrderExcel = catchAsync(
     ];
 
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Đơn hàng');
+    XLSX.utils.book_append_sheet(wb, ws, "Đơn hàng");
 
-    const buffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+    const buffer = XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
 
     res.set({
-      'Content-Type':
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      'Content-Disposition': `attachment; filename=order-${code}.xlsx`,
+      "Content-Type":
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "Content-Disposition": `attachment; filename=order-${code}.xlsx`,
     });
     res.send(buffer);
+  }
+);
+
+const sendOrderConfirmationEmail = async (order: any) => {
+  // Lấy thông tin đơn hàng với đầy đủ chi tiết sản phẩm và biến thể
+  const populatedOrder = await Order.findById(order._id)
+    .populate("user")
+    .populate("shippingAddress")
+    .populate({
+      path: "lineItems.product",
+      select: "name imageCover variants", // Thêm variants để lấy thông tin biến thể
+    });
+
+  if (!populatedOrder) {
+    throw new AppError("No order found with that ID", 404);
+  }
+
+  // Chuẩn bị dữ liệu cho template với thông tin variant đầy đủ
+  const orderItems = populatedOrder.lineItems.map((item) => {
+    // Tìm variant chính xác từ sản phẩm
+    const product = item.product as any;
+    const variant = product.variants.find(
+      (v: any) => v._id.toString() === item.variant.toString()
+    );
+
+    return {
+      product: {
+        name: product.name,
+        imageCover: product.imageCover,
+      },
+      variant: {
+        name: variant?.name || item._itemName || "Phân loại mặc định",
+        images: variant?.images || [product.imageCover], // Sử dụng ảnh của variant hoặc dùng ảnh bìa nếu không có
+        sku: variant?.sku || "",
+      },
+      quantity: item.quantity,
+      unitPrice: item.unitPrice,
+      subtotal: item.subtotal,
+    };
+  });
+
+  // Tạo nội dung email
+  const html = generateEmail({
+    subject: `Thông tin đơn hàng #${order.orderCode}`,
+    greetingName: (populatedOrder.user as any).name,
+    mainContent: mainContent.orderConfirmation(
+      populatedOrder,
+      populatedOrder.shippingAddress,
+      orderItems
+    ),
+  });
+
+  // Gửi email
+  await sendEmail({
+    to: (populatedOrder.user as any).email,
+    subject: `Thông tin đơn hàng #${order.orderCode}`,
+    html,
+  });
+};
+
+export const resendOrderEmail = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const order = await Order.findById(id);
+
+    if (!order) {
+      return next(new AppError("No order found with that ID", 404));
+    }
+
+    await sendOrderConfirmationEmail(order);
+
+    res.status(200).json({
+      status: "success",
+      message: "Order confirmation email sent successfully",
+    });
   }
 );

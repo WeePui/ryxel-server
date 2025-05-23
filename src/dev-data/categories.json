@@ -1,38 +1,38 @@
 [
   {
     "_id": "60c72b2f9b1d8b3a4c8b4567",
-    "name": "Headphone",
-    "description": "High-quality headphones for an immersive audio experience.",
-    "image": "/headset-category.jpg"
+    "name": "Tai nghe",
+    "description": "Tai nghe chất lượng cao cho trải nghiệm âm thanh sống động.",
+    "image": "/categories/headset-category.jpg"
   },
   {
     "_id": "60c72b2f9b1d8b3a4c8b4568",
-    "name": "Mouse",
-    "description": "Precision mice for gaming and productivity.",
-    "image": "/mouse-category.jpg"
+    "name": "Chuột",
+    "description": "Chuột chính xác cho chơi game và làm việc.",
+    "image": "/categories/mouse-category.jpg"
   },
   {
     "_id": "60c72b2f9b1d8b3a4c8b4569",
-    "name": "Keyboard",
-    "description": "Mechanical and membrane keyboards for all your typing needs.",
-    "image": "/keyboard-category.jpg"
+    "name": "Bàn phím",
+    "description": "Bàn phím cơ và màng cho mọi nhu cầu gõ phím.",
+    "image": "/categories/keyboard-category.jpg"
   },
   {
     "_id": "60c72b2f9b1d8b3a4c8b456a",
-    "name": "Chair",
-    "description": "Gaming chairs for comfortable and healthy gaming.",
-    "image": "/chair-category.jpg"
+    "name": "Ghế",
+    "description": "Ghế gaming mang lại sự thoải mái và tốt cho sức khỏe.",
+    "image": "/categories/chair-category.jpg"
   },
   {
     "_id": "60c72b2f9b1d8b3a4c8b456b",
-    "name": "Table",
-    "description": "Sturdy and stylish tables for your gaming and working space.",
-    "image": "/table.jpg"
+    "name": "Bàn",
+    "description": "Bàn chắc chắn và thời trang cho không gian chơi game và làm việc.",
+    "image": "/categories/table-category.jpg"
   },
   {
     "_id": "60c72b2f9b1d8b3a4c8b456c",
-    "name": "Accessory",
-    "description": "Essential accessories for your gaming setup.",
-    "image": "/accessory.jpg"
+    "name": "Phụ kiện",
+    "description": "Phụ kiện thiết yếu cho bộ máy chơi game của bạn.",
+    "image": "/categories/accessory-category.jpg"
   }
 ]
