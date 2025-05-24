@@ -36,6 +36,11 @@ class APIFeatures {
                       autocomplete: {
                         query: this.queryString.search,
                         path: 'name',
+                        fuzzy: {
+                          maxEdits: 2, // Cho phép sửa tối đa 2 ký tự
+                          prefixLength: 1, // Không cho phép sửa ký tự đầu tiên
+                          maxExpansions: 50, // Giới hạn số lượng kết quả mở rộng
+                        },
                       },
                     },
                     {
@@ -48,12 +53,22 @@ class APIFeatures {
                       autocomplete: {
                         query: this.queryString.search,
                         path: 'brand',
+                        fuzzy: {
+                          maxEdits: 2, // Cho phép sửa tối đa 2 ký tự
+                          prefixLength: 1, // Không cho phép sửa ký tự đầu tiên
+                          maxExpansions: 50, // Giới hạn số lượng kết quả mở rộng
+                        },
                       },
                     },
                     {
                       autocomplete: {
                         query: this.queryString.search,
                         path: '_categoryName',
+                        fuzzy: {
+                          maxEdits: 2, // Cho phép sửa tối đa 2 ký tự
+                          prefixLength: 1, // Không cho phép sửa ký tự đầu tiên
+                          maxExpansions: 50, // Giới hạn số lượng kết quả mở rộng
+                        },
                       },
                     },
                     {
@@ -65,6 +80,11 @@ class APIFeatures {
                                 autocomplete: {
                                   query: this.queryString.search,
                                   path: 'variants.name',
+                                  fuzzy: {
+                                    maxEdits: 1, // Cho phép sửa tối đa 1 ký tự
+                                    prefixLength: 1, // Không cho phép sửa ký tự đầu tiên
+                                    maxExpansions: 50, // Giới hạn số lượng kết quả mở rộng
+                                  },
                                 },
                               },
                               {
