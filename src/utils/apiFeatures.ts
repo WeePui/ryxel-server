@@ -94,7 +94,7 @@ class APIFeatures {
                 compound: {
                   should: [
                     {
-                      text: {
+                      autocomplete: {
                         query: this.queryString.search,
                         path: 'orderCode',
                       },
