@@ -255,7 +255,7 @@ productSchema.pre<IProduct>('save', async function (next) {
         return next(new Error('Category not found ' + this.category));
       }
 
-      this._categoryName = category.name;
+      this._categoryName = category?.slug ?? '';
 
       await Product.updateMany(
         { category: this.category },
@@ -293,21 +293,6 @@ productSchema.pre<IProduct>('save', function (next) {
   next();
 });
 
-productSchema.pre<IProduct>('save', async function (next) {
-  if (this.isModified('category') || this.isNew) {
-    try {
-      const category = await Category.findById(this.category);
-      if (!category) {
-        return next(new Error('Category not found ' + this.category)); // Handle missing category gracefully
-      }
-
-      this._categoryName = category.name; // Assign category name
-    } catch (err) {
-      return next(err as mongoose.CallbackError);
-    }
-  }
-  next();
-});
 
 productSchema.virtual('reviews', {
   ref: 'Review',
