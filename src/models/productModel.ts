@@ -214,20 +214,6 @@ productSchema.statics.getPriceRange = async function (categoryId) {
   ]);
 };
 
-// Pre-save middleware to create a slug
-productSchema.pre<IProduct>('save', async function (next) {
-  let slug = slugify(this.name, { lower: true, strict: true });
-  let count = 1;
-
-  const originalSlug = slug;
-  while (await Product.findOne({ slug })) {
-    slug = `${originalSlug}-${count++}`;
-  }
-  this.slug = slug;
-
-  next();
-});
-
 // Hiện tại slug chỉ được tạo khi tạo mới, không update khi name thay đổi
 productSchema.pre<IProduct>('save', async function (next) {
   // Nên kiểm tra nếu name thay đổi thì mới tạo slug mới
@@ -293,6 +279,55 @@ productSchema.pre<IProduct>('save', function (next) {
   next();
 });
 
+productSchema.pre<IProduct>('find', function (next) {
+if (this.variants && this.variants.length > 0) {
+    // Tìm variant có giá thấp nhất và lấy percentage của nó trong một lần duyệt
+    const { lowestPrice, percentageSaleOff } = this.variants.reduce(
+      (acc, variant) => {
+        const finalPrice = variant.finalPrice || 0;
+        if (finalPrice < acc.lowestPrice) {
+          return {
+            lowestPrice: finalPrice,
+            percentageSaleOff: variant.saleOff?.percentage || 0
+          };
+        }
+        return acc;
+      },
+      { lowestPrice: Infinity, percentageSaleOff: 0 }
+    );
+
+    this.lowestPrice = lowestPrice;
+    this.percentageSaleOff = percentageSaleOff;
+    this.sold = this.variants.reduce((acc, variant) => acc + variant.sold!, 0);
+  }
+
+  next();
+});
+
+productSchema.pre<IProduct>('findOne', function (next) {
+if (this.variants && this.variants.length > 0) {
+    // Tìm variant có giá thấp nhất và lấy percentage của nó trong một lần duyệt
+    const { lowestPrice, percentageSaleOff } = this.variants.reduce(
+      (acc, variant) => {
+        const finalPrice = variant.finalPrice || 0;
+        if (finalPrice < acc.lowestPrice) {
+          return {
+            lowestPrice: finalPrice,
+            percentageSaleOff: variant.saleOff?.percentage || 0
+          };
+        }
+        return acc;
+      },
+      { lowestPrice: Infinity, percentageSaleOff: 0 }
+    );
+
+    this.lowestPrice = lowestPrice;
+    this.percentageSaleOff = percentageSaleOff;
+    this.sold = this.variants.reduce((acc, variant) => acc + variant.sold!, 0);
+  }
+
+  next();
+});
 
 productSchema.virtual('reviews', {
   ref: 'Review',
@@ -339,6 +374,44 @@ productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
 
   next();
 });
+
+export function updateProductPricing(product: IProduct): IProduct {
+  const now = new Date();
+
+  let lowestPrice = Infinity;
+  let percentageSaleOff = 0;
+  let totalSold = 0;
+
+  for (const variant of product.variants) {
+    const saleOff = variant.saleOff;
+    const isOnSale =
+      saleOff &&
+      saleOff.startDate &&
+      saleOff.endDate &&
+      new Date(saleOff.startDate) <= now &&
+      now <= new Date(saleOff.endDate);
+
+    const discount = isOnSale ? (variant.price * saleOff.percentage) / 100 : 0;
+    const finalPrice = variant.price - discount;
+
+    // Gán finalPrice thủ công nếu bạn không dùng virtual
+    // (nếu dùng virtual thì bỏ dòng này)
+    (variant as any).finalPrice = finalPrice;
+
+    if (finalPrice < lowestPrice) {
+      lowestPrice = finalPrice;
+      percentageSaleOff = isOnSale ? saleOff.percentage : 0;
+    }
+
+    totalSold += variant.sold ?? 0;
+  }
+
+  product.lowestPrice = lowestPrice;
+  product.percentageSaleOff = percentageSaleOff;
+  product.sold = totalSold;
+
+  return product;
+}
 
 const Product = mongoose.model<IProduct>('Product', productSchema);
 
