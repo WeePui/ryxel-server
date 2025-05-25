@@ -427,7 +427,7 @@ export const getUserOrders = catchAsync(
       }
     }
 
-    let apiFeatures = new APIFeatures(Order.find({ user }), req.query);
+    let apiFeatures = new APIFeatures(Order.find({ user }), req.query).sort();
     apiFeatures = await apiFeatures.search();
 
     const orders = await apiFeatures.query

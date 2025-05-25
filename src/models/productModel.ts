@@ -227,7 +227,7 @@ productSchema.pre<IProduct>('save', async function (next) {
 
   next();
 });
-
+  
 // Hiện tại slug chỉ được tạo khi tạo mới, không update khi name thay đổi
 productSchema.pre<IProduct>('save', async function (next) {
   // Nên kiểm tra nếu name thay đổi thì mới tạo slug mới
@@ -246,7 +246,6 @@ productSchema.pre<IProduct>('save', async function (next) {
 });
 
 // Pre-save middleware to update category name in all products
-// when the category is modified or a new product is created
 productSchema.pre<IProduct>('save', async function (next) {
   if (this.isModified('category') || this.isNew) {
     // Update tất cả Product liên quan khi Category thay đổi
@@ -269,16 +268,16 @@ productSchema.pre<IProduct>('save', async function (next) {
   next();
 });
 
-// Pre-save middleware to calculate the lowest price
 productSchema.pre<IProduct>('save', function (next) {
   if (this.variants && this.variants.length > 0) {
+    // Tìm variant có giá thấp nhất và lấy percentage của nó trong một lần duyệt
     const { lowestPrice, percentageSaleOff } = this.variants.reduce(
       (acc, variant) => {
         const finalPrice = variant.finalPrice || 0;
-        if (finalPrice < acc.lowestPrice) {
+        if (finalPrice < acc.lowestPrice && finalPrice == variant.price && variant.saleOff.endDate > new Date()) {
           return {
             lowestPrice: finalPrice,
-            percentageSaleOff: variant.saleOff?.percentage || 0,
+            percentageSaleOff: variant.saleOff?.percentage || 0
           };
         }
         return acc;
@@ -294,21 +293,6 @@ productSchema.pre<IProduct>('save', function (next) {
   next();
 });
 
-productSchema.pre<IProduct>('save', async function (next) {
-  if (this.isModified('category') || this.isNew) {
-    try {
-      const category = await Category.findById(this.category);
-      if (!category) {
-        return next(new Error('Category not found ' + this.category)); // Handle missing category gracefully
-      }
-
-      this._categoryName = category.name; // Assign category name
-    } catch (err) {
-      return next(err as mongoose.CallbackError);
-    }
-  }
-  next();
-});
 
 productSchema.virtual('reviews', {
   ref: 'Review',
@@ -355,6 +339,44 @@ productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
 
   next();
 });
+
+export function updateProductPricing(product: IProduct): IProduct {
+  const now = new Date();
+
+  let lowestPrice = Infinity;
+  let percentageSaleOff = 0;
+  let totalSold = 0;
+
+  for (const variant of product.variants) {
+    const saleOff = variant.saleOff;
+    const isOnSale =
+      saleOff &&
+      saleOff.startDate &&
+      saleOff.endDate &&
+      new Date(saleOff.startDate) <= now &&
+      now <= new Date(saleOff.endDate);
+
+    const discount = isOnSale ? (variant.price * saleOff.percentage) / 100 : 0;
+    const finalPrice = variant.price - discount;
+
+    // Gán finalPrice thủ công nếu bạn không dùng virtual
+    // (nếu dùng virtual thì bỏ dòng này)
+    (variant as any).finalPrice = finalPrice;
+
+    if (finalPrice < lowestPrice) {
+      lowestPrice = finalPrice;
+      percentageSaleOff = isOnSale ? saleOff.percentage : 0;
+    }
+
+    totalSold += variant.sold ?? 0;
+  }
+
+  product.lowestPrice = lowestPrice;
+  product.percentageSaleOff = percentageSaleOff;
+  product.sold = totalSold;
+
+  return product;
+}
 
 const Product = mongoose.model<IProduct>('Product', productSchema);
 

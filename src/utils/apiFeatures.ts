@@ -36,24 +36,44 @@ class APIFeatures {
                       autocomplete: {
                         query: this.queryString.search,
                         path: 'name',
+                        fuzzy: {
+                          maxEdits: 1, // Cho phép sửa tối đa 1 ký tự
+                          prefixLength: 2, // Không cho phép sửa ký tự đầu tiên
+                          maxExpansions: 50, // Giới hạn số lượng kết quả mở rộng
+                        },
+                        score: { boost: { value: 10 } },
                       },
                     },
                     {
-                      autocomplete: {
+                      text: {
                         query: this.queryString.search,
                         path: 'description',
+                        score: { boost: { value: 2 } },
                       },
+                      
                     },
                     {
-                      autocomplete: {
+                      text: {
                         query: this.queryString.search,
                         path: 'brand',
+                        fuzzy: {
+                          maxEdits: 1, // Cho phép sửa tối đa 1 ký tự
+                          prefixLength: 2, // Không cho phép sửa ký tự đầu tiên
+                          maxExpansions: 50, // Giới hạn số lượng kết quả mở rộng
+                        },
+                        score: { boost: { value: 8 } },
                       },
                     },
                     {
-                      autocomplete: {
+                      text: {
                         query: this.queryString.search,
                         path: '_categoryName',
+                        fuzzy: {
+                          maxEdits: 1, // Cho phép sửa tối đa 1 ký tự
+                          prefixLength: 2, // Không cho phép sửa ký tự đầu tiên
+                          maxExpansions: 50, // Giới hạn số lượng kết quả mở rộng
+                        },
+                        score: { boost: { value:  6} },
                       },
                     },
                     {
@@ -65,12 +85,19 @@ class APIFeatures {
                                 autocomplete: {
                                   query: this.queryString.search,
                                   path: 'variants.name',
+                                  fuzzy: {
+                                    maxEdits: 1, // Cho phép sửa tối đa 1 ký tự
+                                    prefixLength: 2, // Không cho phép sửa ký tự đầu tiên
+                                    maxExpansions: 50, // Giới hạn số lượng kết quả mở rộng
+                                  },
+                                  score: { boost: { value: 4 } },
                                 },
                               },
                               {
-                                autocomplete: {
+                                text: {
                                   query: this.queryString.search,
                                   path: 'variants.specifications',
+                                  score: { boost: { value: 2 } },
                                 },
                               },
                             ],
@@ -94,7 +121,7 @@ class APIFeatures {
                 compound: {
                   should: [
                     {
-                      text: {
+                      autocomplete: {
                         query: this.queryString.search,
                         path: 'orderCode',
                       },

@@ -3,6 +3,7 @@ import Discount, { IDiscount } from '../models/discountModel';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
 import Product from '../models/productModel';
+import APIFeatures from '../utils/apiFeatures';
 
 //TO VALIDATE IF THE DISCOUNT CODE IS USABLE AND RETURN THE DISCOUNT AMOUNT FOR FRONT END USAGE
 export const checkDiscount = catchAsync(
@@ -104,17 +105,48 @@ export const verifyDiscount = async (
 
 export const getAllDiscounts = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { active } = req.query;
-    let query: { isActive?: boolean } = {};
+    const { remainingUses, isActive, startDate, endDate, search } = req.query;
 
-    if (active) {
-      query.isActive = active === 'true';
+    const query: any = {};
+
+    if (remainingUses) {
+      query.maxUse = { $gte: Number(remainingUses) };
     }
 
-    const discounts = await Discount.find(query);
+    if ('isActive' in req.query) {
+      query.isActive = isActive === 'true';
+    }
+
+    if (startDate) {
+      query.startDate = {};
+      query.startDate.$gte = new Date(startDate as string);
+    }
+
+    if (endDate) {
+      query.endDate = {};
+      query.endDate.$lte = new Date(endDate as string);
+    }
+
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } },
+        { code: { $regex: search, $options: 'i' } }, // ví dụ nếu có trường "code" voucher
+      ];
+    }
+
+    const apiFeatures = new APIFeatures(Discount.find(query), req.query)
+      .sort()
+      .paginate();
+
+    const [discounts, totalDiscounts] = await Promise.all([
+      apiFeatures.query.exec(),
+      Discount.countDocuments(query),
+    ]);
 
     res.status(200).json({
       status: 'success',
+      totalDiscounts,
       results: discounts.length,
       data: {
         discounts,
@@ -122,6 +154,8 @@ export const getAllDiscounts = catchAsync(
     });
   }
 );
+
+
 
 export const getDiscountById = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {

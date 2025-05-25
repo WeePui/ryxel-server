@@ -67,6 +67,12 @@ interface IOrderModel extends mongoose.Model<IOrder> {
     startDate: Date,
     endDate: Date
   ): Promise<{ name: string; value: number }[]>;
+
+  getTopProvincesByPurchasingUsers(
+    startDate: Date,
+    endDate: Date,
+    limit: number
+  ): Promise<{ name: string; value: number }[]>;
 }
 
 const orderProductSchema = new Schema<IOrderProduct>({
@@ -329,6 +335,62 @@ orderSchema.statics.getTopProvinces = async function (
     },
     { $sort: { value: -1 } },
     { $limit: limit },
+  ]);
+};
+
+orderSchema.statics.getTopProvincesByPurchasingUsers = async function (
+  startDate: Date,
+  endDate: Date,
+  limit: number = 6
+): Promise<{ name: string; value: number }[]> {
+  return this.aggregate([
+    {
+      $match: {
+        status: 'delivered',
+        createdAt: { $gte: startDate, $lte: endDate },
+      },
+    },
+    {
+      $lookup: {
+        from: 'shippingaddresses',
+        localField: 'shippingAddress',
+        foreignField: '_id',
+        as: 'address',
+      },
+    },
+    { $unwind: '$address' },
+    {
+      $match: {
+        'address.city.name': { $ne: null, $exists: true },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          province: '$address.city.name',
+          userId: '$user',
+        },
+      },
+    },
+    {
+      $group: {
+        _id: '$_id.province',
+        value: { $sum: 1 },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        name: '$_id',
+        value: 1,
+      },
+    },
+    {
+      $sort: { value: -1 },
+    },
+    {
+      $limit: limit,
+    },
   ]);
 };
 

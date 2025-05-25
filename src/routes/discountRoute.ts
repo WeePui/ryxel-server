@@ -6,7 +6,10 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(discountController.getAllDiscounts)
+  .get(
+    authController.protect,
+    authController.restrictTo('admin'), 
+    discountController.getAllDiscounts)
   .post(
     authController.protect,
     authController.restrictTo('admin'),
