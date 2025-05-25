@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import Product from '../models/productModel';
+import Product, { updateProductPricing } from '../models/productModel';
 import APIFeatures from '../utils/apiFeatures';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
@@ -17,12 +17,6 @@ export const aliasTopProducts = (
 };
 
 export const getAllProducts = catchAsync(async (req, res) => {
-      /*const AUO = await Product.find();
-      for (const product of AUO) {
-        await product.save(); // sẽ trigger pre('save')
-      }
-    */
-    //FOR TESTING PURPOSES ONLY, DONT REMOVE
 
   let apiFeatures = new APIFeatures(Product.find(), req.query);
   apiFeatures = await apiFeatures.search();
@@ -123,11 +117,12 @@ export const getFilterData = catchAsync(async (req, res) => {
 export const getProductBySlug = catchAsync(async (req, res, next) => {
   const product = await Product.findOne({ slug: req.params.slug })
     .populate({ path: 'reviews', match: { status: 'approved' } })
-    .lean();
 
   if (!product) {
     return next(new AppError('No product found with that slug', 404));
   }
+
+  updateProductPricing(product);
 
   res.status(200).json({
     status: 'success',
@@ -212,6 +207,7 @@ export const getProductById = catchAsync(async (req, res, next) => {
   if (!product) {
     return next(new AppError('No product found with that ID', 404));
   }
+  updateProductPricing(product);
   res.status(200).json({
     status: 'success',
     data: { product },
@@ -286,14 +282,19 @@ export const updateProduct = catchAsync(async (req, res, next) => {
             return next(new AppError('Sale off percentage must be between 0 and 100', 400));
           }
 
+          const now = new Date();
           const startDate = new Date(variant.saleOff.startDate);
           const endDate = new Date(variant.saleOff.endDate);
 
           if (endDate <= startDate) {
             return next(new AppError('Sale off end date must be after start date', 400));
           }
-
-          variant.finalPrice = variant.price * (1 - variant.saleOff.percentage / 100);
+          if (endDate > now) {
+            variant.finalPrice = variant.price * (1 - variant.saleOff.percentage / 100);
+          }
+          else {
+            variant.finalPrice = variant.price;
+          }
         }
         else {
           variant.finalPrice = variant.price;
@@ -312,13 +313,17 @@ export const updateProduct = catchAsync(async (req, res, next) => {
     const { lowestPrice, percentageSaleOff } = parsedVariants.reduce(
       (acc, variant) => {
         const finalPrice = variant.finalPrice || 1;
-        if (finalPrice < acc.lowestPrice) {
+        if (finalPrice < acc.lowestPrice && finalPrice != variant.price) {
           return {
             lowestPrice: finalPrice,
             percentageSaleOff: variant.saleOff?.percentage || 0,
           };
         }
-        return acc;
+        else
+          return {
+            lowestPrice: variant.finalPrice,
+            percentageSaleOff: 0,
+          };
       },
       { lowestPrice: Infinity, percentageSaleOff: 0 }
     );
