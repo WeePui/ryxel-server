@@ -35,4 +35,8 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
+router.route('/:id/analytics').get(userController.getUserAnalytics);
+router.route('/:id/orders').get(userController.getUserOrderHistory);
+router.route('/:id/status').patch(userController.updateUserStatus);
+
 export default router;
