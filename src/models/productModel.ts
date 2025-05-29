@@ -274,7 +274,7 @@ productSchema.pre<IProduct>('save', function (next) {
     const { lowestPrice, percentageSaleOff } = this.variants.reduce(
       (acc, variant) => {
         const finalPrice = variant.finalPrice || 0;
-        if (finalPrice < acc.lowestPrice && finalPrice == variant.price && variant.saleOff.endDate > new Date()) {
+        if (finalPrice < acc.lowestPrice && finalPrice == variant.price && variant.saleOff?.endDate > new Date()) {
           return {
             lowestPrice: finalPrice,
             percentageSaleOff: variant.saleOff?.percentage || 0
