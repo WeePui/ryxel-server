@@ -1,5 +1,6 @@
-import mongoose, { Schema, Document, Types } from 'mongoose';
-import Product from './productModel'; // Adjust the import path as needed
+import mongoose, { Schema, Document, Types } from "mongoose";
+import Product from "./productModel"; // Adjust the import path as needed
+import { calculateFinalPrice } from "../utils/saleValidation";
 
 interface ICartProduct {
   product: Types.ObjectId;
@@ -20,22 +21,22 @@ interface ICart extends Document {
 const cartSchema = new Schema<ICart>({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: [true, 'Cart must belong to a user!'],
+    ref: "User",
+    required: [true, "Cart must belong to a user!"],
   },
   lineItems: [
     {
       product: {
         type: Schema.Types.ObjectId,
-        ref: 'Product',
+        ref: "Product",
       },
       variant: {
         type: Schema.Types.ObjectId,
-        ref: 'Product.variants',
+        ref: "Product.variants",
       },
       quantity: {
         type: Number,
-        required: [true, 'Quantity is required!'],
+        required: [true, "Quantity is required!"],
       },
     },
   ],
@@ -61,8 +62,8 @@ cartSchema.methods.removeCartItem = async function (
   }
 };
 
-cartSchema.pre<ICart>('save', async function (next) {
-  await this.populate('lineItems.product'); // Populate the variant field
+cartSchema.pre<ICart>("save", async function (next) {
+  await this.populate("lineItems.product"); // Populate the variant field
 
   const subtotal = await Promise.all(
     this.lineItems.map(async (item) => {
@@ -72,7 +73,9 @@ cartSchema.pre<ICart>('save', async function (next) {
           (v) => v._id.toString() === item.variant.toString()
         );
         if (variant) {
-          return variant.price * item.quantity;
+          // Use calculateFinalPrice to get the correct price including time-validated discounts
+          const price = calculateFinalPrice(variant.price, variant.saleOff);
+          return price * item.quantity;
         }
       }
       return 0;
@@ -84,6 +87,6 @@ cartSchema.pre<ICart>('save', async function (next) {
   next();
 });
 
-const Cart = mongoose.model<ICart>('Cart', cartSchema);
+const Cart = mongoose.model<ICart>("Cart", cartSchema);
 
 export default Cart;

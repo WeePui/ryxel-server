@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
-import Discount, { IDiscount } from '../models/discountModel';
-import catchAsync from '../utils/catchAsync';
-import AppError from '../utils/AppError';
-import Product from '../models/productModel';
-import APIFeatures from '../utils/apiFeatures';
+import { Request, Response, NextFunction } from "express";
+import Discount, { IDiscount } from "../models/discountModel";
+import catchAsync from "../utils/catchAsync";
+import AppError from "../utils/AppError";
+import Product from "../models/productModel";
+import APIFeatures from "../utils/apiFeatures";
+import { calculateFinalPrice } from "../utils/saleValidation";
 
 //TO VALIDATE IF THE DISCOUNT CODE IS USABLE AND RETURN THE DISCOUNT AMOUNT FOR FRONT END USAGE
 export const checkDiscount = catchAsync(
@@ -19,7 +20,7 @@ export const checkDiscount = catchAsync(
     );
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         isValid,
         discountAmount,
@@ -33,7 +34,7 @@ export const verifyDiscount = async (
   lineItems: any,
   userId: string
 ) => {
-  console.log('Discount code:', discountCode);
+  console.log("Discount code:", discountCode);
 
   if (!discountCode) {
     return {
@@ -43,7 +44,7 @@ export const verifyDiscount = async (
     };
   }
 
-  console.log('hello');
+  console.log("hello");
 
   const discount = await Discount.findOne({
     code: discountCode.toUpperCase(),
@@ -54,7 +55,7 @@ export const verifyDiscount = async (
   let discountId;
   if (discount) {
     if (!lineItems) {
-      throw new AppError('Items does not exist', 404);
+      throw new AppError("Items does not exist", 404);
     }
 
     if (
@@ -64,16 +65,17 @@ export const verifyDiscount = async (
       discount.isActive = false;
       await discount.save();
     }
-
     let totalPrice = 0;
     for (const item of lineItems) {
       const product = await Product.findById(item.product);
-      if (!product) throw new AppError('No product found with that ID', 404);
+      if (!product) throw new AppError("No product found with that ID", 404);
       const variant = product.variants.find(
         (v) => v._id.toString() === item.variant
       );
-      if (!variant) throw new AppError('No variant found with that ID', 404);
-      totalPrice += variant.price * item.quantity;
+      if (!variant) throw new AppError("No variant found with that ID", 404);
+      // Use calculateFinalPrice to get the correct price including time-validated discounts
+      const price = calculateFinalPrice(variant.price, variant.saleOff);
+      totalPrice += price * item.quantity;
     }
 
     const userUsageCount = discount.usedUser.filter(
@@ -113,8 +115,8 @@ export const getAllDiscounts = catchAsync(
       query.maxUse = { $gte: Number(remainingUses) };
     }
 
-    if ('isActive' in req.query) {
-      query.isActive = isActive === 'true';
+    if ("isActive" in req.query) {
+      query.isActive = isActive === "true";
     }
 
     if (startDate) {
@@ -129,9 +131,9 @@ export const getAllDiscounts = catchAsync(
 
     if (search) {
       query.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } },
-        { code: { $regex: search, $options: 'i' } }, // ví dụ nếu có trường "code" voucher
+        { name: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+        { code: { $regex: search, $options: "i" } }, // ví dụ nếu có trường "code" voucher
       ];
     }
 
@@ -145,7 +147,7 @@ export const getAllDiscounts = catchAsync(
     ]);
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       totalDiscounts,
       results: discounts.length,
       data: {
@@ -155,18 +157,16 @@ export const getAllDiscounts = catchAsync(
   }
 );
 
-
-
 export const getDiscountById = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const discount = await Discount.findById(req.params.id);
 
     if (!discount) {
-      return next(new AppError('No discount found with that ID', 404));
+      return next(new AppError("No discount found with that ID", 404));
     }
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         discount,
       },
@@ -179,15 +179,15 @@ export const createDiscount = catchAsync(
     const discount = await Discount.create(req.body);
     if (new Date(discount.startDate) >= new Date(discount.endDate)) {
       return next(
-        new AppError('The start date must be before the end date', 404)
+        new AppError("The start date must be before the end date", 404)
       );
     }
     if (new Date(discount.endDate).getTime() < Date.now()) {
-      return next(new AppError('The end date must be in the future', 404));
+      return next(new AppError("The end date must be in the future", 404));
     }
 
     res.status(201).json({
-      status: 'success',
+      status: "success",
       data: {
         discount,
       },
@@ -202,7 +202,7 @@ export const updateDiscount = catchAsync(
 
     const discount = await Discount.findById(id);
     if (!discount)
-      return next(new AppError('No discount found with that ID', 404));
+      return next(new AppError("No discount found with that ID", 404));
 
     // Update the discount fields with the provided data
     Object.keys(updates).forEach((key) => {
@@ -214,7 +214,7 @@ export const updateDiscount = catchAsync(
     await discount.save();
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         discount,
       },
@@ -225,7 +225,7 @@ export const updateDiscount = catchAsync(
 //UPDATE THE DISCOUNT USAGE, RUN AFTER ORDER IS PLACED
 const updateDiscountUsage = async (discountId: String, userId: string) => {
   const discount = await Discount.findById(discountId);
-  if (!discount) throw new AppError('No discount found with that ID', 404);
+  if (!discount) throw new AppError("No discount found with that ID", 404);
 
   // Ensure usedUser is a string
   const usedUserId = userId.toString();
@@ -245,7 +245,7 @@ export const deleteDiscount = catchAsync(
     await Discount.findByIdAndDelete(req.params.id);
 
     res.status(204).json({
-      status: 'success',
+      status: "success",
       data: null,
     });
   }
