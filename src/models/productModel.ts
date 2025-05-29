@@ -301,6 +301,9 @@ productSchema.virtual('reviews', {
 });
 
 productSchema.virtual('totalStock').get(function (this: IProduct) {
+  if (!this.variants || !Array.isArray(this.variants)) {
+    return 0;
+  }
   return this.variants.reduce(
     (total, variant) => total + (variant.stock || 0),
     0
@@ -346,6 +349,11 @@ export function updateProductPricing(product: IProduct): IProduct {
   let lowestPrice = Infinity;
   let percentageSaleOff = 0;
   let totalSold = 0;
+
+  // Check if variants exist and is an array
+  if (!product.variants || !Array.isArray(product.variants)) {
+    return product;
+  }
 
   for (const variant of product.variants) {
     const saleOff = variant.saleOff;
