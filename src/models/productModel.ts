@@ -282,7 +282,7 @@ productSchema.pre<IProduct>("save", function (next) {
         if (
           finalPrice < acc.lowestPrice &&
           finalPrice == variant.price &&
-          variant.saleOff.endDate > new Date()
+          variant.saleOff?.endDate > new Date()
         ) {
           return {
             lowestPrice: finalPrice,
