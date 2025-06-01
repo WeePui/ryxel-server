@@ -29,7 +29,8 @@ export const getAllProducts = catchAsync(async (req, res) => {
   apiFeatures = await apiFeatures.search();
 
   const totalProducts = await apiFeatures.count();
-  const resultsPerPage = Number(req.query.limit) || 10;
+  const resultsPerPage =
+    Number(req.query.limit) || Number(process.env.DEFAULT_LIMIT_PER_PAGE) || 10;
 
   apiFeatures.filter().sort().limitFields().paginate();
 
