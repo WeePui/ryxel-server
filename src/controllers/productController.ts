@@ -138,6 +138,14 @@ export const getProductBySlug = catchAsync(async (req, res, next) => {
   }
 
   updateProductPricing(product);
+  await Product.updateOne(
+    { _id: product._id },
+    {
+      lowestPrice: product.lowestPrice,
+      percentageSaleOff: product.percentageSaleOff,
+      sold: product.sold,
+    }
+  );
 
   res.status(200).json({
     status: "success",
@@ -246,6 +254,14 @@ export const getProductById = catchAsync(async (req, res, next) => {
     return next(new AppError("No product found with that ID", 404));
   }
   updateProductPricing(product);
+  await Product.updateOne(
+    { _id: product._id },
+    {
+      lowestPrice: product.lowestPrice,
+      percentageSaleOff: product.percentageSaleOff,
+      sold: product.sold,
+    }
+  );
   res.status(200).json({
     status: "success",
     data: { product },
