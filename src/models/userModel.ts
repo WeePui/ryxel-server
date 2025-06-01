@@ -1,9 +1,9 @@
-import mongoose, { Document, Schema, Query, Types } from 'mongoose';
-import validator from 'validator';
-import bcrypt from 'bcryptjs';
-import crypto from 'crypto';
-import './shippingAddressModel';
-import './wishlistModel';
+import mongoose, { Document, Schema, Query, Types } from "mongoose";
+import validator from "validator";
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
+import "./shippingAddressModel";
+import "./wishlistModel";
 
 interface IUser extends Document {
   name: string;
@@ -12,10 +12,10 @@ interface IUser extends Document {
     publicId?: string;
     url?: string;
   };
-  gender?: 'male' | 'female' | 'other';
+  gender?: "male" | "female" | "other";
   dob?: Date;
   emailVerified?: boolean;
-  role?: 'user' | 'admin';
+  role?: "user" | "admin";
   password: string;
   passwordConfirm: string | undefined;
   passwordChangedAt?: Date;
@@ -27,6 +27,7 @@ interface IUser extends Document {
   otpRequests?: number;
   otpLastRequest?: Date;
   wishlistId?: Types.ObjectId;
+  expoPushTokens: string[];
   correctPassword(
     candidatePassword: string,
     userPassword: string
@@ -40,28 +41,28 @@ const userSchema = new Schema<IUser>(
   {
     name: {
       type: String,
-      required: [true, 'Please tell us your name!'],
+      required: [true, "Please tell us your name!"],
       trim: true,
     },
     email: {
       type: String,
-      required: [true, 'Please provide your email!'],
+      required: [true, "Please provide your email!"],
       unique: true,
-      validate: [validator.isEmail, 'Please provide a valid email!'],
+      validate: [validator.isEmail, "Please provide a valid email!"],
     },
     photo: {
       publicId: {
         type: String,
-        default: 'avatars/test-public-id',
+        default: "avatars/test-public-id",
       },
       url: {
         type: String,
-        default: '/dev-users/default.png',
+        default: "/dev-users/default.png",
       },
     },
     gender: {
       type: String,
-      enum: ['male', 'female', 'other'],
+      enum: ["male", "female", "other"],
     },
     dob: Date,
     emailVerified: {
@@ -70,23 +71,23 @@ const userSchema = new Schema<IUser>(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'],
-      default: 'user',
+      enum: ["user", "admin"],
+      default: "user",
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password!'],
+      required: [true, "Please provide a password!"],
       minlength: 8,
       select: false,
     },
     passwordConfirm: {
       type: String,
-      required: [true, 'Please confirm your password!'],
+      required: [true, "Please confirm your password!"],
       validate: {
         validator: function (el) {
           return el === this.password;
         },
-        message: 'Passwords are not the same!',
+        message: "Passwords are not the same!",
       },
     },
     passwordChangedAt: Date,
@@ -111,23 +112,27 @@ const userSchema = new Schema<IUser>(
     },
     wishlistId: {
       type: Schema.Types.ObjectId,
-      ref: 'Wishlist',
+      ref: "Wishlist",
+    },
+    expoPushTokens: {
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true }
 );
 
-userSchema.pre<IUser>('find', function (next) {
+userSchema.pre<IUser>("find", function (next) {
   this.populate({
-    path: 'wishlistId',
-    select: 'products shared shareCode',
+    path: "wishlistId",
+    select: "products shared shareCode",
   });
 
   next();
 });
 
-userSchema.pre<IUser>('save', async function (next) {
-  if (!this.isModified('password')) return next();
+userSchema.pre<IUser>("save", async function (next) {
+  if (!this.isModified("password")) return next();
 
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
@@ -135,8 +140,8 @@ userSchema.pre<IUser>('save', async function (next) {
   next();
 });
 
-userSchema.pre('save', function (next) {
-  if (!this.isModified('password') || this.isNew) return next();
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password") || this.isNew) return next();
 
   this.passwordChangedAt = new Date(Date.now() - 1000);
   next();
@@ -165,12 +170,12 @@ userSchema.methods.changedPasswordAfter = function (
 };
 
 userSchema.methods.createPasswordResetToken = function (): string {
-  const resetToken = crypto.randomBytes(32).toString('hex');
+  const resetToken = crypto.randomBytes(32).toString("hex");
 
   this.passwordResetToken = crypto
-    .createHash('sha256')
+    .createHash("sha256")
     .update(resetToken)
-    .digest('hex');
+    .digest("hex");
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
@@ -180,13 +185,13 @@ userSchema.methods.createPasswordResetToken = function (): string {
 userSchema.methods.createOTP = function (): string {
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-  this.otp = crypto.createHash('sha256').update(otp).digest('hex');
+  this.otp = crypto.createHash("sha256").update(otp).digest("hex");
 
   this.otpExpires = new Date(Date.now() + 10 * 60 * 1000);
 
   return otp;
 };
 
-const User = mongoose.model<IUser>('User', userSchema);
+const User = mongoose.model<IUser>("User", userSchema);
 
 export default User;

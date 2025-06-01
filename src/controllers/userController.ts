@@ -425,3 +425,125 @@ export const updateUserStatus = catchAsync(
     });
   }
 );
+
+export const saveExpoPushToken = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { expoPushToken } = req.body;
+
+    if (!expoPushToken) {
+      return next(new AppError("expoPushToken is required", 400));
+    }
+
+    // Check if the token is already saved
+    const user = await User.findById(req.user.id).select("expoPushTokens");
+    if (!user) {
+      return next(new AppError("No user found with that ID", 404));
+    }
+
+    if (user.expoPushTokens.includes(expoPushToken)) {
+      return res.status(200).json({
+        status: "success",
+        message: "Expo push token already exists",
+      });
+    }
+
+    // Add the new token to the user's tokens
+    user.expoPushTokens.push(expoPushToken);
+    await user.save();
+
+    res.status(200).json({
+      status: "success",
+      message: "Expo push token saved successfully",
+    });
+  }
+);
+
+export const deleteExpoPushToken = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { expoPushToken } = req.body;
+
+    if (!expoPushToken) {
+      return next(new AppError("expoPushToken is required", 400));
+    }
+
+    // Check if the token exists
+    const user = await User.findById(req.user.id).select("expoPushTokens");
+    if (!user) {
+      return next(new AppError("No user found with that ID", 404));
+    }
+
+    const tokenIndex = user.expoPushTokens.indexOf(expoPushToken);
+    if (tokenIndex === -1) {
+      return res.status(200).json({
+        status: "success",
+        message: "Expo push token not found",
+      });
+    }
+
+    // Remove the token from the user's tokens
+    user.expoPushTokens.splice(tokenIndex, 1);
+    await user.save();
+
+    res.status(200).json({
+      status: "success",
+      message: "Expo push token deleted successfully",
+    });
+  }
+);
+
+// import { Expo, ExpoPushToken } from "expo-server-sdk";
+// const expo = new Expo();
+
+// export const sendPushNotificationHandler = catchAsync(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     const { expoPushToken, message } = req.body;
+
+//     if (!expoPushToken || !message) {
+//       return next(new AppError("expoPushToken and message are required", 400));
+//     }
+
+//     try {
+//       await sendPushNotification(expoPushToken, message);
+//       res.status(200).json({
+//         status: "success",
+//         message: "Notification sent successfully",
+//       });
+//     } catch (error) {
+//       console.error("Error sending push notification:", error);
+//       return next(new AppError("Failed to send push notification", 500));
+//     }
+//   }
+// );
+
+// async function sendPushNotification(
+//   expoPushToken: ExpoPushToken,
+//   message: string
+// ) {
+//   if (!Expo.isExpoPushToken(expoPushToken)) {
+//     console.error(`Push token ${expoPushToken} is not a valid Expo push token`);
+//     return;
+//   }
+
+//   const messages = [
+//     {
+//       to: expoPushToken,
+//       title: "Test Notification",
+//       sound: "default",
+//       body: message,
+//       data: { withSome: "data" },
+//     },
+//   ];
+
+//   const chunks = expo.chunkPushNotifications(messages);
+//   const tickets = [];
+
+//   for (let chunk of chunks) {
+//     try {
+//       let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
+//       console.log(ticketChunk);
+//       tickets.push(...ticketChunk);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
+// }
