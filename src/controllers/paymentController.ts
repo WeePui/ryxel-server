@@ -6,8 +6,7 @@ import { getLineItemsInfo } from '../utils/getLineItemsInfo';
 import moment from 'moment';
 import CryptoJS from 'crypto-js';
 import axios from 'axios';
-import { addPaymentId, changeOrderStatus } from './orderController';
-import Cart from '../models/cartModel';
+import { addPaymentId, changeOrderStatus, removeCartItem } from './orderController';
 import Order from '../models/orderModel';
 import { Types } from 'mongoose';
 
@@ -252,13 +251,7 @@ export const zalopayCallback = catchAsync(
         'pending'
       );
 
-      const cart = await Cart.findOne({ user: userId });
-
-      if (cart?.lineItems && cart.lineItems.length > 0) {
-        for (const item of order?.lineItems) {
-          await cart.removeCartItem(item.product, item.variant);
-        }
-      }
+      await removeCartItem(userId, order.lineItems);
 
       res.status(200).json({
         status: 'success',
@@ -304,15 +297,11 @@ export const fulfillCheckout = async (sessionId: string) => {
       (order._id as Types.ObjectId).toString(),
       'pending'
     );
-    const cart = await Cart.findOne({
-      user: checkoutSession!.client_reference_id,
-    });
-
-    if (cart?.lineItems && cart.lineItems.length > 0) {
-      for (const item of order?.lineItems) {
-        await cart.removeCartItem(item.product, item.variant);
-      }
+    const user = checkoutSession!.client_reference_id;
+    if (!user) {
+      throw new AppError('User not found', 404);
     }
+    await removeCartItem(user, order.lineItems);
     // TODO: Record/save fulfillment status for this
     // Checkout Session
   }

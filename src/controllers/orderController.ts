@@ -17,6 +17,23 @@ import { getLineItemsInfo } from "../utils/getLineItemsInfo";
 import XLSX from "xlsx";
 import { generateEmail, mainContent } from "../utils/generateEmailTemplate";
 import sendEmail from "../utils/email";
+import Cart from "../models/cartModel";
+
+
+export const removeCartItem = async (
+  userId: string,
+  orderItems: any,
+  session?: mongoose.ClientSession // Optional session parameter
+) => {
+  const cart = await Cart.findOne({ user: userId }).session(session ?? null); // Use session if provided
+  if (!cart) {
+    throw new AppError("No cart found for this user", 404);
+  }
+
+  for (const item of orderItems) {
+    await cart.removeCartItem(item.product, item.variant);
+  }
+};
 
 const reduceStock = async (
   orderItems: any,
@@ -239,6 +256,15 @@ export const createOrder = catchAsync(
         { session } // Pass the session to the create method
       );
 
+      if (paymentMethod === "cod") {
+        await removeCartItem(
+          userId,
+          orderProducts,
+          session
+        ).catch((err) => {
+          console.error("Error removing cart items:", err);
+        });
+      }
       await reduceStock(orderProducts, session);
 
       await session.commitTransaction(); // Commit the transaction
@@ -638,7 +664,7 @@ const calculateTotalWeight = async (orderItems: any) => {
   return totalWeight;
 };
 
-export const createShippingOrder = catchAsync(async (req, res, next) => {
+export const createShippingOrder = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
   const orderId = req.params.id;
   const order = await Order.findById(orderId);
 
