@@ -62,7 +62,7 @@ class ExpoNotificationService {
       const user = await User.findById(userId).select("expoPushTokens");
       if (!user || !user.expoPushTokens || user.expoPushTokens.length === 0) {
         console.log(`No Expo push tokens found for user ${userId}`);
-        
+
         // Don't save notification to database if user has no tokens
         // This prevents notification records for users who can't receive them
         return {
@@ -111,7 +111,9 @@ class ExpoNotificationService {
       }
 
       // Only save notification to database if sending was successful
-      const successfulTickets = tickets.filter(ticket => ticket.status === 'ok');
+      const successfulTickets = tickets.filter(
+        (ticket) => ticket.status === "ok"
+      );
       if (successfulTickets.length > 0) {
         try {
           const notification = new Notification({

@@ -16,7 +16,7 @@ export const checkUserNotificationTokens = async (
 }> => {
   try {
     const user = await User.findById(userId).select("fcmTokens expoPushTokens");
-    
+
     if (!user) {
       return {
         hasTokens: false,
@@ -28,7 +28,8 @@ export const checkUserNotificationTokens = async (
 
     const hasFcmTokens = user.fcmTokens && user.fcmTokens.length > 0;
     const hasExpoTokens = user.expoPushTokens && user.expoPushTokens.length > 0;
-    const totalTokens = (user.fcmTokens?.length || 0) + (user.expoPushTokens?.length || 0);
+    const totalTokens =
+      (user.fcmTokens?.length || 0) + (user.expoPushTokens?.length || 0);
 
     return {
       hasTokens: hasFcmTokens || hasExpoTokens,
@@ -66,20 +67,20 @@ export const getNotificationCapableUsersStats = async (): Promise<{
       usersWithAnyTokens,
     ] = await Promise.all([
       User.countDocuments({ active: true }),
-      User.countDocuments({ 
-        active: true, 
-        fcmTokens: { $exists: true, $ne: [] }
+      User.countDocuments({
+        active: true,
+        fcmTokens: { $exists: true, $ne: [] },
       }),
-      User.countDocuments({ 
-        active: true, 
-        expoPushTokens: { $exists: true, $ne: [] }
+      User.countDocuments({
+        active: true,
+        expoPushTokens: { $exists: true, $ne: [] },
       }),
       User.countDocuments({
         active: true,
         $or: [
           { fcmTokens: { $exists: true, $ne: [] } },
-          { expoPushTokens: { $exists: true, $ne: [] } }
-        ]
+          { expoPushTokens: { $exists: true, $ne: [] } },
+        ],
       }),
     ]);
 
@@ -112,11 +113,11 @@ export const getNotificationCapableUsers = async (): Promise<string[]> => {
       active: true,
       $or: [
         { fcmTokens: { $exists: true, $ne: [] } },
-        { expoPushTokens: { $exists: true, $ne: [] } }
-      ]
+        { expoPushTokens: { $exists: true, $ne: [] } },
+      ],
     }).select("_id");
 
-    return users.map(user => user._id.toString());
+    return users.map((user) => user._id.toString());
   } catch (error) {
     console.error("Error getting notification capable users:", error);
     return [];
@@ -126,12 +127,16 @@ export const getNotificationCapableUsers = async (): Promise<string[]> => {
 /**
  * Find user ID by email address
  */
-export const getUserIdByEmail = async (email: string): Promise<string | null> => {
+export const getUserIdByEmail = async (
+  email: string
+): Promise<string | null> => {
   try {
-    const user = await User.findOne({ email: email.toLowerCase().trim() }).select('_id');
+    const user = await User.findOne({
+      email: email.toLowerCase().trim(),
+    }).select("_id");
     return user ? user._id.toString() : null;
   } catch (error) {
-    console.error('Error finding user by email:', error);
+    console.error("Error finding user by email:", error);
     return null;
   }
 };
@@ -139,22 +144,26 @@ export const getUserIdByEmail = async (email: string): Promise<string | null> =>
 /**
  * Find multiple user IDs by email addresses
  */
-export const getUserIdsByEmails = async (emails: string[]): Promise<{ email: string; userId: string | null }[]> => {
+export const getUserIdsByEmails = async (
+  emails: string[]
+): Promise<{ email: string; userId: string | null }[]> => {
   try {
-    const normalizedEmails = emails.map(email => email.toLowerCase().trim());
-    const users = await User.find({ 
-      email: { $in: normalizedEmails } 
-    }).select('_id email');
-    
-    const userMap = new Map(users.map(user => [user.email, user._id.toString()]));
-    
-    return normalizedEmails.map(email => ({
+    const normalizedEmails = emails.map((email) => email.toLowerCase().trim());
+    const users = await User.find({
+      email: { $in: normalizedEmails },
+    }).select("_id email");
+
+    const userMap = new Map(
+      users.map((user) => [user.email, user._id.toString()])
+    );
+
+    return normalizedEmails.map((email) => ({
       email,
-      userId: userMap.get(email) || null
+      userId: userMap.get(email) || null,
     }));
   } catch (error) {
-    console.error('Error finding users by emails:', error);
-    return emails.map(email => ({ email, userId: null }));
+    console.error("Error finding users by emails:", error);
+    return emails.map((email) => ({ email, userId: null }));
   }
 };
 

@@ -52,7 +52,7 @@ class FirebaseNotificationService {
       const user = await User.findById(userId).select("fcmTokens name email");
       if (!user || !user.fcmTokens || user.fcmTokens.length === 0) {
         console.log(`No FCM tokens found for user ${userId}`);
-        
+
         // Don't save notification to database if user has no tokens
         // This prevents notification records for users who can't receive them
         return { success: false, error: "No FCM tokens found for user" };
@@ -185,13 +185,15 @@ class FirebaseNotificationService {
       }
 
       // Only get users who have FCM tokens (like Expo service does)
-      const users = await User.find({ 
+      const users = await User.find({
         active: true,
-        fcmTokens: { $exists: true, $ne: [] }
+        fcmTokens: { $exists: true, $ne: [] },
       }).select("_id fcmTokens");
 
       if (!users || users.length === 0) {
-        console.log("No users with FCM tokens found for broadcast notification");
+        console.log(
+          "No users with FCM tokens found for broadcast notification"
+        );
         return {
           success: false,
           sentCount: 0,

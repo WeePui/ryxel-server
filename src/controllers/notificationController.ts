@@ -6,7 +6,11 @@ import catchAsync from "../utils/catchAsync";
 import { sendPromotionalNotification } from "../utils/notificationHelpers";
 import FirebaseNotificationService from "../utils/firebaseNotificationService";
 import ExpoNotificationService from "../utils/expoNotificationService";
-import { getUserIdByEmail, getUserIdsByEmails, isValidEmail } from "../utils/notificationUtils";
+import {
+  getUserIdByEmail,
+  getUserIdsByEmails,
+  isValidEmail,
+} from "../utils/notificationUtils";
 
 const firebaseNotificationService = FirebaseNotificationService.getInstance();
 const expoNotificationService = ExpoNotificationService.getInstance();
@@ -210,7 +214,8 @@ export const sendToTokens = async (
     if (req.body.payload) {
       // Nested structure: { tokens/userIds/emails, payload: { title, body, data, ... } }
       payload = req.body.payload;
-      targetTokensOrUserIds = req.body.tokens || req.body.userIds || req.body.emails;
+      targetTokensOrUserIds =
+        req.body.tokens || req.body.userIds || req.body.emails;
       notificationType = req.body.notificationType || "both";
     } else {
       // Flat structure: { tokens/userIds/emails, title, body, type, data, imageUrl, ... }
@@ -252,26 +257,31 @@ export const sendToTokens = async (
 
     // Convert emails to userIds if necessary
     let processedTargets = targetTokensOrUserIds;
-    const hasEmails = req.body.emails || targetTokensOrUserIds.some((target: string) => isValidEmail(target));
-    
+    const hasEmails =
+      req.body.emails ||
+      targetTokensOrUserIds.some((target: string) => isValidEmail(target));
+
     if (hasEmails) {
       const emailResults = await getUserIdsByEmails(targetTokensOrUserIds);
       const validUserIds = emailResults
-        .filter(result => result.userId !== null)
-        .map(result => result.userId!);
-      
+        .filter((result) => result.userId !== null)
+        .map((result) => result.userId!);
+
       const invalidEmails = emailResults
-        .filter(result => result.userId === null)
-        .map(result => result.email);
-      
+        .filter((result) => result.userId === null)
+        .map((result) => result.email);
+
       if (invalidEmails.length > 0) {
-        console.warn(`Invalid emails found: ${invalidEmails.join(', ')}`);
+        console.warn(`Invalid emails found: ${invalidEmails.join(", ")}`);
       }
-      
+
       processedTargets = validUserIds;
-      
+
       if (processedTargets.length === 0) {
-        throw new AppError("No valid users found for the provided email addresses", 404);
+        throw new AppError(
+          "No valid users found for the provided email addresses",
+          404
+        );
       }
     }
 
