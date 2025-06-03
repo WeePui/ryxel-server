@@ -162,10 +162,6 @@ const productSchema = new mongoose.Schema(
       required: [true, "Product imageCover is required"],
     },
     variants: [variantsSchema],
-    lowestPrice: {
-      type: Number,
-      default: 0,
-    },
     rating: {
       type: Number,
       default: 0,
@@ -174,10 +170,6 @@ const productSchema = new mongoose.Schema(
       set: (value: number) => Math.round(value * 10) / 10,
     },
     ratingsQuantity: {
-      type: Number,
-      default: 0,
-    },
-    percentageSaleOff: {
       type: Number,
       default: 0,
     },
@@ -326,6 +318,28 @@ variantsSchema.virtual("finalPrice").get(function (this: IVariant) {
   return calculateFinalPrice(this.price, this.saleOff);
 });
 
+productSchema.virtual("lowestPrice").get(function (this: IProduct) {
+  if (!this.variants || this.variants.length === 0) return 0;
+
+  return this.variants.reduce((min, variant) => {
+    const finalPrice = variant.finalPrice ?? 0;
+    return finalPrice < min ? finalPrice : min;
+  }, Infinity);
+});
+
+productSchema.virtual("percentageSaleOff").get(function (this: IProduct) {
+  if (!this.variants || this.variants.length === 0) return 0;
+
+  const cheapestVariant = this.variants.reduce((minVariant, current) => {
+    const currentPrice = current.finalPrice ?? 0;
+    const minPrice = minVariant.finalPrice ?? 0;
+    return currentPrice < minPrice ? current : minVariant;
+  });
+
+  return cheapestVariant.saleOff?.percentage ?? 0;
+});
+
+
 productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
   const filter = this.getFilter();
 
@@ -338,38 +352,6 @@ productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
 
   next();
 });
-
-export function updateProductPricing(product: IProduct): IProduct {
-  let lowestPrice = Infinity;
-  let percentageSaleOff = 0;
-  let totalSold = 0;
-
-  // Check if variants exist and is an array
-  if (!product.variants || !Array.isArray(product.variants)) {
-    return product;
-  }
-
-  for (const variant of product.variants) {
-    const finalPrice = calculateFinalPrice(variant.price, variant.saleOff);
-    const isOnSale = isSaleOfferActive(variant.saleOff);
-
-    // Assign finalPrice manually if not using virtual
-    (variant as any).finalPrice = finalPrice;
-    if (finalPrice < lowestPrice) {
-      lowestPrice = finalPrice;
-      percentageSaleOff =
-        isOnSale && variant.saleOff ? variant.saleOff.percentage : 0;
-    }
-
-    totalSold += variant.sold ?? 0;
-  }
-
-  product.lowestPrice = lowestPrice;
-  product.percentageSaleOff = percentageSaleOff;
-  product.sold = totalSold;
-
-  return product;
-}
 
 const Product = mongoose.model<IProduct>("Product", productSchema);
 
