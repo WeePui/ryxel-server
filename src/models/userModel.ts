@@ -6,6 +6,7 @@ import "./shippingAddressModel";
 import "./wishlistModel";
 
 interface IUser extends Document {
+  _id: Types.ObjectId;
   name: string;
   email: string;
   photo: {
@@ -28,6 +29,7 @@ interface IUser extends Document {
   otpLastRequest?: Date;
   wishlistId?: Types.ObjectId;
   expoPushTokens: string[];
+  fcmTokens: string[];
   correctPassword(
     candidatePassword: string,
     userPassword: string
@@ -115,6 +117,10 @@ const userSchema = new Schema<IUser>(
       ref: "Wishlist",
     },
     expoPushTokens: {
+      type: [String],
+      default: [],
+    },
+    fcmTokens: {
       type: [String],
       default: [],
     },

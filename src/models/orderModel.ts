@@ -1,7 +1,7 @@
-import mongoose, { Document, Schema, Types } from 'mongoose';
-import Product from './productModel';
-import Review from './reviewModel';
-import AppError from '../utils/AppError';
+import mongoose, { Document, Schema, Types } from "mongoose";
+import Product from "./productModel";
+import Review from "./reviewModel";
+import AppError from "../utils/AppError";
 
 interface IOrderProduct extends Document {
   product: Types.ObjectId;
@@ -25,18 +25,19 @@ interface IShippingTracking {
 }
 
 interface IOrder extends Document {
+  _id: Types.ObjectId;
   user: Types.ObjectId;
   //checkout: ICheckout;
   paymentMethod: string;
   shippingAddress: Types.ObjectId;
   status:
-    | 'unpaid'
-    | 'pending'
-    | 'processing'
-    | 'shipped'
-    | 'delivered'
-    | 'cancelled'
-    | 'refunded';
+    | "unpaid"
+    | "pending"
+    | "processing"
+    | "shipped"
+    | "delivered"
+    | "cancelled"
+    | "refunded";
   lineItems: IOrderProduct[];
   subtotal: number;
   total: number;
@@ -76,71 +77,71 @@ interface IOrderModel extends mongoose.Model<IOrder> {
 }
 
 const orderProductSchema = new Schema<IOrderProduct>({
-  product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+  product: { type: Schema.Types.ObjectId, ref: "Product", required: true },
   variant: {
     type: Schema.Types.ObjectId,
-    ref: 'Product.variants',
+    ref: "Product.variants",
     required: true,
   },
   quantity: { type: Number, required: true },
   unitPrice: { type: Number },
   subtotal: { type: Number },
   _itemName: { type: String },
-  review: { type: Schema.Types.ObjectId, ref: 'Review' },
+  review: { type: Schema.Types.ObjectId, ref: "Review" },
 });
 
 const orderSchema = new Schema<IOrder>(
   {
     user: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: [true, 'Order must belong to a user!'],
+      ref: "User",
+      required: [true, "Order must belong to a user!"],
     },
     paymentMethod: {
       type: String,
-      enum: ['zalopay', 'cod', 'stripe'],
-      required: [true, 'Order must have a payment!'],
+      enum: ["zalopay", "cod", "stripe"],
+      required: [true, "Order must have a payment!"],
     },
     shippingAddress: {
       type: Schema.Types.ObjectId,
-      ref: 'ShippingAddress',
-      required: [true, 'Order must have a shipping address!'],
+      ref: "ShippingAddress",
+      required: [true, "Order must have a shipping address!"],
     },
     status: {
       type: String,
       enum: [
-        'unpaid',
-        'pending',
-        'processing',
-        'shipped',
-        'delivered',
-        'cancelled',
-        'refunded',
+        "unpaid",
+        "pending",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+        "refunded",
       ],
-      default: 'pending',
+      default: "pending",
     },
     lineItems: {
       type: [orderProductSchema],
-      required: [true, 'Order must have products!'],
+      required: [true, "Order must have products!"],
     },
     total: {
       type: Number,
-      required: [true, 'Order must have a subtotal!'],
+      required: [true, "Order must have a subtotal!"],
       default: 0,
     },
     subtotal: {
       type: Number,
-      required: [true, 'Order must have a subtotal!'],
+      required: [true, "Order must have a subtotal!"],
       default: 0,
     },
     shippingFee: {
       type: Number,
-      required: [true, 'Order must have a shipping fee!'],
+      required: [true, "Order must have a shipping fee!"],
       default: 0,
     },
     discount: {
       type: Schema.Types.ObjectId,
-      ref: 'Discount',
+      ref: "Discount",
     },
     discountAmount: {
       type: Number,
@@ -174,7 +175,7 @@ const orderSchema = new Schema<IOrder>(
     },
     adminNotes: {
       type: String,
-      default: '',
+      default: "",
     },
   },
   { timestamps: true }
@@ -186,19 +187,19 @@ orderSchema.index({ createdAt: 1 });
 orderSchema.index({ updatedAt: 1 });
 orderSchema.index({ orderCode: 1 });
 
-orderSchema.pre<IOrder>('find', async function (next) {
+orderSchema.pre<IOrder>("find", async function (next) {
   this.populate({
-    path: 'lineItems.review',
-    select: 'rating review images video',
+    path: "lineItems.review",
+    select: "rating review images video",
   });
 
   next();
 });
 
-orderSchema.pre<IOrder>('save', async function (next) {
+orderSchema.pre<IOrder>("save", async function (next) {
   // Generate an order code
   if (!this.orderCode) {
-    const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
+    const today = new Date().toISOString().split("T")[0].replace(/-/g, "");
     const userSuffix = this.user.toString().slice(-4).toUpperCase();
     const timestamp = Date.now().toString().slice(-5);
 
@@ -207,18 +208,18 @@ orderSchema.pre<IOrder>('save', async function (next) {
   next();
 });
 
-orderSchema.pre<IOrder>('save', async function (next) {
+orderSchema.pre<IOrder>("save", async function (next) {
   // Nếu là đơn mới thì không cần ghi log
-  if (!this.isModified('status') || (this as any).skipLog) return next();
+  if (!this.isModified("status") || (this as any).skipLog) return next();
 
-  const statusMessages: Record<IOrder['status'], string> = {
-    unpaid: 'Chưa thanh toán',
-    pending: 'Đơn hàng đang chờ xác nhận',
-    processing: 'Đơn hàng đang được xử lý',
-    shipped: 'Đã giao cho đơn vị vận chuyển',
-    delivered: 'Giao hàng thành công',
-    cancelled: 'Đơn hàng đã bị hủy',
-    refunded: 'Đơn hàng đã hoàn tiền',
+  const statusMessages: Record<IOrder["status"], string> = {
+    unpaid: "Chưa thanh toán",
+    pending: "Đơn hàng đang chờ xác nhận",
+    processing: "Đơn hàng đang được xử lý",
+    shipped: "Đã giao cho đơn vị vận chuyển",
+    delivered: "Giao hàng thành công",
+    cancelled: "Đơn hàng đã bị hủy",
+    refunded: "Đơn hàng đã hoàn tiền",
   };
 
   const logEntry = {
@@ -229,7 +230,7 @@ orderSchema.pre<IOrder>('save', async function (next) {
 
   if (!this.shippingTracking) {
     this.shippingTracking = {
-      ghnOrderCode: '',
+      ghnOrderCode: "",
       trackingStatus: this.status,
       statusHistory: [logEntry],
       expectedDeliveryDate: undefined,
@@ -246,13 +247,13 @@ orderSchema.statics.calculateTotalSales = async function () {
   const result = await this.aggregate([
     {
       $match: {
-        status: { $nin: ['unpaid', 'cancelled'] }, // Lọc bỏ đơn hàng unpaid và cancelled
+        status: { $nin: ["unpaid", "cancelled"] }, // Lọc bỏ đơn hàng unpaid và cancelled
       },
     },
     {
       $group: {
         _id: null, // Không nhóm theo trường nào
-        totalSales: { $sum: '$subtotal' }, // Tính tổng trường `total`
+        totalSales: { $sum: "$subtotal" }, // Tính tổng trường `total`
       },
     },
   ]);
@@ -260,7 +261,7 @@ orderSchema.statics.calculateTotalSales = async function () {
   return result.length > 0 ? result[0].totalSales : 0; // Nếu không có đơn hàng hợp lệ, trả về 0
 };
 
-orderSchema.pre<IOrder>('save', async function (next) {
+orderSchema.pre<IOrder>("save", async function (next) {
   // Initialize the total and shippingFee
   this.subtotal = 0;
 
@@ -269,7 +270,7 @@ orderSchema.pre<IOrder>('save', async function (next) {
     const product = await Product.findById(item.product);
 
     if (!product) {
-      throw new Error('Product ' + item.product.toString() + ' not found');
+      throw new Error("Product " + item.product.toString() + " not found");
     }
 
     item._itemName = product.name;
@@ -283,7 +284,7 @@ orderSchema.pre<IOrder>('save', async function (next) {
       item.subtotal = item.unitPrice * item.quantity;
       this.subtotal += item.subtotal;
     } else {
-      throw new Error('Variant ' + item.variant.toString() + ' not found');
+      throw new Error("Variant " + item.variant.toString() + " not found");
     }
   }
 
@@ -300,35 +301,35 @@ orderSchema.statics.getTopProvinces = async function (
   return this.aggregate([
     {
       $match: {
-        status: { $nin: ['unpaid', 'cancelled'] },
+        status: { $nin: ["unpaid", "cancelled"] },
         createdAt: { $gte: startDate, $lte: endDate },
       },
     },
     {
       $lookup: {
-        from: 'shippingaddresses',
-        localField: 'shippingAddress',
-        foreignField: '_id',
-        as: 'address',
+        from: "shippingaddresses",
+        localField: "shippingAddress",
+        foreignField: "_id",
+        as: "address",
       },
     },
-    { $unwind: '$address' },
+    { $unwind: "$address" },
     {
       $match: {
-        'address.city.name': { $ne: null, $exists: true },
+        "address.city.name": { $ne: null, $exists: true },
       },
     },
     {
       $group: {
-        _id: '$address.city.name',
-        value: { $sum: '$subtotal' },
+        _id: "$address.city.name",
+        value: { $sum: "$subtotal" },
         count: { $sum: 1 },
       },
     },
     {
       $project: {
         _id: 0,
-        name: { $ifNull: ['$_id', 'Không xác định'] },
+        name: { $ifNull: ["$_id", "Không xác định"] },
         value: 1,
         count: 1,
       },
@@ -346,42 +347,42 @@ orderSchema.statics.getTopProvincesByPurchasingUsers = async function (
   return this.aggregate([
     {
       $match: {
-        status: 'delivered',
+        status: "delivered",
         createdAt: { $gte: startDate, $lte: endDate },
       },
     },
     {
       $lookup: {
-        from: 'shippingaddresses',
-        localField: 'shippingAddress',
-        foreignField: '_id',
-        as: 'address',
+        from: "shippingaddresses",
+        localField: "shippingAddress",
+        foreignField: "_id",
+        as: "address",
       },
     },
-    { $unwind: '$address' },
+    { $unwind: "$address" },
     {
       $match: {
-        'address.city.name': { $ne: null, $exists: true },
+        "address.city.name": { $ne: null, $exists: true },
       },
     },
     {
       $group: {
         _id: {
-          province: '$address.city.name',
-          userId: '$user',
+          province: "$address.city.name",
+          userId: "$user",
         },
       },
     },
     {
       $group: {
-        _id: '$_id.province',
+        _id: "$_id.province",
         value: { $sum: 1 },
       },
     },
     {
       $project: {
         _id: 0,
-        name: '$_id',
+        name: "$_id",
         value: 1,
       },
     },
@@ -406,14 +407,14 @@ orderSchema.statics.getOrderStatusCounts = async function (
     },
     {
       $group: {
-        _id: '$status',
+        _id: "$status",
         value: { $sum: 1 },
       },
     },
     {
       $project: {
         _id: 0,
-        name: '$_id',
+        name: "$_id",
         value: 1,
       },
     },
@@ -421,6 +422,6 @@ orderSchema.statics.getOrderStatusCounts = async function (
   ]);
 };
 
-const Order = mongoose.model<IOrder, IOrderModel>('Order', orderSchema);
+const Order = mongoose.model<IOrder, IOrderModel>("Order", orderSchema);
 
 export default Order;
