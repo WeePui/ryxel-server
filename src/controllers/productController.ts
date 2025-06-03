@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import Product, { updateProductPricing } from "../models/productModel";
+import Product from "../models/productModel";
 import APIFeatures from "../utils/apiFeatures";
 import catchAsync from "../utils/catchAsync";
 import AppError from "../utils/AppError";
@@ -36,7 +36,7 @@ export const getAllProducts = catchAsync(async (req, res) => {
 
   const products = await apiFeatures.query.exec();
   const results = await apiFeatures.count();
-
+  
   res.status(200).json({
     status: "success",
     data: {
@@ -138,7 +138,6 @@ export const getProductBySlug = catchAsync(async (req, res, next) => {
     return next(new AppError("No product found with that slug", 404));
   }
 
-  updateProductPricing(product);
   await Product.updateOne(
     { _id: product._id },
     {
@@ -254,15 +253,7 @@ export const getProductById = catchAsync(async (req, res, next) => {
   if (!product) {
     return next(new AppError("No product found with that ID", 404));
   }
-  updateProductPricing(product);
-  await Product.updateOne(
-    { _id: product._id },
-    {
-      lowestPrice: product.lowestPrice,
-      percentageSaleOff: product.percentageSaleOff,
-      sold: product.sold,
-    }
-  );
+
   res.status(200).json({
     status: "success",
     data: { product },
