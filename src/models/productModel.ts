@@ -331,10 +331,14 @@ productSchema.virtual("percentageSaleOff").get(function (this: IProduct) {
   if (!this.variants || this.variants.length === 0) return 0;
 
   const cheapestVariant = this.variants.reduce((minVariant, current) => {
-    const currentPrice = current.finalPrice ?? 0;
-    const minPrice = minVariant.finalPrice ?? 0;
+    const currentPrice = current.finalPrice ?? current.price;
+    const minPrice = minVariant.finalPrice ?? minVariant.price;
     return currentPrice < minPrice ? current : minVariant;
   });
+
+  if (!cheapestVariant.saleOff || !isSaleOfferActive(cheapestVariant.saleOff)) {
+    return 0;
+  }
 
   return cheapestVariant.saleOff?.percentage ?? 0;
 });
