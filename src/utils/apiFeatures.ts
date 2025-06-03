@@ -50,7 +50,7 @@ class APIFeatures {
                         path: 'description',
                         score: { boost: { value: 2 } },
                       },
-                      
+
                     },
                     {
                       text: {
@@ -73,7 +73,7 @@ class APIFeatures {
                           prefixLength: 2, // Không cho phép sửa ký tự đầu tiên
                           maxExpansions: 50, // Giới hạn số lượng kết quả mở rộng
                         },
-                        score: { boost: { value:  6} },
+                        score: { boost: { value: 6 } },
                       },
                     },
                     {
@@ -166,6 +166,13 @@ class APIFeatures {
     const excludedFields = ['page', 'sort', 'limit', 'fields', 'search'];
     excludedFields.forEach((el) => delete queryObj[el]);
 
+    // Filtering by price
+    if (queryObj.price) {
+      // Gán filter theo variants.finalPrice
+      queryObj['variants.price'] = { ...queryObj.price };
+      delete queryObj.price;
+    }
+
     if (queryObj.category) {
       queryObj._categoryName = queryObj.category;
       delete queryObj.category;
@@ -195,6 +202,67 @@ class APIFeatures {
     this.query = this.query.find(JSON.parse(queryStr));
     return this;
   }
+
+  async filterWithAggregation() {
+    const pipeline: any[] = [];
+
+    // Thêm lowestPrice từ variants
+    pipeline.push({
+      $addFields: {
+        lowestPrice: {
+          $min: {
+            $map: {
+              input: '$variants',
+              as: 'variant',
+              in: '$$variant.finalPrice',
+            },
+          },
+        },
+      },
+    });
+
+    const matchStage: any = {};
+
+    // Lọc theo price (thành lowestPrice)
+    if (this.queryString.price) {
+      const priceFilter = JSON.parse(
+        JSON.stringify(this.queryString.price).replace(
+          /\b(gte|gt|lte|lt)\b/g,
+          (match) => `$${match}`
+        )
+      );
+      matchStage.lowestPrice = priceFilter;
+    }
+
+    // Lọc theo category
+    if (this.queryString.category) {
+      matchStage._categoryName = this.queryString.category;
+    }
+
+    // Lọc theo specs
+    if (this.queryString.specs) {
+      const specFilters = JSON.parse(this.queryString.specs);
+      const specConditions = Object.entries(specFilters).map(([key, value]) => {
+        const condition = Array.isArray(value)
+          ? { $in: value }
+          : value;
+        return { [`variants.specifications.${key}`]: condition };
+      });
+      if (specConditions.length > 0) {
+        matchStage.$and = specConditions;
+      }
+    }
+
+    pipeline.push({ $match: matchStage });
+
+    // Optional: add sorting, pagination, field limiting vào pipeline nếu cần
+
+    const results = await this.query.model.aggregate(pipeline);
+    this.query = this.query.model.find({ _id: { $in: results.map((r) => r._id) } });
+
+    return this;
+  }
+
 
   sort() {
     // Sorting
