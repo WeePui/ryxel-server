@@ -166,12 +166,6 @@ class APIFeatures {
     const excludedFields = ['page', 'sort', 'limit', 'fields', 'search'];
     excludedFields.forEach((el) => delete queryObj[el]);
 
-    // Filtering
-    if (queryObj.price) {
-      queryObj.lowestPrice = { ...queryObj.price };
-      delete queryObj.price;
-    }
-
     if (queryObj.category) {
       queryObj._categoryName = queryObj.category;
       delete queryObj.category;
