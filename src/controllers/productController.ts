@@ -36,7 +36,7 @@ export const getAllProducts = catchAsync(async (req, res) => {
 
   const products = await apiFeatures.query.exec();
   const results = await apiFeatures.count();
-  
+
   res.status(200).json({
     status: "success",
     data: {
@@ -54,7 +54,7 @@ export const getFilterData = catchAsync(async (req, res) => {
   apiFeatures.filter();
 
   const allFilteredProducts = await apiFeatures.query
-    .select("brand lowestPrice variants.specifications")
+    .select("brand variants.price variants.specifications")
     .lean()
     .exec();
 
@@ -79,12 +79,17 @@ export const getFilterData = catchAsync(async (req, res) => {
     count,
   }));
 
-  const prices = allFilteredProducts.map((p) =>
-    "lowestPrice" in p ? p.lowestPrice : 0
-  ) as number[];
+  const prices = allFilteredProducts.flatMap((p: any) =>
+    p.variants?.map((v: any) => v.price ?? 0) ?? []
+  );
+
 
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
+
+  console.log("Min Price:", minPrice);
+  console.log("Max Price:", maxPrice);
+
 
   const specsWithCounts = allFilteredProducts.reduce(
     (acc, product) => {
