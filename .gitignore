@@ -131,3 +131,6 @@ dist
 
 # multer upload folder
 uploads
+
+# Firebases service account JSON files
+*.service-account.json

@@ -18,7 +18,13 @@ import XLSX from "xlsx";
 import { generateEmail, mainContent } from "../utils/generateEmailTemplate";
 import sendEmail from "../utils/email";
 import Cart from "../models/cartModel";
-
+import {
+  sendOrderCreatedNotification,
+  sendOrderStatusUpdatedNotification,
+  sendOrderShippedNotification,
+  sendOrderDeliveredNotification,
+  sendOrderCancelledNotification,
+} from "../utils/notificationHelpers";
 
 export const removeCartItem = async (
   userId: string,
@@ -253,20 +259,32 @@ export const createOrder = catchAsync(
       );
 
       if (paymentMethod === "cod") {
-        await removeCartItem(
-          userId,
-          orderProducts,
-          session
-        ).catch((err) => {
+        await removeCartItem(userId, orderProducts, session).catch((err) => {
           console.error("Error removing cart items:", err);
         });
       }
       await reduceStock(orderProducts, session);
-
       await session.commitTransaction(); // Commit the transaction
       session.endSession();
 
-      await sendOrderConfirmationEmail(newOrder[0]);
+      sendOrderConfirmationEmail(newOrder[0]);
+
+      // Send notification for order creation
+      try {
+        sendOrderCreatedNotification({
+          _id: newOrder[0]._id.toString(),
+          userId: userId,
+          orderCode: newOrder[0].orderCode,
+          status: newOrder[0].status,
+          totalAmount: newOrder[0].total,
+        });
+      } catch (notificationError) {
+        console.error(
+          "Error sending order created notification:",
+          notificationError
+        );
+        // Don't fail the order creation if notification fails
+      }
 
       res.status(201).json({
         status: "success",
@@ -278,7 +296,7 @@ export const createOrder = catchAsync(
       await session.abortTransaction(); // Roll back transaction in case of error
       session.endSession();
 
-      console.log("Error creating order:", err);
+      console.error("Error creating order:", err);
 
       return next(
         new AppError(`Cannot process the order: ${(err as Error).message}`, 400)
@@ -520,13 +538,32 @@ export const cancelOrder = catchAsync(
           );
         }
       }
-
       order.status = "cancelled";
 
       await increaseStock(order.lineItems, session);
       await order.save({ session });
 
       await session.commitTransaction();
+
+      // Send cancellation notification
+      try {
+        sendOrderCancelledNotification(
+          {
+            _id: order._id.toString(),
+            userId: order.user.toString(),
+            orderCode: order.orderCode,
+            status: order.status,
+            totalAmount: order.total,
+          },
+          "Đơn hàng đã được hủy theo yêu cầu của khách hàng"
+        );
+      } catch (notificationError) {
+        console.error(
+          "Error sending order cancellation notification:",
+          notificationError
+        );
+        // Don't fail the cancellation if notification fails
+      }
 
       res.status(200).json({
         status: "success",
@@ -551,13 +588,50 @@ export const updateOrderStatus = catchAsync(
     const order = await Order.findById(req.params.id);
     if (!order) {
       return next(new AppError("No order found with that ID", 404));
-    }
+    } // Store old status for notification
+    const oldStatus = order.status;
 
     // Update the order status
     order.status = req.body.status;
     order.adminNotes = req.body.adminNotes;
     await order.save();
     if (order.status === "cancelled") await increaseStock(order.lineItems);
+
+    // Send appropriate notifications based on status change
+    try {
+      const orderData = {
+        _id: order._id.toString(),
+        userId: order.user.toString(),
+        orderCode: order.orderCode,
+        status: order.status,
+        totalAmount: order.total,
+      };
+
+      if (order.status === "shipped" && oldStatus !== "shipped") {
+        await sendOrderShippedNotification(orderData, {
+          trackingNumber: order.shippingTracking?.ghnOrderCode,
+          carrier: "GHN",
+        });
+      } else if (order.status === "delivered" && oldStatus !== "delivered") {
+        await sendOrderDeliveredNotification(orderData);
+      } else if (order.status === "cancelled" && oldStatus !== "cancelled") {
+        await sendOrderCancelledNotification(orderData, req.body.adminNotes);
+      } else {
+        // For other status updates
+        await sendOrderStatusUpdatedNotification(
+          orderData,
+          oldStatus,
+          order.status,
+          req.body.adminNotes
+        );
+      }
+    } catch (notificationError) {
+      console.error(
+        "Error sending order status update notification:",
+        notificationError
+      );
+      // Don't fail the status update if notification fails
+    }
 
     res.status(200).json({
       status: "success",
@@ -660,87 +734,112 @@ const calculateTotalWeight = async (orderItems: any) => {
   return totalWeight;
 };
 
-export const createShippingOrder = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-  const orderId = req.params.id;
-  const order = await Order.findById(orderId);
+export const createShippingOrder = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const orderId = req.params.id;
+    const order = await Order.findById(orderId);
 
-  if (!order) {
-    return next(new AppError("No order found with that ID", 404));
-  }
+    if (!order) {
+      return next(new AppError("No order found with that ID", 404));
+    }
 
-  if (order.status !== "pending") {
-    return next(new AppError("Order is not in pending status", 400));
-  }
+    if (order.status !== "pending") {
+      return next(new AppError("Order is not in pending status", 400));
+    }
 
-  const shippingAddress = await ShippingAddress.findById(order.shippingAddress);
-  if (!shippingAddress) {
-    return next(new AppError("No shipping address found", 400));
-  }
+    const shippingAddress = await ShippingAddress.findById(
+      order.shippingAddress
+    );
+    if (!shippingAddress) {
+      return next(new AppError("No shipping address found", 400));
+    }
 
-  const orderItems = order.lineItems.map((item: any) => ({
-    product: item.product,
-    variant: item.variant,
-    quantity: item.quantity,
-  }));
+    const orderItems = order.lineItems.map((item: any) => ({
+      product: item.product,
+      variant: item.variant,
+      quantity: item.quantity,
+    }));
 
-  const lineItems = await getLineItemsInfo(orderItems);
-  const totalWeight = lineItems.reduce(
-    (acc: number, item: any) => acc + item.variant.weight * item.quantity,
-    0
-  );
-  const ghnItems = lineItems.map((item: any) => ({
-    name: item.variant.name,
-    quantity: item.quantity,
-    code: item.variant.sku,
-    price: item.variant.price,
-    weight: item.variant.weight,
-    length: item.variant.dimension.length,
-    width: item.variant.dimension.width,
-    height: item.variant.dimension.height,
-    category: {
-      level1: "Hàng Công Nghệ",
-    },
-  }));
-
-  const shippingOrder = await createShippingOrderGHN({
-    toName: shippingAddress.fullname,
-    toPhone: shippingAddress.phoneNumber,
-    toAddress: shippingAddress.address,
-    toWardName: shippingAddress.ward.name,
-    toDistrictName: shippingAddress.district.name,
-    toDistrictCode: shippingAddress.district.code,
-    toProvinceName: shippingAddress.city.name,
-    clientOrderCode: order.orderCode,
-    weight: totalWeight,
-    lineItems: ghnItems,
-  });
-
-  const { data } = shippingOrder;
-
-  order.status = "processing";
-
-  order.shippingTracking = {
-    ghnOrderCode: data.order_code,
-    expectedDeliveryDate: data.expected_delivery_time,
-    trackingStatus: "ready_to_pick",
-    statusHistory: [
-      {
-        status: "ready_to_pick",
-        description: "Đơn vận đã được tạo và sẵn sàng để lấy",
-        timestamp: new Date(),
+    const lineItems = await getLineItemsInfo(orderItems);
+    const totalWeight = lineItems.reduce(
+      (acc: number, item: any) => acc + item.variant.weight * item.quantity,
+      0
+    );
+    const ghnItems = lineItems.map((item: any) => ({
+      name: item.variant.name,
+      quantity: item.quantity,
+      code: item.variant.sku,
+      price: item.variant.price,
+      weight: item.variant.weight,
+      length: item.variant.dimension.length,
+      width: item.variant.dimension.width,
+      height: item.variant.dimension.height,
+      category: {
+        level1: "Hàng Công Nghệ",
       },
-    ],
-  };
+    }));
 
-  await order.save();
+    const shippingOrder = await createShippingOrderGHN({
+      toName: shippingAddress.fullname,
+      toPhone: shippingAddress.phoneNumber,
+      toAddress: shippingAddress.address,
+      toWardName: shippingAddress.ward.name,
+      toDistrictName: shippingAddress.district.name,
+      toDistrictCode: shippingAddress.district.code,
+      toProvinceName: shippingAddress.city.name,
+      clientOrderCode: order.orderCode,
+      weight: totalWeight,
+      lineItems: ghnItems,
+    });
 
-  res.status(200).json({
-    status: "success",
-    data: {
-      shippingOrder,
-    },
-  });
-});
+    const { data } = shippingOrder;
+
+    order.status = "processing";
+
+    order.shippingTracking = {
+      ghnOrderCode: data.order_code,
+      expectedDeliveryDate: data.expected_delivery_time,
+      trackingStatus: "ready_to_pick",
+      statusHistory: [
+        {
+          status: "ready_to_pick",
+          description: "Đơn vận đã được tạo và sẵn sàng để lấy",
+          timestamp: new Date(),
+        },
+      ],
+    };
+    await order.save();
+
+    // Send notification for shipping order creation (status change to processing)
+    try {
+      await sendOrderStatusUpdatedNotification(
+        {
+          _id: order._id.toString(),
+          userId: order.user.toString(),
+          orderCode: order.orderCode,
+          status: order.status,
+          totalAmount: order.total,
+        },
+        "pending",
+        "processing",
+        "Đơn hàng đã được tạo vận đơn và đang được chuẩn bị"
+      );
+    } catch (notificationError) {
+      console.error(
+        "Error sending shipping order notification:",
+        notificationError
+      );
+      // Don't fail the shipping order creation if notification fails
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        shippingOrder,
+      },
+    });
+  }
+);
 
 export const refundOrder = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {

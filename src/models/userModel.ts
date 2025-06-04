@@ -6,6 +6,7 @@ import "./shippingAddressModel";
 import "./wishlistModel";
 
 interface IUser extends Document {
+  _id: Types.ObjectId;
   name: string;
   email: string;
   photo: {
@@ -28,6 +29,7 @@ interface IUser extends Document {
   otpLastRequest?: Date;
   wishlistId?: Types.ObjectId;
   expoPushTokens: string[];
+  fcmTokens: string[];
   correctPassword(
     candidatePassword: string,
     userPassword: string
@@ -82,7 +84,10 @@ const userSchema = new Schema<IUser>(
     },
     passwordConfirm: {
       type: String,
-      required: [true, "Please confirm your password!"],
+      required: function () {
+        // Only require passwordConfirm when password is being modified or document is new
+        return this.isModified("password") || this.isNew;
+      },
       validate: {
         validator: function (el) {
           return el === this.password;
@@ -115,6 +120,10 @@ const userSchema = new Schema<IUser>(
       ref: "Wishlist",
     },
     expoPushTokens: {
+      type: [String],
+      default: [],
+    },
+    fcmTokens: {
       type: [String],
       default: [],
     },

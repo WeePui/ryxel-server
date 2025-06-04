@@ -33,6 +33,12 @@ router
   .patch(userController.saveExpoPushToken)
   .delete(userController.deleteExpoPushToken);
 
+router
+  .route("/fcm-token")
+  .post(userController.saveFcmToken)
+  .delete(userController.deleteFcmToken)
+  .get(userController.getFcmTokens);
+
 router.use(authController.restrictTo("admin"));
 
 router.route("/").get(userController.getAllUsers);
