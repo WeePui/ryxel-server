@@ -202,7 +202,7 @@ orderSchema.pre<IOrder>('save', async function (next) {
     const userSuffix = this.user.toString().slice(-4).toUpperCase();
     const timestamp = Date.now().toString().slice(-5);
 
-    this.orderCode = `ORD-${today}-${userSuffix}-${timestamp}`;
+    this.orderCode = `ORD${today}${userSuffix}${timestamp}`;
   }
   next();
 });
