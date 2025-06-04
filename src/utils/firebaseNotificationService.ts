@@ -436,7 +436,7 @@ class FirebaseNotificationService {
     deviceInfo?: string
   ): Promise<{ success: boolean; message: string }> {
     try {
-      const user = await User.findById(userId);
+      const user = await User.findById(userId).select("fcmTokens");
       if (!user) {
         return { success: false, message: "User not found" };
       }
@@ -446,9 +446,12 @@ class FirebaseNotificationService {
         return { success: true, message: "Token already registered" };
       }
 
-      // Add token to user's fcmTokens array
-      user.fcmTokens.push(token);
-      await user.save();
+      // Use findByIdAndUpdate to avoid triggering passwordConfirm validation
+      await User.findByIdAndUpdate(
+        userId,
+        { $addToSet: { fcmTokens: token } },
+        { new: true }
+      );
 
       console.log(`FCM token registered for user ${userId}: ${token}`);
       return { success: true, message: "Token registered successfully" };

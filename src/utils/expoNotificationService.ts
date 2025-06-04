@@ -38,7 +38,7 @@ class ExpoNotificationService {
   private constructor() {
     this.expo = new Expo({
       // If you want to use FCM v1 API, set useFcmV1 to true
-      useFcmV1: false, // Set to true if you want to use FCM v1 API
+      useFcmV1: true, // Set to true if you want to use FCM v1 API
     });
   }
 
@@ -61,8 +61,6 @@ class ExpoNotificationService {
     try {
       const user = await User.findById(userId).select("expoPushTokens");
       if (!user || !user.expoPushTokens || user.expoPushTokens.length === 0) {
-        console.log(`No Expo push tokens found for user ${userId}`);
-
         // Don't save notification to database if user has no tokens
         // This prevents notification records for users who can't receive them
         return {
@@ -77,7 +75,6 @@ class ExpoNotificationService {
       );
 
       if (validTokens.length === 0) {
-        console.log(`No valid Expo push tokens found for user ${userId}`);
         return {
           success: false,
           error: "No valid Expo push tokens found for user",
@@ -404,7 +401,7 @@ class ExpoNotificationService {
         };
       }
 
-      const user = await User.findById(userId);
+      const user = await User.findById(userId).select("expoPushTokens");
       if (!user) {
         return {
           success: false,
@@ -420,9 +417,12 @@ class ExpoNotificationService {
         };
       }
 
-      // Add token to user's tokens
-      user.expoPushTokens.push(token);
-      await user.save();
+      // Use findByIdAndUpdate to avoid triggering passwordConfirm validation
+      await User.findByIdAndUpdate(
+        userId,
+        { $addToSet: { expoPushTokens: token } },
+        { new: true }
+      );
 
       console.log(
         `Expo push token registered for user ${userId} on ${platform}${deviceInfo ? ` - ${deviceInfo}` : ""}`

@@ -84,7 +84,10 @@ const userSchema = new Schema<IUser>(
     },
     passwordConfirm: {
       type: String,
-      required: [true, "Please confirm your password!"],
+      required: function () {
+        // Only require passwordConfirm when password is being modified or document is new
+        return this.isModified("password") || this.isNew;
+      },
       validate: {
         validator: function (el) {
           return el === this.password;

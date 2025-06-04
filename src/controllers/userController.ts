@@ -518,9 +518,12 @@ export const saveFcmToken = catchAsync(
       });
     }
 
-    // Add the new token to the user's tokens
-    user.fcmTokens.push(fcmToken);
-    await user.save();
+    // Use findByIdAndUpdate to avoid triggering passwordConfirm validation
+    await User.findByIdAndUpdate(
+      req.user.id,
+      { $addToSet: { fcmTokens: fcmToken } },
+      { new: true }
+    );
 
     res.status(200).json({
       status: "success",
