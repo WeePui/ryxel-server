@@ -23,16 +23,12 @@ import Cart from "../models/cartModel";
 export const removeCartItem = async (
   userId: string,
   orderItems: any,
-  session?: mongoose.ClientSession // Optional session parameter
+  session?: mongoose.ClientSession
 ) => {
-  const cart = await Cart.findOne({ user: userId }).session(session ?? null); // Use session if provided
-  if (!cart) {
-    throw new AppError("No cart found for this user", 404);
-  }
+  const cart = await Cart.findOne({ user: userId }).session(session ?? null);
+  if (!cart) throw new AppError("No cart found for this user", 404);
 
-  for (const item of orderItems) {
-    await cart.removeCartItem(item.product, item.variant);
-  }
+  await cart.removeCartItems(orderItems); // sử dụng method mới
 };
 
 const reduceStock = async (
