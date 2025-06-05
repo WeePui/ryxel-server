@@ -34,7 +34,7 @@ app.use(compression());
 
 app.use(
   cors({
-    origin: "https://ryxel-store-orymym09b-weepuis-projects.vercel.app",
+    origin: ["https://ryxel-store-mu.vercel.app", "http://localhost:3000"],
     methods: "GET,POST,PUT,DELETE,PATCH",
     allowedHeaders: "Content-Type,Authorization",
     credentials: true,
