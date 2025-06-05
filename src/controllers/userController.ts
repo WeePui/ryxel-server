@@ -114,18 +114,10 @@ export const updateUser = catchAsync(
 
 export const deleteUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const user = await User.findById(req.params.id);
-
-    if (!user) return next(new AppError("No user found with that ID", 404));
-
-    if (user.isDeleted) {
-      return next(new AppError("User already deleted", 400));
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) {
+      return next(new AppError("No user found with that ID", 404));
     }
-
-    await User.findByIdAndUpdate(req.params.id, {
-      isDeleted: true,
-      deletedAt: new Date(),
-    });
 
     res.status(204).json({
       status: "success",
