@@ -49,14 +49,13 @@ export const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   const pageNum = parseInt(page as string);
   const limitNum = parseInt(limit as string);
   const skip = (pageNum - 1) * limitNum;
-
   // Execute query with pagination
   const users = await User.find(query)
     .sort(sort as string)
     .skip(skip)
     .limit(limitNum)
     .select(
-      "-password -passwordResetToken -passwordResetExpires -otp -otpExpires"
+      "+active -password -passwordResetToken -passwordResetExpires -otp -otpExpires"
     );
 
   // Get total count for pagination
@@ -76,7 +75,7 @@ export const getAllUsers = catchAsync(async (req: Request, res: Response) => {
 
 export const getUserById = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).select("+active");
 
     if (!user) {
       return next(new AppError("No user found with that ID", 404));
@@ -221,7 +220,7 @@ export const getUserAnalytics = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.params.id;
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select("+active");
     if (!user) {
       return next(new AppError("No user found with that ID", 404));
     }

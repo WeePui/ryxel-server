@@ -25,44 +25,52 @@ export const aliasTopProducts = (
   next();
 };
 
-export const getAllProducts = catchAsync(async (req: Request, res: Response) => {
-  let apiFeatures: APIFeatures;
-  const user = await User.findById(req.user.id);
-  if (!user || user.role !== "admin") {
-    apiFeatures = new APIFeatures(Product.find({ isDeleted: false }), req.query);
+export const getAllProducts = catchAsync(
+  async (req: Request, res: Response) => {
+    let apiFeatures: APIFeatures;
+    const user = await User.findById(req.user.id);
+    if (!user || user.role !== "admin") {
+      apiFeatures = new APIFeatures(
+        Product.find({ isDeleted: false }),
+        req.query
+      );
+    } else {
+      apiFeatures = new APIFeatures(Product.find(), req.query);
+    }
+    apiFeatures = await apiFeatures.search();
+
+    const totalProducts = await apiFeatures.count();
+    const resultsPerPage =
+      Number(req.query.limit) ||
+      Number(process.env.DEFAULT_LIMIT_PER_PAGE) ||
+      10;
+
+    apiFeatures.filter().sort().limitFields().paginate();
+
+    const products = await apiFeatures.query.exec();
+    const results = await apiFeatures.count();
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        results,
+        totalProducts,
+        resultsPerPage,
+        products,
+      },
+    });
   }
-  else {
-    apiFeatures = new APIFeatures(Product.find(), req.query);
-  }
-  apiFeatures = await apiFeatures.search();
-
-  const totalProducts = await apiFeatures.count();
-  const resultsPerPage =
-    Number(req.query.limit) || Number(process.env.DEFAULT_LIMIT_PER_PAGE) || 10;
-
-  apiFeatures.filter().sort().limitFields().paginate();
-
-  const products = await apiFeatures.query.exec();
-  const results = await apiFeatures.count();
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      results,
-      totalProducts,
-      resultsPerPage,
-      products,
-    },
-  });
-});
+);
 
 export const getFilterData = catchAsync(async (req, res) => {
   let apiFeatures: APIFeatures;
   const user = await User.findById(req.user.id);
   if (!user || user.role !== "admin") {
-    apiFeatures = new APIFeatures(Product.find({ isDeleted: false }), req.query);
-  }
-  else {
+    apiFeatures = new APIFeatures(
+      Product.find({ isDeleted: false }),
+      req.query
+    );
+  } else {
     apiFeatures = new APIFeatures(Product.find(), req.query);
   }
   apiFeatures = await apiFeatures.search();
@@ -94,17 +102,15 @@ export const getFilterData = catchAsync(async (req, res) => {
     count,
   }));
 
-  const prices = allFilteredProducts.flatMap((p: any) =>
-    p.variants?.map((v: any) => v.price ?? 0) ?? []
+  const prices = allFilteredProducts.flatMap(
+    (p: any) => p.variants?.map((v: any) => v.price ?? 0) ?? []
   );
-
 
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
 
   console.log("Min Price:", minPrice);
   console.log("Max Price:", maxPrice);
-
 
   const specsWithCounts = allFilteredProducts.reduce(
     (acc, product) => {
