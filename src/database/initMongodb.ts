@@ -1,11 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const dbConnectionString = process.env.DB_CONNECTION
-  ? process.env.DB_CONNECTION.replace('<PASSWORD>', process.env.DB_PASSWORD!)
+  ? process.env.DB_CONNECTION.replace("<PASSWORD>", process.env.DB_PASSWORD!)
   : null;
 
 if (!dbConnectionString) {
-  console.error('Database connection string is not defined.');
+  console.error("Database connection string is not defined.");
   process.exit(1);
 }
 
@@ -16,19 +16,19 @@ class Database {
     this.connect();
   }
 
-  private connect(type = 'mongodb') {
+  private connect(type = "mongodb") {
     // if (process.env.NODE_ENV === 'development') {
     //   mongoose.set('debug', true);
     //   mongoose.set('debug', { color: true });
     // }
 
     mongoose
-      .connect(dbConnectionString!, { maxPoolSize: 100 })
+      .connect(dbConnectionString!, { maxPoolSize: 40000 })
       .then(() => {
-        console.log('Database connection successful!');
+        console.log("Database connection successful!");
       })
       .catch((error) => {
-        console.error('Database connection failed:', error.message);
+        console.error("Database connection failed:", error.message);
       });
   }
 

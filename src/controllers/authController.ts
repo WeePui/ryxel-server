@@ -1,12 +1,12 @@
-import crypto from 'crypto';
-import { Request, Response, NextFunction } from 'express';
-import catchAsync from '../utils/catchAsync';
-import AppError from '../utils/AppError';
-import User from '../models/userModel';
-import signToken from '../utils/signToken';
-import sendEmail from '../utils/email';
-import verifyToken from '../utils/verifyToken';
-import { generateEmail, mainContent } from '../utils/generateEmailTemplate';
+import crypto from "crypto";
+import { Request, Response, NextFunction } from "express";
+import catchAsync from "../utils/catchAsync";
+import AppError from "../utils/AppError";
+import User from "../models/userModel";
+import signToken from "../utils/signToken";
+import sendEmail from "../utils/email";
+import verifyToken from "../utils/verifyToken";
+import { generateEmail, mainContent } from "../utils/generateEmailTemplate";
 
 const createSendToken = (user: any, statusCode: number, res: Response) => {
   // Sign new token for the user
@@ -21,12 +21,12 @@ const createSendToken = (user: any, statusCode: number, res: Response) => {
     // secure: process.env.NODE_ENV === 'production', // Cookie will only be sent on an encrypted connection
   };
 
-  res.cookie('jwt', token, cookieOptions); // Send the token in a cookie
+  res.cookie("jwt", token, cookieOptions); // Send the token in a cookie
 
   user.password = undefined;
 
   res.status(statusCode).json({
-    status: 'success',
+    status: "success",
     token,
     data: {
       user,
@@ -41,15 +41,15 @@ export const protect = catchAsync(
     // 1. Getting token and check if it's there
     if (
       req.headers.authorization &&
-      req.headers.authorization.startsWith('Bearer')
+      req.headers.authorization.startsWith("Bearer")
     )
-      token = req.headers.authorization.split(' ')[1];
+      token = req.headers.authorization.split(" ")[1];
     else if (req.cookies && req.cookies.jwt) token = req.cookies.jwt;
     else if (req.body.token) token = req.body.token;
 
     if (!token) {
       return next(
-        new AppError('You are not logged in! Please log in to get access.', 401)
+        new AppError("You are not logged in! Please log in to get access.", 401)
       );
     }
 
@@ -60,8 +60,8 @@ export const protect = catchAsync(
       return next(
         new AppError(
           expired
-            ? 'Your session has expired. Please log in again.'
-            : 'Invalid token. Please log in again.',
+            ? "Your session has expired. Please log in again."
+            : "Invalid token. Please log in again.",
           401
         )
       );
@@ -71,7 +71,7 @@ export const protect = catchAsync(
     if (!user)
       return next(
         new AppError(
-          'The user belonging to this token does no longer exist.',
+          "The user belonging to this token does no longer exist.",
           401
         )
       );
@@ -80,7 +80,7 @@ export const protect = catchAsync(
     if (user.changedPasswordAfter(decoded.iat)) {
       return next(
         new AppError(
-          'User recently changed password! Please log in again.',
+          "User recently changed password! Please log in again.",
           401
         )
       );
@@ -98,14 +98,14 @@ export const optionalAuth = catchAsync(
     // 1. Getting token and check if it's there
     if (
       req.headers.authorization &&
-      req.headers.authorization.startsWith('Bearer')
+      req.headers.authorization.startsWith("Bearer")
     )
-      token = req.headers.authorization.split(' ')[1];
+      token = req.headers.authorization.split(" ")[1];
     else if (req.cookies && req.cookies.jwt) token = req.cookies.jwt;
     else if (req.body.token) token = req.body.token;
 
     if (!token) {
-      req.user = { role: 'guest' }; // If no token, set user role to guest
+      req.user = { role: "guest" }; // If no token, set user role to guest
       return next();
     }
 
@@ -116,8 +116,8 @@ export const optionalAuth = catchAsync(
       return next(
         new AppError(
           expired
-            ? 'Your session has expired. Please log in again.'
-            : 'Invalid token. Please log in again.',
+            ? "Your session has expired. Please log in again."
+            : "Invalid token. Please log in again.",
           401
         )
       );
@@ -125,7 +125,7 @@ export const optionalAuth = catchAsync(
     // 3. Check if user still exists
     const user = await User.findById(decoded.id);
     if (!user) {
-      req.user = { role: 'guest' }; // If no token, set user role to guest
+      req.user = { role: "guest" }; // If no token, set user role to guest
       return next();
     }
 
@@ -133,7 +133,7 @@ export const optionalAuth = catchAsync(
     if (user.changedPasswordAfter(decoded.iat)) {
       return next(
         new AppError(
-          'User recently changed password! Please log in again.',
+          "User recently changed password! Please log in again.",
           401
         )
       );
@@ -148,7 +148,7 @@ export const restrictTo = (...roles: string[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
     if (!roles.includes(req.user.role)) {
       return next(
-        new AppError('You do not have permission to perform this action.', 403)
+        new AppError("You do not have permission to perform this action.", 403)
       );
     }
 
@@ -162,10 +162,10 @@ export const checkEmailExists = catchAsync(
 
     const userExists = await User.findOne({ email });
     if (userExists) {
-      return next(new AppError('Email is already in use.', 400));
+      return next(new AppError("Email is already in use.", 400));
     }
 
-    res.status(200).json({ status: 'success', message: 'Email is available.' });
+    res.status(200).json({ status: "success", message: "Email is available." });
   }
 );
 
@@ -174,27 +174,27 @@ export const verifyUserToken = catchAsync(
     const { token } = req.body;
 
     if (!token) {
-      return next(new AppError('Token is required', 400));
+      return next(new AppError("Token is required", 400));
     }
 
     const { valid, expired, decoded } = await verifyToken(token);
 
     const user = await User.findById(decoded.id);
     if (!user) {
-      return next(new AppError('User not found', 404));
+      return next(new AppError("User not found", 404));
     }
 
-    res.status(200).json({ valid, expired, isAdmin: user.role === 'admin' });
+    res.status(200).json({ valid, expired, isAdmin: user.role === "admin" });
   }
 );
 
 export const logout = (req: Request, res: Response) => {
   // Send a new cookie with the same name and an expired date
-  res.cookie('jwt', 'loggedout', {
+  res.cookie("jwt", "loggedout", {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
-  res.status(200).json({ status: 'success' });
+  res.status(200).json({ status: "success" });
 };
 
 export const signup = catchAsync(
@@ -208,12 +208,12 @@ export const signup = catchAsync(
       dob: req.body.dob,
     });
 
-    const subject = '[Ryxel Store no-reply] Chào mừng bạn đến với Ryxel Store';
-    const greetingName = newUser.name || 'Khách hàng';
+    const subject = "[Ryxel Store no-reply] Chào mừng bạn đến với Ryxel Store";
+    const greetingName = newUser.name || "Khách hàng";
     const html = generateEmail({
       subject,
       greetingName,
-      mainContent: mainContent['welcome'](),
+      mainContent: mainContent["welcome"](),
     });
 
     await sendEmail({
@@ -231,7 +231,7 @@ export const sendOTP = catchAsync(
     const user = await User.findById(req.user.id);
 
     if (!user) {
-      return next(new AppError('User not found', 404));
+      return next(new AppError("User not found", 404));
     }
 
     const now = Date.now();
@@ -243,7 +243,7 @@ export const sendOTP = catchAsync(
         if (user.otpRequests! >= 3) {
           return next(
             new AppError(
-              'You have reached the maximum number of OTP requests. Please try again later.',
+              "You have reached the maximum number of OTP requests. Please try again later.",
               429 // Too Many Requests
             )
           );
@@ -260,23 +260,23 @@ export const sendOTP = catchAsync(
     await user.save({ validateBeforeSave: false });
 
     try {
-      const subject = '[Ryxel Store no-reply] Mã OTP xác thực tài khoản';
-      const greetingName = user.name || 'Khách hàng';
+      const subject = "[Ryxel Store no-reply] Mã OTP xác thực tài khoản";
+      const greetingName = user.name || "Khách hàng";
       const html = generateEmail({
         subject,
         greetingName,
-        mainContent: mainContent['sendingOtp'](otp),
+        mainContent: mainContent["sendingOtp"](otp),
       });
 
       await sendEmail({
         to: user.email,
-        subject: 'Email Verification OTP',
+        subject: "Email Verification OTP",
         html,
       });
 
       res.status(200).json({
-        status: 'success',
-        message: 'OTP sent to your email!',
+        status: "success",
+        message: "OTP sent to your email!",
       });
     } catch (err) {
       // If there is an error sending the email, reset the OTP and the expiry time
@@ -286,7 +286,7 @@ export const sendOTP = catchAsync(
 
       return next(
         new AppError(
-          'There was an error sending the OTP. Please try again later.',
+          "There was an error sending the OTP. Please try again later.",
           500
         )
       );
@@ -298,11 +298,11 @@ export const verifyOTP = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     // Hash the OTP sent by the user
     const { otp } = req.body;
-    const hashedOTP = crypto.createHash('sha256').update(otp).digest('hex');
+    const hashedOTP = crypto.createHash("sha256").update(otp).digest("hex");
 
-    const user = await User.findById(req.user.id).select('+otp +otpExpires');
+    const user = await User.findById(req.user.id).select("+otp +otpExpires");
 
-    if (!user) return next(new AppError('User not found', 404));
+    if (!user) return next(new AppError("User not found", 404));
 
     // Check if the OTP is valid and has not expired
     if (
@@ -310,11 +310,11 @@ export const verifyOTP = catchAsync(
       !user.otpExpires ||
       user.otpExpires.getTime() < Date.now()
     ) {
-      return next(new AppError('OTP is invalid or has expired.', 400));
+      return next(new AppError("OTP is invalid or has expired.", 400));
     }
 
     if (user.otp !== hashedOTP) {
-      return next(new AppError('Incorrect OTP. Please try again.', 400));
+      return next(new AppError("Incorrect OTP. Please try again.", 400));
     }
 
     // If the OTP is correct, set emailVerified to true and remove the OTP
@@ -325,8 +325,8 @@ export const verifyOTP = catchAsync(
     await user.save({ validateBeforeSave: false });
 
     res.status(200).json({
-      status: 'success',
-      message: 'Email verified successfully!',
+      status: "success",
+      message: "Email verified successfully!",
     });
   }
 );
@@ -337,19 +337,19 @@ export const login = catchAsync(
 
     // 1. Check if email and password exist
     if (!email || !password) {
-      return next(new AppError('Please provide email and password!', 400));
+      return next(new AppError("Please provide email and password!", 400));
     }
 
     // 2. Check if user exists && password is correct
-    const user = await User.findOne({ email }).select('+password +active');
-    if (!user) return next(new AppError('Incorrect email or password', 401));
+    const user = await User.findOne({ email }).select("+password +active");
+    if (!user) return next(new AppError("Incorrect email or password", 401));
 
     const correct = await user.correctPassword(password, user.password);
 
-    if (!correct) return next(new AppError('Incorrect email or password', 401));
+    if (!correct) return next(new AppError("Incorrect email or password", 401));
 
     if (user.active === false) {
-      return next(new AppError('This account has been deleted', 403));
+      return next(new AppError("This account has been deleted", 403));
     }
 
     createSendToken(user, 200, res);
@@ -362,33 +362,33 @@ export const forgotPassword = catchAsync(
     const user = await User.findOne({ email });
 
     if (!user) {
-      return next(new AppError('There is no user with email address.', 404));
+      return next(new AppError("There is no user with email address.", 404));
     }
 
     const resetToken = user.createPasswordResetToken();
     await user.save({ validateBeforeSave: false });
-    const clientHost = process.env.CLIENT_HOST || 'http://localhost:3000';
+    const clientHost = process.env.CLIENT_HOST || "http://localhost:3000";
 
     const resetURL = `${req.protocol}://${clientHost}/resetPassword/${resetToken}`;
 
-    const subject = '[Ryxel Store no-reply] Đặt lại mật khẩu';
-    const greetingName = user.name || 'Khách hàng';
+    const subject = "[Ryxel Store no-reply] Đặt lại mật khẩu";
+    const greetingName = user.name || "Khách hàng";
     const html = generateEmail({
       subject,
       greetingName,
-      mainContent: mainContent['resetPassword'](resetURL),
+      mainContent: mainContent["resetPassword"](resetURL),
     });
 
     try {
       await sendEmail({
         to: user.email,
-        subject: 'Your password reset token (valid for 10 min)',
+        subject: "Your password reset token (valid for 10 min)",
         html,
       });
 
       res.status(200).json({
-        status: 'success',
-        message: 'Reset token is sent to email!',
+        status: "success",
+        message: "Reset token is sent to email!",
       });
     } catch (error) {
       // If there is an error sending the email, reset the token and the expiry time
@@ -398,7 +398,7 @@ export const forgotPassword = catchAsync(
 
       return next(
         new AppError(
-          'There was an error sending the email. Try again later!',
+          "There was an error sending the email. Try again later!",
           500
         )
       );
@@ -410,9 +410,9 @@ export const resetPassword = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     // 1. Get user based on the token
     const hashedToken = crypto
-      .createHash('sha256')
+      .createHash("sha256")
       .update(req.params.token)
-      .digest('hex');
+      .digest("hex");
 
     const user = await User.findOne({
       passwordResetToken: hashedToken,
@@ -420,7 +420,7 @@ export const resetPassword = catchAsync(
     });
 
     if (!user) {
-      return next(new AppError('Token is invalid or has expired', 400));
+      return next(new AppError("Token is invalid or has expired", 400));
     }
 
     // 2. If token has not expired, and there is user, set the new password
@@ -438,16 +438,16 @@ export const resetPassword = catchAsync(
 export const updatePassword = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { password, passwordConfirm, passwordCurrent } = req.body;
-    const user = await User.findById(req.user.id).select('+password');
+    const user = await User.findById(req.user.id).select("+password");
 
     if (!user) {
-      return next(new AppError('User not found', 404));
+      return next(new AppError("User not found", 404));
     }
 
     const correct = await user.correctPassword(passwordCurrent, user.password);
 
     if (!correct) {
-      return next(new AppError('Your current password is wrong.', 401));
+      return next(new AppError("Your current password is wrong.", 401));
     }
 
     user.password = password;
@@ -462,20 +462,20 @@ export const updatePassword = catchAsync(
 export const reauthenticate = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { password } = req.body;
-    const user = await User.findById(req.user.id).select('+password');
+    const user = await User.findById(req.user.id).select("+password");
 
     if (!user) {
-      return next(new AppError('User not found', 404));
+      return next(new AppError("User not found", 404));
     }
 
     const correct = await user.correctPassword(password, user.password);
 
     if (!correct) {
-      return next(new AppError('Incorrect password. Please try again.', 401));
+      return next(new AppError("Incorrect password. Please try again.", 401));
     }
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
     });
   }
 );

@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
-import Product from '../models/productModel';
-import Order from '../models/orderModel';
-import User from '../models/userModel';
-import catchAsync from '../utils/catchAsync';
-import AppError from '../utils/AppError';
+import { Request, Response, NextFunction, query } from "express";
+import Product from "../models/productModel";
+import Order from "../models/orderModel";
+import User from "../models/userModel";
+import catchAsync from "../utils/catchAsync";
+import AppError from "../utils/AppError";
 
 const predictOutOfStock = async (): Promise<{
   predictions: { product: any; predictedDaysToOutOfStock: number }[];
@@ -44,7 +44,7 @@ const predictOutOfStock = async (): Promise<{
     return { predictions };
   } catch (error) {
     throw new AppError(
-      'Internal error while predicting out-of-stock products',
+      "Internal error while predicting out-of-stock products",
       500
     );
   }
@@ -68,7 +68,7 @@ const getTotalSalebyMonth = async (startDate: Date, endDate: Date) => {
       await Order.aggregate([
         {
           $match: {
-            status: { $nin: ['unpaid', 'cancelled'] },
+            status: { $nin: ["unpaid", "cancelled"] },
             createdAt: {
               $gte: startDate,
               $lte: endDate,
@@ -78,7 +78,7 @@ const getTotalSalebyMonth = async (startDate: Date, endDate: Date) => {
         {
           $group: {
             _id: null,
-            totalSales: { $sum: '$total' },
+            totalSales: { $sum: "$total" },
           },
         },
       ])
@@ -89,7 +89,7 @@ const getTotalSalebyMonth = async (startDate: Date, endDate: Date) => {
 const getTotalOrderbyMonth = async (startDate: Date, endDate: Date) => {
   return (
     (await Order.find({
-      status: { $nin: ['unpaid', 'cancelled'] },
+      status: { $nin: ["unpaid", "cancelled"] },
       createdAt: {
         $gte: startDate,
         $lte: endDate,
@@ -124,7 +124,7 @@ export const getTime = (range: string, year: number, month?: number) => {
   let startDate: Date;
   let endDate: Date;
   let timeSlots: number[] = [];
-  if (range === 'day') {
+  if (range === "day") {
     const now = new Date();
     startDate = new Date(
       Date.UTC(
@@ -148,7 +148,7 @@ export const getTime = (range: string, year: number, month?: number) => {
       )
     );
     timeSlots = Array.from({ length: 7 }, (_, i) => i); // 0–6: Sunday–Saturday
-  } else if (range === 'month') {
+  } else if (range === "month") {
     startDate = new Date(Date.UTC(year, month! - 1, 1));
     endDate = new Date(Date.UTC(year, month!, 0, 23, 59, 59, 999));
     const totalDays = endDate.getUTCDate();
@@ -170,10 +170,10 @@ export const getDashboard = catchAsync(
     const currentYear = now.getFullYear();
 
     const thisMonthStartDate = new Date(
-      `${currentYear}-${String(currentMonth).padStart(2, '0')}-01`
+      `${currentYear}-${String(currentMonth).padStart(2, "0")}-01`
     );
     const thisMonthEndDate = new Date(
-      `${currentYear}-${String(currentMonth).padStart(2, '0')}-${new Date(currentYear, currentMonth, 0).getDate()}`
+      `${currentYear}-${String(currentMonth).padStart(2, "0")}-${new Date(currentYear, currentMonth, 0).getDate()}`
     ); // Last day of the month
 
     // Previous month calculations
@@ -181,10 +181,10 @@ export const getDashboard = catchAsync(
     const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear; // Handle year edge case
 
     const previousMonthStartDate = new Date(
-      `${previousYear}-${String(previousMonth).padStart(2, '0')}-01`
+      `${previousYear}-${String(previousMonth).padStart(2, "0")}-01`
     );
     const previousMonthEndDate = new Date(
-      `${previousYear}-${String(previousMonth).padStart(2, '0')}-${new Date(previousYear, previousMonth, 0).getDate()}`
+      `${previousYear}-${String(previousMonth).padStart(2, "0")}-${new Date(previousYear, previousMonth, 0).getDate()}`
     ); // Last day of the month
 
     // Total Products
@@ -224,7 +224,7 @@ export const getDashboard = catchAsync(
     // Total Orders (excluding unpaid/cancelled)
     const totalOrdersValue =
       (await Order.find({
-        status: { $nin: ['unpaid', 'cancelled'] },
+        status: { $nin: ["unpaid", "cancelled"] },
       }).countDocuments()) || 0;
 
     const totalOrdersThisMonth = await getTotalOrderbyMonth(
@@ -259,7 +259,7 @@ export const getDashboard = catchAsync(
 
     // Structure the response
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         sales: {
           value: totalSalesValue,
@@ -288,13 +288,13 @@ export const getRecentOrders = catchAsync(
     const recentOrders = await Order.find()
       .sort({ createdAt: -1 }) // Sort by creation date in descending order
       .limit(10) // Limit to 10 orders;
-      .populate('user')
-      .populate('shippingAddress')
-      .populate('lineItems.product');
+      .populate("user")
+      .populate("shippingAddress")
+      .populate("lineItems.product");
     // Respond with all attributes of the orders
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: recentOrders,
     });
   }
@@ -302,31 +302,35 @@ export const getRecentOrders = catchAsync(
 
 export const getRevenue = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.query);
     const range = req.query.range as string;
-    const year = parseInt(req.query.year as string);
-    const month = req.query.month
-      ? parseInt(req.query.month as string)
-      : undefined;
 
-    // Validate query parameters
-    if (
-      !['day', 'month', 'year'].includes(range) ||
-      (range !== 'day' && isNaN(year)) ||
-      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
-    ) {
+    // Only validate the range parameter
+    if (!range || !["day", "month", "year"].includes(range)) {
       return res.status(400).json({
-        status: 'fail',
+        status: "fail",
         message:
-          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+          'Invalid or missing "range" parameter. Must be one of: day, month, year',
       });
     }
+
+    // Always use current date if not specified
+    const now = new Date();
+    const year =
+      req.query.year && !isNaN(parseInt(req.query.year as string))
+        ? parseInt(req.query.year as string)
+        : now.getFullYear();
+    const month =
+      req.query.month && !isNaN(parseInt(req.query.month as string))
+        ? parseInt(req.query.month as string)
+        : now.getMonth() + 1; // 1-based month
 
     let matchFilter: any = {};
     const { startDate, endDate, timeSlots } = getTime(range, year, month);
 
     matchFilter = {
       createdAt: { $gte: startDate, $lte: endDate },
-      status: { $nin: ['unpaid', 'cancelled'] },
+      status: { $nin: ["unpaid", "cancelled"] },
     };
 
     const revenueData = await Order.aggregate([
@@ -334,27 +338,27 @@ export const getRevenue = catchAsync(
       {
         $group: {
           _id:
-            range === 'day'
+            range === "day"
               ? {
-                $dayOfWeek: {
-                  date: '$createdAt',
-                  timezone: 'Asia/Ho_Chi_Minh',
-                },
-              } // 1 (Sunday) – 7 (Saturday)
-              : range === 'month'
+                  $dayOfWeek: {
+                    date: "$createdAt",
+                    timezone: "Asia/Ho_Chi_Minh",
+                  },
+                } // 1 (Sunday) – 7 (Saturday)
+              : range === "month"
                 ? {
-                  $dayOfMonth: {
-                    date: '$createdAt',
-                    timezone: 'Asia/Ho_Chi_Minh',
-                  },
-                } // 1–31
+                    $dayOfMonth: {
+                      date: "$createdAt",
+                      timezone: "Asia/Ho_Chi_Minh",
+                    },
+                  } // 1–31
                 : {
-                  $month: {
-                    date: '$createdAt',
-                    timezone: 'Asia/Ho_Chi_Minh',
-                  },
-                }, // 1–12
-          totalRevenue: { $sum: '$subtotal' },
+                    $month: {
+                      date: "$createdAt",
+                      timezone: "Asia/Ho_Chi_Minh",
+                    },
+                  }, // 1–12
+          totalRevenue: { $sum: "$subtotal" },
         },
       },
     ]);
@@ -369,7 +373,7 @@ export const getRevenue = catchAsync(
     });
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         revenue: responseData,
       },
@@ -380,23 +384,26 @@ export const getRevenue = catchAsync(
 export const getTopCustomers = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const range = req.query.range as string;
-    const year = parseInt(req.query.year as string);
-    const month = req.query.month
-      ? parseInt(req.query.month as string)
-      : undefined;
 
-    // Validate query parameters
-    if (
-      !['day', 'month', 'year'].includes(range) ||
-      (range !== 'day' && isNaN(year)) ||
-      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
-    ) {
+    // Only validate the range parameter
+    if (!range || !["day", "month", "year"].includes(range)) {
       return res.status(400).json({
-        status: 'fail',
+        status: "fail",
         message:
-          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+          'Invalid or missing "range" parameter. Must be one of: day, month, year',
       });
     }
+
+    // Always use current date if not specified
+    const now = new Date();
+    const year =
+      req.query.year && !isNaN(parseInt(req.query.year as string))
+        ? parseInt(req.query.year as string)
+        : now.getFullYear();
+    const month =
+      req.query.month && !isNaN(parseInt(req.query.month as string))
+        ? parseInt(req.query.month as string)
+        : now.getMonth() + 1; // 1-based month
 
     // Calculate date range
     const { startDate, endDate } = getTime(range, year, month);
@@ -405,14 +412,14 @@ export const getTopCustomers = catchAsync(
     const topCustomers = await Order.aggregate([
       {
         $match: {
-          status: { $nin: ['unpaid', 'cancelled'] },
+          status: { $nin: ["unpaid", "cancelled"] },
           createdAt: { $gte: startDate, $lte: endDate },
         },
       },
       {
         $group: {
-          _id: '$user',
-          totalSpent: { $sum: '$subtotal' },
+          _id: "$user",
+          totalSpent: { $sum: "$subtotal" },
           totalOrders: { $sum: 1 },
         },
       },
@@ -424,7 +431,7 @@ export const getTopCustomers = catchAsync(
     const users = await Promise.all(
       topCustomers.map(async (customer) => {
         const user = await User.findById(customer._id).select(
-          'name email photo'
+          "name email photo"
         );
         return {
           user,
@@ -435,7 +442,7 @@ export const getTopCustomers = catchAsync(
     );
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: { users },
     });
   }
@@ -444,23 +451,26 @@ export const getTopCustomers = catchAsync(
 export const getProductsSold = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const range = req.query.range as string;
-    const year = parseInt(req.query.year as string);
-    const month = req.query.month
-      ? parseInt(req.query.month as string)
-      : undefined;
 
-    // Validate inputs
-    if (
-      !['day', 'month', 'year'].includes(range) ||
-      (range !== 'day' && isNaN(year)) ||
-      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
-    ) {
+    // Only validate the range parameter
+    if (!range || !["day", "month", "year"].includes(range)) {
       return res.status(400).json({
-        status: 'fail',
+        status: "fail",
         message:
-          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+          'Invalid or missing "range" parameter. Must be one of: day, month, year',
       });
     }
+
+    // Always use current date if not specified
+    const now = new Date();
+    const year =
+      req.query.year && !isNaN(parseInt(req.query.year as string))
+        ? parseInt(req.query.year as string)
+        : now.getFullYear();
+    const month =
+      req.query.month && !isNaN(parseInt(req.query.month as string))
+        ? parseInt(req.query.month as string)
+        : now.getMonth() + 1; // 1-based month
 
     // Setup time range
     const { startDate, endDate, timeSlots } = getTime(range, year, month);
@@ -469,40 +479,40 @@ export const getProductsSold = catchAsync(
     const productsSold = await Order.aggregate([
       {
         $match: {
-          status: { $nin: ['unpaid', 'cancelled'] },
+          status: { $nin: ["unpaid", "cancelled"] },
           createdAt: { $gte: startDate, $lte: endDate },
         },
       },
-      { $unwind: '$lineItems' },
+      { $unwind: "$lineItems" },
       {
         $group: {
           _id:
-            range === 'day'
+            range === "day"
               ? {
-                $dayOfWeek: {
-                  date: '$createdAt',
-                  timezone: 'Asia/Ho_Chi_Minh',
-                },
-              } // 1 (Sunday) – 7 (Saturday)
-              : range === 'month'
+                  $dayOfWeek: {
+                    date: "$createdAt",
+                    timezone: "Asia/Ho_Chi_Minh",
+                  },
+                } // 1 (Sunday) – 7 (Saturday)
+              : range === "month"
                 ? {
-                  $dayOfMonth: {
-                    date: '$createdAt',
-                    timezone: 'Asia/Ho_Chi_Minh',
-                  },
-                } // 1–31
+                    $dayOfMonth: {
+                      date: "$createdAt",
+                      timezone: "Asia/Ho_Chi_Minh",
+                    },
+                  } // 1–31
                 : {
-                  $month: {
-                    date: '$createdAt',
-                    timezone: 'Asia/Ho_Chi_Minh',
-                  },
-                }, // 1–12
-          sold: { $sum: '$lineItems.quantity' },
+                    $month: {
+                      date: "$createdAt",
+                      timezone: "Asia/Ho_Chi_Minh",
+                    },
+                  }, // 1–12
+          sold: { $sum: "$lineItems.quantity" },
         },
       },
       {
         $project: {
-          name: { $subtract: ['$_id', 1] }, // convert to 0-based index
+          name: { $subtract: ["$_id", 1] }, // convert to 0-based index
           sold: 1,
           _id: 0,
         },
@@ -520,7 +530,7 @@ export const getProductsSold = catchAsync(
     });
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: mergedData,
     });
   }
@@ -544,7 +554,7 @@ export const getStockSummary = catchAsync(
     });
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         inStock: inStock,
         outStock: outStock,
@@ -593,33 +603,33 @@ export const getCategorySaleData = async (
   const sales = await Order.aggregate([
     {
       $match: {
-        status: { $nin: ['unpaid', 'cancelled'] },
+        status: { $nin: ["unpaid", "cancelled"] },
         createdAt: { $gte: startDate, $lt: endDate },
       },
     },
-    { $unwind: '$lineItems' },
+    { $unwind: "$lineItems" },
     {
       $lookup: {
-        from: 'products',
-        localField: 'lineItems.product',
-        foreignField: '_id',
-        as: 'product',
+        from: "products",
+        localField: "lineItems.product",
+        foreignField: "_id",
+        as: "product",
       },
     },
-    { $unwind: '$product' },
+    { $unwind: "$product" },
     {
-      $match: { 'product.category': category._id },
+      $match: { "product.category": category._id },
     },
     {
       $group: {
         _id: groupBy,
-        value: { $sum: '$lineItems.subtotal' },
+        value: { $sum: "$lineItems.subtotal" },
       },
     },
     {
       $project: {
         _id: 0,
-        name: '$_id',
+        name: "$_id",
         value: 1,
       },
     },
@@ -631,62 +641,65 @@ export const getCategorySaleData = async (
 export const getCategorySales = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const range = req.query.range as string;
-    const year = parseInt(req.query.year as string);
-    const month = req.query.month
-      ? parseInt(req.query.month as string)
-      : undefined;
 
-    // Validate query parameters
-    if (
-      !['day', 'month', 'year'].includes(range) ||
-      (range !== 'day' && isNaN(year)) ||
-      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
-    ) {
+    // Only validate the range parameter
+    if (!range || !["day", "month", "year"].includes(range)) {
       return res.status(400).json({
-        status: 'fail',
+        status: "fail",
         message:
-          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+          'Invalid or missing "range" parameter. Must be one of: day, month, year',
       });
     }
+
+    // Always use current date if not specified
+    const now = new Date();
+    const year =
+      req.query.year && !isNaN(parseInt(req.query.year as string))
+        ? parseInt(req.query.year as string)
+        : now.getFullYear();
+    const month =
+      req.query.month && !isNaN(parseInt(req.query.month as string))
+        ? parseInt(req.query.month as string)
+        : now.getMonth() + 1; // 1-based month
 
     const { startDate, endDate } = getTime(range, year, month);
     const sales = await Order.aggregate([
       {
         $match: {
-          status: { $nin: ['unpaid', 'cancelled'] },
+          status: { $nin: ["unpaid", "cancelled"] },
           createdAt: { $gte: startDate, $lte: endDate },
         },
       },
-      { $unwind: '$lineItems' },
+      { $unwind: "$lineItems" },
       {
         $lookup: {
-          from: 'products', // the collection name for products
-          localField: 'lineItems.product',
-          foreignField: '_id',
-          as: 'product',
+          from: "products", // the collection name for products
+          localField: "lineItems.product",
+          foreignField: "_id",
+          as: "product",
         },
       },
-      { $unwind: '$product' },
+      { $unwind: "$product" },
       {
         $group: {
-          _id: '$product.category', // group by product's category
-          totalSales: { $sum: '$lineItems.subtotal' },
+          _id: "$product.category", // group by product's category
+          totalSales: { $sum: "$lineItems.subtotal" },
         },
       },
       {
         $lookup: {
-          from: 'categories', // the collection name for categories
-          localField: '_id',
-          foreignField: '_id',
-          as: 'category',
+          from: "categories", // the collection name for categories
+          localField: "_id",
+          foreignField: "_id",
+          as: "category",
         },
       },
-      { $unwind: '$category' },
+      { $unwind: "$category" },
       {
         $project: {
           _id: 0,
-          name: '$category.name', // category name
-          value: '$totalSales',
+          name: "$category.name", // category name
+          value: "$totalSales",
         },
       },
       { $sort: { name: 1 } },
@@ -694,7 +707,7 @@ export const getCategorySales = catchAsync(
 
     // Send the response with an array of { name, value } objects.
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: {
         sales,
       },
@@ -705,30 +718,33 @@ export const getCategorySales = catchAsync(
 export const getTopProvinces = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const range = req.query.range as string;
-    const year = parseInt(req.query.year as string);
-    const month = req.query.month
-      ? parseInt(req.query.month as string)
-      : undefined;
 
-    // Validate query parameters
-    if (
-      !['month', 'year'].includes(range) ||
-      isNaN(year) ||
-      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
-    ) {
+    // Only validate the range parameter
+    if (!range || !["month", "year"].includes(range)) {
       return res.status(400).json({
-        status: 'fail',
+        status: "fail",
         message:
-          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+          'Invalid or missing "range" parameter. Must be one of: month, year',
       });
     }
+
+    // Always use current date if not specified
+    const now = new Date();
+    const year =
+      req.query.year && !isNaN(parseInt(req.query.year as string))
+        ? parseInt(req.query.year as string)
+        : now.getFullYear();
+    const month =
+      req.query.month && !isNaN(parseInt(req.query.month as string))
+        ? parseInt(req.query.month as string)
+        : now.getMonth() + 1; // 1-based month
 
     const { startDate, endDate } = getTime(range, year, month);
 
     const topProvinces = await Order.getTopProvinces(startDate, endDate, 5);
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: topProvinces,
     });
   }
@@ -737,30 +753,33 @@ export const getTopProvinces = catchAsync(
 export const getOrderStatusCounts = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const range = req.query.range as string;
-    const year = parseInt(req.query.year as string);
-    const month = req.query.month
-      ? parseInt(req.query.month as string)
-      : undefined;
 
-    // Validate query parameters
-    if (
-      !['month', 'year'].includes(range) ||
-      isNaN(year) ||
-      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
-    ) {
+    // Only validate the range parameter
+    if (!range || !["month", "year"].includes(range)) {
       return res.status(400).json({
-        status: 'fail',
+        status: "fail",
         message:
-          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+          'Invalid or missing "range" parameter. Must be one of: month, year',
       });
     }
+
+    // Always use current date if not specified
+    const now = new Date();
+    const year =
+      req.query.year && !isNaN(parseInt(req.query.year as string))
+        ? parseInt(req.query.year as string)
+        : now.getFullYear();
+    const month =
+      req.query.month && !isNaN(parseInt(req.query.month as string))
+        ? parseInt(req.query.month as string)
+        : now.getMonth() + 1; // 1-based month
 
     const { startDate, endDate } = getTime(range, year, month);
 
     const statusCounts = await Order.getOrderStatusCounts(startDate, endDate);
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: statusCounts,
     });
   }
@@ -775,7 +794,7 @@ const getOrderStatsByStatus = async (startDate: Date, endDate: Date) => {
     },
     {
       $group: {
-        _id: '$status',
+        _id: "$status",
         count: { $sum: 1 },
       },
     },
@@ -790,10 +809,10 @@ export const getOrderStats = catchAsync(
 
     // Current month calculations
     const thisMonthStartDate = new Date(
-      `${currentYear}-${String(currentMonth).padStart(2, '0')}-01`
+      `${currentYear}-${String(currentMonth).padStart(2, "0")}-01`
     );
     const thisMonthEndDate = new Date(
-      `${currentYear}-${String(currentMonth).padStart(2, '0')}-${new Date(currentYear, currentMonth, 0).getDate()}`
+      `${currentYear}-${String(currentMonth).padStart(2, "0")}-${new Date(currentYear, currentMonth, 0).getDate()}`
     );
 
     // Previous month calculations
@@ -801,10 +820,10 @@ export const getOrderStats = catchAsync(
     const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
 
     const previousMonthStartDate = new Date(
-      `${previousYear}-${String(previousMonth).padStart(2, '0')}-01`
+      `${previousYear}-${String(previousMonth).padStart(2, "0")}-01`
     );
     const previousMonthEndDate = new Date(
-      `${previousYear}-${String(previousMonth).padStart(2, '0')}-${new Date(previousYear, previousMonth, 0).getDate()}`
+      `${previousYear}-${String(previousMonth).padStart(2, "0")}-${new Date(previousYear, previousMonth, 0).getDate()}`
     );
 
     // Get total orders for all time
@@ -851,37 +870,37 @@ export const getOrderStats = catchAsync(
     const stats = {
       totalOrders,
       totalPendingOrders: {
-        value: totalMap.get('pending') || 0,
+        value: totalMap.get("pending") || 0,
         changeRate: calculateChangeRate(
-          currentMonthMap.get('pending') || 0,
-          previousMonthMap.get('pending') || 0
+          currentMonthMap.get("pending") || 0,
+          previousMonthMap.get("pending") || 0
         ),
       },
       totalShippedOrders: {
-        value: totalMap.get('shipped') || 0,
+        value: totalMap.get("shipped") || 0,
         changeRate: calculateChangeRate(
-          currentMonthMap.get('shipped') || 0,
-          previousMonthMap.get('shipped') || 0
+          currentMonthMap.get("shipped") || 0,
+          previousMonthMap.get("shipped") || 0
         ),
       },
       totalDeliveredOrders: {
-        value: totalMap.get('delivered') || 0,
+        value: totalMap.get("delivered") || 0,
         changeRate: calculateChangeRate(
-          currentMonthMap.get('delivered') || 0,
-          previousMonthMap.get('delivered') || 0
+          currentMonthMap.get("delivered") || 0,
+          previousMonthMap.get("delivered") || 0
         ),
       },
       totalCancelOrders: {
-        value: totalMap.get('cancelled') || 0,
+        value: totalMap.get("cancelled") || 0,
         changeRate: calculateChangeRate(
-          currentMonthMap.get('cancelled') || 0,
-          previousMonthMap.get('cancelled') || 0
+          currentMonthMap.get("cancelled") || 0,
+          previousMonthMap.get("cancelled") || 0
         ),
       },
     };
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: stats,
     });
   }
@@ -893,17 +912,20 @@ export const getUserStats = catchAsync(
     const currentMonth = now.getMonth() + 1;
     const currentYear = now.getFullYear();
 
-    const thisMonthStartDate = new Date(`${currentYear}-${String(currentMonth).padStart(2, '0')}-01`);
+    const thisMonthStartDate = new Date(
+      `${currentYear}-${String(currentMonth).padStart(2, "0")}-01`
+    );
     const thisMonthEndDate = new Date(currentYear, currentMonth, 0); // cuối tháng hiện tại
 
     const previousMonth = currentMonth === 1 ? 12 : currentMonth - 1;
     const previousYear = currentMonth === 1 ? currentYear - 1 : currentYear;
 
-    const previousMonthStartDate = new Date(`${previousYear}-${String(previousMonth).padStart(2, '0')}-01`);
+    const previousMonthStartDate = new Date(
+      `${previousYear}-${String(previousMonth).padStart(2, "0")}-01`
+    );
     const previousMonthEndDate = new Date(previousYear, previousMonth, 0); // cuối tháng trước
 
-    const countUsers = async (filter = {}) =>
-      await User.countDocuments(filter);
+    const countUsers = async (filter = {}) => await User.countDocuments(filter);
 
     const countUsersBetween = async (filter = {}, start: Date, end: Date) =>
       await User.countDocuments({
@@ -915,19 +937,51 @@ export const getUserStats = catchAsync(
     const totalUsers = await countUsers();
     const totalActiveUsers = await countUsers({ isActive: true });
     const totalVerifiedUsers = await countUsers({ isEmailVerified: true });
-    const totalAdminUsers = await countUsers({ role: 'admin' });
+    const totalAdminUsers = await countUsers({ role: "admin" });
 
     // Tháng hiện tại
-    const currentMonthUsers = await countUsersBetween({}, thisMonthStartDate, thisMonthEndDate);
-    const currentActiveUsers = await countUsersBetween({ isActive: true }, thisMonthStartDate, thisMonthEndDate);
-    const currentVerifiedUsers = await countUsersBetween({ isEmailVerified: true }, thisMonthStartDate, thisMonthEndDate);
-    const currentAdminUsers = await countUsersBetween({ role: 'admin' }, thisMonthStartDate, thisMonthEndDate);
+    const currentMonthUsers = await countUsersBetween(
+      {},
+      thisMonthStartDate,
+      thisMonthEndDate
+    );
+    const currentActiveUsers = await countUsersBetween(
+      { isActive: true },
+      thisMonthStartDate,
+      thisMonthEndDate
+    );
+    const currentVerifiedUsers = await countUsersBetween(
+      { isEmailVerified: true },
+      thisMonthStartDate,
+      thisMonthEndDate
+    );
+    const currentAdminUsers = await countUsersBetween(
+      { role: "admin" },
+      thisMonthStartDate,
+      thisMonthEndDate
+    );
 
     // Tháng trước
-    const prevMonthUsers = await countUsersBetween({}, previousMonthStartDate, previousMonthEndDate);
-    const prevActiveUsers = await countUsersBetween({ isActive: true }, previousMonthStartDate, previousMonthEndDate);
-    const prevVerifiedUsers = await countUsersBetween({ isEmailVerified: true }, previousMonthStartDate, previousMonthEndDate);
-    const prevAdminUsers = await countUsersBetween({ role: 'admin' }, previousMonthStartDate, previousMonthEndDate);
+    const prevMonthUsers = await countUsersBetween(
+      {},
+      previousMonthStartDate,
+      previousMonthEndDate
+    );
+    const prevActiveUsers = await countUsersBetween(
+      { isActive: true },
+      previousMonthStartDate,
+      previousMonthEndDate
+    );
+    const prevVerifiedUsers = await countUsersBetween(
+      { isEmailVerified: true },
+      previousMonthStartDate,
+      previousMonthEndDate
+    );
+    const prevAdminUsers = await countUsersBetween(
+      { role: "admin" },
+      previousMonthStartDate,
+      previousMonthEndDate
+    );
 
     const calculateChangeRate = (current: number, previous: number): number => {
       if (previous === 0) return current > 0 ? 100 : 0;
@@ -945,7 +999,10 @@ export const getUserStats = catchAsync(
       },
       totalVerifiedUsers: {
         value: totalVerifiedUsers,
-        changeRate: calculateChangeRate(currentVerifiedUsers, prevVerifiedUsers),
+        changeRate: calculateChangeRate(
+          currentVerifiedUsers,
+          prevVerifiedUsers
+        ),
       },
       totalAdminUsers: {
         value: totalAdminUsers,
@@ -954,7 +1011,7 @@ export const getUserStats = catchAsync(
     };
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: stats,
     });
   }
@@ -963,33 +1020,39 @@ export const getUserStats = catchAsync(
 export const getTopProvincesWithMostPurchasingUsers = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const range = req.query.range as string;
-    const year = parseInt(req.query.year as string);
-    const month = req.query.month
-      ? parseInt(req.query.month as string)
-      : undefined;
 
-    // Validate query parameters
-    if (
-      !['month', 'year'].includes(range) ||
-      isNaN(year) ||
-      (range === 'month' && (!month || isNaN(month) || month < 1 || month > 12))
-    ) {
+    // Only validate the range parameter
+    if (!range || !["month", "year"].includes(range)) {
       return res.status(400).json({
-        status: 'fail',
+        status: "fail",
         message:
-          'Invalid query parameters. Ensure valid "range", "year", and (if range=month) "month".',
+          'Invalid or missing "range" parameter. Must be one of: month, year',
       });
     }
+
+    // Always use current date if not specified
+    const now = new Date();
+    const year =
+      req.query.year && !isNaN(parseInt(req.query.year as string))
+        ? parseInt(req.query.year as string)
+        : now.getFullYear();
+    const month =
+      req.query.month && !isNaN(parseInt(req.query.month as string))
+        ? parseInt(req.query.month as string)
+        : now.getMonth() + 1; // 1-based month
 
     const { startDate, endDate } = getTime(range, year, month);
 
     // Gộp đơn hàng delivered theo tỉnh
-    const topProvinces = await Order.getTopProvincesByPurchasingUsers(startDate, endDate, 6);
+    const topProvinces = await Order.getTopProvincesByPurchasingUsers(
+      startDate,
+      endDate,
+      6
+    );
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: topProvinces,
     });
   }
 );
-
