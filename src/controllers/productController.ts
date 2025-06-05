@@ -240,17 +240,6 @@ export const createProduct = catchAsync(async (req, res, next) => {
       const imageUrls = uploadedImages.map((img) => img.secure_url);
       console.log(variant.saleOff);
 
-      // Validate sale offer if present
-      if (variant.saleOff) {
-        const validation = validateSaleOffer(variant.saleOff);
-        if (!validation.isValid) {
-          throw new AppError(
-            `Invalid sale offer for variant ${index + 1}: ${validation.error}`,
-            400
-          );
-        }
-      }
-
       return {
         ...variant,
         images: imageUrls,
