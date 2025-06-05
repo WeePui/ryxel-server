@@ -341,15 +341,15 @@ export const login = catchAsync(
     }
 
     // 2. Check if user exists && password is correct
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email }).select('+password +active');
     if (!user) return next(new AppError('Incorrect email or password', 401));
 
     const correct = await user.correctPassword(password, user.password);
 
     if (!correct) return next(new AppError('Incorrect email or password', 401));
 
-    if (user.isDeleted) {
-      return next(new AppError('This account has been deleted on ' + user.deletedAt, 403));
+    if (user.active === false) {
+      return next(new AppError('This account has been deleted', 403));
     }
 
     createSendToken(user, 200, res);
