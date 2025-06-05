@@ -13,6 +13,7 @@ import {
   validateSaleOffer,
   calculateFinalPrice,
 } from "../utils/saleValidation";
+import User from "../models/userModel";
 
 export const aliasTopProducts = (
   req: Request,
@@ -24,8 +25,15 @@ export const aliasTopProducts = (
   next();
 };
 
-export const getAllProducts = catchAsync(async (req, res) => {
-  let apiFeatures = new APIFeatures(Product.find(), req.query);
+export const getAllProducts = catchAsync(async (req: Request, res: Response) => {
+  let apiFeatures: APIFeatures;
+  const user = await User.findById(req.user.id);
+  if (!user || user.role !== "admin") {
+    apiFeatures = new APIFeatures(Product.find({ isDeleted: false }), req.query);
+  }
+  else {
+    apiFeatures = new APIFeatures(Product.find(), req.query);
+  }
   apiFeatures = await apiFeatures.search();
 
   const totalProducts = await apiFeatures.count();
@@ -36,7 +44,7 @@ export const getAllProducts = catchAsync(async (req, res) => {
 
   const products = await apiFeatures.query.exec();
   const results = await apiFeatures.count();
-  
+
   res.status(200).json({
     status: "success",
     data: {
@@ -49,12 +57,19 @@ export const getAllProducts = catchAsync(async (req, res) => {
 });
 
 export const getFilterData = catchAsync(async (req, res) => {
-  let apiFeatures = new APIFeatures(Product.find(), req.query);
+  let apiFeatures: APIFeatures;
+  const user = await User.findById(req.user.id);
+  if (!user || user.role !== "admin") {
+    apiFeatures = new APIFeatures(Product.find({ isDeleted: false }), req.query);
+  }
+  else {
+    apiFeatures = new APIFeatures(Product.find(), req.query);
+  }
   apiFeatures = await apiFeatures.search();
   apiFeatures.filter();
 
   const allFilteredProducts = await apiFeatures.query
-    .select("brand lowestPrice variants.specifications")
+    .select("brand variants.price variants.specifications")
     .lean()
     .exec();
 
@@ -79,12 +94,17 @@ export const getFilterData = catchAsync(async (req, res) => {
     count,
   }));
 
-  const prices = allFilteredProducts.map((p) =>
-    "lowestPrice" in p ? p.lowestPrice : 0
-  ) as number[];
+  const prices = allFilteredProducts.flatMap((p: any) =>
+    p.variants?.map((v: any) => v.price ?? 0) ?? []
+  );
+
 
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
+
+  console.log("Min Price:", minPrice);
+  console.log("Max Price:", maxPrice);
+
 
   const specsWithCounts = allFilteredProducts.reduce(
     (acc, product) => {
@@ -212,6 +232,7 @@ export const createProduct = catchAsync(async (req, res, next) => {
         )
       );
       const imageUrls = uploadedImages.map((img) => img.secure_url);
+      console.log(variant.saleOff);
 
       // Validate sale offer if present
       if (variant.saleOff) {
@@ -384,20 +405,11 @@ export const deleteProduct = catchAsync(async (req, res, next) => {
   if (!product) {
     return next(new AppError("No product found with that ID", 404));
   }
-
-  if (product.imageCover) {
-    const coverImagePublicId = extractPublicId(product.imageCover);
-    if (coverImagePublicId) await deleteImage(coverImagePublicId);
+  if (product.isDeleted) {
+    return next(new AppError("Product has already been deleted", 400));
   }
 
-  for (const variant of product.variants) {
-    for (const imageUrl of variant.images) {
-      const publicId = extractPublicId(imageUrl);
-      if (publicId) await deleteImage(publicId);
-    }
-  }
-
-  await Product.findByIdAndDelete(id);
+  await Product.findByIdAndUpdate(id, { isDeleted: true });
 
   res.status(204).json({
     status: "success",
@@ -424,7 +436,7 @@ export const getSimilarProduct = catchAsync(async (req, res) => {
   }
 
   const productIDs = recommendedProducts.map((rec: any) => rec.productID);
-  const products = await Product.find({ _id: { $in: productIDs } }).lean();
+  const products = await Product.find({ _id: { $in: productIDs } });
 
   res.status(200).json({
     status: "success",
@@ -454,7 +466,7 @@ export const getCartProductRecommend = catchAsync(async (req, res) => {
   }
 
   const productIDs = recommendedProducts.map((rec: any) => rec.productID);
-  const products = await Product.find({ _id: { $in: productIDs } }).lean();
+  const products = await Product.find({ _id: { $in: productIDs } });
 
   res.status(200).json({
     status: "success",

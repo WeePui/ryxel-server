@@ -40,7 +40,7 @@ export const verifyDiscount = async (
     return {
       isValid: false,
       discountAmount: 0,
-      discountId: null,
+      discountCode: null,
     };
   }
 
@@ -52,7 +52,6 @@ export const verifyDiscount = async (
 
   let isValid = true;
   let discountAmount = 0;
-  let discountId;
   if (discount) {
     if (!lineItems) {
       throw new AppError("Items does not exist", 404);
@@ -82,7 +81,7 @@ export const verifyDiscount = async (
       (usedUserId) => usedUserId.toString() === userId
     ).length;
 
-    discountId = discount.id;
+    discountCode = discount.code;
 
     if (
       !discount.isActive &&
@@ -101,7 +100,7 @@ export const verifyDiscount = async (
   return {
     isValid,
     discountAmount,
-    discountId,
+    discountCode,
   };
 };
 

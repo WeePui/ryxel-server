@@ -4,6 +4,7 @@ import Cart from '../models/cartModel';
 import Product from '../models/productModel';
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/AppError';
+import { removeCartItem } from './orderController';
 
 interface ICart extends Document {
   user: mongoose.Types.ObjectId;
@@ -35,10 +36,22 @@ export const createCart = catchAsync(
 
 export const getCart = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const cart = await Cart.findOne({ user: req.user.id }).populate(
-      'lineItems.product'
-    );
-    if (!cart) return next(new AppError('Cart does not exist', 404));
+    let cart = await Cart.findOne({ user: req.user.id });
+    if (!cart)
+      cart = await Cart.create({
+        user: req.user.id
+      });
+
+    for (const item of cart?.lineItems || []) {
+      const product = await Product.findById(item.product);
+      if (product?.isDeleted) {
+        cart.removeCartItem(item.product, item.variant);
+      }
+    }
+    cart = await Cart.findOne({ user: req.user.id }).populate({
+      path: 'lineItems.product',
+      model: 'Product',
+    });
 
     res.status(200).json({
       status: 'success',
@@ -76,6 +89,9 @@ export const addOrUpdateCartItem = catchAsync(
     const product = await Product.findById(productID);
     if (!product) {
       return next(new AppError('Product does not exist', 404));
+    }
+    if (product.isDeleted) {
+      return next(new AppError('Product has been removed', 404));
     }
 
     const variant = product.variants.find(

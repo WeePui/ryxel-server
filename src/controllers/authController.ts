@@ -91,6 +91,58 @@ export const protect = catchAsync(
   }
 );
 
+export const optionalAuth = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let token;
+
+    // 1. Getting token and check if it's there
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith('Bearer')
+    )
+      token = req.headers.authorization.split(' ')[1];
+    else if (req.cookies && req.cookies.jwt) token = req.cookies.jwt;
+    else if (req.body.token) token = req.body.token;
+
+    if (!token) {
+      req.user = { role: 'guest' }; // If no token, set user role to guest
+      return next();
+    }
+
+    // 2. Verification token
+    const { valid, expired, decoded } = await verifyToken(token);
+
+    if (!valid) {
+      return next(
+        new AppError(
+          expired
+            ? 'Your session has expired. Please log in again.'
+            : 'Invalid token. Please log in again.',
+          401
+        )
+      );
+    }
+    // 3. Check if user still exists
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      req.user = { role: 'guest' }; // If no token, set user role to guest
+      return next();
+    }
+
+    // 4. Check if user changed password after the token was issued
+    if (user.changedPasswordAfter(decoded.iat)) {
+      return next(
+        new AppError(
+          'User recently changed password! Please log in again.',
+          401
+        )
+      );
+    }
+
+    req.user = user;
+    next();
+  }
+);
 export const restrictTo = (...roles: string[]) => {
   // roles is an array ['admin', 'user']
   return (req: Request, res: Response, next: NextFunction) => {
