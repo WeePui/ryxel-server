@@ -12,11 +12,11 @@ const upload = multer({ storage });
 
 router
   .route('/top-5-bestsellers')
-  .get(productController.aliasTopProducts, productController.getAllProducts);
+  .get(authController.optionalAuth, productController.aliasTopProducts, productController.getAllProducts);
 
 router
   .route('/')
-  .get(productController.getAllProducts)
+  .get(authController.optionalAuth, productController.getAllProducts)
   .post(
     authController.protect,
     authController.restrictTo('admin'),
@@ -24,7 +24,7 @@ router
     productController.createProduct
   );
 
-router.route('/filters').get(productController.getFilterData);
+router.route('/filters').get(authController.optionalAuth, productController.getFilterData);
 
 router
   .route('/:id')

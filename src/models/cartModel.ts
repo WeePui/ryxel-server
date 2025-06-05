@@ -12,6 +12,7 @@ interface ICart extends Document {
   user: Types.ObjectId;
   lineItems: ICartProduct[];
   subtotal: number;
+  removeCartItem: (productId: Types.ObjectId, variantId: Types.ObjectId) => Promise<void>;
   removeCartItems: (
     items: { product: Types.ObjectId; variant: Types.ObjectId }[]
   ) => Promise<void>;
@@ -44,6 +45,25 @@ const cartSchema = new Schema<ICart>({
     default: 0,
   },
 });
+
+cartSchema.methods.removeCartItems = async function (
+  items: { product: Types.ObjectId; variant: Types.ObjectId }[]
+) {
+
+  const index = this.lineItems.findIndex(
+    (item: ICartProduct) =>
+      item.product.toString() === productId.toString() &&
+      item.variant.toString() === variantId.toString()
+  );
+  if (index > -1) {
+    this.lineItems.splice(index, 1);
+    await this.save();
+  } else {
+    throw new Error("Item not found in cart");
+  }
+
+  await this.save();
+};
 
 cartSchema.methods.removeCartItems = async function (
   items: { product: Types.ObjectId; variant: Types.ObjectId }[]

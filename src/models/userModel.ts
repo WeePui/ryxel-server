@@ -29,6 +29,8 @@ interface IUser extends Document {
   otpLastRequest?: Date;
   wishlistId?: Types.ObjectId;
   expoPushTokens: string[];
+  isDeleted?: boolean;
+  deletedAt?: Date;
   fcmTokens: string[];
   correctPassword(
     candidatePassword: string,
@@ -94,6 +96,15 @@ const userSchema = new Schema<IUser>(
         },
         message: "Passwords are not the same!",
       },
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+      select: false, // ẩn khỏi kết quả trả về mặc định
+    },
+    deletedAt: {
+      type: Date,
+      select: false,
     },
     passwordChangedAt: Date,
     passwordResetToken: String,

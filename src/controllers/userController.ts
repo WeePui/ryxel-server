@@ -114,9 +114,18 @@ export const updateUser = catchAsync(
 
 export const deleteUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const user = await User.findByIdAndDelete(req.params.id);
+    const user = await User.findById(req.params.id);
 
     if (!user) return next(new AppError("No user found with that ID", 404));
+
+    if (user.isDeleted) {
+      return next(new AppError("User already deleted", 400));
+    }
+
+    await User.findByIdAndUpdate(req.params.id, {
+      isDeleted: true,
+      deletedAt: new Date(),
+    });
 
     res.status(204).json({
       status: "success",
@@ -376,7 +385,6 @@ export const getUserOrderHistory = catchAsync(
       .skip(skip)
       .limit(limitNum)
       .populate("lineItems.product", "name imageCover price")
-      .populate("shippingAddress")
       .select("-__v");
 
     const totalResults = await Order.countDocuments(query);

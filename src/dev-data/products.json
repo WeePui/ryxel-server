@@ -17,8 +17,8 @@
           "rgb": "Không"
         },
         "price": 1890000,
-        "stock": 914,
-        "sold": 136,
+        "stock": 74,
+        "sold": 126,
         "cost": 1140000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756953/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-rz04-04430100-r3m1-4-0688d75a-974e-4b13-976d-5d377321708b_zb4b1j.webp",
@@ -46,8 +46,8 @@
           "rgb": "Không"
         },
         "price": 1890000,
-        "stock": 939,
-        "sold": 111,
+        "stock": 298,
+        "sold": 102,
         "cost": 1140000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-quartz-rz04-03790300-r3m1-1_agmi9n.webp",
@@ -75,8 +75,8 @@
           "rgb": "Không"
         },
         "price": 1890000,
-        "stock": 924,
-        "sold": 116,
+        "stock": 616,
+        "sold": 84,
         "cost": 1140000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756952/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-mercury-rz04-04430200-r3m1-1_gnrzqm.webp",
@@ -96,7 +96,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039bc",
@@ -116,8 +117,8 @@
           "rgb": "Có"
         },
         "price": 3590000,
-        "stock": 923,
-        "sold": 127,
+        "stock": 713,
+        "sold": 87,
         "cost": 210000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-03_uvx2rz.webp",
@@ -145,8 +146,8 @@
           "rgb": "Có"
         },
         "price": 3590000,
-        "stock": 906,
-        "sold": 144,
+        "stock": 783,
+        "sold": 117,
         "cost": 210000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756945/products/dev-products/tai-nghe-khong-day-razer-barracuda-x-chroma-13_gutccf.webp",
@@ -166,7 +167,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039c1",
@@ -186,8 +188,8 @@
           "rgb": "Không"
         },
         "price": 2990000,
-        "stock": 934,
-        "sold": 116,
+        "stock": 280,
+        "sold": 120,
         "cost": 1310000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-epos-sennheiser-gsp301-4_a6f4fdf796d344d8aca3f2046f1a0d8b_grande_ccvgax.webp",
@@ -214,8 +216,8 @@
           "rgb": "Không"
         },
         "price": 7130000,
-        "stock": 932,
-        "sold": 118,
+        "stock": 598,
+        "sold": 102,
         "cost": 3130000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756976/products/dev-products/unnamed_3bd33c509e264764a496c3c92bd1dd9d_large_tofb7e.webp",
@@ -243,8 +245,8 @@
           "rgb": "Không"
         },
         "price": 6990000,
-        "stock": 897,
-        "sold": 153,
+        "stock": 706,
+        "sold": 94,
         "cost": 2990000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756836/products/dev-products/screenshot_11_66f41a7a65944ae5a7ee24baede946bc_bmqs0o.webp",
@@ -264,7 +266,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039c8",
@@ -284,8 +287,8 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 899,
-        "sold": 151,
+        "stock": 83,
+        "sold": 117,
         "cost": 8290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-starlight_FV1_kqkphm.jpg"
@@ -310,8 +313,8 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 914,
-        "sold": 136,
+        "stock": 390,
+        "sold": 110,
         "cost": 8290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-midnight_FV1_f6s9li.jpg"
@@ -336,8 +339,8 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 919,
-        "sold": 131,
+        "stock": 196,
+        "sold": 104,
         "cost": 8290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756728/products/dev-products/airpods-max-select-202409-blue_FV1_xj2j2m.jpg"
@@ -362,8 +365,8 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 906,
-        "sold": 144,
+        "stock": 204,
+        "sold": 96,
         "cost": 8290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-purple_FV1_gzzftj.jpg"
@@ -388,8 +391,8 @@
           "rgb": "Không"
         },
         "price": 12290000,
-        "stock": 911,
-        "sold": 139,
+        "stock": 302,
+        "sold": 98,
         "cost": 8290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/airpods-max-select-202409-orange_FV1_pt4qyq.jpg"
@@ -406,7 +409,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039d3",
@@ -426,8 +430,8 @@
           "rgb": "Không"
         },
         "price": 9490000,
-        "stock": 904,
-        "sold": 146,
+        "stock": 670,
+        "sold": 130,
         "cost": 5490000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756819/products/dev-products/gearvn-tai-nghe-steelseries-arctis-nova-pro-wireless-1_4825ff4f26a04258be72db4ff9a562d4_xorzgn.webp",
@@ -446,7 +450,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039d6",
@@ -465,8 +470,8 @@
           "weightCapacity": "136kg"
         },
         "price": 17990000,
-        "stock": 911,
-        "sold": 139,
+        "stock": 767,
+        "sold": 133,
         "cost": 12290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-razer-fujjin-rz38-04950100-r3u1-04_gmkzqu.webp",
@@ -478,14 +483,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
+          "width": 50,
           "height": 200,
-          "length": 100
+          "length": 80
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039d9",
@@ -504,8 +510,8 @@
           "weightCapacity": "150kg"
         },
         "price": 3490000,
-        "stock": 895,
-        "sold": 155,
+        "stock": 1,
+        "sold": 99,
         "cost": 1290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756825/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-02_xdqers.webp",
@@ -518,9 +524,9 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
-          "height": 200,
-          "length": 100
+          "width": 50,
+          "height": 60,
+          "length": 20
         }
       },
       {
@@ -532,8 +538,8 @@
           "weightCapacity": "150kg"
         },
         "price": 3490000,
-        "stock": 875,
-        "sold": 175,
+        "stock": 776,
+        "sold": 124,
         "cost": 1290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756830/products/dev-products/ghe-cong-thai-hoc-gami-focus-v2-09_c4hlle.webp",
@@ -546,14 +552,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
-          "height": 200,
-          "length": 100
+          "width": 50,
+          "height": 60,
+          "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039de",
@@ -572,8 +579,8 @@
           "weightCapacity": "150kg"
         },
         "price": 5850000,
-        "stock": 930,
-        "sold": 120,
+        "stock": 17,
+        "sold": 83,
         "cost": 2350000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe-cong-thai-hoc-gami-crom-all-black-e902-001-04_srqg4t.webp",
@@ -585,14 +592,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
-          "height": 200,
-          "length": 100
+          "width": 50,
+          "height": 60,
+          "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039e1",
@@ -612,8 +620,8 @@
           "maxLoad": "120kg"
         },
         "price": 9590000,
-        "stock": 878,
-        "sold": 172,
+        "stock": 355,
+        "sold": 145,
         "cost": 5290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-03_yqsrud.webp",
@@ -626,9 +634,9 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
-          "height": 200,
-          "length": 100
+          "width": 50,
+          "height": 60,
+          "length": 20
         }
       },
       {
@@ -641,8 +649,8 @@
           "maxLoad": "120kg"
         },
         "price": 9590000,
-        "stock": 915,
-        "sold": 135,
+        "stock": 0,
+        "sold": 0,
         "cost": 5290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-01_czokvz.webp",
@@ -655,9 +663,9 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
-          "height": 200,
-          "length": 100
+          "width": 50,
+          "height": 60,
+          "length": 20
         }
       },
       {
@@ -670,8 +678,8 @@
           "maxLoad": "120kg"
         },
         "price": 9590000,
-        "stock": 917,
-        "sold": 133,
+        "stock": 491,
+        "sold": 109,
         "cost": 5290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban-nang-ha-hyperwork-atlas-trang-02_h9z05x.webp",
@@ -684,14 +692,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
-          "height": 200,
-          "length": 100
+          "width": 50,
+          "height": 60,
+          "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039e8",
@@ -712,8 +721,8 @@
           "maxLoad": "110kg"
         },
         "price": 2690000,
-        "stock": 895,
-        "sold": 155,
+        "stock": 70,
+        "sold": 130,
         "cost": 1090000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756818/products/dev-products/gearvn-ban-gaming-e-dra-egt1460a-01_9a048cef570048cb9010773f0fa07a46_1024x1024_mpz6k1.webp",
@@ -724,14 +733,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
-          "height": 200,
-          "length": 100
+          "width": 50,
+          "height": 60,
+          "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039eb",
@@ -752,8 +762,8 @@
           "rgb": "Yes"
         },
         "price": 1249000,
-        "stock": 932,
-        "sold": 118,
+        "stock": 310,
+        "sold": 90,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_den_day_image1_yy3wa7.jpg",
@@ -781,8 +791,8 @@
           "rgb": "Yes"
         },
         "price": 1269000,
-        "stock": 932,
-        "sold": 98,
+        "stock": 0,
+        "sold": 100,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756741/products/dev-products/chuot_gaming_hyperx_pulsefire_haste_2_trang_wireless_image1_mydd2q.jpg",
@@ -801,7 +811,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039f0",
@@ -822,8 +833,8 @@
           "connection": "USB"
         },
         "price": 1289000,
-        "stock": 910,
-        "sold": 130,
+        "stock": 885,
+        "sold": 115,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_black_image1_kljtht.jpg",
@@ -836,7 +847,7 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 30,
-          "height": 120,
+          "height": 60,
           "length": 10
         }
       },
@@ -851,8 +862,8 @@
           "connection": "USB"
         },
         "price": 1289000,
-        "stock": 879,
-        "sold": 146,
+        "stock": 585,
+        "sold": 115,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756739/products/dev-products/ban_phim_co_tkl_dareu_ek87l_v2_white_image1_uqz5rf.jpg",
@@ -865,13 +876,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 120,
+          "height": 60,
           "length": 10
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039f5",
@@ -892,8 +904,8 @@
           "rgb": "No"
         },
         "price": 1259000,
-        "stock": 909,
-        "sold": 151,
+        "stock": 207,
+        "sold": 93,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_black_image1_qz6ioy.jpg",
@@ -921,8 +933,8 @@
           "rgb": "No"
         },
         "price": 1259000,
-        "stock": 900,
-        "sold": 145,
+        "stock": 456,
+        "sold": 144,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756835/products/dev-products/tai_nghe_gaming_hyperx_cloud_iii_red_image1_tqufzz.jpg",
@@ -941,7 +953,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039fa",
@@ -962,8 +975,8 @@
           "weight": 60
         },
         "price": 1299000,
-        "stock": 911,
-        "sold": 134,
+        "stock": 782,
+        "sold": 118,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_black_image1_w9msm8.png",
@@ -991,8 +1004,8 @@
           "weight": 60
         },
         "price": 1299000,
-        "stock": 873,
-        "sold": 157,
+        "stock": 775,
+        "sold": 125,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756742/products/dev-products/chuot_gaming_khong_day_logitech_g_pro_x_superlight_2_white_image1_p5fk7p.png",
@@ -1011,7 +1024,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba039ff",
@@ -1032,8 +1046,8 @@
           "weight": 54
         },
         "price": 2129000,
-        "stock": 875,
-        "sold": 175,
+        "stock": 607,
+        "sold": 93,
         "cost": 890000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756743/products/dev-products/chuot_gaming_khong_day_razer_viper_v3_pro_black_image1_njzqg7.png",
@@ -1052,7 +1066,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a02",
@@ -1073,8 +1088,8 @@
           "connection": "USB"
         },
         "price": 1269000,
-        "stock": 926,
-        "sold": 114,
+        "stock": 301,
+        "sold": 99,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756730/products/dev-products/ban_phim_co_asus_rog_falchion_ace_white_rog_nx_sw_image1_k8eqpa.png",
@@ -1087,13 +1102,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 120,
+          "height": 60,
           "length": 10
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a05",
@@ -1114,8 +1130,8 @@
           "rgb": "No"
         },
         "price": 17900000,
-        "stock": 891,
-        "sold": 164,
+        "stock": 872,
+        "sold": 128,
         "cost": 1340000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756838/products/dev-products/tai_nghe_gaming_khong_day_corsair_hs55_wireless_black_image1_reambf.png",
@@ -1134,7 +1150,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a08",
@@ -1155,8 +1172,8 @@
           "connection": "USB"
         },
         "price": 1990000,
-        "stock": 884,
-        "sold": 151,
+        "stock": 192,
+        "sold": 108,
         "cost": 840000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_kingston_hyperx_alloy_origins_rgb_hyperx_blue_image1_hrfrma.png",
@@ -1169,13 +1186,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 100,
+          "height": 60,
           "length": 10
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a0b",
@@ -1195,8 +1213,8 @@
           "weightCapacity": "120kg"
         },
         "price": 1219000,
-        "stock": 907,
-        "sold": 118,
+        "stock": 263,
+        "sold": 137,
         "cost": 640000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756824/products/dev-products/ghe_gaming_corsair_tc100_fabric_image1_qpagry.png",
@@ -1208,14 +1226,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
+          "width": 50,
           "height": 200,
-          "length": 100
+          "length": 80
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a0e",
@@ -1236,8 +1255,8 @@
           "maxLoad": "80kg"
         },
         "price": 2199000,
-        "stock": 925,
-        "sold": 95,
+        "stock": 604,
+        "sold": 96,
         "cost": 840000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756740/products/dev-products/ban_van_phong_hyperwork_core_desk_image1_i4i86a.png",
@@ -1249,14 +1268,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
-          "height": 200,
-          "length": 100
+          "width": 50,
+          "height": 60,
+          "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a11",
@@ -1277,8 +1297,8 @@
           "rgb": "No"
         },
         "price": 2119000,
-        "stock": 0,
-        "sold": 60,
+        "stock": 656,
+        "sold": 144,
         "cost": 980000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756943/products/dev-products/tai_nghe_gaming_khong_day_logitech_pro_x_2_lightspeed_image1_yrldtz.png",
@@ -1297,7 +1317,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a14",
@@ -1318,8 +1339,8 @@
           "connection": "USB"
         },
         "price": 12109000,
-        "stock": 921,
-        "sold": 109,
+        "stock": 1,
+        "sold": 99,
         "cost": 8400000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756738/products/dev-products/ban_phim_co_razer_huntsman_v3_pro_tenkeyless_analog_optical_image1_m7x4yi.png",
@@ -1332,13 +1353,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 30,
-          "height": 120,
+          "height": 60,
           "length": 10
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a17",
@@ -1358,8 +1380,8 @@
           "weightCapacity": "120kg"
         },
         "price": 1779000,
-        "stock": 909,
-        "sold": 106,
+        "stock": 587,
+        "sold": 113,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756823/products/dev-products/ghe_gaming_corsair_tc500_luxe_white_image1_uojhb8.png",
@@ -1371,14 +1393,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 120,
-          "height": 200,
-          "length": 100
+          "width": 50,
+          "height": 60,
+          "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a1a",
@@ -1399,8 +1422,8 @@
           "connection": "USB-Wrieless"
         },
         "price": 2250000,
-        "stock": 933,
-        "sold": 120,
+        "stock": 15,
+        "sold": 85,
         "cost": 890000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756733/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_black_image1_g3c5qz.png",
@@ -1412,8 +1435,8 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 50,
-          "height": 100,
+          "width": 20,
+          "height": 60,
           "length": 20
         }
       },
@@ -1428,8 +1451,8 @@
           "connection": "USB-Wireless"
         },
         "price": 2250000,
-        "stock": 934,
-        "sold": 96,
+        "stock": 488,
+        "sold": 112,
         "cost": 890000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756729/products/dev-products/ban_phim_co_khong_day_akko_monsgeek_m1_v5_sp_contour_aluminum_rgb_hotswap_akko_sw_09_white_image1_vnggw3.png",
@@ -1441,14 +1464,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 50,
-          "height": 100,
+          "width": 20,
+          "height": 60,
           "length": 10
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a1f",
@@ -1469,8 +1493,8 @@
           "connection": "USB"
         },
         "price": 3090000,
-        "stock": 919,
-        "sold": 111,
+        "stock": 288,
+        "sold": 112,
         "cost": 1690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756736/products/dev-products/ban_phim_co_nuphy_air60_he_image1_olhs6u.png",
@@ -1482,14 +1506,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 50,
-          "height": 100,
+          "width": 20,
+          "height": 60,
           "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a22",
@@ -1510,8 +1535,8 @@
           "connection": "USB-Wireless"
         },
         "price": 3390000,
-        "stock": 888,
-        "sold": 127,
+        "stock": 0,
+        "sold": 0,
         "cost": 1690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756735/products/dev-products/ban_phim_co_khong_day_logitech_mx_keys_mini_graphite_image1_wwqq5m.png",
@@ -1524,13 +1549,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 30,
-          "height": 100,
+          "height": 60,
           "length": 10
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a25",
@@ -1551,8 +1577,8 @@
           "connection": "USB-Wireless-Bluetooth"
         },
         "price": 3190000,
-        "stock": 894,
-        "sold": 136,
+        "stock": 109,
+        "sold": 91,
         "cost": 690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756732/products/dev-products/ban_phim_co_khong_day_akko_mu02_autumn_image1_nksmoe.png",
@@ -1565,13 +1591,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 100,
+          "height": 60,
           "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a28",
@@ -1592,8 +1619,8 @@
           "connection": "USB-Wireless"
         },
         "price": 3590000,
-        "stock": 931,
-        "sold": 99,
+        "stock": 664,
+        "sold": 136,
         "cost": 1690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756734/products/dev-products/ban_phim_co_khong_day_razer_pro_type_ultra_razer_yellow_image1_un5zn3.png",
@@ -1606,13 +1633,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 120,
+          "height": 60,
           "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a2b",
@@ -1633,8 +1661,8 @@
           "rgb": "No"
         },
         "price": 4350000,
-        "stock": 901,
-        "sold": 124,
+        "stock": 0,
+        "sold": 100,
         "cost": 2690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756797/products/dev-products/chuot_khong_day_benq_zowie_za13_dw_image1_ixopoj.png",
@@ -1653,7 +1681,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a2e",
@@ -1674,8 +1703,8 @@
           "rgb": "No"
         },
         "price": 4180000,
-        "stock": 894,
-        "sold": 121,
+        "stock": 186,
+        "sold": 114,
         "cost": 2690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_arbiter_akitsu_image1_znm2cc.png",
@@ -1694,7 +1723,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a31",
@@ -1715,8 +1745,8 @@
           "rgb": "No"
         },
         "price": 3300000,
-        "stock": 903,
-        "sold": 132,
+        "stock": 255,
+        "sold": 145,
         "cost": 1690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756813/products/dev-products/chuot_khong_day_sieu_nhe_fnatic_x_lamzu_maya_image1_utcck2.png"
@@ -1732,7 +1762,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a34",
@@ -1753,8 +1784,8 @@
           "rgb": "No"
         },
         "price": 2800000,
-        "stock": 910,
-        "sold": 115,
+        "stock": 376,
+        "sold": 124,
         "cost": 1290000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756814/products/dev-products/chuot_khong_day_sieu_nhe_pulsar_x2_v2_mini_nezuko_image1_wwbodv.png",
@@ -1773,7 +1804,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a37",
@@ -1794,8 +1826,8 @@
           "rgb": "No"
         },
         "price": 2990000,
-        "stock": 922,
-        "sold": 103,
+        "stock": 704,
+        "sold": 96,
         "cost": 1690000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1741756751/products/dev-products/chuot_khong_day_benq_zowie_ec2_cw_image1_cd7tjm.png",
@@ -1814,7 +1846,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a3a",
@@ -1835,8 +1868,8 @@
           "rgb": "No"
         },
         "price": 80000,
-        "stock": 0,
-        "sold": 100,
+        "stock": 749,
+        "sold": 151,
         "cost": 34000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452025/products/dev-products/oumufhfc99mfvp2d8yyh.webp",
@@ -1855,7 +1888,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a3d",
@@ -1877,8 +1911,8 @@
           "Pin": "1 AA"
         },
         "price": 315000,
-        "stock": 920,
-        "sold": 130,
+        "stock": 390,
+        "sold": 110,
         "cost": 126000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452491/products/dev-products/qboy2m7ulixtjpyifhyj.jpg",
@@ -1907,8 +1941,8 @@
           "Pin": "1 AA"
         },
         "price": 315000,
-        "stock": 863,
-        "sold": 187,
+        "stock": 200,
+        "sold": 100,
         "cost": 126000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452704/products/dev-products/snteulk7ddi7weeefvgn.jpg",
@@ -1937,8 +1971,8 @@
           "Pin": "1 AA"
         },
         "price": 315000,
-        "stock": 891,
-        "sold": 159,
+        "stock": 187,
+        "sold": 113,
         "cost": 126000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746452827/products/dev-products/wzdjbeyxyqg5i0fvgp8x.webp",
@@ -1957,7 +1991,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a44",
@@ -1980,7 +2015,7 @@
         },
         "price": 2250000,
         "stock": 0,
-        "sold": 50,
+        "sold": 100,
         "cost": 1260000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453254/products/dev-products/q33bucdsa2elolujayv6.webp",
@@ -1999,7 +2034,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a47",
@@ -2020,8 +2056,8 @@
           "rgb": "No"
         },
         "price": 2690000,
-        "stock": 925,
-        "sold": 125,
+        "stock": 282,
+        "sold": 118,
         "cost": 1260000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453577/products/dev-products/wq26mhbqxg3oa371zsdb.webp",
@@ -2034,7 +2070,7 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 30,
-          "height": 100,
+          "height": 30,
           "length": 10
         }
       },
@@ -2049,8 +2085,8 @@
           "rgb": "No"
         },
         "price": 2690000,
-        "stock": 922,
-        "sold": 128,
+        "stock": 302,
+        "sold": 98,
         "cost": 1260000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746453911/products/dev-products/zhl2rcnocydo6qx3lqsr.webp",
@@ -2062,14 +2098,15 @@
         "createdAt": "2025-01-01T11:50:44.897Z",
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
-          "width": 50,
-          "height": 100,
-          "length": 20
+          "width": 30,
+          "height": 30,
+          "length": 10
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a4c",
@@ -2090,8 +2127,8 @@
           "battery": "up to 25 hours"
         },
         "price": 600000,
-        "stock": 891,
-        "sold": 159,
+        "stock": 317,
+        "sold": 83,
         "cost": 360000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624447/products/dev-products/jcnoblkbl5xmeauzddgw.webp",
@@ -2103,7 +2140,7 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 120,
+          "height": 60,
           "length": 10
         }
       },
@@ -2118,8 +2155,8 @@
           "battery": "up to 25 hours"
         },
         "price": 600000,
-        "stock": 899,
-        "sold": 151,
+        "stock": 287,
+        "sold": 113,
         "cost": 360000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624592/products/dev-products/lv3uiebd7yhcpir6nmfc.webp",
@@ -2131,7 +2168,7 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 30,
-          "height": 120,
+          "height": 60,
           "length": 20
         }
       },
@@ -2146,8 +2183,8 @@
           "battery": "up to 25 hours"
         },
         "price": 600000,
-        "stock": 911,
-        "sold": 139,
+        "stock": 288,
+        "sold": 112,
         "cost": 360000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746624593/products/dev-products/phtjowqfmr6yivegaddy.jpg",
@@ -2159,13 +2196,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 30,
-          "height": 120,
+          "height": 60,
           "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a53",
@@ -2186,8 +2224,8 @@
           "rgb": "Yes"
         },
         "price": 2690000,
-        "stock": 938,
-        "sold": 112,
+        "stock": 573,
+        "sold": 127,
         "cost": 1660000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625117/products/dev-products/czkvlyg7qiy7fmh6mfwr.webp",
@@ -2200,13 +2238,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 120,
+          "height": 60,
           "length": 10
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a56",
@@ -2227,8 +2266,8 @@
           "rgb": "No"
         },
         "price": 460000,
-        "stock": 912,
-        "sold": 138,
+        "stock": 0,
+        "sold": 0,
         "cost": 260000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625494/products/dev-products/cy5oezyj5jybcw45qnnv.jpg",
@@ -2239,13 +2278,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 120,
+          "height": 60,
           "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a59",
@@ -2266,8 +2306,8 @@
           "rgb": "No"
         },
         "price": 165000,
-        "stock": 915,
-        "sold": 135,
+        "stock": 597,
+        "sold": 103,
         "cost": 860000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746625888/products/dev-products/g8tgfcvicmfwbi5ipyva.webp",
@@ -2278,13 +2318,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 30,
-          "height": 120,
+          "height": 60,
           "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a5c",
@@ -2305,8 +2346,8 @@
           "rgb": "No"
         },
         "price": 560000,
-        "stock": 895,
-        "sold": 155,
+        "stock": 268,
+        "sold": 132,
         "cost": 220000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746694479/products/dev-products/wvwjdi03e9xjwvqoxi2n.jpg",
@@ -2319,13 +2360,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 100,
+          "height": 10,
           "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a5f",
@@ -2345,8 +2387,8 @@
           "rgb": "No"
         },
         "price": 1290000,
-        "stock": 893,
-        "sold": 157,
+        "stock": 271,
+        "sold": 129,
         "cost": 890000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696021/products/dev-products/b3my8k95zjfd5mz3n4ir.webp",
@@ -2358,13 +2400,14 @@
         "updatedAt": "2025-01-01T11:50:44.897Z",
         "dimension": {
           "width": 50,
-          "height": 120,
+          "height": 60,
           "length": 20
         }
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a62",
@@ -2383,8 +2426,8 @@
           "keycap": "4"
         },
         "price": 190000,
-        "stock": 909,
-        "sold": 191,
+        "stock": 71,
+        "sold": 129,
         "cost": 85000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696464/products/dev-products/sujir1yvgajuufwshsh8.webp",
@@ -2403,7 +2446,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a65",
@@ -2422,8 +2466,8 @@
           "keycap": "1"
         },
         "price": 560000,
-        "stock": 902,
-        "sold": 148,
+        "stock": 777,
+        "sold": 123,
         "cost": 360000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696597/products/dev-products/y9qmjegvaaigtmonq7bj.webp",
@@ -2449,8 +2493,8 @@
           "keycap": "1"
         },
         "price": 560000,
-        "stock": 914,
-        "sold": 136,
+        "stock": 78,
+        "sold": 122,
         "cost": 360000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746696597/products/dev-products/y9qmjegvaaigtmonq7bj.webp",
@@ -2469,7 +2513,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a6a",
@@ -2488,8 +2533,8 @@
           "color": "Black"
         },
         "price": 59000,
-        "stock": 0,
-        "sold": 100,
+        "stock": 310,
+        "sold": 90,
         "cost": 19000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697098/products/dev-products/qjdgrqh0ylskxjujo7zx.webp",
@@ -2507,7 +2552,8 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   },
   {
     "_id": "681f43856eff4a812ba03a6d",
@@ -2529,7 +2575,7 @@
         },
         "price": 59000,
         "stock": 0,
-        "sold": 100,
+        "sold": 0,
         "cost": 19000,
         "images": [
           "https://res.cloudinary.com/dx77ngsh6/image/upload/v1746697448/products/dev-products/pqk04flujheswbuetw3m.webp",
@@ -2548,6 +2594,7 @@
       }
     ],
     "createdAt": "2025-01-01T11:50:44.897Z",
-    "updatedAt": "2025-01-01T11:50:44.897Z"
+    "updatedAt": "2025-01-01T11:50:44.897Z",
+    "isDeleted": false
   }
 ]

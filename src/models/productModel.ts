@@ -67,6 +67,7 @@ const variantsSchema = new Schema<IVariant>(
     },
     saleOff: {
       type: saleOffSchema,
+      required: false,
     },
     cost: {
       type: Number,
@@ -127,6 +128,7 @@ interface IProduct extends Document {
   _categoryName: string;
   totalStock: number;
   percentageSaleOff: number;
+  isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -160,6 +162,11 @@ const productSchema = new mongoose.Schema(
     imageCover: {
       type: String,
       required: [true, "Product imageCover is required"],
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+      index: true,
     },
     variants: [variantsSchema],
     rating: {
@@ -356,6 +363,7 @@ productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
 
   next();
 });
+
 
 const Product = mongoose.model<IProduct>("Product", productSchema);
 

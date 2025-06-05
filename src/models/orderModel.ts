@@ -3,6 +3,7 @@ import Product from "./productModel";
 import Review from "./reviewModel";
 import AppError from "../utils/AppError";
 
+
 interface IOrderProduct extends Document {
   product: Types.ObjectId;
   variant: Types.ObjectId;
@@ -23,14 +24,30 @@ interface IShippingTracking {
   }[];
   expectedDeliveryDate?: Date;
 }
+interface IShippingAddress extends Document {
+  city: {
+    name: string;
+  };
+  district: {
+    name: string;
+  };
+  ward: {
+    name: string;
+  };
+  address: string;
+  phoneNumber: string;
+  fullname: string;
+  country?: string;
+  addressInfo?: string;
+}
 
 interface IOrder extends Document {
   _id: Types.ObjectId;
   user: Types.ObjectId;
-  //checkout: ICheckout;
   paymentMethod: string;
-  shippingAddress: Types.ObjectId;
+  shippingAddress: IShippingAddress;
   status:
+
     | "unpaid"
     | "pending"
     | "processing"
@@ -38,11 +55,12 @@ interface IOrder extends Document {
     | "delivered"
     | "cancelled"
     | "refunded";
+
   lineItems: IOrderProduct[];
   subtotal: number;
   total: number;
   shippingFee: number;
-  discount: Types.ObjectId;
+  discount: string;
   discountAmount: number;
   checkout?: {
     paymentId: string;
@@ -90,6 +108,23 @@ const orderProductSchema = new Schema<IOrderProduct>({
   review: { type: Schema.Types.ObjectId, ref: "Review" },
 });
 
+const IShippingAddress = new Schema<IShippingAddress>({
+  city: {
+    name: { type: String, required: true },
+  },
+  district: {
+    name: { type: String, required: true },
+  },
+  ward: {
+    name: { type: String, required: true },
+  },
+  address: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  fullname: { type: String, required: true },
+  country: { type: String, required: true },
+  addressInfo: { type: String, required: false },
+});
+
 const orderSchema = new Schema<IOrder>(
   {
     user: {
@@ -103,9 +138,10 @@ const orderSchema = new Schema<IOrder>(
       required: [true, "Order must have a payment!"],
     },
     shippingAddress: {
-      type: Schema.Types.ObjectId,
-      ref: "ShippingAddress",
-      required: [true, "Order must have a shipping address!"],
+
+      type: IShippingAddress,
+      required: [true, 'Order must have a shipping address!'],
+
     },
     status: {
       type: String,
@@ -140,8 +176,7 @@ const orderSchema = new Schema<IOrder>(
       default: 0,
     },
     discount: {
-      type: Schema.Types.ObjectId,
-      ref: "Discount",
+      type: String,
     },
     discountAmount: {
       type: Number,

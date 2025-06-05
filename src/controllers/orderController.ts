@@ -37,6 +37,7 @@ export const removeCartItem = async (
   await cart.removeCartItems(orderItems); // sử dụng method mới
 };
 
+
 const reduceStock = async (
   orderItems: any,
   session?: mongoose.ClientSession // Optional session parameter
@@ -189,7 +190,7 @@ export const createOrder = catchAsync(
       const paymentMethod = req.body.paymentMethod;
       const userId = req.user.id;
       const orderItems = req.body.lineItems;
-      const discountCode = req.body.code;
+      const code = req.body.code;
 
       let status = "unpaid";
       if (paymentMethod === "cod") {
@@ -205,8 +206,8 @@ export const createOrder = catchAsync(
       const {
         isValid: discountValid,
         discountAmount,
-        discountId,
-      } = await verifyDiscount(discountCode, orderItems, userId);
+        discountCode,
+      } = await verifyDiscount(code, orderItems, userId);
 
       const shippingAddress = await ShippingAddress.findOne({
         _id: shippingAddressId,
@@ -247,11 +248,11 @@ export const createOrder = catchAsync(
           {
             user: userId,
             paymentMethod,
-            shippingAddress: shippingAddressId,
+            shippingAddress: shippingAddress,
             shippingFee,
             status,
             ...(discountValid &&
-              discountAmount !== 0 && { discount: discountId, discountAmount }),
+              discountAmount !== 0 && { discount: discountCode, discountAmount }),
             lineItems: orderProducts,
           },
         ],
@@ -315,6 +316,8 @@ export const getOrderByID = catchAsync(
       .populate("lineItems.review");
 
     if (!order) return next(new AppError("Order not found", 404));
+
+    console.log("Order found:", order);
 
     if (req.user.role === "admin")
       res.status(200).json({
@@ -430,7 +433,6 @@ export const getAllOrders = catchAsync(
 
     const orders = await apiFeatures.query
       .populate("user")
-      .populate("shippingAddress")
       .populate("lineItems.product");
 
     res.status(200).json({
@@ -472,7 +474,6 @@ export const getUserOrders = catchAsync(
 
     const orders = await apiFeatures.query
       .populate("user")
-      .populate("shippingAddress")
       .populate("lineItems.product");
 
     res.status(200).json({
@@ -493,7 +494,6 @@ export const getAdminOrders = catchAsync(
 
     const orders = await apiFeatures.query
       .populate("user")
-      .populate("shippingAddress")
       .populate("lineItems.product");
 
     res.status(200).json({
@@ -678,7 +678,6 @@ export const getOrderByOrderCode = catchAsync(
 
     const order = await Order.findOne(query)
       .populate("user")
-      .populate("shippingAddress")
       .populate("lineItems.product")
       .populate("lineItems.review");
 
@@ -889,7 +888,6 @@ export const exportOrderExcel = catchAsync(
 
     const order = await Order.findOne({ orderCode: code })
       .populate("user")
-      .populate("shippingAddress")
       .populate("lineItems.product")
       .populate("lineItems.review");
 
@@ -954,7 +952,6 @@ const sendOrderConfirmationEmail = async (order: any) => {
   // Lấy thông tin đơn hàng với đầy đủ chi tiết sản phẩm và biến thể
   const populatedOrder = await Order.findById(order._id)
     .populate("user")
-    .populate("shippingAddress")
     .populate({
       path: "lineItems.product",
       select: "name imageCover variants", // Thêm variants để lấy thông tin biến thể
