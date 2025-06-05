@@ -212,7 +212,12 @@ export const getProfile = catchAsync(
 );
 
 export const deleteProfile = catchAsync(async (req: Request, res: Response) => {
-  await User.findByIdAndUpdate(req.user.id, { active: false });
+  // Clear FCM tokens when user deactivates their account
+  await User.findByIdAndUpdate(req.user.id, {
+    active: false,
+    fcmTokens: [], // Clear all FCM tokens
+    expoPushTokens: [], // Also clear Expo tokens for consistency
+  });
 
   res.status(204).json({
     status: "success",
@@ -495,6 +500,91 @@ export const deleteExpoPushToken = catchAsync(
     res.status(200).json({
       status: "success",
       message: "Expo push token deleted successfully",
+    });
+  }
+);
+
+// FCM Token Management
+export const saveFcmToken = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { fcmToken } = req.body;
+
+    if (!fcmToken) {
+      return next(new AppError("FCM token is required", 400));
+    }
+
+    // Check if the token is already saved
+    const user = await User.findById(req.user.id).select("fcmTokens");
+    if (!user) {
+      return next(new AppError("No user found with that ID", 404));
+    }
+
+    if (user.fcmTokens.includes(fcmToken)) {
+      return res.status(200).json({
+        status: "success",
+        message: "FCM token already exists",
+      });
+    }
+
+    // Use findByIdAndUpdate to avoid triggering passwordConfirm validation
+    await User.findByIdAndUpdate(
+      req.user.id,
+      { $addToSet: { fcmTokens: fcmToken } },
+      { new: true }
+    );
+
+    res.status(200).json({
+      status: "success",
+      message: "FCM token saved successfully",
+    });
+  }
+);
+
+export const deleteFcmToken = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { fcmToken } = req.body;
+
+    if (!fcmToken) {
+      return next(new AppError("FCM token is required", 400));
+    }
+
+    // Check if the token exists
+    const user = await User.findById(req.user.id).select("fcmTokens");
+    if (!user) {
+      return next(new AppError("No user found with that ID", 404));
+    }
+
+    const tokenIndex = user.fcmTokens.indexOf(fcmToken);
+    if (tokenIndex === -1) {
+      return res.status(200).json({
+        status: "success",
+        message: "FCM token not found",
+      });
+    }
+
+    // Remove the token from the user's tokens
+    user.fcmTokens.splice(tokenIndex, 1);
+    await user.save();
+
+    res.status(200).json({
+      status: "success",
+      message: "FCM token deleted successfully",
+    });
+  }
+);
+
+export const getFcmTokens = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.user.id).select("fcmTokens");
+    if (!user) {
+      return next(new AppError("No user found with that ID", 404));
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        fcmTokens: user.fcmTokens,
+      },
     });
   }
 );
