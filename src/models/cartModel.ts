@@ -46,10 +46,10 @@ const cartSchema = new Schema<ICart>({
   },
 });
 
-cartSchema.methods.removeCartItems = async function (
-  items: { product: Types.ObjectId; variant: Types.ObjectId }[]
+cartSchema.methods.removeCartItem = async function (
+  productId: Types.ObjectId,
+  variantId: Types.ObjectId
 ) {
-
   const index = this.lineItems.findIndex(
     (item: ICartProduct) =>
       item.product.toString() === productId.toString() &&
@@ -61,9 +61,8 @@ cartSchema.methods.removeCartItems = async function (
   } else {
     throw new Error("Item not found in cart");
   }
-
-  await this.save();
 };
+
 
 cartSchema.methods.removeCartItems = async function (
   items: { product: Types.ObjectId; variant: Types.ObjectId }[]
