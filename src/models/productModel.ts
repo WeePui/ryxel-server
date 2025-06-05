@@ -67,6 +67,7 @@ const variantsSchema = new Schema<IVariant>(
     },
     saleOff: {
       type: saleOffSchema,
+      required: false,
     },
     cost: {
       type: Number,
@@ -127,6 +128,7 @@ interface IProduct extends Document {
   _categoryName: string;
   totalStock: number;
   percentageSaleOff: number;
+  isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -160,6 +162,11 @@ const productSchema = new mongoose.Schema(
     imageCover: {
       type: String,
       required: [true, "Product imageCover is required"],
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+      index: true,
     },
     variants: [variantsSchema],
     rating: {
@@ -331,10 +338,14 @@ productSchema.virtual("percentageSaleOff").get(function (this: IProduct) {
   if (!this.variants || this.variants.length === 0) return 0;
 
   const cheapestVariant = this.variants.reduce((minVariant, current) => {
-    const currentPrice = current.finalPrice ?? 0;
-    const minPrice = minVariant.finalPrice ?? 0;
+    const currentPrice = current.finalPrice ?? current.price;
+    const minPrice = minVariant.finalPrice ?? minVariant.price;
     return currentPrice < minPrice ? current : minVariant;
   });
+
+  if (!cheapestVariant.saleOff || !isSaleOfferActive(cheapestVariant.saleOff)) {
+    return 0;
+  }
 
   return cheapestVariant.saleOff?.percentage ?? 0;
 });
@@ -352,6 +363,7 @@ productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
 
   next();
 });
+
 
 const Product = mongoose.model<IProduct>("Product", productSchema);
 
