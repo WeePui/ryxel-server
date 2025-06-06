@@ -58,7 +58,7 @@ app.use("/api", limiter);
 
 app.use("/api/v1/webhooks", webhookRouter);
 
-app.use(express.json({ limit: "10kb" }));
+app.use(express.json({ limit: "10mb" }));
 app.use(
   express.urlencoded({
     extended: true,
