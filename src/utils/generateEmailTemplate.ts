@@ -7,11 +7,11 @@ interface GenerateEmailOptions {
 }
 
 export function generateEmail({
-  subject = 'Ryxel Store',
-  greetingName = '',
+  subject = "Ryxel Store",
+  greetingName = "",
   mainContent,
-  extraContent = '',
-  footerContent = '',
+  extraContent = "",
+  footerContent = "",
 }: GenerateEmailOptions): string {
   return `
   <!doctype html>
@@ -188,7 +188,7 @@ export function generateEmail({
         <img src="cid:logo" alt="Logo" />
       </div>
       <main>
-        ${greetingName ? `<p>Kính gửi <strong>${greetingName}</strong>,</p>` : ''}
+        ${greetingName ? `<p>Kính gửi <strong>${greetingName}</strong>,</p>` : ""}
         ${mainContent}
         ${extraContent}
       </main>
@@ -201,7 +201,7 @@ export function generateEmail({
         </ul>
         <p>Đây là e-mail tự động, xin vui lòng không phản hồi.</p>
         <p>Trân trọng,</p>
-        <a href="https://localhost:3000/">Ryxel Company</a>
+        <a href="${process.env.CLIENT_HOST}">Ryxel Company</a>
       </div>
       <footer>
         ${
@@ -235,7 +235,7 @@ export const mainContent = {
     <ul class="step-list">
         <li>
           Truy cập vào trang
-          <a href="https://localhost:3000/account">quản lý tài khoản</a> của
+          <a href="${process.env.CLIENT_HOST}/account">quản lý tài khoản</a> của
           bạn.
         </li>
         <li>Chọn xác thực tài khoản.</li>
@@ -249,13 +249,13 @@ export const mainContent = {
     <h4>Các liên kết hữu ích</h4>
     <ul class="step-list">
         <li>
-          <a href="https://localhost:3000/account">Quản lý tài khoản</a>
+          <a href="${process.env.CLIENT_HOST}/account">Quản lý tài khoản</a>
         </li>
         <li>
-          <a href="https://localhost:3000/cart">Giỏ hàng</a>
+          <a href="${process.env.CLIENT_HOST}/cart">Giỏ hàng</a>
         </li>
         <li>
-          <a href="https://localhost:3000/products">Sản phẩm</a>
+          <a href="${process.env.CLIENT_HOST}/products">Sản phẩm</a>
         </li>
     </ul>
     `,
@@ -267,18 +267,18 @@ export const mainContent = {
     <p>Xin lưu ý mã xác thực chỉ có hiệu lực trong vòng 10 phút, quá thời hạn trên sẽ không còn hiệu lực.</p>
     <p class="mt-top-md">Nếu bạn không thực hiện yêu cầu này, có thể tài khoản của bạn đã bị truy cập trái phép bởi bên thứ 3.</p>
     <p>Xin hãy truy cập vào trang quản lý tài khoản của bạn để thay đổi mật khẩu.</p>
-    <a href="https://localhost:3000/account/change-password">https://ryxel.com/account/change-password</a>
+    <a href="${process.env.CLIENT_HOST}/account/change-password">https://ryxel.com/account/change-password</a>
     `,
   resetPassword: (resetUrl: string) => `
     <p>Chân thành cảm ơn bạn đã sử dụng dịch vụ của Ryxel Store.</p>
     <p>Chúng tôi vừa nhận được yêu cầu khôi phục mật khẩu từ tài khoản Ryxel có liên kết với email của bạn.</p>
     <p>Để hoàn tất việc khôi phục mật khẩu, vui lòng bấm vào nút bên dưới để chuyển sang trang khôi phục mật khẩu.</p>
     <button class="btn btn-primary">
-      <a href="https://localhost:3000/account/reset-password/${resetUrl}">Khôi phục mật khẩu</a>
+      <a href="${process.env.CLIENT_HOST}/account/reset-password/${resetUrl}">Khôi phục mật khẩu</a>
     </button>
     <p class="mt-top-md">Nếu bạn không thực hiện yêu cầu này, có thể tài khoản của bạn đã bị truy cập trái phép bởi bên thứ 3.</p>
     <p>Xin hãy truy cập vào trang quản lý tài khoản của bạn để thay đổi mật khẩu.</p>
-    <a href="https://localhost:3000/account/change-password">https://ryxel.com/account/change-password</a>
+    <a href="${process.env.CLIENT_HOST}/account/change-password">https://ryxel.com/account/change-password</a>
     `,
   orderConfirmation: (order: any, shippingAddress: any, orderItems: any[]) => {
     // Tạo bảng sản phẩm
@@ -311,12 +311,12 @@ export const mainContent = {
                     <div>Phân loại: ${item.variant.name}</div>
                   </td>
                   <td>${item.quantity}</td>
-                  <td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.unitPrice)}</td>
-                  <td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.subtotal)}</td>
+                  <td>${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(item.unitPrice)}</td>
+                  <td>${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(item.subtotal)}</td>
                 </tr>
               `
                 )
-                .join('')}
+                .join("")}
             </tbody>
           </table>
         `;
@@ -331,29 +331,29 @@ export const mainContent = {
             </div>
             <div class="summary-row">
               <span class="summary-label">Ngày đặt hàng:</span>
-              <span class="summary-value">${new Date(order.createdAt).toLocaleDateString('vi-VN')}</span>
+              <span class="summary-value">${new Date(order.createdAt).toLocaleDateString("vi-VN")}</span>
             </div>
             <div class="summary-row">
               <span class="summary-label">Tạm tính:</span>
-              <span class="summary-value">${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.subtotal)}</span>
+              <span class="summary-value">${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(order.subtotal)}</span>
             </div>
             <div class="summary-row">
               <span class="summary-label">Phí vận chuyển:</span>
-              <span class="summary-value">${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.shippingFee)}</span>
+              <span class="summary-value">${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(order.shippingFee)}</span>
             </div>
             ${
               order.discountAmount
                 ? `
             <div class="summary-row">
               <span class="summary-label">Giảm giá:</span>
-              <span class="summary-value">-${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.discountAmount)}</span>
+              <span class="summary-value">-${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(order.discountAmount)}</span>
             </div>
             `
-                : ''
+                : ""
             }
             <div class="summary-row total-row">
               <span class="summary-label">Tổng cộng:</span>
-              <span class="summary-value">${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.total)}</span>
+              <span class="summary-value">${new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(order.total)}</span>
             </div>
           </div>
         `;
@@ -377,7 +377,7 @@ export const mainContent = {
 
     // Tạo tracking info nếu đơn hàng đã ship
     const trackingInfo =
-      (order.status === 'shipped' || order.status === 'delivered') &&
+      (order.status === "shipped" || order.status === "delivered") &&
       order.shippingTracking &&
       order.shippingTracking.ghnOrderCode
         ? `
@@ -387,15 +387,15 @@ export const mainContent = {
             ${
               order.shippingTracking.expectedDeliveryDate
                 ? `
-            <div><strong>Ngày giao hàng dự kiến:</strong> ${new Date(order.shippingTracking.expectedDeliveryDate).toLocaleDateString('vi-VN')}</div>
+            <div><strong>Ngày giao hàng dự kiến:</strong> ${new Date(order.shippingTracking.expectedDeliveryDate).toLocaleDateString("vi-VN")}</div>
             `
-                : ''
+                : ""
             }
             <div><strong>Trạng thái:</strong> ${getShippingStatusText(order.shippingTracking.trackingStatus)}</div>
             <div><strong>Theo dõi đơn hàng: </strong> <a href="https://tracking.ghn.dev/?order_code=${order.shippingTracking.ghnOrderCode}" target="_blank">Xem tại đây</a></div>
           </div>
         `
-        : '';
+        : "";
 
     return `
           <p>Cảm ơn bạn đã đặt hàng tại Ryxel Store. Dưới đây là thông tin chi tiết về đơn hàng của bạn:</p>
@@ -420,39 +420,39 @@ export const mainContent = {
 
 function getOrderStatusText(status: string) {
   const statusTexts: Record<string, string> = {
-    unpaid: 'Chưa thanh toán',
-    pending: 'Chờ xác nhận',
-    processing: 'Đang chuẩn bị hàng',
-    shipped: 'Đã giao cho đơn vị vận chuyển',
-    delivered: 'Đã giao hàng',
-    cancelled: 'Đã hủy',
-    refunded: 'Đã hoàn tiền',
+    unpaid: "Chưa thanh toán",
+    pending: "Chờ xác nhận",
+    processing: "Đang chuẩn bị hàng",
+    shipped: "Đã giao cho đơn vị vận chuyển",
+    delivered: "Đã giao hàng",
+    cancelled: "Đã hủy",
+    refunded: "Đã hoàn tiền",
   };
   return statusTexts[status] || status;
 }
 
 function getPaymentMethodText(method: string) {
   const methodTexts: Record<string, string> = {
-    cod: 'Thanh toán khi nhận hàng (COD)',
-    zalopay: 'Thanh toán qua ZaloPay',
-    stripe: 'Thanh toán qua thẻ tín dụng/ghi nợ',
+    cod: "Thanh toán khi nhận hàng (COD)",
+    zalopay: "Thanh toán qua ZaloPay",
+    stripe: "Thanh toán qua thẻ tín dụng/ghi nợ",
   };
   return methodTexts[method] || method;
 }
 
 function getShippingStatusText(status: string) {
   const statusTexts: Record<string, string> = {
-    ready_to_pick: 'Đã sẵn sàng để lấy hàng',
-    picking: 'Đang lấy hàng',
-    picked: 'Đã lấy hàng',
-    storing: 'Đang lưu kho',
-    delivering: 'Đang giao hàng',
-    delivered: 'Đã giao hàng',
-    delivery_failed: 'Giao hàng thất bại',
-    waiting_to_return: 'Chờ trả hàng',
-    return: 'Đang trả hàng',
-    returned: 'Đã trả hàng',
-    cancelled: 'Đã hủy',
+    ready_to_pick: "Đã sẵn sàng để lấy hàng",
+    picking: "Đang lấy hàng",
+    picked: "Đã lấy hàng",
+    storing: "Đang lưu kho",
+    delivering: "Đang giao hàng",
+    delivered: "Đã giao hàng",
+    delivery_failed: "Giao hàng thất bại",
+    waiting_to_return: "Chờ trả hàng",
+    return: "Đang trả hàng",
+    returned: "Đã trả hàng",
+    cancelled: "Đã hủy",
   };
   return statusTexts[status] || status;
 }

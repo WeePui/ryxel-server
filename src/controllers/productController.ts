@@ -47,7 +47,15 @@ export const getAllProducts = catchAsync(
 
     apiFeatures.filter().sort().limitFields().paginate();
 
-    const products = await apiFeatures.query.exec();
+    let products;
+    if (apiFeatures.needsPriceAggregation) {
+      // Use aggregation for price sorting
+      products = await apiFeatures.executePriceSortedQuery();
+    } else {
+      // Use regular query for other sorting
+      products = await apiFeatures.query.exec();
+    }
+
     const results = await apiFeatures.count();
 
     res.status(200).json({
@@ -298,7 +306,6 @@ export const updateProduct = catchAsync(async (req, res, next) => {
       updateData.imageCover = coverImageResult.secure_url;
     }
   }
-
   if (updateData.variants) {
     let parsedVariants: any[] = [];
 
@@ -310,12 +317,14 @@ export const updateProduct = catchAsync(async (req, res, next) => {
       }
     } else if (Array.isArray(updateData.variants)) {
       parsedVariants = updateData.variants;
-    }
-
+    }    const validVariants = parsedVariants.filter(variant => variant && typeof variant === 'object');
+    
     const updatedVariants = await Promise.all(
-      parsedVariants.map(async (variant: any, index: number) => {
-        const existingVariant = product.variants[index];
-        if (!existingVariant) return variant;
+      validVariants.map(async (variant: any, index: number) => {
+        // Find existing variant by _id if it exists, otherwise create new one
+        const existingVariant = variant._id 
+          ? product.variants.find(v => v._id && v._id.toString() === variant._id.toString())
+          : null;
 
         if (files?.length) {
           const variantImages = files.filter((file) =>
@@ -323,9 +332,12 @@ export const updateProduct = catchAsync(async (req, res, next) => {
           );
 
           if (variantImages.length > 0) {
-            for (const oldImageUrl of existingVariant.images) {
-              const oldPublicId = extractPublicId(oldImageUrl);
-              if (oldPublicId) await deleteImage(oldPublicId);
+            // Only delete old images if we have an existing variant
+            if (existingVariant && existingVariant.images) {
+              for (const oldImageUrl of existingVariant.images) {
+                const oldPublicId = extractPublicId(oldImageUrl);
+                if (oldPublicId) await deleteImage(oldPublicId);
+              }
             }
 
             const uploadedImages = await Promise.all(
@@ -335,36 +347,79 @@ export const updateProduct = catchAsync(async (req, res, next) => {
             );
             variant.images = uploadedImages.map((img) => img.secure_url);
           }
-        }
+        }        
+        // Handle sale offer validation and final price calculation
         if (variant.saleOff) {
-          // Validate sale offer using utility function
-          const validation = validateSaleOffer(variant.saleOff);
-          if (!validation.isValid) {
-            return next(new AppError(validation.error!, 400));
-          }
+          // Check if this is an empty/inactive sale offer
+          const hasEmptyStartDate = !variant.saleOff.startDate || 
+            (typeof variant.saleOff.startDate === 'string' && variant.saleOff.startDate === "") ||
+            (variant.saleOff.startDate instanceof Date && isNaN(variant.saleOff.startDate.getTime()));
+            
+          const hasEmptyEndDate = !variant.saleOff.endDate || 
+            (typeof variant.saleOff.endDate === 'string' && variant.saleOff.endDate === "") ||
+            (variant.saleOff.endDate instanceof Date && isNaN(variant.saleOff.endDate.getTime()));
+            
+          const hasZeroPercentage = !variant.saleOff.percentage || variant.saleOff.percentage === 0;
+          
+          if (hasEmptyStartDate && hasEmptyEndDate && hasZeroPercentage) {
+            // Empty sale offer - remove it and set final price to regular price
+            variant.saleOff = undefined;
+            variant.finalPrice = variant.price;
+          } else {
+            // Validate sale offer using utility function
+            const validation = validateSaleOffer(variant.saleOff);
+            if (!validation.isValid) {
+              throw new AppError(validation.error!, 400);
+            }
 
-          // Calculate final price using utility function
-          variant.finalPrice = calculateFinalPrice(
-            variant.price,
-            variant.saleOff
-          );
+            // Calculate final price using utility function
+            variant.finalPrice = calculateFinalPrice(
+              variant.price,
+              variant.saleOff
+            );
+          }
         } else {
           variant.finalPrice = variant.price;
         }
 
-        return {
-          ...existingVariant.toObject(),
-          ...variant,
-        };
+        // If we have an existing variant, merge with new data
+        if (existingVariant) {
+          const mergedVariant = {
+            ...existingVariant.toObject(),
+            ...variant,
+            _id: existingVariant._id, // Preserve the original _id
+            updatedAt: new Date(), // Explicitly set updatedAt
+          };
+          // Remove any undefined fields that might cause issues
+          Object.keys(mergedVariant).forEach(key => {
+            if (mergedVariant[key] === undefined) {
+              delete mergedVariant[key];
+            }
+          });
+          return mergedVariant;
+        } else {
+          // New variant - ensure it has all required fields
+          const newVariant = {
+            ...variant,
+            sold: variant.sold || 0,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          };
+          // Remove any undefined fields that might cause issues
+          Object.keys(newVariant).forEach(key => {
+            if (newVariant[key] === undefined) {
+              delete newVariant[key];
+            }
+          });
+          return newVariant;
+        }
       })
-    );
-
-    updateData.variants = updatedVariants;
+    );    updateData.variants = updatedVariants;
 
     // Tính toán giá thấp nhất và phần trăm giảm giá
-    const { lowestPrice, percentageSaleOff } = parsedVariants.reduce(
+    const { lowestPrice, percentageSaleOff } = validVariants.reduce(
       (acc, variant) => {
-        const finalPrice = variant.finalPrice || 1;
+        const finalPrice = variant.finalPrice || variant.price || 1;
         if (finalPrice < acc.lowestPrice && finalPrice != variant.price) {
           return {
             lowestPrice: finalPrice,
@@ -372,7 +427,7 @@ export const updateProduct = catchAsync(async (req, res, next) => {
           };
         } else
           return {
-            lowestPrice: variant.finalPrice,
+            lowestPrice: finalPrice,
             percentageSaleOff: 0,
           };
       },

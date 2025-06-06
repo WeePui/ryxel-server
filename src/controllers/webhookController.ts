@@ -190,7 +190,7 @@ export const testGHNWebhook = catchAsync(
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/webhooks/ghn",
+        `${process.env.API_URL}/api/v1/webhooks/ghn`,
         fakePayload
       );
       return res.status(200).json({

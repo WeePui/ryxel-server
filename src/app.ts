@@ -34,10 +34,59 @@ app.use(compression());
 
 app.use(
   cors({
-    origin: ["https://ryxel-store-mu.vercel.app", "http://localhost:3000"],
-    methods: "GET,POST,PUT,DELETE,PATCH",
-    allowedHeaders: "Content-Type,Authorization",
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      const allowedOrigins = [
+        "https://ryxel-store-mu.vercel.app",
+        "http://localhost:3000",
+        "https://localhost:3000",
+      ];
+
+      // Check exact matches first
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      // Check patterns for Vercel deployment URLs
+      if (/^https:\/\/.*\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // Check patterns for Cloudflare tunnel URLs
+      if (/^https:\/\/.*\.trycloudflare\.com$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // Log denied origins for debugging in development
+      if (process.env.NODE_ENV === "development") {
+        console.log(`CORS: Denied origin: ${origin}`);
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+      "Origin",
+      "Access-Control-Allow-Origin",
+      "Access-Control-Allow-Headers",
+      "Access-Control-Allow-Methods",
+      "ngrok-skip-browser-warning",
+      "cf-connecting-ip",
+      "cf-ray",
+      "cf-ipcountry",
+      "x-forwarded-for",
+      "x-forwarded-proto",
+      "x-real-ip",
+    ],
     credentials: true,
+    optionsSuccessStatus: 200,
+    preflightContinue: false,
   })
 );
 
@@ -82,6 +131,16 @@ app.use("/api/v1/notifications", notificationRouter);
 app.use("/api/v1/api-callback", apiCallback);
 app.use("/api/v1/chatbot", chatbotRouter);
 app.use("/api/v1/admin", adminRouter);
+
+// CORS testing endpoint
+app.get("/api/v1/cors-test", (req, res) => {
+  res.json({
+    message: "CORS is working correctly",
+    origin: req.get("Origin") || "No origin header",
+    headers: req.headers,
+    timestamp: new Date().toISOString(),
+  });
+});
 
 app.use(errorController);
 

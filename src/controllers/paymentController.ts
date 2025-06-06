@@ -1,25 +1,29 @@
-import e, { Request, Response, NextFunction } from 'express';
-import catchAsync from '../utils/catchAsync';
-import stripe from 'stripe';
-import AppError from '../utils/AppError';
-import { getLineItemsInfo } from '../utils/getLineItemsInfo';
-import moment from 'moment';
-import CryptoJS from 'crypto-js';
-import axios from 'axios';
-import { addPaymentId, changeOrderStatus, removeCartItem } from './orderController';
-import Order from '../models/orderModel';
-import { Types } from 'mongoose';
+import e, { Request, Response, NextFunction } from "express";
+import catchAsync from "../utils/catchAsync";
+import stripe from "stripe";
+import AppError from "../utils/AppError";
+import { getLineItemsInfo } from "../utils/getLineItemsInfo";
+import moment from "moment";
+import CryptoJS from "crypto-js";
+import axios from "axios";
+import {
+  addPaymentId,
+  changeOrderStatus,
+  removeCartItem,
+} from "./orderController";
+import Order from "../models/orderModel";
+import { Types } from "mongoose";
 
 const stripeClient = new stripe(process.env.STRIPE_SECRET_KEY as string, {
   typescript: true,
 });
 
 const zalopayConfig = {
-  app_id: '2553',
-  key1: 'PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL',
-  key2: 'kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz',
-  endpoint: 'https://sb-openapi.zalopay.vn/v2/create',
-  refund_url: 'https://sb-openapi.zalopay.vn/v2/refund',
+  app_id: "2553",
+  key1: "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL",
+  key2: "kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz",
+  endpoint: "https://sb-openapi.zalopay.vn/v2/create",
+  refund_url: "https://sb-openapi.zalopay.vn/v2/refund",
 };
 
 export const createStripeCheckoutSession = catchAsync(
@@ -27,11 +31,11 @@ export const createStripeCheckoutSession = catchAsync(
     const { orderCode, lineItems } = req.body;
     const order = await Order.findOne({ orderCode });
     if (!order) {
-      return next(new AppError('Order not found', 404));
+      return next(new AppError("Order not found", 404));
     }
 
     if (!lineItems) {
-      return next(new AppError('No line items provided', 400));
+      return next(new AppError("No line items provided", 400));
     }
 
     try {
@@ -40,7 +44,7 @@ export const createStripeCheckoutSession = catchAsync(
       const stripeLineItems = items.map((item) => {
         return {
           price_data: {
-            currency: 'vnd',
+            currency: "vnd",
             product_data: {
               name: item.variant.name,
               images: [item.variant.images[0]],
@@ -64,9 +68,9 @@ export const createStripeCheckoutSession = catchAsync(
         } catch (error) {
           // Tạo coupon với max_redemptions = 1
           coupon = await stripeClient.coupons.create({
-            duration: 'forever',
+            duration: "forever",
             amount_off: order.discountAmount,
-            currency: 'vnd',
+            currency: "vnd",
             id: order.orderCode, // Đảm bảo id duy nhất
             max_redemptions: 1, // Chỉ có thể sử dụng một lần
           });
@@ -76,8 +80,8 @@ export const createStripeCheckoutSession = catchAsync(
       if (order.shippingFee > 0) {
         stripeLineItems.push({
           price_data: {
-            currency: 'vnd',
-            product_data: { name: 'Phí vận chuyển', images: [] },
+            currency: "vnd",
+            product_data: { name: "Phí vận chuyển", images: [] },
             unit_amount: order.shippingFee,
           },
           quantity: 1,
@@ -92,7 +96,7 @@ export const createStripeCheckoutSession = catchAsync(
             lineItems.map((item: any) => {
               return {
                 product:
-                  typeof item.product === 'string'
+                  typeof item.product === "string"
                     ? item.product
                     : item.product._id,
                 variant: item.variant,
@@ -103,12 +107,12 @@ export const createStripeCheckoutSession = catchAsync(
         },
         discounts: coupon ? [{ coupon: coupon.id }] : [],
         line_items: stripeLineItems,
-        mode: 'payment',
-        success_url: `http://localhost:3000/account/orders/${order.orderCode}`,
+        mode: "payment",
+        success_url: `${process.env.CLIENT_HOST}/account/orders/${order.orderCode}`,
       });
 
       res.status(200).json({
-        status: 'success',
+        status: "success",
         session,
       });
     } catch (error) {
@@ -123,11 +127,11 @@ export const createZaloPayCheckoutSession = catchAsync(
     const { orderCode, lineItems } = req.body;
     const order = await Order.findOne({ orderCode });
     if (!order) {
-      return next(new AppError('Order not found', 404));
+      return next(new AppError("Order not found", 404));
     }
 
     if (!lineItems) {
-      return next(new AppError('No line items provided', 400));
+      return next(new AppError("No line items provided", 400));
     }
 
     try {
@@ -144,7 +148,7 @@ export const createZaloPayCheckoutSession = catchAsync(
 
       if (order.discountAmount > 0) {
         zaloItems.push({
-          itemid: 'discount',
+          itemid: "discount",
           itemname: `Giảm giá`,
           itemprice: -order.discountAmount,
           itemquantity: 1,
@@ -152,8 +156,8 @@ export const createZaloPayCheckoutSession = catchAsync(
       }
       if (order.shippingFee > 0) {
         zaloItems.push({
-          itemid: 'shipping',
-          itemname: 'Phí vận chuyển',
+          itemid: "shipping",
+          itemname: "Phí vận chuyển",
           itemprice: order.shippingFee,
           itemquantity: 1,
         });
@@ -165,7 +169,7 @@ export const createZaloPayCheckoutSession = catchAsync(
       );
 
       const embed_data = {
-        redirecturl: `http://localhost:3000/account/orders/${order.orderCode}`,
+        redirecturl: `${process.env.CLIENT_HOST}/account/orders/${order.orderCode}`,
         orderCode,
         userId: req.user.id,
       };
@@ -174,32 +178,31 @@ export const createZaloPayCheckoutSession = catchAsync(
 
       const orderData = {
         app_id: zalopayConfig.app_id,
-        app_trans_id: `${moment().format('YYMMDD')}_${transId}`,
+        app_trans_id: `${moment().format("YYMMDD")}_${transId}`,
         app_user: req.user.email,
         app_time: Date.now(),
         item: JSON.stringify(zaloItems),
         amount: totalAmount,
-        description: 'Thanh toán đơn hàng từ cửa hàng Ryxel Store.',
-        bank_code: '',
+        description: "Thanh toán đơn hàng từ cửa hàng Ryxel Store.",
+        bank_code: "",
         embed_data: JSON.stringify(embed_data),
-        mac: '',
-        callback_url:
-          'https://22d9-14-191-63-11.ngrok-free.app/api/v1/payments/zalopay/callback',
+        mac: "",
+        callback_url: `${process.env.API_URL}/v1/payments/zalopay/callback`,
       };
 
       const data =
         zalopayConfig.app_id +
-        '|' +
+        "|" +
         orderData.app_trans_id +
-        '|' +
+        "|" +
         orderData.app_user +
-        '|' +
+        "|" +
         orderData.amount +
-        '|' +
+        "|" +
         orderData.app_time +
-        '|' +
+        "|" +
         orderData.embed_data +
-        '|' +
+        "|" +
         orderData.item;
       orderData.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();
 
@@ -211,7 +214,7 @@ export const createZaloPayCheckoutSession = catchAsync(
           }
 
           res.status(200).json({
-            status: 'success',
+            status: "success",
             data: response.data,
             orderCode: req.body.orderCode,
           });
@@ -230,14 +233,14 @@ export const zalopayCallback = catchAsync(
     const mac = CryptoJS.HmacSHA256(dataStr, zalopayConfig.key2).toString();
 
     if (mac !== reqMac) {
-      return next(new AppError('Invalid MAC', 400));
+      return next(new AppError("Invalid MAC", 400));
     } else {
       const data = JSON.parse(dataStr);
       const { orderCode, userId } = JSON.parse(data.embed_data);
 
       const order = await Order.findOne({ orderCode });
       if (!order) {
-        return next(new AppError('Order not found', 404));
+        return next(new AppError("Order not found", 404));
       }
 
       await addPaymentId((order._id as Types.ObjectId).toString(), {
@@ -248,14 +251,14 @@ export const zalopayCallback = catchAsync(
 
       await changeOrderStatus(
         (order._id as Types.ObjectId).toString(),
-        'pending'
+        "pending"
       );
 
       await removeCartItem(userId, order.lineItems);
 
       res.status(200).json({
-        status: 'success',
-        message: 'Payment successful',
+        status: "success",
+        message: "Payment successful",
       });
     }
   }
@@ -272,20 +275,20 @@ export const fulfillCheckout = async (sessionId: string) => {
   const checkoutSession = await stripeClient.checkout.sessions.retrieve(
     sessionId,
     {
-      expand: ['line_items'],
+      expand: ["line_items"],
     }
   );
 
   // Check the Checkout Session's payment_status property
   // to determine if fulfillment should be peformed
-  if (checkoutSession.payment_status !== 'unpaid') {
+  if (checkoutSession.payment_status !== "unpaid") {
     // TODO: Perform fulfillment of the line items
     const order = await Order.findOne({
       orderCode: checkoutSession!.metadata!.order_id,
     });
 
     if (!order) {
-      throw new AppError('Order not found', 404);
+      throw new AppError("Order not found", 404);
     }
 
     await addPaymentId((order._id as Types.ObjectId).toString(), {
@@ -295,11 +298,11 @@ export const fulfillCheckout = async (sessionId: string) => {
     });
     await changeOrderStatus(
       (order._id as Types.ObjectId).toString(),
-      'pending'
+      "pending"
     );
     const user = checkoutSession!.client_reference_id;
     if (!user) {
-      throw new AppError('User not found', 404);
+      throw new AppError("User not found", 404);
     }
     await removeCartItem(user, order.lineItems);
     // TODO: Record/save fulfillment status for this
@@ -313,13 +316,13 @@ export const refundStripePayment = async (
 ) => {
   const paymentIntent = await stripeClient.paymentIntents.retrieve(paymentId);
 
-  if (paymentIntent.status === 'succeeded') {
+  if (paymentIntent.status === "succeeded") {
     await stripeClient.refunds.create({
       payment_intent: paymentId,
       amount: amount,
     });
   } else {
-    throw new AppError('Refund not successful', 400);
+    throw new AppError("Refund not successful", 400);
   }
 };
 
@@ -332,23 +335,23 @@ export const refundZaloPayPayment = async (
 
   let params = {
     app_id: zalopayConfig.app_id,
-    m_refund_id: `${moment().format('YYMMDD')}_${zalopayConfig.app_id}_${uid}`,
+    m_refund_id: `${moment().format("YYMMDD")}_${zalopayConfig.app_id}_${uid}`,
     timestamp, // miliseconds
     zp_trans_id: paymentId,
     amount: amount,
-    description: 'ZaloPay Refund',
-    mac: '',
+    description: "ZaloPay Refund",
+    mac: "",
   };
 
   let data =
     params.app_id +
-    '|' +
+    "|" +
     params.zp_trans_id +
-    '|' +
+    "|" +
     params.amount +
-    '|' +
+    "|" +
     params.description +
-    '|' +
+    "|" +
     params.timestamp;
   params.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();
 

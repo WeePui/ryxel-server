@@ -274,28 +274,29 @@ productSchema.pre<IProduct>("save", async function (next) {
 
 productSchema.pre<IProduct>("save", function (next) {
   if (this.variants && this.variants.length > 0) {
-    // Tìm variant có giá thấp nhất và lấy percentage của nó trong một lần duyệt
-    const { lowestPrice, percentageSaleOff } = this.variants.reduce(
-      (acc, variant) => {
-        const finalPrice = variant.finalPrice || 0;
-        if (
-          finalPrice < acc.lowestPrice &&
-          finalPrice == variant.price &&
-          variant.saleOff?.endDate > new Date()
-        ) {
-          return {
-            lowestPrice: finalPrice,
-            percentageSaleOff: variant.saleOff?.percentage || 0,
-          };
-        }
-        return acc;
-      },
-      { lowestPrice: Infinity, percentageSaleOff: 0 }
-    );
+    // Find the variant with the lowest final price and its sale percentage
+    let lowestPrice = Infinity;
+    let percentageSaleOff = 0;
 
-    this.lowestPrice = lowestPrice;
+    this.variants.forEach((variant) => {
+      const finalPrice = variant.finalPrice || variant.price;
+      if (finalPrice < lowestPrice) {
+        lowestPrice = finalPrice;
+        // Only set percentage if this variant has an active sale
+        if (variant.saleOff && isSaleOfferActive(variant.saleOff)) {
+          percentageSaleOff = variant.saleOff.percentage || 0;
+        } else {
+          percentageSaleOff = 0;
+        }
+      }
+    });
+
+    this.lowestPrice = lowestPrice === Infinity ? 0 : lowestPrice;
     this.percentageSaleOff = percentageSaleOff;
-    this.sold = this.variants.reduce((acc, variant) => acc + variant.sold!, 0);
+    this.sold = this.variants.reduce(
+      (acc, variant) => acc + (variant.sold || 0),
+      0
+    );
   }
 
   next();
@@ -350,7 +351,6 @@ productSchema.virtual("percentageSaleOff").get(function (this: IProduct) {
   return cheapestVariant.saleOff?.percentage ?? 0;
 });
 
-
 productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
   const filter = this.getFilter();
 
@@ -363,7 +363,6 @@ productSchema.pre<Query<IProduct, IProduct>>(/^find/, function (next) {
 
   next();
 });
-
 
 const Product = mongoose.model<IProduct>("Product", productSchema);
 
