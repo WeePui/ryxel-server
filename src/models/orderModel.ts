@@ -338,25 +338,12 @@ orderSchema.statics.getTopProvinces = async function (
       $match: {
         status: { $nin: ["unpaid", "cancelled"] },
         createdAt: { $gte: startDate, $lte: endDate },
-      },
-    },
-    {
-      $lookup: {
-        from: "shippingaddresses",
-        localField: "shippingAddress",
-        foreignField: "_id",
-        as: "address",
-      },
-    },
-    { $unwind: "$address" },
-    {
-      $match: {
-        "address.city.name": { $ne: null, $exists: true },
+        "shippingAddress.city.name": { $ne: null, $exists: true },
       },
     },
     {
       $group: {
-        _id: "$address.city.name",
+        _id: "$shippingAddress.city.name",
         value: { $sum: "$subtotal" },
         count: { $sum: 1 },
       },
@@ -374,6 +361,7 @@ orderSchema.statics.getTopProvinces = async function (
   ]);
 };
 
+
 orderSchema.statics.getTopProvincesByPurchasingUsers = async function (
   startDate: Date,
   endDate: Date,
@@ -384,26 +372,13 @@ orderSchema.statics.getTopProvincesByPurchasingUsers = async function (
       $match: {
         status: "delivered",
         createdAt: { $gte: startDate, $lte: endDate },
-      },
-    },
-    {
-      $lookup: {
-        from: "shippingaddresses",
-        localField: "shippingAddress",
-        foreignField: "_id",
-        as: "address",
-      },
-    },
-    { $unwind: "$address" },
-    {
-      $match: {
-        "address.city.name": { $ne: null, $exists: true },
+        "shippingAddress.city.name": { $ne: null, $exists: true },
       },
     },
     {
       $group: {
         _id: {
-          province: "$address.city.name",
+          province: "$shippingAddress.city.name",
           userId: "$user",
         },
       },
@@ -411,13 +386,13 @@ orderSchema.statics.getTopProvincesByPurchasingUsers = async function (
     {
       $group: {
         _id: "$_id.province",
-        value: { $sum: 1 },
+        value: { $sum: 1 }, // Mỗi cặp tỉnh-user chỉ được 1 lần
       },
     },
     {
       $project: {
         _id: 0,
-        name: "$_id",
+        name: { $ifNull: ["$_id", "Không xác định"] },
         value: 1,
       },
     },
@@ -429,6 +404,7 @@ orderSchema.statics.getTopProvincesByPurchasingUsers = async function (
     },
   ]);
 };
+
 
 orderSchema.statics.getOrderStatusCounts = async function (
   startDate: Date,
