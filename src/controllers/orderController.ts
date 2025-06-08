@@ -37,7 +37,6 @@ export const removeCartItem = async (
   await cart.removeCartItems(orderItems); // sử dụng method mới
 };
 
-
 const reduceStock = async (
   orderItems: any,
   session?: mongoose.ClientSession // Optional session parameter
@@ -252,7 +251,10 @@ export const createOrder = catchAsync(
             shippingFee,
             status,
             ...(discountValid &&
-              discountAmount !== 0 && { discount: discountCode, discountAmount }),
+              discountAmount !== 0 && {
+                discount: discountCode,
+                discountAmount,
+              }),
             lineItems: orderProducts,
           },
         ],
@@ -432,6 +434,7 @@ export const getAllOrders = catchAsync(
     apiFeatures.paginate();
 
     const orders = await apiFeatures.query
+      .sort("-createdAt")
       .populate("user")
       .populate("lineItems.product");
 

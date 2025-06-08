@@ -44,8 +44,6 @@ export const createReviewsByOrder = catchAsync(
     const { orderId } = req.params;
     const { reviews } = req.body;
 
-    console.log("BODY:", req.body);
-
     const order = await Order.findById({ _id: orderId, user: req.user.id });
 
     if (!order)
@@ -96,19 +94,6 @@ export const createReviewsByOrder = catchAsync(
           )
         );
       }
-    } // Log received files for debugging
-    console.log(
-      `Received ${req.files ? (req.files as Express.Multer.File[]).length : 0} files`
-    );
-    if (req.files) {
-      console.log(
-        "File field names:",
-        (req.files as Express.Multer.File[]).map((f) => f.fieldname)
-      );
-      console.log(
-        "File original names:",
-        (req.files as Express.Multer.File[]).map((f) => f.originalname)
-      );
     }
 
     const files = req.files as Express.Multer.File[];
@@ -128,14 +113,9 @@ export const createReviewsByOrder = catchAsync(
         const reviewIndex = parseInt(match[1], 10);
         const type = match[2];
 
-        console.log(
-          `Processing file for review ${reviewIndex}, type: ${type}, originalname: ${file.originalname}`
-        );
-
         if (!fileMap[reviewIndex]) fileMap[reviewIndex] = {};
 
         const url = await uploadProductReview(file.buffer, file.mimetype);
-        console.log(`Uploaded file for review ${reviewIndex}, URL: ${url}`);
 
         if (type === "images") {
           if (!fileMap[reviewIndex].images) fileMap[reviewIndex].images = [];
@@ -143,28 +123,13 @@ export const createReviewsByOrder = catchAsync(
         } else if (type === "video") {
           fileMap[reviewIndex].video = url;
         }
-
-        console.log(
-          `Updated fileMap for review ${reviewIndex}:`,
-          fileMap[reviewIndex]
-        );
       })
-    );
-    // ADD THIS LOG:
-    console.log(
-      "Final fileMap after all uploads:",
-      JSON.stringify(fileMap, null, 2)
     );
 
     reviews.forEach((review: ReviewInput, index: number) => {
       review.images = fileMap[index]?.images || [];
       review.video = fileMap[index]?.video || "";
     });
-    // ADD THIS LOG:
-    console.log(
-      "req.body.reviews after image assignment:",
-      JSON.stringify(reviews, null, 2)
-    );
 
     const reviewObjects = reviews.map((review: ReviewInput) => ({
       user: req.user.id,
@@ -176,11 +141,6 @@ export const createReviewsByOrder = catchAsync(
       order: orderId,
       variant: review.variantId,
     }));
-    // ADD THIS LOG:
-    console.log(
-      "Final reviewObjects before create:",
-      JSON.stringify(reviewObjects, null, 2)
-    );
 
     // Try to create all reviews at once
     let createdReviews;
@@ -233,7 +193,7 @@ export const createReviewsByOrder = catchAsync(
         for (const review of successful) {
           // Run NSFW detection for images
           if (review.images && review.images.length > 0) {
-            // nsfwDetection(review._id as string, review.images as string[]);
+            nsfwDetection(review._id as string, review.images as string[]);
           }
 
           // Update product ratings
@@ -274,14 +234,14 @@ export const createReviewsByOrder = catchAsync(
       if (review.images && review.images.length > 0) {
         nsfwDetection(review._id as string, review.images as string[]);
       }
-      await Review.calcAverageRatings(review.product);
-
-      // Update the order's lineItem with the correct review reference
+      await Review.calcAverageRatings(review.product);      // Update the order's lineItem with the correct review reference
       await Order.updateOne(
         {
           _id: orderId,
-          "lineItems.product": review.product,
-          "lineItems.variant": review.variant,
+          $and: [
+            { "lineItems.product": review.product },
+            { "lineItems.variant": review.variant }
+          ]
         },
         {
           $set: { "lineItems.$.review": review._id },
@@ -375,21 +335,6 @@ export const updateReviewsByOrder = catchAsync(
       }
     }
 
-    // Log received files for debugging
-    console.log(
-      `Received ${req.files ? (req.files as Express.Multer.File[]).length : 0} update files`
-    );
-    if (req.files) {
-      console.log(
-        "Update file field names:",
-        (req.files as Express.Multer.File[]).map((f) => f.fieldname)
-      );
-      console.log(
-        "Update file original names:",
-        (req.files as Express.Multer.File[]).map((f) => f.originalname)
-      );
-    }
-
     const files = req.files as Express.Multer.File[];
     const fileMap: Record<number, { images?: string[]; video?: string }> = {};
 
@@ -408,16 +353,9 @@ export const updateReviewsByOrder = catchAsync(
         const reviewIndex = parseInt(match[1], 10);
         const type = match[2];
 
-        console.log(
-          `Processing update file for review ${reviewIndex}, type: ${type}, originalname: ${file.originalname}`
-        );
-
         if (!fileMap[reviewIndex]) fileMap[reviewIndex] = {};
 
         const url = await uploadProductReview(file.buffer, file.mimetype);
-        console.log(
-          `Uploaded update file for review ${reviewIndex}, URL: ${url}`
-        );
 
         if (type === "images") {
           if (!fileMap[reviewIndex].images) fileMap[reviewIndex].images = [];
@@ -425,17 +363,7 @@ export const updateReviewsByOrder = catchAsync(
         } else if (type === "video") {
           fileMap[reviewIndex].video = url;
         }
-
-        console.log(
-          `Updated fileMap for review ${reviewIndex}:`,
-          fileMap[reviewIndex]
-        );
       })
-    );
-
-    console.log(
-      "Final update fileMap after all uploads:",
-      JSON.stringify(fileMap, null, 2)
     );
 
     // Array to collect responses from each review update
@@ -494,14 +422,14 @@ export const updateReviewsByOrder = catchAsync(
           updatedReviews.push(updatedReview);
 
           // Update product ratings
-          await Review.calcAverageRatings(updatedReview.product);
-
-          // Update the order's lineItem with the correct review reference
+          await Review.calcAverageRatings(updatedReview.product);          // Update the order's lineItem with the correct review reference
           await Order.updateOne(
             {
               _id: orderId,
-              "lineItems.product": updatedReview.product,
-              "lineItems.variant": updatedReview.variant,
+              $and: [
+                { "lineItems.product": updatedReview.product },
+                { "lineItems.variant": updatedReview.variant }
+              ]
             },
             {
               $set: { "lineItems.$.review": updatedReview._id },
@@ -544,7 +472,9 @@ export const updateReviewsByOrder = catchAsync(
           message: err.message || "Unknown error during update",
         });
       }
-    } // Check for NSFW content in uploaded images
+    }
+
+    // Check for NSFW content in uploaded images
     for (const review of updatedReviews) {
       if (review.images && review.images.length > 0) {
         nsfwDetection(review._id as string, review.images as string[]);
@@ -624,9 +554,7 @@ export const processNSFWReview = catchAsync(
     if (!review) return next(new AppError("No review found with that ID", 404));
 
     console.log("Found review:", review._id);
-    console.log("Review images before update:", review.images);
-
-    if (!isValid) {
+    console.log("Review images before update:", review.images);    if (!isValid) {
       let images = review.images;
       let video = review.video;
       try {
@@ -641,6 +569,16 @@ export const processNSFWReview = catchAsync(
       } catch (err) {
         console.error("Error deleting old files:", err);
       }
+
+      // Clear the review reference from the order's lineItem before deleting the review
+      await Order.updateOne(
+        {
+          "lineItems.review": reviewId
+        },
+        {
+          $unset: { "lineItems.$.review": 1 }
+        }
+      );
 
       await Review.findByIdAndDelete(reviewId);
       console.log("Review deleted due to NSFW content");

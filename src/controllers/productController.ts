@@ -317,13 +317,18 @@ export const updateProduct = catchAsync(async (req, res, next) => {
       }
     } else if (Array.isArray(updateData.variants)) {
       parsedVariants = updateData.variants;
-    }    const validVariants = parsedVariants.filter(variant => variant && typeof variant === 'object');
-    
+    }
+    const validVariants = parsedVariants.filter(
+      (variant) => variant && typeof variant === "object"
+    );
+
     const updatedVariants = await Promise.all(
       validVariants.map(async (variant: any, index: number) => {
         // Find existing variant by _id if it exists, otherwise create new one
-        const existingVariant = variant._id 
-          ? product.variants.find(v => v._id && v._id.toString() === variant._id.toString())
+        const existingVariant = variant._id
+          ? product.variants.find(
+              (v) => v._id && v._id.toString() === variant._id.toString()
+            )
           : null;
 
         if (files?.length) {
@@ -347,20 +352,27 @@ export const updateProduct = catchAsync(async (req, res, next) => {
             );
             variant.images = uploadedImages.map((img) => img.secure_url);
           }
-        }        
+        }
         // Handle sale offer validation and final price calculation
         if (variant.saleOff) {
           // Check if this is an empty/inactive sale offer
-          const hasEmptyStartDate = !variant.saleOff.startDate || 
-            (typeof variant.saleOff.startDate === 'string' && variant.saleOff.startDate === "") ||
-            (variant.saleOff.startDate instanceof Date && isNaN(variant.saleOff.startDate.getTime()));
-            
-          const hasEmptyEndDate = !variant.saleOff.endDate || 
-            (typeof variant.saleOff.endDate === 'string' && variant.saleOff.endDate === "") ||
-            (variant.saleOff.endDate instanceof Date && isNaN(variant.saleOff.endDate.getTime()));
-            
-          const hasZeroPercentage = !variant.saleOff.percentage || variant.saleOff.percentage === 0;
-          
+          const hasEmptyStartDate =
+            !variant.saleOff.startDate ||
+            (typeof variant.saleOff.startDate === "string" &&
+              variant.saleOff.startDate === "") ||
+            (variant.saleOff.startDate instanceof Date &&
+              isNaN(variant.saleOff.startDate.getTime()));
+
+          const hasEmptyEndDate =
+            !variant.saleOff.endDate ||
+            (typeof variant.saleOff.endDate === "string" &&
+              variant.saleOff.endDate === "") ||
+            (variant.saleOff.endDate instanceof Date &&
+              isNaN(variant.saleOff.endDate.getTime()));
+
+          const hasZeroPercentage =
+            !variant.saleOff.percentage || variant.saleOff.percentage === 0;
+
           if (hasEmptyStartDate && hasEmptyEndDate && hasZeroPercentage) {
             // Empty sale offer - remove it and set final price to regular price
             variant.saleOff = undefined;
@@ -391,7 +403,7 @@ export const updateProduct = catchAsync(async (req, res, next) => {
             updatedAt: new Date(), // Explicitly set updatedAt
           };
           // Remove any undefined fields that might cause issues
-          Object.keys(mergedVariant).forEach(key => {
+          Object.keys(mergedVariant).forEach((key) => {
             if (mergedVariant[key] === undefined) {
               delete mergedVariant[key];
             }
@@ -406,7 +418,7 @@ export const updateProduct = catchAsync(async (req, res, next) => {
             updatedAt: new Date(),
           };
           // Remove any undefined fields that might cause issues
-          Object.keys(newVariant).forEach(key => {
+          Object.keys(newVariant).forEach((key) => {
             if (newVariant[key] === undefined) {
               delete newVariant[key];
             }
@@ -414,7 +426,8 @@ export const updateProduct = catchAsync(async (req, res, next) => {
           return newVariant;
         }
       })
-    );    updateData.variants = updatedVariants;
+    );
+    updateData.variants = updatedVariants;
 
     // Tính toán giá thấp nhất và phần trăm giảm giá
     const { lowestPrice, percentageSaleOff } = validVariants.reduce(

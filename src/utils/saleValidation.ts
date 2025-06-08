@@ -92,16 +92,18 @@ export function validateSaleOffer(saleOff: Partial<ISaleOff>): {
   }
 
   // Check if this is an empty/inactive sale offer (empty dates and 0 percentage)
-  const hasEmptyStartDate = !saleOff.startDate || 
-    (typeof saleOff.startDate === 'string' && saleOff.startDate === "") ||
+  const hasEmptyStartDate =
+    !saleOff.startDate ||
+    (typeof saleOff.startDate === "string" && saleOff.startDate === "") ||
     (saleOff.startDate instanceof Date && isNaN(saleOff.startDate.getTime()));
-    
-  const hasEmptyEndDate = !saleOff.endDate || 
-    (typeof saleOff.endDate === 'string' && saleOff.endDate === "") ||
+
+  const hasEmptyEndDate =
+    !saleOff.endDate ||
+    (typeof saleOff.endDate === "string" && saleOff.endDate === "") ||
     (saleOff.endDate instanceof Date && isNaN(saleOff.endDate.getTime()));
-    
+
   const hasZeroPercentage = !saleOff.percentage || saleOff.percentage === 0;
-  
+
   if (hasEmptyStartDate && hasEmptyEndDate && hasZeroPercentage) {
     return { isValid: true }; // Empty sale offer is valid (no sale)
   }
