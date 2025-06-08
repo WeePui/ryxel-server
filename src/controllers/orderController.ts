@@ -476,6 +476,7 @@ export const getUserOrders = catchAsync(
     apiFeatures = await apiFeatures.search();
 
     const orders = await apiFeatures.query
+      .sort("-createdAt")
       .populate("user")
       .populate("lineItems.product");
 
