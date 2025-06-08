@@ -227,26 +227,13 @@ export const createReviewsByOrder = catchAsync(
     // If all reviews were created successfully
     const createdReviewsArray = Array.isArray(createdReviews)
       ? createdReviews
-      : [createdReviews];
-
-    // Process NSFW detection and update product ratings
+      : [createdReviews];    // Process NSFW detection and update product ratings
     for (const review of createdReviewsArray) {
       if (review.images && review.images.length > 0) {
         nsfwDetection(review._id as string, review.images as string[]);
       }
-      await Review.calcAverageRatings(review.product);      // Update the order's lineItem with the correct review reference
-      await Order.updateOne(
-        {
-          _id: orderId,
-          $and: [
-            { "lineItems.product": review.product },
-            { "lineItems.variant": review.variant }
-          ]
-        },
-        {
-          $set: { "lineItems.$.review": review._id },
-        }
-      );
+      await Review.calcAverageRatings(review.product);
+      // Note: Order lineItem update is handled by the review model's post-save hook
     }
 
     // Increment review count
@@ -416,25 +403,12 @@ export const updateReviewsByOrder = catchAsync(
             video: finalVideo,
           },
           { new: true }
-        );
-
-        if (updatedReview) {
+        );        if (updatedReview) {
           updatedReviews.push(updatedReview);
 
           // Update product ratings
-          await Review.calcAverageRatings(updatedReview.product);          // Update the order's lineItem with the correct review reference
-          await Order.updateOne(
-            {
-              _id: orderId,
-              $and: [
-                { "lineItems.product": updatedReview.product },
-                { "lineItems.variant": updatedReview.variant }
-              ]
-            },
-            {
-              $set: { "lineItems.$.review": updatedReview._id },
-            }
-          );
+          await Review.calcAverageRatings(updatedReview.product);
+          // Note: Order lineItem update is handled by the review model's post-save hook
 
           updateResults.push({
             success: true,

@@ -165,7 +165,9 @@ reviewSchema.post("save", async function (doc) {
     if (this.isModified("review")) order.reviewCount += 1;
 
     order.lineItems.forEach((item) => {
-      if (item.product.toString() === this.product.toString()) {
+      // Check both product AND variant to ensure we're updating the correct lineItem
+      if (item.product.toString() === this.product.toString() && 
+          item.variant.toString() === this.variant.toString()) {
         item.review = doc._id as mongoose.Types.ObjectId;
       }
     });
@@ -191,7 +193,9 @@ reviewSchema.post(/^findOneAnd/, async function (doc) {
 
   if (order) {
     order.lineItems.forEach((item) => {
-      if (item.product.toString() === doc.product.toString()) {
+      // Check both product AND variant to ensure we're updating the correct lineItem
+      if (item.product.toString() === doc.product.toString() && 
+          item.variant.toString() === doc.variant.toString()) {
         item.review = doc._id as mongoose.Types.ObjectId;
       }
     });
