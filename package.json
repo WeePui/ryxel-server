@@ -11,7 +11,9 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "seeder:import": "ts-node ./src/dev-data/seeder.ts --import",
     "seeder:delete": "ts-node ./src/dev-data/seeder.ts --delete",
-    "debug": "ndb dist/server.js"
+    "debug": "ndb dist/server.js",
+    "benchmark": "node benchmark-chatbot.js",
+    "workload-test": "node workload-simulation.js"
   },
   "author": "Bùi Quang Huy",
   "license": "ISC",
