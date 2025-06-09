@@ -227,7 +227,7 @@ export const createReviewsByOrder = catchAsync(
     // If all reviews were created successfully
     const createdReviewsArray = Array.isArray(createdReviews)
       ? createdReviews
-      : [createdReviews];    // Process NSFW detection and update product ratings
+      : [createdReviews]; // Process NSFW detection and update product ratings
     for (const review of createdReviewsArray) {
       if (review.images && review.images.length > 0) {
         nsfwDetection(review._id as string, review.images as string[]);
@@ -403,7 +403,8 @@ export const updateReviewsByOrder = catchAsync(
             video: finalVideo,
           },
           { new: true }
-        );        if (updatedReview) {
+        );
+        if (updatedReview) {
           updatedReviews.push(updatedReview);
 
           // Update product ratings
@@ -528,7 +529,8 @@ export const processNSFWReview = catchAsync(
     if (!review) return next(new AppError("No review found with that ID", 404));
 
     console.log("Found review:", review._id);
-    console.log("Review images before update:", review.images);    if (!isValid) {
+    console.log("Review images before update:", review.images);
+    if (!isValid) {
       let images = review.images;
       let video = review.video;
       try {
@@ -547,10 +549,10 @@ export const processNSFWReview = catchAsync(
       // Clear the review reference from the order's lineItem before deleting the review
       await Order.updateOne(
         {
-          "lineItems.review": reviewId
+          "lineItems.review": reviewId,
         },
         {
-          $unset: { "lineItems.$.review": 1 }
+          $unset: { "lineItems.$.review": 1 },
         }
       );
 

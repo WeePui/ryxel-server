@@ -166,8 +166,10 @@ reviewSchema.post("save", async function (doc) {
 
     order.lineItems.forEach((item) => {
       // Check both product AND variant to ensure we're updating the correct lineItem
-      if (item.product.toString() === this.product.toString() && 
-          item.variant.toString() === this.variant.toString()) {
+      if (
+        item.product.toString() === this.product.toString() &&
+        item.variant.toString() === this.variant.toString()
+      ) {
         item.review = doc._id as mongoose.Types.ObjectId;
       }
     });
@@ -194,8 +196,10 @@ reviewSchema.post(/^findOneAnd/, async function (doc) {
   if (order) {
     order.lineItems.forEach((item) => {
       // Check both product AND variant to ensure we're updating the correct lineItem
-      if (item.product.toString() === doc.product.toString() && 
-          item.variant.toString() === doc.variant.toString()) {
+      if (
+        item.product.toString() === doc.product.toString() &&
+        item.variant.toString() === doc.variant.toString()
+      ) {
         item.review = doc._id as mongoose.Types.ObjectId;
       }
     });
