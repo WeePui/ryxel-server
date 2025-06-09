@@ -92,9 +92,7 @@ export class WorkloadAnalyzer {
     const avgAutomationRate =
       metrics.reduce((sum, m) => sum + m.automationRate, 0) / totalQueries;
     const avgResponseTime =
-      metrics.reduce((sum, m) => sum + m.responseTime, 0) / totalQueries;
-
-    // Intent breakdown
+      metrics.reduce((sum, m) => sum + m.responseTime, 0) / totalQueries;    // Intent breakdown
     const intentStats = metrics.reduce(
       (acc, m) => {
         if (!acc[m.intent]) {
@@ -104,7 +102,7 @@ export class WorkloadAnalyzer {
         acc[m.intent].totalAutomation += m.automationRate;
         return acc;
       },
-      {} as Record<string, { count: number; totalAutomation: number }>
+      {} as Record<string, { count: number; totalAutomation: number; percentage?: number; avgAutomation?: number }>
     );
 
     // Calculate intent percentages
