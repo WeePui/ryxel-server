@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "postbuild": "cp firebase.service-account.json dist/ && cp -r src/dev-data dist/src/ || echo 'Optional files not found'",
     "start": "node dist/server.js",
     "start:prod": "cross-env NODE_ENV=production node dist/server.js",
+    "vercel-build": "npm run build",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "seeder:import": "ts-node ./src/dev-data/seeder.ts --import",
     "seeder:delete": "ts-node ./src/dev-data/seeder.ts --delete",

@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "name": "ryxel-server",
+  "builds": [
+    {
+      "src": "dist/server.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "dist/**",
+          "firebase.service-account.json",
+          "package.json"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/v1/(.*)",
+      "dest": "dist/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "dist/server.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "dist/server.js": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  },
+  "regions": ["sin1"],
+  "installCommand": "npm install",
+  "buildCommand": "npm run build"
+}
