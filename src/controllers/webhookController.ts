@@ -3,6 +3,7 @@ import Order from "../models/orderModel";
 import AppError from "../utils/AppError";
 import catchAsync from "../utils/catchAsync";
 import { fulfillCheckout } from "./paymentController";
+import { processStripeWebhookWithRetry } from "../utils/webhookRecovery";
 import { ghnStatusDescriptions } from "../utils/ghnService";
 import {
   sendOrderStatusUpdatedNotification,
@@ -125,12 +126,24 @@ export const stripeWebhook = catchAsync(
       console.error("❌ Webhook Signature Error:", err.message);
       return next(new AppError(`Webhook Error: ${err.message}`, 400));
     }
-
     if (
       event.type === "checkout.session.completed" ||
       event.type === "checkout.session.async_payment_succeeded"
     ) {
-      fulfillCheckout(event.data.object.id);
+      // Use retry mechanism for webhook processing
+      try {
+        await processStripeWebhookWithRetry(event.data.object.id);
+        console.log(
+          `✅ Successfully processed Stripe webhook: ${event.type} for session ${event.data.object.id}`
+        );
+      } catch (error) {
+        console.error(
+          `❌ Failed to process Stripe webhook after retries: ${event.type} for session ${event.data.object.id}`,
+          error
+        );
+        // Don't fail the webhook response - Stripe will retry if we return an error
+        // But log it for manual investigation
+      }
     }
 
     response.status(200).end();

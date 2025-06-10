@@ -6,6 +6,7 @@ import { getLineItemsInfo } from "../utils/getLineItemsInfo";
 import moment from "moment";
 import CryptoJS from "crypto-js";
 import axios from "axios";
+import mongoose from "mongoose";
 import {
   addPaymentId,
   changeOrderStatus,
@@ -28,11 +29,10 @@ const zalopayConfig = {
 
 export const createStripeCheckoutSession = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { orderCode, lineItems } = req.body;
-    const order = await Order.findOne({ orderCode });
-    if (!order) {
-      return next(new AppError("Order not found", 404));
-    }
+    const { lineItems, code } = req.body;
+
+    // Use the validated order from middleware
+    const order = req.order;
 
     if (!lineItems) {
       return next(new AppError("No line items provided", 400));
@@ -56,8 +56,28 @@ export const createStripeCheckoutSession = catchAsync(
       });
 
       let coupon: stripe.Response<stripe.Coupon> | undefined = undefined;
+      let finalDiscountAmount = order.discountAmount;
 
-      if (order.discountAmount > 0) {
+      // Check if a new discount code is provided during process payment
+      if (code && code.trim() !== "") {
+        const { verifyDiscount } = await import(
+          "../controllers/discountController"
+        );
+        const {
+          isValid: discountValid,
+          discountAmount: newDiscountAmount,
+          discountCode,
+        } = await verifyDiscount(code, lineItems, req.user.id);
+        if (discountValid && newDiscountAmount > 0) {
+          // Update the order with new discount information
+          order.discount = discountCode || "";
+          order.discountAmount = newDiscountAmount;
+          await order.save();
+          finalDiscountAmount = newDiscountAmount;
+        }
+      }
+
+      if (finalDiscountAmount > 0) {
         try {
           // Kiểm tra xem coupon đã tồn tại chưa
           const existingCoupon = await stripeClient.coupons.retrieve(
@@ -69,7 +89,7 @@ export const createStripeCheckoutSession = catchAsync(
           // Tạo coupon với max_redemptions = 1
           coupon = await stripeClient.coupons.create({
             duration: "forever",
-            amount_off: order.discountAmount,
+            amount_off: finalDiscountAmount,
             currency: "vnd",
             id: order.orderCode, // Đảm bảo id duy nhất
             max_redemptions: 1, // Chỉ có thể sử dụng một lần
@@ -124,11 +144,10 @@ export const createStripeCheckoutSession = catchAsync(
 
 export const createZaloPayCheckoutSession = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { orderCode, lineItems } = req.body;
-    const order = await Order.findOne({ orderCode });
-    if (!order) {
-      return next(new AppError("Order not found", 404));
-    }
+    const { lineItems, code } = req.body;
+
+    // Use the validated order from middleware
+    const order = req.order;
 
     if (!lineItems) {
       return next(new AppError("No line items provided", 400));
@@ -146,11 +165,32 @@ export const createZaloPayCheckoutSession = catchAsync(
         };
       });
 
-      if (order.discountAmount > 0) {
+      let finalDiscountAmount = order.discountAmount;
+
+      // Check if a new discount code is provided during process payment
+      if (code && code.trim() !== "") {
+        const { verifyDiscount } = await import(
+          "../controllers/discountController"
+        );
+        const {
+          isValid: discountValid,
+          discountAmount: newDiscountAmount,
+          discountCode,
+        } = await verifyDiscount(code, lineItems, req.user.id);
+        if (discountValid && newDiscountAmount > 0) {
+          // Update the order with new discount information
+          order.discount = discountCode || "";
+          order.discountAmount = newDiscountAmount;
+          await order.save();
+          finalDiscountAmount = newDiscountAmount;
+        }
+      }
+
+      if (finalDiscountAmount > 0) {
         zaloItems.push({
           itemid: "discount",
           itemname: `Giảm giá`,
-          itemprice: -order.discountAmount,
+          itemprice: -finalDiscountAmount,
           itemquantity: 1,
         });
       }
@@ -167,10 +207,9 @@ export const createZaloPayCheckoutSession = catchAsync(
         (total, item) => total + item.itemprice * item.itemquantity,
         0
       );
-
       const embed_data = {
         redirecturl: `${process.env.CLIENT_HOST}/account/orders/${order.orderCode}`,
-        orderCode,
+        orderCode: order.orderCode,
         userId: req.user.id,
       };
 
@@ -234,19 +273,123 @@ export const zalopayCallback = catchAsync(
 
     if (mac !== reqMac) {
       return next(new AppError("Invalid MAC", 400));
-    } else {
-      const data = JSON.parse(dataStr);
-      const { orderCode, userId } = JSON.parse(data.embed_data);
+    }
 
-      const order = await Order.findOne({ orderCode });
-      if (!order) {
-        return next(new AppError("Order not found", 404));
+    const session = await mongoose.startSession();
+
+    try {
+      await session.withTransaction(async () => {
+        const data = JSON.parse(dataStr);
+        const { orderCode, userId } = JSON.parse(data.embed_data);
+
+        const order = await Order.findOne({ orderCode }).session(session);
+        if (!order) {
+          throw new AppError("Order not found", 404);
+        }        // CRITICAL: Check if order has already been paid/fulfilled
+        if (order.status !== "unpaid") {
+          console.log(
+            `ZaloPay callback: Order ${order.orderCode} already processed (status: ${order.status}), skipping fulfillment`
+          );
+          return;
+        }
+
+        // Prevent duplicate payments by checking if payment ID already exists across ALL orders
+        const existingOrderWithPayment = await Order.findOne({
+          "checkout.paymentId": data.zp_trans_id,
+        }).session(session);
+
+        if (existingOrderWithPayment) {
+          console.log(
+            `ZaloPay payment ${data.zp_trans_id} already used for order ${existingOrderWithPayment.orderCode}`
+          );
+          throw new AppError(
+            "Payment already processed for another order",
+            400
+          );
+        }
+
+        await addPaymentId((order._id as Types.ObjectId).toString(), {
+          paymentId: data.zp_trans_id,
+          checkoutId: data.app_trans_id,
+          amount: data.amount,
+        });
+
+        await changeOrderStatus(
+          (order._id as Types.ObjectId).toString(),
+          "pending"
+        );
+
+        await removeCartItem(userId, order.lineItems);
+
+        console.log(
+          `ZaloPay callback: Successfully fulfilled order ${order.orderCode} for transaction ${data.zp_trans_id}`
+        );
+      });
+
+      res.status(200).json({
+        status: "success",
+        message: "Payment successful",
+      });
+    } catch (error) {
+      console.error("ZaloPay callback error:", error);
+      throw error;
+    } finally {
+      await session.endSession();
+    }
+  }
+);
+
+export const fulfillCheckout = async (sessionId: string) => {
+  // Make this function safe to run multiple times, even concurrently
+  const session = await mongoose.startSession();
+
+  try {
+    await session.withTransaction(async () => {
+      // Retrieve the Checkout Session from the API with line_items expanded
+      const checkoutSession = await stripeClient.checkout.sessions.retrieve(
+        sessionId,
+        {
+          expand: ["line_items"],
+        }
+      );
+
+      // Check the Checkout Session's payment_status property
+      if (checkoutSession.payment_status === "unpaid") {
+        console.log(
+          `Checkout session ${sessionId} is still unpaid, skipping fulfillment`
+        );
+        return;
       }
 
+      const order = await Order.findOne({
+        orderCode: checkoutSession!.metadata!.order_id,
+      }).session(session);
+
+      if (!order) {
+        throw new AppError("Order not found", 404);
+      }      // CRITICAL: Check if order has already been paid/fulfilled
+      if (order.status !== "unpaid") {
+        console.log(
+          `Order ${order.orderCode} already processed (status: ${order.status}), skipping fulfillment`
+        );
+        return;
+      }      // Prevent duplicate payments by checking if payment intent already exists across ALL orders
+      const existingOrderWithPayment = await Order.findOne({
+        "checkout.paymentId": checkoutSession!.payment_intent as string,
+      }).session(session);
+
+      if (existingOrderWithPayment) {
+        console.log(
+          `Payment intent ${checkoutSession!.payment_intent} already used for order ${existingOrderWithPayment.orderCode}`
+        );
+        throw new AppError("Payment already processed for another order", 400);
+      }
+
+      // Perform fulfillment atomically
       await addPaymentId((order._id as Types.ObjectId).toString(), {
-        paymentId: data.zp_trans_id,
-        checkoutId: data.app_trans_id,
-        amount: data.amount,
+        paymentId: checkoutSession!.payment_intent as string,
+        checkoutId: checkoutSession.id,
+        amount: checkoutSession.amount_total!,
       });
 
       await changeOrderStatus(
@@ -254,59 +397,22 @@ export const zalopayCallback = catchAsync(
         "pending"
       );
 
-      await removeCartItem(userId, order.lineItems);
+      const user = checkoutSession!.client_reference_id;
+      if (!user) {
+        throw new AppError("User not found", 404);
+      }
 
-      res.status(200).json({
-        status: "success",
-        message: "Payment successful",
-      });
-    }
-  }
-);
+      await removeCartItem(user, order.lineItems);
 
-export const fulfillCheckout = async (sessionId: string) => {
-  // TODO: Make this function safe to run multiple times,
-  // even concurrently, with the same session ID
-
-  // TODO: Make sure fulfillment hasn't already been
-  // peformed for this Checkout Session
-
-  // Retrieve the Checkout Session from the API with line_items expanded
-  const checkoutSession = await stripeClient.checkout.sessions.retrieve(
-    sessionId,
-    {
-      expand: ["line_items"],
-    }
-  );
-
-  // Check the Checkout Session's payment_status property
-  // to determine if fulfillment should be peformed
-  if (checkoutSession.payment_status !== "unpaid") {
-    // TODO: Perform fulfillment of the line items
-    const order = await Order.findOne({
-      orderCode: checkoutSession!.metadata!.order_id,
+      console.log(
+        `Successfully fulfilled order ${order.orderCode} for checkout session ${sessionId}`
+      );
     });
-
-    if (!order) {
-      throw new AppError("Order not found", 404);
-    }
-
-    await addPaymentId((order._id as Types.ObjectId).toString(), {
-      paymentId: checkoutSession!.payment_intent as string,
-      checkoutId: checkoutSession.id,
-      amount: checkoutSession.amount_total!,
-    });
-    await changeOrderStatus(
-      (order._id as Types.ObjectId).toString(),
-      "pending"
-    );
-    const user = checkoutSession!.client_reference_id;
-    if (!user) {
-      throw new AppError("User not found", 404);
-    }
-    await removeCartItem(user, order.lineItems);
-    // TODO: Record/save fulfillment status for this
-    // Checkout Session
+  } catch (error) {
+    console.error(`Error fulfilling checkout session ${sessionId}:`, error);
+    throw error;
+  } finally {
+    await session.endSession();
   }
 };
 

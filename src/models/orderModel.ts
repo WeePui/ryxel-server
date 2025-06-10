@@ -222,6 +222,15 @@ orderSchema.index({ createdAt: 1 });
 orderSchema.index({ updatedAt: 1 });
 orderSchema.index({ orderCode: 1 });
 
+// TTL index: Automatically delete unpaid orders after 24 hours
+orderSchema.index(
+  { createdAt: 1 }, 
+  { 
+    expireAfterSeconds: 86400, // 24 hours in seconds
+    partialFilterExpression: { status: "unpaid" }
+  }
+);
+
 orderSchema.pre<IOrder>("find", async function (next) {
   this.populate({
     path: "lineItems.review",

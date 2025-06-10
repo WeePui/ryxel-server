@@ -164,9 +164,43 @@ export const getShippingFee = catchAsync(
   }
 );
 
+// Clean up old unpaid orders to prevent blocking users indefinitely
+const cleanupOldUnpaidOrders = async (userId: string) => {
+  try {
+    // Find unpaid orders older than 24 hours
+    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+    const oldUnpaidOrders = await Order.find({
+      user: userId,
+      status: "unpaid",
+      createdAt: { $lt: twentyFourHoursAgo },
+    });
+
+    if (oldUnpaidOrders.length > 0) {
+      console.log(
+        `Found ${oldUnpaidOrders.length} old unpaid orders for user ${userId}, cancelling them`
+      );
+
+      for (const order of oldUnpaidOrders) {
+        order.status = "cancelled";
+        await order.save();
+        // Return stock for cancelled orders
+        await increaseStock(order.lineItems);
+        console.log(`Automatically cancelled old unpaid order ${order.orderCode}`);
+      }
+    }
+  } catch (error) {
+    console.error("Error cleaning up old unpaid orders:", error);
+    // Don't throw error, just log it - this is background cleanup
+  }
+};
+
 // Create a new order
 export const createOrder = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    // First, clean up any old unpaid orders for this user
+    await cleanupOldUnpaidOrders(req.user.id);
+
     const unpaidOrder = await Order.findOne({
       user: req.user.id,
       status: "unpaid",

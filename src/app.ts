@@ -22,6 +22,9 @@ import errorController from "./controllers/errorController";
 import webhookRouter from "./routes/webhookRoute";
 import adminRouter from "./routes/adminRoute";
 import apiCallback from "./routes/apiCallbackRoute";
+import { startOrderCleanupScheduler } from "./utils/orderCleanup";
+import { startPaymentRecoveryCheck } from "./utils/webhookRecovery";
+import { startOrderStatusMonitoring } from "./utils/orderMonitoring";
 import dotenv from "dotenv";
 import cors from "cors";
 
@@ -141,6 +144,20 @@ app.get("/api/v1/cors-test", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+// Start monitoring and cleanup services
+if (process.env.NODE_ENV === 'production') {
+  // Start background services for production
+  startOrderCleanupScheduler();
+  startPaymentRecoveryCheck();
+  startOrderStatusMonitoring();
+  
+  // Import and start auto-refund service
+  const { startAutoRefundScheduler } = require("./utils/autoRefund");
+  startAutoRefundScheduler();
+  
+  console.log('🔧 Started payment protection services including auto-refund');
+}
 
 app.use(errorController);
 
