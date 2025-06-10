@@ -39,24 +39,29 @@ export const getAllProducts = catchAsync(
     }
     apiFeatures = await apiFeatures.search();
 
+    // Apply filters and sorting first
+    apiFeatures.filter().sort().limitFields();
+
+    // Get total count AFTER applying filters but BEFORE pagination
     const totalProducts = await apiFeatures.count();
+
     const resultsPerPage =
       Number(req.query.limit) ||
       Number(process.env.DEFAULT_LIMIT_PER_PAGE) ||
       10;
 
-    apiFeatures.filter().sort().limitFields().paginate();
-
     let products;
+    let results;
     if (apiFeatures.needsPriceAggregation) {
-      // Use aggregation for price sorting
+      // For aggregation queries, pagination is handled inside the pipeline
       products = await apiFeatures.executePriceSortedQuery();
+      results = products.length;
     } else {
-      // Use regular query for other sorting
+      // Apply pagination for regular queries
+      apiFeatures.paginate();
       products = await apiFeatures.query.exec();
+      results = products.length;
     }
-
-    const results = await apiFeatures.count();
 
     res.status(200).json({
       status: "success",
@@ -109,16 +114,12 @@ export const getFilterData = catchAsync(async (req, res) => {
     value,
     count,
   }));
-
   const prices = allFilteredProducts.flatMap(
     (p: any) => p.variants?.map((v: any) => v.price ?? 0) ?? []
   );
 
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
-
-  console.log("Min Price:", minPrice);
-  console.log("Max Price:", maxPrice);
 
   const specsWithCounts = allFilteredProducts.reduce(
     (acc, product) => {

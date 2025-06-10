@@ -262,7 +262,9 @@ class RAGService {
         } else {
           // If no variants, set price to 0 (this shouldn't happen in real products)
           context.price = 0;
-        } // Add review content - fetch separately since we're using lean()
+        }
+
+        // Add review content - fetch separately since we're using lean()
         try {
           const reviews = await Review.find({
             product: product._id,
@@ -442,22 +444,14 @@ class RAGService {
             .map(([key, value]) => `${key}: ${value}`)
             .join(", ");
 
-          const reviews =
-            product.reviews.length > 0
-              ? `Customer reviews: ${product.reviews.join(". ")}`
-              : "";
-
           return `
 Product: ${product.name}
 Brand: ${product.brand}
-Category: ${product.category}
 Price: ${product.price.toLocaleString("vi-VN")} VND
-Rating: ${product.rating}/5 (${product.sold} sold)
 Stock: ${product.stock} units
 Description: ${product.description}
 Specifications: ${specs}
-${reviews}
-        `.trim();
+`.trim();
         })
         .join("\n\n---\n\n"); // Create conversation context
       const conversationContext =

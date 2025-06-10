@@ -195,12 +195,35 @@ class APIFeatures {
       delete queryObj.specs;
     }
 
+    // Handle onSale filtering separately to avoid Date serialization issues
+    let onSaleQuery = null;
+    if (queryObj.onSale === "true") {
+      const currentDate = new Date();
+      onSaleQuery = {
+        "variants.saleOff.percentage": { $gt: 0 },
+        "variants.saleOff.startDate": { $lte: currentDate },
+        "variants.saleOff.endDate": { $gte: currentDate },
+      };
+      delete queryObj.onSale;
+    }
+
     const queryStr = JSON.stringify(queryObj).replace(
       /\b(gte|gt|lte|lt)\b/g,
       (match) => `$${match}`
     );
 
-    this.query = this.query.find(JSON.parse(queryStr));
+    const parsedQuery = JSON.parse(queryStr);
+
+    // Add onSale query conditions after JSON parsing to preserve Date objects
+    if (onSaleQuery) {
+      if (parsedQuery.$and) {
+        parsedQuery.$and.push(onSaleQuery);
+      } else {
+        parsedQuery.$and = [onSaleQuery];
+      }
+    }
+
+    this.query = this.query.find(parsedQuery);
     return this;
   }
 
@@ -233,9 +256,7 @@ class APIFeatures {
         )
       );
       matchStage.lowestPrice = priceFilter;
-    }
-
-    // Lọc theo category
+    } // Lọc theo category
     if (this.queryString.category) {
       matchStage._categoryName = this.queryString.category;
     }
@@ -250,6 +271,16 @@ class APIFeatures {
       if (specConditions.length > 0) {
         matchStage.$and = specConditions;
       }
+    } // Handle onSale filtering for aggregation - avoid Date serialization issues
+    if (this.queryString.onSale === "true") {
+      const currentDate = new Date();
+      matchStage.$and = matchStage.$and || [];
+      matchStage.$and.push({
+        "variants.saleOff": { $exists: true },
+        "variants.saleOff.percentage": { $gt: 0 },
+        "variants.saleOff.startDate": { $lte: currentDate },
+        "variants.saleOff.endDate": { $gte: currentDate },
+      });
     }
 
     pipeline.push({ $match: matchStage });
@@ -297,14 +328,15 @@ class APIFeatures {
 
     return this;
   }
-
   paginate() {
     // Pagination
     const page = Number(this.queryString.page) || 1;
     const limit =
       Number(this.queryString.limit) ||
-      Number(process.env.DEFAULT_LIMIT_PER_PAGE);
+      Number(process.env.DEFAULT_LIMIT_PER_PAGE) ||
+      10; // Default fallback
     const skip = (page - 1) * limit;
+
     this.query = this.query.skip(skip).limit(limit);
     return this;
   }
@@ -335,9 +367,7 @@ class APIFeatures {
           },
         },
       },
-    });
-
-    // Build match stage with all filters
+    }); // Build match stage with all filters
     const matchStage: any = {};
 
     // Get the original filter conditions but exclude price filters
@@ -357,6 +387,16 @@ class APIFeatures {
         )
       );
       matchStage.lowestPrice = priceFilter;
+    } // Handle onSale filtering for aggregation - preserve Date objects
+    if (this.queryString.onSale === "true") {
+      const currentDate = new Date();
+      matchStage.$and = matchStage.$and || [];
+      matchStage.$and.push({
+        "variants.saleOff": { $exists: true },
+        "variants.saleOff.percentage": { $gt: 0 },
+        "variants.saleOff.startDate": { $lte: currentDate },
+        "variants.saleOff.endDate": { $gte: currentDate },
+      });
     }
 
     // Add match stage if there are conditions
