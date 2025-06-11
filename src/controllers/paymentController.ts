@@ -226,7 +226,7 @@ export const createZaloPayCheckoutSession = catchAsync(
         bank_code: "",
         embed_data: JSON.stringify(embed_data),
         mac: "",
-        callback_url: `${process.env.API_URL}/v1/payments/zalopay/callback`,
+        callback_url: `${process.env.API_URL}/api/v1/payments/zalopay/callback`,
       };
 
       const data =
@@ -285,7 +285,9 @@ export const zalopayCallback = catchAsync(
         const order = await Order.findOne({ orderCode }).session(session);
         if (!order) {
           throw new AppError("Order not found", 404);
-        }        // CRITICAL: Check if order has already been paid/fulfilled
+        }
+
+        // CRITICAL: Check if order has already been paid/fulfilled
         if (order.status !== "unpaid") {
           console.log(
             `ZaloPay callback: Order ${order.orderCode} already processed (status: ${order.status}), skipping fulfillment`
@@ -367,13 +369,15 @@ export const fulfillCheckout = async (sessionId: string) => {
 
       if (!order) {
         throw new AppError("Order not found", 404);
-      }      // CRITICAL: Check if order has already been paid/fulfilled
+      }
+
+      // CRITICAL: Check if order has already been paid/fulfilled
       if (order.status !== "unpaid") {
         console.log(
           `Order ${order.orderCode} already processed (status: ${order.status}), skipping fulfillment`
         );
         return;
-      }      // Prevent duplicate payments by checking if payment intent already exists across ALL orders
+      } // Prevent duplicate payments by checking if payment intent already exists across ALL orders
       const existingOrderWithPayment = await Order.findOne({
         "checkout.paymentId": checkoutSession!.payment_intent as string,
       }).session(session);
