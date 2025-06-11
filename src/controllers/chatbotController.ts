@@ -40,16 +40,15 @@ VÍ DỤ ĐỊNH DẠNG TRẢ LỜI:
    - Sensor cao cấp Focus Pro 30K
    - Phù hợp: Game MMO, RPG
 
-💡 **Gợi ý của em:** Tùy vào ngân sách và loại game anh/chị thường chơi mà em sẽ tư vấn cụ thể hơn!"`;
+💡 **Gợi ý của em:** Tùy vào ngân sách và loại game anh/chị thường chơi mà em sẽ tư vấn cụ thể hơn!"
+
+CHÍNH XÁC VỀ ĐƯỜNG DẪN SẢN PHẨM:
+- PHẢI sử dụng slug thực của sản phẩm từ database, KHÔNG tự tạo slug
+- Định dạng: [Tên sản phẩm](${process.env.CLIENT_HOST}/products/{slug_thực_từ_database})`;
 
 // Helper function to create product links
-function createProductLink(productName: string, productId: string): string {
-  const slug = productName
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "") // Remove special characters
-    .replace(/\s+/g, "-") // Replace spaces with hyphens
-    .trim();
-  return `[${productName}](${process.env.CLIENT_HOST}/products/${slug})`;
+function createProductLink(productName: string, productSlug: string): string {
+  return `[${productName}](${process.env.CLIENT_HOST}/products/${productSlug})`;
 }
 
 // Helper function to format price in VND

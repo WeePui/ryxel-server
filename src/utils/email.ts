@@ -1,5 +1,4 @@
-import nodemailer from 'nodemailer';
-import path from 'path';
+import nodemailer from "nodemailer";
 
 interface EmailOptions {
   to: string;
@@ -18,20 +17,12 @@ const sendEmail = async (options: EmailOptions): Promise<void> => {
       pass: process.env.EMAIL_PASSWORD,
     },
   });
-
   const mailOptions = {
     from: process.env.EMAIL_FROM,
     to: options.to,
     subject: options.subject,
     html: options.html,
     text: options.text,
-    attachments: [
-      {
-        filename: 'logo.png',
-        path: path.join(__dirname, 'logo.png'),
-        cid: 'logo',
-      },
-    ],
   };
 
   await transporter.sendMail(mailOptions);

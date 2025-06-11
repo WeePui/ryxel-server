@@ -22,6 +22,7 @@ interface ProductContext {
   rating: number;
   sold: number;
   stock: number;
+  slug: string;
   specifications: Record<string, string>;
   reviews: string[];
 }
@@ -231,15 +232,17 @@ class RAGService {
           price: 0, // Will be calculated below
           rating: product.rating || 0,
           sold: product.sold || 0,
-          stock: product.totalStock || 0,
+          stock: 0, // Will be calculated manually
+          slug: product.slug || "",
           specifications: {},
           reviews: [],
         };
 
-        // Extract specifications from variants and calculate lowest price
+        // Extract specifications from variants and calculate lowest price + total stock
         if (product.variants && product.variants.length > 0) {
           const allSpecs: Record<string, string> = {};
           let lowestPrice = Infinity;
+          let totalStock = 0;
 
           product.variants.forEach((variant: any) => {
             if (variant.specifications) {
@@ -256,12 +259,17 @@ class RAGService {
             if (finalPrice < lowestPrice) {
               lowestPrice = finalPrice;
             }
+
+            // Add variant stock to total
+            totalStock += variant.stock || 0;
           });
           context.specifications = allSpecs;
           context.price = lowestPrice === Infinity ? 0 : lowestPrice;
+          context.stock = totalStock;
         } else {
-          // If no variants, set price to 0 (this shouldn't happen in real products)
+          // If no variants, set price and stock to 0 (this shouldn't happen in real products)
           context.price = 0;
+          context.stock = 0;
         }
 
         // Add review content - fetch separately since we're using lean()
@@ -400,20 +408,31 @@ class RAGService {
           },
           { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
         ]);
+        relevantProducts = expensiveProducts.map((product) => {
+          // Calculate total stock manually since virtual fields aren't available with .lean()
+          const totalStock =
+            product.variants && Array.isArray(product.variants)
+              ? product.variants.reduce(
+                  (total: number, variant: any) => total + (variant.stock || 0),
+                  0
+                )
+              : 0;
 
-        relevantProducts = expensiveProducts.map((product) => ({
-          _id: product._id.toString(),
-          name: product.name,
-          description: product.description,
-          brand: product.brand,
-          category: product.category?.name || "Unknown",
-          price: product.highestPrice || product.lowestPrice || 0,
-          rating: product.rating || 0,
-          sold: product.sold || 0,
-          stock: product.totalStock || 0,
-          specifications: {},
-          reviews: [],
-        }));
+          return {
+            _id: product._id.toString(),
+            name: product.name,
+            description: product.description,
+            brand: product.brand,
+            category: product.category?.name || "Unknown",
+            price: product.highestPrice || product.lowestPrice || 0,
+            rating: product.rating || 0,
+            sold: product.sold || 0,
+            stock: totalStock,
+            slug: product.slug || "",
+            specifications: {},
+            reviews: [],
+          };
+        });
       } else {
         // Regular semantic search
         relevantProducts = await this.retrieveRelevantProducts(query, 5);
@@ -428,27 +447,28 @@ class RAGService {
           retrievedContext: [],
           productLinks: [],
         };
-      } // Generate product links
+      } // Generate product links using actual product slug
       const productLinks = relevantProducts.map((product) => ({
         name: product.name,
-        url: `${process.env.CLIENT_HOST || "http://localhost:3000"}/products/${product.name.toLowerCase().replace(/\s+/g, "-")}`,
+        url: `${process.env.CLIENT_HOST || "http://localhost:3000"}/products/${product.slug}`,
         price: product.price,
       }));
 
-      // Rest of the method...
-
-      // Create context for the LLM
+      // Rest of the method...      // Create context for the LLM
       const contextText = relevantProducts
-        .map((product) => {
+        .map((product, index) => {
           const specs = Object.entries(product.specifications)
             .map(([key, value]) => `${key}: ${value}`)
             .join(", ");
+
+          const productLink = productLinks[index];
 
           return `
 Product: ${product.name}
 Brand: ${product.brand}
 Price: ${product.price.toLocaleString("vi-VN")} VND
 Stock: ${product.stock} units
+URL: ${productLink.url}
 Description: ${product.description}
 Specifications: ${specs}
 `.trim();
@@ -476,6 +496,7 @@ Hướng dẫn:
 5. Gợi ý các lựa chọn thay thế nếu phù hợp
 6. Giữ câu trả lời dưới 300 từ
 7. Luôn chính xác về thông tin sản phẩm
+8. Khi tạo link sản phẩm, sử dụng các URL đã được cung cấp trong productLinks
 
 Trả lời:`;
       const completion = await openai.chat.completions.create({
@@ -554,6 +575,7 @@ Trả lời:`;
       return products.map((product) => {
         // Calculate lowest price manually
         let lowestPrice = Infinity;
+        let totalStock = 0;
         if (product.variants && product.variants.length > 0) {
           product.variants.forEach((variant: any) => {
             const finalPrice = calculateFinalPrice(
@@ -563,9 +585,10 @@ Trả lời:`;
             if (finalPrice < lowestPrice) {
               lowestPrice = finalPrice;
             }
+            // Add variant stock to total
+            totalStock += variant.stock || 0;
           });
         }
-
         return {
           _id: product._id.toString(),
           name: product.name,
@@ -575,7 +598,8 @@ Trả lời:`;
           price: lowestPrice === Infinity ? 0 : lowestPrice,
           rating: product.rating || 0,
           sold: product.sold || 0,
-          stock: product.totalStock || 0,
+          stock: totalStock,
+          slug: product.slug || "",
           specifications: {},
           reviews: [],
         };
@@ -628,6 +652,7 @@ Trả lời:`;
       return products.map((product) => {
         // Calculate lowest price manually
         let lowestPrice = Infinity;
+        let totalStock = 0;
         if (product.variants && product.variants.length > 0) {
           product.variants.forEach((variant: any) => {
             const finalPrice = calculateFinalPrice(
@@ -637,9 +662,10 @@ Trả lời:`;
             if (finalPrice < lowestPrice) {
               lowestPrice = finalPrice;
             }
+            // Add variant stock to total
+            totalStock += variant.stock || 0;
           });
         }
-
         return {
           _id: product._id.toString(),
           name: product.name,
@@ -649,7 +675,8 @@ Trả lời:`;
           price: lowestPrice === Infinity ? 0 : lowestPrice,
           rating: product.rating || 0,
           sold: product.sold || 0,
-          stock: product.totalStock || 0,
+          stock: totalStock,
+          slug: product.slug || "",
           specifications: {},
           reviews: [],
         };
