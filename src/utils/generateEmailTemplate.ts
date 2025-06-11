@@ -6,6 +6,9 @@ interface GenerateEmailOptions {
   footerContent?: string; // HTML content
 }
 
+const LOGO_URL =
+  "https://res.cloudinary.com/dx77ngsh6/image/upload/v1749609259/wvilrt6kadqvfhdnnnih.jpg";
+
 export function generateEmail({
   subject = "Ryxel Store",
   greetingName = "",
@@ -185,7 +188,7 @@ export function generateEmail({
     </head>
     <body>
       <div class="logo-container">
-        <img src="cid:logo" alt="Logo" />
+        <img src="${LOGO_URL}" alt="Logo" />
       </div>
       <main>
         ${greetingName ? `<p>Kính gửi <strong>${greetingName}</strong>,</p>` : ""}
