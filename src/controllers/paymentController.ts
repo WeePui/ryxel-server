@@ -238,7 +238,7 @@ export const createZaloPayCheckoutSession = catchAsync(
         bank_code: "",
         embed_data: JSON.stringify(embed_data),
         mac: "",
-        callback_url: `${process.env.API_URL}/api/v1/payments/zalopay/callback`,
+        callback_url: `${process.env.API_URL || 'https://ryxel-server.onrender.com'}/api/v1/payments/zalopay/callback`,
       };
 
       const data =
@@ -258,27 +258,17 @@ export const createZaloPayCheckoutSession = catchAsync(
       orderData.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();      axios
         .post(zalopayConfig.endpoint, null, { params: orderData })
         .then((response) => {
-          console.log("ZaloPay create order response:", response.data);
-          
           if (response.data.return_code !== 1) {
-            console.error("ZaloPay order creation failed:", response.data);
             return next(new AppError(response.data.return_message, 400));
           }
-
-          console.log("ZaloPay order created successfully:", {
-            orderCode: order.orderCode,
-            app_trans_id: orderData.app_trans_id,
-            callback_url: orderData.callback_url
-          });
 
           res.status(200).json({
             status: "success",
             data: response.data,
-            orderCode: order.orderCode, // Use order.orderCode instead of req.body.orderCode
+            orderCode: order.orderCode,
           });
         })
         .catch((err) => {
-          console.error("ZaloPay order creation error:", err);
           next(new AppError((err as Error).message, 400));
         });
     } catch (error) {
@@ -289,32 +279,18 @@ export const createZaloPayCheckoutSession = catchAsync(
 
 export const zalopayCallback = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log("ZaloPay callback received:", {
-      body: req.body,
-      headers: req.headers,
-      timestamp: new Date().toISOString()
-    });
-
     const dataStr = req.body.data;
     const reqMac = req.body.mac;
     
     if (!dataStr || !reqMac) {
-      console.error("ZaloPay callback missing data or mac:", { dataStr, reqMac });
       return next(new AppError("Missing callback data", 400));
     }
 
     const mac = CryptoJS.HmacSHA256(dataStr, zalopayConfig.key2).toString();
 
     if (mac !== reqMac) {
-      console.error("ZaloPay callback MAC validation failed:", {
-        calculated: mac,
-        received: reqMac,
-        dataStr
-      });
       return next(new AppError("Invalid MAC", 400));
     }
-
-    console.log("ZaloPay callback MAC validation successful");
 
     const session = await mongoose.startSession();
 
@@ -330,9 +306,6 @@ export const zalopayCallback = catchAsync(
 
         // CRITICAL: Check if order has already been paid/fulfilled
         if (order.status !== "unpaid") {
-          console.log(
-            `ZaloPay callback: Order ${order.orderCode} already processed (status: ${order.status}), skipping fulfillment`
-          );
           return;
         }
 
@@ -342,9 +315,6 @@ export const zalopayCallback = catchAsync(
         }).session(session);
 
         if (existingOrderWithPayment) {
-          console.log(
-            `ZaloPay payment ${data.zp_trans_id} already used for order ${existingOrderWithPayment.orderCode}`
-          );
           throw new AppError(
             "Payment already processed for another order",
             400
@@ -363,10 +333,6 @@ export const zalopayCallback = catchAsync(
         );
 
         await removeCartItem(userId, order.lineItems);
-
-        console.log(
-          `ZaloPay callback: Successfully fulfilled order ${order.orderCode} for transaction ${data.zp_trans_id}`
-        );
       });
 
       res.status(200).json({
@@ -374,7 +340,6 @@ export const zalopayCallback = catchAsync(
         message: "Payment successful",
       });
     } catch (error) {
-      console.error("ZaloPay callback error:", error);
       throw error;
     } finally {
       await session.endSession();
@@ -394,13 +359,8 @@ export const fulfillCheckout = async (sessionId: string) => {
         {
           expand: ["line_items"],
         }
-      );
-
-      // Check the Checkout Session's payment_status property
+      );      // Check the Checkout Session's payment_status property
       if (checkoutSession.payment_status === "unpaid") {
-        console.log(
-          `Checkout session ${sessionId} is still unpaid, skipping fulfillment`
-        );
         return;
       }
 
@@ -410,23 +370,17 @@ export const fulfillCheckout = async (sessionId: string) => {
 
       if (!order) {
         throw new AppError("Order not found", 404);
+      }      // CRITICAL: Check if order has already been paid/fulfilled
+      if (order.status !== "unpaid") {
+        return;
       }
 
-      // CRITICAL: Check if order has already been paid/fulfilled
-      if (order.status !== "unpaid") {
-        console.log(
-          `Order ${order.orderCode} already processed (status: ${order.status}), skipping fulfillment`
-        );
-        return;
-      } // Prevent duplicate payments by checking if payment intent already exists across ALL orders
+      // Prevent duplicate payments by checking if payment intent already exists across ALL orders
       const existingOrderWithPayment = await Order.findOne({
         "checkout.paymentId": checkoutSession!.payment_intent as string,
       }).session(session);
 
       if (existingOrderWithPayment) {
-        console.log(
-          `Payment intent ${checkoutSession!.payment_intent} already used for order ${existingOrderWithPayment.orderCode}`
-        );
         throw new AppError("Payment already processed for another order", 400);
       }
 
@@ -445,13 +399,7 @@ export const fulfillCheckout = async (sessionId: string) => {
       const user = checkoutSession!.client_reference_id;
       if (!user) {
         throw new AppError("User not found", 404);
-      }
-
-      await removeCartItem(user, order.lineItems);
-
-      console.log(
-        `Successfully fulfilled order ${order.orderCode} for checkout session ${sessionId}`
-      );
+      }      await removeCartItem(user, order.lineItems);
     });
   } catch (error) {
     console.error(`Error fulfilling checkout session ${sessionId}:`, error);
