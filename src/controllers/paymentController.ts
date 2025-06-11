@@ -39,6 +39,12 @@ export const createStripeCheckoutSession = catchAsync(
     }
 
     try {
+      // Update payment method if it's different from the original
+      if (order.paymentMethod !== "stripe") {
+        order.paymentMethod = "stripe";
+        await order.save();
+      }
+
       const items = await getLineItemsInfo(lineItems);
 
       const stripeLineItems = items.map((item) => {
@@ -154,6 +160,12 @@ export const createZaloPayCheckoutSession = catchAsync(
     }
 
     try {
+      // Update payment method if it's different from the original
+      if (order.paymentMethod !== "zalopay") {
+        order.paymentMethod = "zalopay";
+        await order.save();
+      }
+
       const items = await getLineItemsInfo(lineItems);
 
       const zaloItems = items.map((item) => {
@@ -243,22 +255,32 @@ export const createZaloPayCheckoutSession = catchAsync(
         orderData.embed_data +
         "|" +
         orderData.item;
-      orderData.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();
-
-      axios
+      orderData.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();      axios
         .post(zalopayConfig.endpoint, null, { params: orderData })
         .then((response) => {
+          console.log("ZaloPay create order response:", response.data);
+          
           if (response.data.return_code !== 1) {
+            console.error("ZaloPay order creation failed:", response.data);
             return next(new AppError(response.data.return_message, 400));
           }
+
+          console.log("ZaloPay order created successfully:", {
+            orderCode: order.orderCode,
+            app_trans_id: orderData.app_trans_id,
+            callback_url: orderData.callback_url
+          });
 
           res.status(200).json({
             status: "success",
             data: response.data,
-            orderCode: req.body.orderCode,
+            orderCode: order.orderCode, // Use order.orderCode instead of req.body.orderCode
           });
         })
-        .catch((err) => next(new AppError((err as Error).message, 400)));
+        .catch((err) => {
+          console.error("ZaloPay order creation error:", err);
+          next(new AppError((err as Error).message, 400));
+        });
     } catch (error) {
       return next(new AppError((error as Error).message, 400));
     }
@@ -267,13 +289,32 @@ export const createZaloPayCheckoutSession = catchAsync(
 
 export const zalopayCallback = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    console.log("ZaloPay callback received:", {
+      body: req.body,
+      headers: req.headers,
+      timestamp: new Date().toISOString()
+    });
+
     const dataStr = req.body.data;
     const reqMac = req.body.mac;
+    
+    if (!dataStr || !reqMac) {
+      console.error("ZaloPay callback missing data or mac:", { dataStr, reqMac });
+      return next(new AppError("Missing callback data", 400));
+    }
+
     const mac = CryptoJS.HmacSHA256(dataStr, zalopayConfig.key2).toString();
 
     if (mac !== reqMac) {
+      console.error("ZaloPay callback MAC validation failed:", {
+        calculated: mac,
+        received: reqMac,
+        dataStr
+      });
       return next(new AppError("Invalid MAC", 400));
     }
+
+    console.log("ZaloPay callback MAC validation successful");
 
     const session = await mongoose.startSession();
 

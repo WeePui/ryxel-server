@@ -38,7 +38,7 @@ app.use(compression());
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
+      // Allow requests with no origin (like mobile apps, curl requests, or webhook calls)
       if (!origin) return callback(null, true);
 
       const allowedOrigins = [
@@ -59,6 +59,11 @@ app.use(
 
       // Check patterns for Cloudflare tunnel URLs
       if (/^https:\/\/.*\.trycloudflare\.com$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // Allow ZaloPay domains for callbacks
+      if (/^https:\/\/.*\.zalopay\.vn$/.test(origin)) {
         return callback(null, true);
       }
 
