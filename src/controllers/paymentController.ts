@@ -238,7 +238,7 @@ export const createZaloPayCheckoutSession = catchAsync(
         bank_code: "",
         embed_data: JSON.stringify(embed_data),
         mac: "",
-        callback_url: `${process.env.API_URL || 'https://ryxel-server.onrender.com'}/api/v1/payments/zalopay/callback`,
+        callback_url: `${process.env.API_URL || "https://ryxel-server.onrender.com"}/api/v1/payments/zalopay/callback`,
       };
 
       const data =
@@ -255,7 +255,8 @@ export const createZaloPayCheckoutSession = catchAsync(
         orderData.embed_data +
         "|" +
         orderData.item;
-      orderData.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();      axios
+      orderData.mac = CryptoJS.HmacSHA256(data, zalopayConfig.key1).toString();
+      axios
         .post(zalopayConfig.endpoint, null, { params: orderData })
         .then((response) => {
           if (response.data.return_code !== 1) {
@@ -281,7 +282,7 @@ export const zalopayCallback = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const dataStr = req.body.data;
     const reqMac = req.body.mac;
-    
+
     if (!dataStr || !reqMac) {
       return next(new AppError("Missing callback data", 400));
     }
@@ -359,7 +360,7 @@ export const fulfillCheckout = async (sessionId: string) => {
         {
           expand: ["line_items"],
         }
-      );      // Check the Checkout Session's payment_status property
+      ); // Check the Checkout Session's payment_status property
       if (checkoutSession.payment_status === "unpaid") {
         return;
       }
@@ -370,7 +371,7 @@ export const fulfillCheckout = async (sessionId: string) => {
 
       if (!order) {
         throw new AppError("Order not found", 404);
-      }      // CRITICAL: Check if order has already been paid/fulfilled
+      } // CRITICAL: Check if order has already been paid/fulfilled
       if (order.status !== "unpaid") {
         return;
       }
@@ -399,7 +400,8 @@ export const fulfillCheckout = async (sessionId: string) => {
       const user = checkoutSession!.client_reference_id;
       if (!user) {
         throw new AppError("User not found", 404);
-      }      await removeCartItem(user, order.lineItems);
+      }
+      await removeCartItem(user, order.lineItems);
     });
   } catch (error) {
     console.error(`Error fulfilling checkout session ${sessionId}:`, error);

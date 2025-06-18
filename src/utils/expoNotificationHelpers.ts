@@ -304,6 +304,55 @@ export const sendExpoPromotionalNotification = async (
 };
 
 /**
+ * Send Expo notification when a review is deleted due to NSFW content
+ */
+export const sendExpoReviewDeletedNotification = async (
+  userId: string,
+  productName?: string,
+  reason?: string
+) => {
+  try {
+    const title = "⚠️ Review Removed";
+    let body = "Your review has been removed due to community policy violation.";
+
+    if (productName) {
+      body = `Your review for "${productName}" has been removed due to community policy violation.`;
+    }
+
+    if (reason) {
+      body += ` Reason: ${reason}`;
+    }
+
+    body += " Please follow our guidelines when reviewing products.";
+
+    const result = await expoNotificationService.sendToUser(userId, {
+      title,
+      body,
+      data: {
+        type: "review_deleted",
+        productName: productName || "",
+        reason: reason || "",
+        timestamp: new Date().toISOString(),
+      },
+      sound: "default",
+    });
+
+    if (result.success) {
+      console.log(`✅ Expo review deleted notification sent to user ${userId}`);
+    } else {
+      console.log(
+        `❌ Failed to send Expo review deleted notification: ${result.error}`
+      );
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Error sending Expo review deleted notification:", error);
+    return { success: false, error: (error as Error).message };
+  }
+};
+
+/**
  * Get status update message based on new status
  */
 function getStatusUpdateMessage(

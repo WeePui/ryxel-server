@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 import Review from "../models/reviewModel";
+import Product from "../models/productModel";
 import catchAsync from "../utils/catchAsync";
 import AppError from "../utils/AppError";
 import {
@@ -10,6 +11,7 @@ import {
 } from "../utils/cloudinaryService";
 import Order from "../models/orderModel";
 import { nsfwDetection } from "../utils/python";
+import { sendReviewDeletedNotification } from "../utils/notificationHelpers";
 
 export const getAllReviews = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -520,16 +522,10 @@ export const deleteReview = catchAsync(
 export const processNSFWReview = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { reviewId, isValid, detected } = req.body;
-    console.log("==== NSFW Detection Callback Received ====");
-    console.log("ReviewID:", reviewId);
-    console.log("IsValid:", isValid);
-    console.log("Detected:", detected);
 
-    const review = await Review.findById(reviewId);
+    const review = await Review.findById(reviewId).populate('product', 'name').populate('user', '_id');
     if (!review) return next(new AppError("No review found with that ID", 404));
 
-    console.log("Found review:", review._id);
-    console.log("Review images before update:", review.images);
     if (!isValid) {
       let images = review.images;
       let video = review.video;
@@ -556,13 +552,27 @@ export const processNSFWReview = catchAsync(
         }
       );
 
+      // Send notification to user before deleting the review
+      try {
+        const productName = (review.product as any)?.name || "Unknown Product";
+        const reason = detected ? `Nội dung không phù hợp được phát hiện: ${detected.join(", ")}` : "Nội dung vi phạm chính sách cộng đồng";
+        
+        await sendReviewDeletedNotification(
+          (review.user as any)._id.toString(),
+          productName,
+          reason
+        );
+        
+        console.log(`✅ Notification sent to user ${(review.user as any)._id} for deleted review of product: ${productName}`);
+      } catch (notificationError) {
+        console.error("Error sending review deletion notification:", notificationError);
+        // Continue with review deletion even if notification fails
+      }
+
       await Review.findByIdAndDelete(reviewId);
-      console.log("Review deleted due to NSFW content");
     } else {
       review.status = "approved";
       await review.save();
-      console.log("Review approved:", review._id);
-      console.log("Review images after approval:", review.images);
     }
     res.status(204).json({
       status: "success",

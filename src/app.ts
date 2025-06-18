@@ -151,17 +151,17 @@ app.get("/api/v1/cors-test", (req, res) => {
 });
 
 // Start monitoring and cleanup services
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   // Start background services for production
   startOrderCleanupScheduler();
   startPaymentRecoveryCheck();
   startOrderStatusMonitoring();
-  
+
   // Import and start auto-refund service
   const { startAutoRefundScheduler } = require("./utils/autoRefund");
   startAutoRefundScheduler();
-  
-  console.log('🔧 Started payment protection services including auto-refund');
+
+  console.log("🔧 Started payment protection services including auto-refund");
 }
 
 app.use(errorController);

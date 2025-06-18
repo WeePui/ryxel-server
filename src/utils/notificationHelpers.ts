@@ -7,6 +7,7 @@ import {
   sendExpoOrderDeliveredNotification,
   sendExpoOrderCancelledNotification,
   sendExpoPromotionalNotification,
+  sendExpoReviewDeletedNotification,
 } from "./expoNotificationHelpers";
 import { Types } from "mongoose";
 
@@ -293,6 +294,63 @@ export const sendOrderCancelledNotification = async (
     };
   } catch (error) {
     console.error("Error sending order cancelled notification:", error);
+    return { success: false, error: (error as Error).message };
+  }
+};
+
+/**
+ * Send notification when a review is deleted due to NSFW content
+ */
+export const sendReviewDeletedNotification = async (
+  userId: string,
+  productName?: string,
+  reason?: string
+) => {
+  try {
+    const title = "⚠️ Review đã bị xóa";
+    let body = "Review của bạn đã bị xóa do vi phạm chính sách cộng đồng.";
+
+    if (productName) {
+      body = `Review của bạn về sản phẩm "${productName}" đã bị xóa do vi phạm chính sách cộng đồng.`;
+    }
+
+    if (reason) {
+      body += ` Lý do: ${reason}`;
+    }
+
+    body += " Vui lòng tuân thủ quy định khi đánh giá sản phẩm.";    // Send both FCM and Expo notifications
+    const [fcmResult, expoResult] = await Promise.allSettled([
+      notificationService.sendToUser(userId, {
+        title,
+        body,
+        data: {
+          type: "review_deleted",
+          productName: productName || "",
+          reason: reason || "",
+          clickAction: "/account/reviews",
+        },
+      }),
+      sendExpoReviewDeletedNotification(userId, productName, reason),
+    ]);
+
+    console.log(`Review deleted notification sent to user ${userId}:`, {
+      fcm: fcmResult,
+      expo: expoResult,
+    });
+
+    // Return success if at least one notification was sent successfully
+    const fcmSuccess =
+      fcmResult.status === "fulfilled" && fcmResult.value.success;
+    const expoSuccess =
+      expoResult.status === "fulfilled" && expoResult.value.success;
+
+    return {
+      success: fcmSuccess || expoSuccess,
+      fcm: fcmResult,
+      expo: expoResult,
+    };
+  } catch (error) {
+    console.error("Error sending review deleted notification:", error);
     return { success: false, error: (error as Error).message };
   }
 };
